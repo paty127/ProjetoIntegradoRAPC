@@ -14,21 +14,34 @@
     <title>Document</title>
     <script src="Scripts/exercicios.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.purple-amber.min.css" />
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-light_blue.min.css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 </head>
 <style>
+    *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+
+body{
+    width: 100%;
+    min-height: 100vh;
+    background: url("Imagens/fundo.jpg") center/cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
     h1 {
         font: bold;
         color: rgb(16, 87, 87);
     }
-
-    .fundo {
-        background: url("Imagens/fundo.jpg") center/cover;
-        margin: 0px;
-    }
-
     .campo {
         background: rgb(255, 255, 255);
     }
@@ -67,15 +80,42 @@
         color: black;
     }
     .formulario{
-        background-color: rgb(155, 156, 156);
         align-items: center;
         text-align: center;
     }
+
+    .group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction:column;
+    width: 70%;
+    padding: 1.3rem 0;
     
+    }
+    .cadastro{
+        background-color: rgb(155, 156, 156);
+    }
+    
+    .getSexo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1.3rem 0;
+    }
+    .sexo{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1rem;
+    }
 </style>
 <body class="fundo">
     <div class="mdl-layout mdl-js-layout">
-        <header class="mdl-layout__header mdl-color--blue-400">
+        <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <span class="mdl-layout-title "><img src="Imagens/logo.png" alt="some text" width=120 height=60><span class="rodape">CyberSchool</span></span>
                 <div class="mdl-layout-spacer mdl-color--accent"></div>
@@ -101,14 +141,14 @@
                 
             </div>
         </header>
-        <div class="demo-drawer mdl-layout__drawer mdl-color--green-900 mdl-color-text--blue-grey-50">
+        <div class="demo-drawer mdl-layout__drawer mdl-color--blue-100 mdl-color-text--black">
             <header class="demo-drawer-header">
                 <img src="Imagens/user.png" class="demo-avatar">
                 <div class="demo-avatar-dropdown mdl-typography--text-center">
                     <span>hello@example.com</span>
                 </div>
             </header>
-            <nav class="demo-navigation mdl-navigation mdl-color--black">
+            <nav class="demo-navigation mdl-navigation mdl-color--blue-300">
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--white material-icons"
                         role="presentation">home</i>Home</a>
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--white material-icons"
@@ -136,72 +176,66 @@
         <div class="mdl-layout__content">
             <!-- Todo conteudo do Site. -->
             <main>
-                <h1 class="mdl-cell--12-col-desktop">Cadastro Aluno</h1>
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col mdl-cell--8-col-tablet">
-                        <form class="formulario" action="${request.contextPath}/exemplo-web" method="post">
-                            <input type="hidden" name="id" value="123" />
-                            <div>
-                                <label>Nome:</label>
-                                <input type="text" name="nome" placeholder="Preencha o nome completo" />
-                            </div>
-                            <div>
-                                <label>Data Nascimento</label>
-                                <input type="date" name="dataNascimento" />
-                            </div>
-                            <div>
+                <div class="group">
+                    <h1 class="mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--6-col ">Cadastro Aluno</h1>
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col mdl-cell--8-col-tablet cadastro">
+                            <form class="formulario " action="${request.contextPath}/exemplo-web" method="post">
+                                <input type="hidden" name="id" value="123" />
+                                <div>
+                                    <label>Nome:</label>
+                                    <input type="text" name="nome" placeholder="Preencha o nome completo" />
+                                </div>
+                                <div>
+                                    <label>Data Nascimento</label>
+                                    <input type="date" name="dataNascimento" />
+                                </div>
+                                <div>
+                                    <label>Pai</label>
+                                    <input type="text" name="NomePai" placeholder="Preencha o nome completo do Pai" />
+                                </div>
+                                <div>
+                                    <label>Mãe</label>
+                                    <input type="text" name="NomeMae" placeholder="Preencha o nome completo do Mãe" />
+                                </div>
+                                <div>
+                                    <label>E-mail</label>
+                                    <input type="email" name="email" placeholder="Preencha o e-mail do responsável" />
+                                </div>
+                                <div>
+                                    <label>Celular</label>
+                                    <input type="text" name="CelularAluno" placeholder="Preencha o Celular do Aluno" />
+                                </div>
+                                <div>
+                                    <label>Celular</label>
+                                    <input type="text" name="celularPai" placeholder="Preencha o Celular do Pai" />
+                                </div>
+                                <div>
+                                    <label>Celular</label>
+                                    <input type="text" name="celularMae" placeholder="Preencha o Celular da Mãe" />
+                                </div>
+                                <div class="getsexo">
+                                    <fieldset class="sexo">
+                                        <legend class="">Gênero</legend>
+                                        <div>
+                                            <input   type="radio" name="genero" value="0" id="generoF" />
+                                            <label  for="generoF">Feminino</label>
+                                        </div>
+                                        <div>
+                                            <input  type="radio" name="genero" value="1" id="generoM" />
+                                            <label  for="generoF">Masculino</label>
+                                        </div>
+                                    </fieldset>
+                                </div>
                                 
-                            </div>
-                            <div>
-                                <label>E-mail</label>
-                                <input type="email" name="email" />
-                            </div>
-                            <div>
-                                <label>Telefone</label>
-                                <input type="text" name="telefone" />
-                            </div>
-                            <div>
-                                <label>Senha</label>
-                                <input type="password" name="senha" />
-                            </div>
-                            <div>
-                                <label>Repetir Senha</label>
-                                <input type="password" name="senhaRepetida" />
-                            </div>
-                            <div>
-                                <label>Número de 1 a 99</label>
-                                <input type="number" name="numero" />
-                            </div>
-                            <div>
-                                <label>Altura</label>
-                                <input type="number" name="altura" step="0.01" />
-                            </div>
-                            <div>
-                                <label>Peso</label>
-                                <input type="number" name="peso" step="0.1" />
-                            </div>
-                            <fieldset>
-                                <legend>Gênero</legend>
-                                <div>
-                                    <input type="radio" name="genero" value="0" id="generoF" />
-                                    <label for="generoF">Feminino</label>
-                                </div>
-                                <div>
-                                    <input type="radio" name="genero" value="1" id="generoM" />
-                                    <label for="generoF">Masculino</label>
-                                </div>
-                            </fieldset>
+                        </div>
                     </div>
                 </div>
             
             </main>
         </div>
 
-
-
-
-
-        <footer class="mdl-mini-footer mdl-color--blue-400">
+        <footer class="mdl-mini-footer mdl-color--accent ">
             <!-- mdl-mini-footer--left-section = alinhado a esquerda -->
             <div class="mdl-mini-footer--left-section">
                 <div class="mdl-logo"><img src="Imagens/logo.png" alt="some text" width=100 height=50></div>
@@ -211,12 +245,12 @@
                             <img class="mdl-mega-footer--social-btn" src="Imagens/Twitter.png">
                         </a>
                     </li>
-                    <li class="mdl-mega-footer--social-btn">
+                    <li class="mdl-mini-footer--social-btn">
                         <a href="https://github.com" class="social-btn social-btn__github" role="button" title="GitHub">
                             <img class="mdl-mega-footer--social-btn" src="Imagens/git.png">
                         </a>
                     </li>
-                    <li class="mdl-mega-footer--social-btn ">
+                    <li class="mdl-mini-footer--social-btn ">
                         <a href="https://www.facebook.com" class="social-btn social-btn__facebook" role="button" title="Facebook">
                             <img class="mdl-mega-footer--social-btn" src="Imagens/face.jpg">
                         </a>
