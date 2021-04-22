@@ -187,7 +187,7 @@ body{
                                     <input type="text" name="nome" placeholder="Preencha o nome completo" />
                                 </div>
                                 <div>
-                                    <label>Data Nascimento</label>
+                                    <label>Data Nascimento:</label>
                                     <input type="date" name="dataNascimento" />
                                 </div>
                                 <div>
