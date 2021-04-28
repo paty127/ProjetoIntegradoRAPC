@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,31 +18,29 @@ import util.DbUtil;
  */
 public class AlunoDao {
 
-    private Connection connection;
+    private final DbUtil connection = new DbUtil();
 
-    public AlunoDao() {
-        connection = DbUtil.getConnection();
-    }
 
-    public void adicionarAluno(Aluno aluno) {
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("insert into Aluno(nome,data_de_nascimento,sexo,pai,mae,celular,telefone_pai,telefone_mae,email)values(?, ?, ?, ?, ?, ?, ?, ?, ? )");
+    public void adicionarAluno(Aluno aluno) throws SQLException, IOException {
+        String sql = "insert into Aluno(nome,data_de_nascimento,sexo,pai,mae,celular,telefone_pai,telefone_mae,email)values(?, ?, ?, ?, ?, ?, ?, ?, ? )";
+            try(Connection conn = connection.getConnection();
+                     PreparedStatement stmt = conn.prepareStatement(sql)) {
+                
+            stmt.setString(1, aluno.getNome());
+            stmt.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
+            stmt.setString(3, aluno.getSexo());
+            stmt.setString(4, aluno.getNomePai());
+            stmt.setString(5, aluno.getNomeMae());
+            stmt.setString(6, aluno.getCelular());
+            stmt.setString(7, aluno.getCelularPai());
+            stmt.setString(8, aluno.getCelularMae());
+            stmt.setString(9, aluno.getEmail());
 
-            preparedStatement.setString(1, aluno.getNome());
-            preparedStatement.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
-            preparedStatement.setString(3, aluno.getSexo());
-            preparedStatement.setString(4, aluno.getNomePai());
-            preparedStatement.setString(5, aluno.getNomeMae());
-            preparedStatement.setString(6, aluno.getCelular());
-            preparedStatement.setString(7, aluno.getCelularPai());
-            preparedStatement.setString(8, aluno.getCelularMae());
-            preparedStatement.setString(9, aluno.getEmail());
+            stmt.executeUpdate();
 
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            System.err.println("Erro na execução");
+            ex.printStackTrace();
         }
     }
 /*

@@ -4,7 +4,9 @@
     Author     : Carlos Pavão
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,7 +116,11 @@ body{
     }
 </style>
 <body class="fundo">
-    <jsp:forward page="/AlunoController?action=listUser" />
+    <script>
+        $(function() {
+            $('input[name=dob]').datepicker();
+        });
+    </script>
     <div class="mdl-layout mdl-js-layout">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
@@ -181,39 +187,48 @@ body{
                     <h1 class="mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--6-col ">Cadastro Aluno</h1>
                     <div class="mdl-grid">
                         <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col mdl-cell--8-col-tablet cadastro">
-                            <form class="formulario " action="${request.contextPath}/exemplo-web" method="post">
-                                <input type="hidden" name="id" value="123" />
+                            <form method="post" class="formulario " action='AlunoController' name='frmAdicionarAluno' >
+                                Aluno ID: <input type="hidden" readonly="readonly" name="id" 
+                                                 value="<c:out value="${aluno.codAluno}" />" /> <br /> 
                                 <div>
-                                    <label>Nome:</label>
-                                    <input type="text" name="nome" placeholder="Preencha o nome completo" />
+                                    Nome: <input
+                                            type="text" name="nome"
+                                            value="<c:out value="${aluno.nome}" />" /> <br />
                                 </div>
                                 <div>
-                                    <label>Data Nascimento:</label>
-                                    <input type="date" name="dataNascimento" />
+                                    data de Nascimento: <input
+                                        type="text" placeholder="dd/MM/yyyy" name="dob" data-date-format="dd/MM/yyyy"
+                                        value="<fmt:formatDate pattern="dd/MM/yyyy" value="${aluno.dataNasc}" />" /> <br />
                                 </div>
                                 <div>
-                                    <label>Pai</label>
-                                    <input type="text" name="NomePai"/>
+                                    Pai: <input
+                                            type="text" name="nomePai"
+                                            value="<c:out value="${aluno.nomePai}" />" /> <br />
                                 </div>
                                 <div>
-                                    <label>Mãe:</label>
-                                    <input type="text" name="NomeMae"/>
+                                    Mãe: <input
+                                            type="text" name="nomeMae"
+                                            value="<c:out value="${aluno.nomeMae}" />" /> <br />
                                 </div>
                                 <div>
-                                    <label>E-mail:</label>
-                                    <input type="email" name="email" placeholder="e-mail do responsável" />
+                                    E-mail: <input
+                                            type="text" name="email"
+                                            value="<c:out value="${aluno.email}" />" /> <br />
                                 </div>
                                 <div>
-                                    <label>Celular:</label>
-                                    <input type="text" name="CelularAluno" placeholder="(11)99999-9999" />
+                                    Celular: <input
+                                            type="text" name="celular"
+                                            value="<c:out value="${aluno.celular}" />" /> <br />
                                 </div>
                                 <div>
-                                    <label>Celular do Pai:</label>
-                                    <input type="text" name="celularPai" placeholder="(11)99999-9999" />
+                                    Celular do Pai: <input
+                                            type="text" name="celularPai"
+                                            value="<c:out value="${aluno.celularPai}" />" /> <br />
                                 </div>
                                 <div>
-                                    <label>Celular da Mãe:</label>
-                                    <input type="text" name="celularMae" placeholder="(11)99999-9999" />
+                                    Celular da Mãe: <input
+                                            type="text" name="celularMae"
+                                            value="<c:out value="${aluno.celularMae}" />" /> <br />
                                 </div>
                                 <div class="getsexo">
                                     <fieldset class="sexo">
@@ -227,6 +242,7 @@ body{
                                             <label  for="generoF">Masculino</label>
                                         </div>
                                     </fieldset>
+                                    <input type="submit" value="Submit" />
                                 </div>
                                 
                         </div>
