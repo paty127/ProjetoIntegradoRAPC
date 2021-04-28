@@ -56,14 +56,14 @@
                     out.print("</script>");
                 }else{
                     aluno.setNome(request.getParameter("nome"));
-                    aluno.setNome(request.getParameter("dataNascimento"));
-                    aluno.setNome(request.getParameter("NomePai"));
-                    aluno.setNome(request.getParameter("NomeMae"));
-                    aluno.setNome(request.getParameter("email"));
-                    aluno.setNome(request.getParameter("CelularAluno"));
-                    aluno.setNome(request.getParameter("celularPai"));
-                    aluno.setNome(request.getParameter("celularMae"));
-                    aluno.setNome(request.getParameter("genero"));
+                    aluno.setDataNasc(request.getParameter("dataNascimento"));
+                    aluno.setNomePai(request.getParameter("NomePai"));
+                    aluno.setNomeMae(request.getParameter("NomeMae"));
+                    aluno.setEmail(request.getParameter("email"));
+                    aluno.setCelular(request.getParameter("CelularAluno"));
+                    aluno.setCelularPai(request.getParameter("celularPai"));
+                    aluno.setCelularMae(request.getParameter("celularMae"));
+                    aluno.setSexo(request.getParameter("genero"));
                     alu.inserir(aluno);
                     out.print("<script>");
                     out.print("alert('Dados inseridos com sucesso!');");
