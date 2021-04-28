@@ -5,6 +5,9 @@
  */
 package util;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,27 +17,27 @@ public class DbUtil {
 
     private static Connection connection = null;
 
-    public static Connection getConnection() {
-        if (connection != null)
-            return connection;
-        else {
+ 
+      public Connection getConnection() throws SQLException, FileNotFoundException, IOException {
+        // 1) Abrir o arquivo de propriedades com informações de conexão
+        try  (FileReader propReader = new FileReader("C:/Senac/conexao-bd.properties")) {
+            Properties bdProps = new Properties();
+            bdProps.load(propReader);
+            
+            // 2) Declarar o driver JDBC
             try {
-                Properties prop = new Properties();
-                
-                String user = "CyberSchool";
-                String password = "CyberSchool2021";
-                
-                Class.forName("com.mysql.jdbc.Driver"); 
-                
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ProjetoRAPC", user, password);
-                
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
+                Class.forName(bdProps.getProperty("driver"));
+            } catch (ClassNotFoundException ex) {
+                throw new SQLException("Driver do banco de dados não encontrado", ex);
             }
-            return connection;
-        }
+            
+            // 3) Abrir conexão usando as propriedades configuradas no arquivo
+            Connection conn = DriverManager.getConnection(bdProps.getProperty("url"), bdProps);
+            return conn;
 
+        } catch (IOException ex) {
+            throw new SQLException("Arquivo conexao-bd.properties não encontrado", ex);
+        }
     }
+
 }

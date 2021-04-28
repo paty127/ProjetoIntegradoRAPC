@@ -1,6 +1,6 @@
 package controller;
 
-import dao.UserDao;
+
 import model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -19,7 +19,7 @@ public class AlunoController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String INSERT_OR_EDIT = "/user.jsp";
     private static String LIST_USER = "/listUser.jsp";
-    private UserDao dao;
+    private Aluno dao;
 
     public AlunoController() {
         super();
