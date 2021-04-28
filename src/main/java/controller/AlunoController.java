@@ -1,7 +1,8 @@
 package controller;
 
 
-import model.User;
+import dao.AlunoDao;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,11 +20,11 @@ public class AlunoController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String INSERT_OR_EDIT = "/user.jsp";
     private static String LIST_USER = "/listUser.jsp";
-    private Aluno dao;
+    private AlunoDao dao;
 
     public AlunoController() {
         super();
-        dao = new UserDao();
+        dao = new AlunoDao();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

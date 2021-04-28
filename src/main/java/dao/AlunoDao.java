@@ -22,7 +22,7 @@ public class AlunoDao {
 
 
     public void adicionarAluno(Aluno aluno) throws SQLException, IOException {
-        String sql = "insert into Aluno(nome,data_de_nascimento,sexo,pai,mae,celular,telefone_pai,telefone_mae,email)values(?, ?, ?, ?, ?, ?, ?, ?, ? )";
+        String sql = "INSERT INTO Aluno(nome,data_de_nascimento,sexo,pai,mae,celular,telefone_pai,telefone_mae,email)values(?, ?, ?, ?, ?, ?, ?, ?, ? )";
             try(Connection conn = connection.getConnection();
                      PreparedStatement stmt = conn.prepareStatement(sql)) {
                 
@@ -43,21 +43,20 @@ public class AlunoDao {
             ex.printStackTrace();
         }
     }
-/*
-    public void deletarAluno(int alunoID) {
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from users where userid=?");
+    public void deletarAluno(int alunoID) throws SQLException, IOException {
+        String sql = "delete from users where userid=?";
+        try(Connection conn = connection.getConnection();
+                     PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            preparedStatement.setInt(1, alunoID);
-            preparedStatement.executeUpdate();
+            stmt.setInt(1, alunoID);
+            stmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-/*
-    public void updateUser(User user) {
+
+    public void updateUser(Aluno aluno) {
         try {
             PreparedStatement preparedStatement = connection
                     .prepareStatement("update users set firstname=?, lastname=?, dob=?, email=?" +
