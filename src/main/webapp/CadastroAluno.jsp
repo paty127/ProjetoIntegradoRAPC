@@ -114,6 +114,7 @@ body{
     }
 </style>
 <body class="fundo">
+    <jsp:forward page="/AlunoController?action=listUser" />
     <div class="mdl-layout mdl-js-layout">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
@@ -192,27 +193,27 @@ body{
                                 </div>
                                 <div>
                                     <label>Pai</label>
-                                    <input type="text" name="NomePai" placeholder="Preencha o nome completo do Pai" />
+                                    <input type="text" name="NomePai"/>
                                 </div>
                                 <div>
-                                    <label>Mãe</label>
-                                    <input type="text" name="NomeMae" placeholder="Preencha o nome completo do Mãe" />
+                                    <label>Mãe:</label>
+                                    <input type="text" name="NomeMae"/>
                                 </div>
                                 <div>
-                                    <label>E-mail</label>
-                                    <input type="email" name="email" placeholder="Preencha o e-mail do responsável" />
+                                    <label>E-mail:</label>
+                                    <input type="email" name="email" placeholder="e-mail do responsável" />
                                 </div>
                                 <div>
-                                    <label>Celular</label>
-                                    <input type="text" name="CelularAluno" placeholder="Preencha o Celular do Aluno" />
+                                    <label>Celular:</label>
+                                    <input type="text" name="CelularAluno" placeholder="(11)99999-9999" />
                                 </div>
                                 <div>
-                                    <label>Celular</label>
-                                    <input type="text" name="celularPai" placeholder="Preencha o Celular do Pai" />
+                                    <label>Celular do Pai:</label>
+                                    <input type="text" name="celularPai" placeholder="(11)99999-9999" />
                                 </div>
                                 <div>
-                                    <label>Celular</label>
-                                    <input type="text" name="celularMae" placeholder="Preencha o Celular da Mãe" />
+                                    <label>Celular da Mãe:</label>
+                                    <input type="text" name="celularMae" placeholder="(11)99999-9999" />
                                 </div>
                                 <div class="getsexo">
                                     <fieldset class="sexo">
