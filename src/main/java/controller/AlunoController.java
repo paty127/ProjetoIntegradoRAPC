@@ -11,13 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Aluno;
 
-@WebServlet(name = "AlunoController", urlPatterns = {"aluno-controller"})
+@WebServlet(name = "AlunoController", urlPatterns = {"/cadastrar-aluno"})
 public class AlunoController extends HttpServlet {
+    
     private static final long serialVersionUID = 1L;
     private static String INSERT_OR_EDIT = "/user.jsp";
     private static String LIST_USER = "/listUser.jsp";
@@ -34,17 +38,34 @@ public class AlunoController extends HttpServlet {
 
         if (action.equalsIgnoreCase("delete")){
             int CodAluno = Integer.parseInt(request.getParameter("CodAluno"));
-            dao.deletarAluno(CodAluno);
+            try {
+                dao.deletarAluno(CodAluno);
+            } catch (SQLException ex) {
+                Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             forward = LIST_USER;
-            request.setAttribute("Aluno", dao.getAllUsers());
+            try {
+                request.setAttribute("Aluno", dao.getAllUsers());
+            } catch (SQLException ex) {
+                Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (action.equalsIgnoreCase("edit")){
             forward = INSERT_OR_EDIT;
             int CodAluno = Integer.parseInt(request.getParameter("CodAluno"));
-            Aluno user = dao.getUserById(CodAluno);
-            request.setAttribute("Aluno", user);
+            Aluno user;
+            try {
+                user = dao.getUserById(CodAluno);
+            } catch (SQLException ex) {
+                Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.setAttribute("Aluno", CodAluno);
         } else if (action.equalsIgnoreCase("listUser")){
             forward = LIST_USER;
-            request.setAttribute("users", dao.getAllUsers());
+            try {
+                request.setAttribute("aluno", dao.getAllUsers());
+            } catch (SQLException ex) {
+                Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             forward = INSERT_OR_EDIT;
         }

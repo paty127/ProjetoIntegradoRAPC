@@ -56,35 +56,6 @@ private final DbUtil dbUtil = new DbUtil();
         }
     }
     
-    
-    public List<Aluno> getAllUsers() throws SQLException, IOException {
-        String sql = "select * from aluno";
-        List<Aluno> listaDeUsuario = new ArrayList<>();
-        try (
-            Connection conn = dbUtil.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rst = stmt.executeQuery(sql)){
-            while (rst.next()) {
-                Aluno aluno = new Aluno();
-                
-                aluno.setCodAluno(rst.getInt("CodAluno"));
-                aluno.setDataNasc(rst.getDate("DataNasc").toLocalDate());
-                aluno.setNomePai(rst.getString("NomePai"));
-                aluno.setNomeMae(rst.getString("NomeMae"));
-                aluno.setCelular(rst.getString("Celular"));
-                aluno.setCelularPai(rst.getString("CelularPai"));
-                aluno.setCelularMae(rst.getString("CelularMae"));
-                aluno.setEmail(rst.getString("email"));
-                aluno.setSexo(rst.getString("sexo"));
-                listaDeUsuario.add(aluno);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return listaDeUsuario;
-    }
-
     public void updateUser(Aluno aluno) throws SQLException, IOException {
         String sql ="update aluno set nome=?,data_de_nascimento=?,"
                             + "sexo=?,pai=?,mae=?,celular=?,telefone_pai=?,"
@@ -107,6 +78,35 @@ private final DbUtil dbUtil = new DbUtil();
             e.printStackTrace();
         }
     }
+    
+    public List<Aluno> getAllUsers() throws SQLException, IOException {
+        String sql = "select * from aluno";
+        List<Aluno> listaDeUsuario = new ArrayList<>();
+        try (
+            Connection conn = dbUtil.getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rst = stmt.executeQuery(sql)){
+            while (rst.next()) {
+                Aluno aluno = new Aluno();
+                
+                aluno.setCodAluno(rst.getInt("cod_aluno"));
+                aluno.setNome(rst.getString("nome"));
+                aluno.setDataNasc(rst.getDate("data_de_nascimento").toLocalDate());
+                aluno.setNomePai(rst.getString("pai"));
+                aluno.setNomeMae(rst.getString("mae"));
+                aluno.setCelular(rst.getString("celular"));
+                aluno.setCelularPai(rst.getString("telefone_pai"));
+                aluno.setCelularMae(rst.getString(" telefone_mae"));
+                aluno.setEmail(rst.getString("email"));
+                aluno.setSexo(rst.getString("sexo"));
+                listaDeUsuario.add(aluno);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaDeUsuario;
+    }
 
 
     public Aluno getUserById(int CodAluno) throws SQLException, IOException {
@@ -119,13 +119,14 @@ private final DbUtil dbUtil = new DbUtil();
             
 
             if (rst.next()) {
-                aluno.setCodAluno(rst.getInt("CodAluno"));
-                aluno.setDataNasc(rst.getDate("DataNasc").toLocalDate());
-                aluno.setNomePai(rst.getString("NomePai"));
-                aluno.setNomeMae(rst.getString("NomeMae"));
-                aluno.setCelular(rst.getString("Celular"));
-                aluno.setCelularPai(rst.getString("CelularPai"));
-                aluno.setCelularMae(rst.getString("CelularMae"));
+                aluno.setCodAluno(rst.getInt("cod_aluno"));
+                aluno.setNome(rst.getString("nome"));
+                aluno.setDataNasc(rst.getDate("data_de_nascimento").toLocalDate());
+                aluno.setNomePai(rst.getString("pai"));
+                aluno.setNomeMae(rst.getString("mae"));
+                aluno.setCelular(rst.getString("celular"));
+                aluno.setCelularPai(rst.getString("telefone_pai"));
+                aluno.setCelularMae(rst.getString(" telefone_mae"));
                 aluno.setEmail(rst.getString("email"));
                 aluno.setSexo(rst.getString("sexo"));
             }
