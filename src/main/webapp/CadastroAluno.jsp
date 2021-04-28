@@ -112,6 +112,15 @@ body{
     align-items: center;
     padding: 1rem;
     }
+    #botao{
+	background-color: #c00000;
+	color: #ffffff;
+	width: 90px;
+	height: 40px;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+    }
 </style>
 <body class="fundo">
     <div class="mdl-layout mdl-js-layout">
@@ -180,7 +189,7 @@ body{
                     <h1 class="mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--6-col ">Cadastro Aluno</h1>
                     <div class="mdl-grid">
                         <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col mdl-cell--8-col-tablet cadastro">
-                            <form class="formulario " action="${request.contextPath}/exemplo-web" method="post">
+                            <form class="formulario " action="inseriAluno.jsp" method="post">
                                 <input type="hidden" name="id" value="123" />
                                 <div>
                                     <label>Nome:</label>
@@ -224,6 +233,8 @@ body{
                                         <div>
                                             <input  type="radio" name="genero" value="1" id="generoM" />
                                             <label  for="generoF">Masculino</label>
+                                            <br/>
+                                            <button type="submit" value="Cadastrar" id="botao"/>      
                                         </div>
                                     </fieldset>
                                 </div>
