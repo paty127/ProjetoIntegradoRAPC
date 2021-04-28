@@ -11,7 +11,7 @@ public class Aluno {
     
 private int codAluno;
 private String nome;
-private LocalDate dataNasc;
+private Date dataNasc;
 private String sexo;
 private String nomePai;
 private String nomeMae;
@@ -36,13 +36,15 @@ private String email;
         this.nome = nome;
     }
 
-    public LocalDate getDataNasc() {
+    public Date getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(LocalDate dataNasc) {
+    public void setDataNasc(Date dataNasc) {
         this.dataNasc = dataNasc;
     }
+
+   
 
     public String getSexo() {
         return sexo;

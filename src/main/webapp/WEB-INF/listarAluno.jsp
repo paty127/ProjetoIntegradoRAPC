@@ -33,7 +33,18 @@
         <tbody>
             <c:forEach items="${aluno}" var="aluno">
                 <tr>
-                    <td><c:out value="${aluno.user}>
+                    <td><c:out value="${aluno.cod_aluno}" /></td>
+                    <td><c:out value="${aluno.nome}" /></td>
+                    <td><fmt:formatDate pattern="dd/MM/yyyy" value="${aluno.data_de_nascimento}" /></td>
+                    <td><c:out value="${aluno.sexo}" /></td>
+                    <td><c:out value="${aluno.pai}" /></td>
+                    <td><c:out value="${aluno.mae}" /></td>
+                    <td><c:out value="${aluno.celular}" /></td>
+                    <td><c:out value="${aluno.telefone_pai}" /></td>
+                    <td><c:out value="${aluno.telefone_mae}" /></td>
+                    <td><c:out value="${aluno.email}" /></td>
+                    <td><a href="UserController?action=edit&userId=<c:out value="${aluno.cod_aluno}"/>">Update</a></td>
+                    <td><a href="UserController?action=delete&userId=<c:out value="${aluno.cod_aluno}"/>">Delete</a></td>
                 </tr>
             </c:forEach>
     </body>

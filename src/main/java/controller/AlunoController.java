@@ -75,8 +75,8 @@ public class AlunoController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Aluno user = new Aluno();
-        user.setNome(request.getParameter("nome"));
+        Aluno aluno = new Aluno();
+        aluno.setNome(request.getParameter("nome"));
         try {
             Date dob=null;
             String teste = request.getParameter("dob");
@@ -88,23 +88,35 @@ public class AlunoController extends HttpServlet {
                 dob = null;
             }
 
-            user.setDataNasc(dob);
+            aluno.setDataNasc(dob);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        user.setEmail(request.getParameter("email"));
+        aluno.setEmail(request.getParameter("email"));
         String userid = request.getParameter("userid");
         if(userid == null || userid.isEmpty())
         {
-            dao.addUser(user);
+            try {
+                dao.adicionarAluno(aluno);
+            } catch (SQLException ex) {
+                Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else
         {
-            user.setUserid(Integer.parseInt(userid));
-            dao.updateUser(user);
+            aluno.setCodAluno(Integer.parseInt(userid));
+            try {
+                dao.updateUser(aluno);
+            } catch (SQLException ex) {
+                Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
-        request.setAttribute("users", dao.getAllUsers());
+        try {
+            request.setAttribute("users", dao.getAllUsers());
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         view.forward(request, response);
     }
 }

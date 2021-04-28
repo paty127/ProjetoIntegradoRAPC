@@ -27,7 +27,7 @@ private final DbUtil dbUtil = new DbUtil();
                      PreparedStatement stmt = conn.prepareStatement(sql)) {
                 
             stmt.setString(1, aluno.getNome());
-            stmt.setDate(2, java.sql.Date.valueOf(aluno.getDataNasc()));
+            stmt.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
             stmt.setString(3, aluno.getSexo());
             stmt.setString(4, aluno.getNomePai());
             stmt.setString(5, aluno.getNomeMae());
@@ -63,7 +63,7 @@ private final DbUtil dbUtil = new DbUtil();
         try (Connection conn = dbUtil.getConnection();
                      PreparedStatement stmt = conn.prepareStatement(sql)){            
             stmt.setString(1, aluno.getNome());
-            stmt.setDate(2, java.sql.Date.valueOf(aluno.getDataNasc()));
+            stmt.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
             stmt.setString(3, aluno.getSexo());
             stmt.setString(4, aluno.getNomePai());
             stmt.setString(5, aluno.getNomeMae());
@@ -91,12 +91,12 @@ private final DbUtil dbUtil = new DbUtil();
                 
                 aluno.setCodAluno(rst.getInt("cod_aluno"));
                 aluno.setNome(rst.getString("nome"));
-                aluno.setDataNasc(rst.getDate("data_de_nascimento").toLocalDate());
+                aluno.setDataNasc(rst.getDate("data_de_nascimento"));
                 aluno.setNomePai(rst.getString("pai"));
                 aluno.setNomeMae(rst.getString("mae"));
                 aluno.setCelular(rst.getString("celular"));
                 aluno.setCelularPai(rst.getString("telefone_pai"));
-                aluno.setCelularMae(rst.getString(" telefone_mae"));
+                aluno.setCelularMae(rst.getString("telefone_mae"));
                 aluno.setEmail(rst.getString("email"));
                 aluno.setSexo(rst.getString("sexo"));
                 listaDeUsuario.add(aluno);
@@ -121,7 +121,7 @@ private final DbUtil dbUtil = new DbUtil();
             if (rst.next()) {
                 aluno.setCodAluno(rst.getInt("cod_aluno"));
                 aluno.setNome(rst.getString("nome"));
-                aluno.setDataNasc(rst.getDate("data_de_nascimento").toLocalDate());
+                aluno.setDataNasc(rst.getDate("data_de_nascimento"));
                 aluno.setNomePai(rst.getString("pai"));
                 aluno.setNomeMae(rst.getString("mae"));
                 aluno.setCelular(rst.getString("celular"));
