@@ -114,6 +114,7 @@ body{
     }
 </style>
 <body class="fundo">
+    <jsp:forward page="/AlunoController?action=listUser" />
     <div class="mdl-layout mdl-js-layout">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">

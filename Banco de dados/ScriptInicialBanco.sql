@@ -1,5 +1,9 @@
 create database ProjetoRAPC;
 
+CREATE USER 'CyberSchool'@'localhost' IDENTIFIED BY 'CyberSchool2021';
+GRANT ALL PRIVILEGES ON ProjetoRAPC. * TO 'CyberSchool'@'localhost';
+FLUSH PRIVILEGES;
+
 USE ProjetoRAPC;
 
 /* Banco Logico: */
@@ -53,7 +57,9 @@ CREATE TABLE Funcionario (
     Celular varchar(13),
     Telefone varchar(10),
     CPF varchar(11),
-    RG varchar(14),    
+    RG varchar(14),
+    senha varchar(8) not null,
+    cargo varchar(10) not null,
     fk_cod_professor integer,
     FOREIGN KEY (fk_cod_professor) references Professor(cod_professor)
 );
