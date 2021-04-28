@@ -21,8 +21,8 @@ public class DbUtil {
             try {
                 Properties prop = new Properties();
                 
-                String user = "root";
-                String password = "C@r0laine2810P@va0*$";
+                String user = "CyberSchool";
+                String password = "CyberSchool2021";
                 
                 Class.forName("com.mysql.jdbc.Driver"); 
                 
