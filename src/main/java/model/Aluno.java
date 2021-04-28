@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ public class Aluno {
     
 private int codAluno;
 private String nome;
-private Date dataNasc;
+private LocalDate dataNasc;
 private String sexo;
 private String nomePai;
 private String nomeMae;
@@ -35,11 +36,11 @@ private String email;
         this.nome = nome;
     }
 
-    public Date getDataNasc() {
+    public LocalDate getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(Date dataNasc) {
+    public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
 
@@ -99,11 +100,7 @@ private String email;
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Aluno{" + "codaLUNO=" + codAluno + ", nome=" + nome + ", dataNasc=" + dataNasc + ", sexo=" + sexo + ", nomePai=" + nomePai + ", nomeMae=" + nomeMae + ", Celular=" + Celular + ", CelularPai=" + CelularPai + ", CelularMae=" + CelularMae + ", email=" + email + '}';
-    }
-
+    
 
 
 

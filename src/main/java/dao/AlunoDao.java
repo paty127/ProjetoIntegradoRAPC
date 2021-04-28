@@ -17,17 +17,17 @@ import util.DbUtil;
  * @author Carlos Pavão <carlos.henrique93@msn.com>
  */
 public class AlunoDao {
-
-    private final DbUtil connection = new DbUtil();
-
-
+    
+private final DbUtil dbUtil = new DbUtil();
+    
+    
     public void adicionarAluno(Aluno aluno) throws SQLException, IOException {
-        String sql = "INSERT INTO Aluno(nome,data_de_nascimento,sexo,pai,mae,celular,telefone_pai,telefone_mae,email)values(?, ?, ?, ?, ?, ?, ?, ?, ? )";
-            try(Connection conn = connection.getConnection();
+        String sql = "INSERT INTO aluno(nome,data_de_nascimento,sexo,pai,mae,celular,telefone_pai,telefone_mae,email)values(?, ?, ?, ?, ?, ?, ?, ?, ? )";
+            try(Connection conn = dbUtil.getConnection();
                      PreparedStatement stmt = conn.prepareStatement(sql)) {
                 
             stmt.setString(1, aluno.getNome());
-            stmt.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
+            stmt.setDate(2, java.sql.Date.valueOf(aluno.getDataNasc()));
             stmt.setString(3, aluno.getSexo());
             stmt.setString(4, aluno.getNomePai());
             stmt.setString(5, aluno.getNomeMae());
@@ -44,8 +44,8 @@ public class AlunoDao {
         }
     }
     public void deletarAluno(int alunoID) throws SQLException, IOException {
-        String sql = "delete from users where userid=?";
-        try(Connection conn = connection.getConnection();
+        String sql = "delete from aluno where cod_aluno=?";
+        try(Connection conn = dbUtil.getConnection();
                      PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, alunoID);
@@ -55,38 +55,28 @@ public class AlunoDao {
             e.printStackTrace();
         }
     }
-
-    public void updateUser(Aluno aluno) {
-        try {
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("update users set firstname=?, lastname=?, dob=?, email=?" +
-                            "where userid=?");
-            // Parameters start with 1
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setDate(3, new java.sql.Date(user.getDob().getTime()));
-            preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setInt(5, user.getUserid());
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<User> getAllUsers() {
-        List<User> listaDeUsuario = new ArrayList<User>();
-        try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from users");
-            while (rs.next()) {
-                User user = new User();
-                user.setUserid(rs.getInt("userid"));
-                user.setFirstName(rs.getString("firstname"));
-                user.setLastName(rs.getString("lastname"));
-                user.setDob(rs.getDate("dob"));
-                user.setEmail(rs.getString("email"));
-                listaDeUsuario.add(user);
+    
+    
+    public List<Aluno> getAllUsers() throws SQLException, IOException {
+        String sql = "select * from aluno";
+        List<Aluno> listaDeUsuario = new ArrayList<>();
+        try (
+            Connection conn = dbUtil.getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rst = stmt.executeQuery(sql)){
+            while (rst.next()) {
+                Aluno aluno = new Aluno();
+                
+                aluno.setCodAluno(rst.getInt("CodAluno"));
+                aluno.setDataNasc(rst.getDate("DataNasc").toLocalDate());
+                aluno.setNomePai(rst.getString("NomePai"));
+                aluno.setNomeMae(rst.getString("NomeMae"));
+                aluno.setCelular(rst.getString("Celular"));
+                aluno.setCelularPai(rst.getString("CelularPai"));
+                aluno.setCelularMae(rst.getString("CelularMae"));
+                aluno.setEmail(rst.getString("email"));
+                aluno.setSexo(rst.getString("sexo"));
+                listaDeUsuario.add(aluno);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,28 +85,56 @@ public class AlunoDao {
         return listaDeUsuario;
     }
 
-    public User getUserById(int userId) {
-        User user = new User();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from users where userid=?");
-            preparedStatement.setInt(1, userId);
-            ResultSet rs = preparedStatement.executeQuery();
+    public void updateUser(Aluno aluno) throws SQLException, IOException {
+        String sql ="update aluno set nome=?,data_de_nascimento=?,"
+                            + "sexo=?,pai=?,mae=?,celular=?,telefone_pai=?,"
+                            + "telefone_mae=?,email=? where userid=?";
+        try (Connection conn = dbUtil.getConnection();
+                     PreparedStatement stmt = conn.prepareStatement(sql)){            
+            stmt.setString(1, aluno.getNome());
+            stmt.setDate(2, java.sql.Date.valueOf(aluno.getDataNasc()));
+            stmt.setString(3, aluno.getSexo());
+            stmt.setString(4, aluno.getNomePai());
+            stmt.setString(5, aluno.getNomeMae());
+            stmt.setString(6, aluno.getCelular());
+            stmt.setString(7, aluno.getCelularPai());
+            stmt.setString(8, aluno.getCelularMae());
+            stmt.setString(9, aluno.getEmail());            
+            
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-            if (rs.next()) {
-                user.setUserid(rs.getInt("userid"));
-                user.setFirstName(rs.getString("firstname"));
-                user.setLastName(rs.getString("lastname"));
-                user.setDob(rs.getDate("dob"));
-                user.setEmail(rs.getString("email"));
+
+    public Aluno getUserById(int CodAluno) throws SQLException, IOException {
+        String sql ="select * from aluno where cod_aluno=?";
+        Aluno aluno = new Aluno();
+        try(Connection conn = dbUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rst = stmt.executeQuery(sql)){
+            stmt.setInt(1, CodAluno);
+            
+
+            if (rst.next()) {
+                aluno.setCodAluno(rst.getInt("CodAluno"));
+                aluno.setDataNasc(rst.getDate("DataNasc").toLocalDate());
+                aluno.setNomePai(rst.getString("NomePai"));
+                aluno.setNomeMae(rst.getString("NomeMae"));
+                aluno.setCelular(rst.getString("Celular"));
+                aluno.setCelularPai(rst.getString("CelularPai"));
+                aluno.setCelularMae(rst.getString("CelularMae"));
+                aluno.setEmail(rst.getString("email"));
+                aluno.setSexo(rst.getString("sexo"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return user;
+        return aluno;
     }
 
-    }
-
- */
 }
+

@@ -14,8 +14,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import model.Aluno;
 
-@WebServlet(name = "aluno", urlPatterns = {"/AlunoController"})
+@WebServlet(name = "AlunoController", urlPatterns = {"aluno-controller"})
 public class AlunoController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String INSERT_OR_EDIT = "/user.jsp";
@@ -32,15 +33,15 @@ public class AlunoController extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("delete")){
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            dao.deleteUser(userId);
+            int CodAluno = Integer.parseInt(request.getParameter("CodAluno"));
+            dao.deletarAluno(CodAluno);
             forward = LIST_USER;
-            request.setAttribute("users", dao.getAllUsers());
+            request.setAttribute("Aluno", dao.getAllUsers());
         } else if (action.equalsIgnoreCase("edit")){
             forward = INSERT_OR_EDIT;
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            User user = dao.getUserById(userId);
-            request.setAttribute("user", user);
+            int CodAluno = Integer.parseInt(request.getParameter("CodAluno"));
+            Aluno user = dao.getUserById(CodAluno);
+            request.setAttribute("Aluno", user);
         } else if (action.equalsIgnoreCase("listUser")){
             forward = LIST_USER;
             request.setAttribute("users", dao.getAllUsers());
@@ -53,9 +54,8 @@ public class AlunoController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = new User();
-        user.setFirstName(request.getParameter("firstName"));
-        user.setLastName(request.getParameter("lastName"));
+        Aluno user = new Aluno();
+        user.setNome(request.getParameter("nome"));
         try {
             Date dob=null;
             String teste = request.getParameter("dob");
@@ -67,7 +67,7 @@ public class AlunoController extends HttpServlet {
                 dob = null;
             }
 
-            user.setDob(dob);
+            user.setDataNasc(dob);
         } catch (ParseException e) {
             e.printStackTrace();
         }

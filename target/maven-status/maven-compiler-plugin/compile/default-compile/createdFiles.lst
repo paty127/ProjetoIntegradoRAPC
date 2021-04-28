@@ -1,8 +1,0 @@
-model\Funcionario.class
-dao\AlunoDao.class
-model\Aluno.class
-util\DbUtil.class
-controller\AlunoController.class
-controller\UserController.class
-dao\UserDao.class
-model\User.class

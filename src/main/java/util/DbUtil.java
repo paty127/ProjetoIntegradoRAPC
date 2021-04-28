@@ -19,24 +19,26 @@ public class DbUtil {
 
  
       public Connection getConnection() throws SQLException, FileNotFoundException, IOException {
-        // 1) Abrir o arquivo de propriedades com informações de conexão
-        try  (FileReader propReader = new FileReader("C:/Senac/conexao-bd.properties")) {
-            Properties bdProps = new Properties();
-            bdProps.load(propReader);
-            
-            // 2) Declarar o driver JDBC
-            try {
-                Class.forName(bdProps.getProperty("driver"));
-            } catch (ClassNotFoundException ex) {
-                throw new SQLException("Driver do banco de dados não encontrado", ex);
-            }
-            
-            // 3) Abrir conexão usando as propriedades configuradas no arquivo
-            Connection conn = DriverManager.getConnection(bdProps.getProperty("url"), bdProps);
-            return conn;
+        if (connection != null){
+            return connection;
+        }else {// 1) Abrir o arquivo de propriedades com informações de conexão
+            try  (FileReader propReader = new FileReader("C:/Senac/conexao-bd.properties")) {
+                Properties bdProps = new Properties();
+                bdProps.load(propReader);
 
-        } catch (IOException ex) {
-            throw new SQLException("Arquivo conexao-bd.properties não encontrado", ex);
+                // 2) Declarar o driver JDBC
+                try {
+                    Class.forName(bdProps.getProperty("driver"));
+                } catch (ClassNotFoundException ex) {
+                    throw new SQLException("Driver do banco de dados não encontrado", ex);
+                }
+
+                // 3) Abrir conexão usando as propriedades configuradas no arquivo
+                connection = DriverManager.getConnection(bdProps.getProperty("url"), bdProps);
+            } catch (IOException ex) {
+                throw new SQLException("Arquivo conexao-bd.properties não encontrado", ex);
+            }
+            return connection;
         }
     }
 
