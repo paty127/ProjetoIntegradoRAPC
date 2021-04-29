@@ -2,8 +2,6 @@ package controller;
 
 
 import dao.AlunoDao;
-
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,11 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Aluno;
 
-@WebServlet(name = "AlunoController", urlPatterns = {"/cadastrar-aluno"})
+@WebServlet(name = "AlunoController", urlPatterns = {"/AlunoController"})
 public class AlunoController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
-    private static String INSERT_OR_EDIT = "/user.jsp";
+    private static String INSERT_OR_EDIT = "/CadastroAluno.jsp";
     private static String LIST_USER = "/listarAluno.jsp";
     private AlunoDao dao;
 
@@ -32,7 +30,8 @@ public class AlunoController extends HttpServlet {
         dao = new AlunoDao();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward="";
         String action = request.getParameter("action");
 
@@ -52,17 +51,16 @@ public class AlunoController extends HttpServlet {
         } else if (action.equalsIgnoreCase("edit")){
             forward = INSERT_OR_EDIT;
             int CodAluno = Integer.parseInt(request.getParameter("CodAluno"));
-            Aluno user;
-            try {
-                user = dao.getUserById(CodAluno);
+            try {           
+                Aluno user = dao.getUserById(CodAluno);
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.setAttribute("Aluno", CodAluno);
-        } else if (action.equalsIgnoreCase("listUser")){
+            request.setAttribute("aluno", CodAluno);
+        } else if (action.equalsIgnoreCase("ListAluno")){
             forward = LIST_USER;
             try {
-                request.setAttribute("aluno", dao.getAllUsers());
+                request.setAttribute("alunos", dao.getAllUsers());
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -74,26 +72,40 @@ public class AlunoController extends HttpServlet {
         view.forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        
         Aluno aluno = new Aluno();
+        
         aluno.setNome(request.getParameter("nome"));
+        
         try {
-            Date dob=null;
-            String teste = request.getParameter("dob");
+            Date data_de_nascimento=null;
+            String teste = request.getParameter("data_de_nascimento");
             System.out.println(teste);
-            if(request.getParameter("dob")!=null){
-                dob = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("dob"));
+            if(request.getParameter("data_de_nascimento")!=null){
+                data_de_nascimento = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_de_nascimento"));
             }
             else{
-                dob = null;
+                data_de_nascimento = null;
             }
 
-            aluno.setDataNasc(dob);
+            aluno.setDataNasc(data_de_nascimento);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        aluno.setNomePai(request.getParameter("pai"));
+        aluno.setNomeMae(request.getParameter("mae"));
+        aluno.setCelular(request.getParameter("celular"));
+        aluno.setCelularPai(request.getParameter("celularPai"));
+        aluno.setCelularMae(request.getParameter("celularMae"));
         aluno.setEmail(request.getParameter("email"));
+        aluno.setSexo(request.getParameter("sexo"));
+        
         String userid = request.getParameter("userid");
+        
         if(userid == null || userid.isEmpty())
         {
             try {
@@ -113,7 +125,7 @@ public class AlunoController extends HttpServlet {
         }
         RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
         try {
-            request.setAttribute("users", dao.getAllUsers());
+            request.setAttribute("alunos", dao.getAllUsers());
         } catch (SQLException ex) {
             Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -22,7 +22,7 @@ private final DbUtil dbUtil = new DbUtil();
     
     
     public void adicionarAluno(Aluno aluno) throws SQLException, IOException {
-        String sql = "INSERT INTO aluno(nome,data_de_nascimento,sexo,pai,mae,celular,telefone_pai,telefone_mae,email)values(?, ?, ?, ?, ?, ?, ?, ?, ? )";
+        String sql = "INSERT INTO `projetorapc`.`aluno`(nome,data_de_nascimento,sexo,pai,mae,celular,telefone_pai,telefone_mae,email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? );";
             try(Connection conn = dbUtil.getConnection();
                      PreparedStatement stmt = conn.prepareStatement(sql)) {
                 
@@ -44,7 +44,7 @@ private final DbUtil dbUtil = new DbUtil();
         }
     }
     public void deletarAluno(int alunoID) throws SQLException, IOException {
-        String sql = "delete from aluno where cod_aluno=?";
+        String sql = "delete from aluno where cod_aluno=?;";
         try(Connection conn = dbUtil.getConnection();
                      PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -52,6 +52,7 @@ private final DbUtil dbUtil = new DbUtil();
             stmt.executeUpdate();
 
         } catch (SQLException e) {
+            System.err.println("Erro na execução");
             e.printStackTrace();
         }
     }
@@ -59,7 +60,7 @@ private final DbUtil dbUtil = new DbUtil();
     public void updateUser(Aluno aluno) throws SQLException, IOException {
         String sql ="update aluno set nome=?,data_de_nascimento=?,"
                             + "sexo=?,pai=?,mae=?,celular=?,telefone_pai=?,"
-                            + "telefone_mae=?,email=? where userid=?";
+                            + "telefone_mae=?,email=? where userid=?;";
         try (Connection conn = dbUtil.getConnection();
                      PreparedStatement stmt = conn.prepareStatement(sql)){            
             stmt.setString(1, aluno.getNome());
@@ -75,12 +76,13 @@ private final DbUtil dbUtil = new DbUtil();
             stmt.executeUpdate();
             
         } catch (SQLException e) {
+            System.err.println("Erro na execução");
             e.printStackTrace();
         }
     }
     
     public List<Aluno> getAllUsers() throws SQLException, IOException {
-        String sql = "select * from aluno";
+        String sql = "SELECT * from aluno;";
         List<Aluno> listaDeUsuario = new ArrayList<>();
         try (
             Connection conn = dbUtil.getConnection();
@@ -88,7 +90,6 @@ private final DbUtil dbUtil = new DbUtil();
             ResultSet rst = stmt.executeQuery(sql)){
             while (rst.next()) {
                 Aluno aluno = new Aluno();
-                
                 aluno.setCodAluno(rst.getInt("cod_aluno"));
                 aluno.setNome(rst.getString("nome"));
                 aluno.setDataNasc(rst.getDate("data_de_nascimento"));
@@ -102,6 +103,7 @@ private final DbUtil dbUtil = new DbUtil();
                 listaDeUsuario.add(aluno);
             }
         } catch (SQLException e) {
+            System.err.println("Erro na execução");
             e.printStackTrace();
         }
 
@@ -110,7 +112,7 @@ private final DbUtil dbUtil = new DbUtil();
 
 
     public Aluno getUserById(int CodAluno) throws SQLException, IOException {
-        String sql ="select * from aluno where cod_aluno=?";
+        String sql ="select * from aluno where cod_aluno=?;";
         Aluno aluno = new Aluno();
         try(Connection conn = dbUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -131,6 +133,7 @@ private final DbUtil dbUtil = new DbUtil();
                 aluno.setSexo(rst.getString("sexo"));
             }
         } catch (SQLException e) {
+            System.err.println("Erro na execução");
             e.printStackTrace();
         }
 

@@ -22,7 +22,7 @@ public class DbUtil {
         if (connection != null){
             return connection;
         }else {// 1) Abrir o arquivo de propriedades com informações de conexão
-            try  (FileReader propReader = new FileReader("C:/Senac/conexao-bd.properties")) {
+            try  (FileReader propReader = new FileReader("C:/Senac/conexao-bd.properties.txt")) {
                 Properties bdProps = new Properties();
                 bdProps.load(propReader);
 
@@ -34,11 +34,12 @@ public class DbUtil {
                 }
 
                 // 3) Abrir conexão usando as propriedades configuradas no arquivo
-                connection = DriverManager.getConnection(bdProps.getProperty("url"), bdProps);
+                Connection conn = DriverManager.getConnection(bdProps.getProperty("url"), bdProps);
+                return conn;
             } catch (IOException ex) {
                 throw new SQLException("Arquivo conexao-bd.properties não encontrado", ex);
             }
-            return connection;
+            
         }
     }
 

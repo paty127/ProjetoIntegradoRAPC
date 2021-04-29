@@ -1,10 +1,8 @@
-<%-- 
-    Document   : CadastroAluno
-    Created on : 22 de abr. de 2021, 11:14:11
-    Author     : Carlos Pavão
---%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,113 +14,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-light_blue.min.css" />
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="CSS/Cadastro Aluno.css" type="text/css">
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 </head>
-<style>
-    *{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    font-family: sans-serif;
-    font-size: 14px;
-}
-
-body{
-    width: 100%;
-    min-height: 100vh;
-    background: url("Imagens/fundo.jpg") center/cover;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-    h1 {
-        font: bold;
-        color: rgb(16, 87, 87);
-    }
-    .campo {
-        background: rgb(255, 255, 255);
-    }
-
-    .textoCaixa {
-        font-family: Roboto, sans-serif;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
-        font-size: 22;
-        letter-spacing: normal;
-        text-decoration: inherit;
-        text-transform: inherit;
-        color: #000000;
-        font: bold;
-
-    }
-
-    .container {
-
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center
-    }
-
-    .box {
-        width: 300px;
-        height: 300px;
-
-    }
-    .rodape{
-        font-size: xx-large;
-        font: bold;
-        color: black;
-    }
-    .formulario{
-        align-items: center;
-        text-align: center;
-    }
-
-    .group{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction:column;
-    width: 70%;
-    padding: 1.3rem 0;
-    
-    }
-    .cadastro{
-        background-color: rgb(155, 156, 156);
-    }
-    
-    .getSexo{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 1.3rem 0;
-    }
-    .sexo{
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 1rem;
-    }
-    #botao{
-	background-color: #c00000;
-	color: #ffffff;
-	width: 90px;
-	height: 40px;
-	text-align: center;
-	font-weight: bold;
-	cursor: pointer;
-    }
-</style>
 <body class="fundo">
+    <script>
+        $(funcion(){
+            $('input[name=data_de_nascimento').datapicker();
+        });
+    </script>
     <div class="mdl-layout mdl-js-layout">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
@@ -189,55 +90,46 @@ body{
                     <h1 class="mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--6-col ">Cadastro Aluno</h1>
                     <div class="mdl-grid">
                         <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col mdl-cell--8-col-tablet cadastro">
-                            <form class="formulario " action="inseriAluno.jsp" method="post">
-                                <input type="hidden" name="id" value="123" />
+                            <form class="formulario" method="POST" action="AlunoController" name="frmAddAluno">
+                                User ID : <input type="text" readonly="readonly" name="userid"
+                                                    value="<c:out value="${user.userid}" />"/> <br />
                                 <div>
-                                    <label>Nome:</label>
-                                    <input type="text" name="nome" placeholder="Preencha o nome completo" />
-                                </div>
-                                <div>
-                                    <label>Data Nascimento:</label>
-                                    <input type="date" name="dataNascimento" />
+                                    Nome:<input type="text" name="nome"
+                                                value="<c:out value="${aluno.nome}" />"/> <br />         
                                 </div>
                                 <div>
-                                    <label>Pai</label>
-                                    <input type="text" name="NomePai"/>
+                                    Data Nascimento:<input type="text" placeholder="dd/MM/yyyy" name="data_de_nascimento" data-date-format="dd/MM/yyyy"
+                                            value="<fmt:formatDate pattern="dd/MM/yyyy" value="${user.data_de_nascimento}" />" /> <br />
                                 </div>
                                 <div>
-                                    <label>Mãe:</label>
-                                    <input type="text" name="NomeMae"/>
+                                    E-mail:<input type="text" name="email"
+                                                value="<c:out value="${aluno.email}" />" /> <br />
                                 </div>
                                 <div>
-                                    <label>E-mail:</label>
-                                    <input type="email" name="email" placeholder="e-mail do responsável" />
+                                    Nome do Pai:<input type="text" name="pai"
+                                                value="<c:out value="${aluno.pai}" />" /> <br />
                                 </div>
                                 <div>
-                                    <label>Celular:</label>
-                                    <input type="text" name="CelularAluno" placeholder="(11)99999-9999" />
+                                    Nome do mae<input type="text" name="mae"
+                                                value="<c:out value="${aluno.mae}" />" /> <br />
                                 </div>
                                 <div>
-                                    <label>Celular do Pai:</label>
-                                    <input type="text" name="celularPai" placeholder="(11)99999-9999" />
+                                    Nome do Celular: <input type="text" name="celular"
+                                                value="<c:out value="${aluno.celular}" />" /> <br />
                                 </div>
                                 <div>
-                                    <label>Celular da Mãe:</label>
-                                    <input type="text" name="celularMae" placeholder="(11)99999-9999" />
+                                    Celular do Pai: <input type="text" name="celularPai"
+                                                value="<c:out value="${aluno.telefone_pai}" />" /> <br />
                                 </div>
-                                <div class="getsexo">
-                                    <fieldset class="sexo">
-                                        <legend class="">Gênero</legend>
-                                        <div>
-                                            <input   type="radio" name="genero" value="0" id="generoF" />
-                                            <label  for="generoF">Feminino</label>
-                                        </div>
-                                        <div>
-                                            <input  type="radio" name="genero" value="1" id="generoM" />
-                                            <label  for="generoF">Masculino</label>
-                                            <br/>
-                                            <button type="submit" value="Cadastrar" id="botao"/>      
-                                        </div>
-                                    </fieldset>
+                                <div>
+                                    Celular da Mãe: <input type="text" name="celularMae"
+                                                value="<c:out value="${aluno.telefone_mae}" />" /><br />
                                 </div>
+                                <div>
+                                    Genero: <input type="text" name="sexo"
+                                                value="<c:out value="${aluno.sexo}" />" /><br />
+                                </div>
+                                <input type="submit" value="Submit" />
                                 
                         </div>
                     </div>
