@@ -37,8 +37,8 @@
                         <td><c:out value="${aluno.celularPai}" /></td>
                         <td><c:out value="${aluno.celularMae}" /></td>
                         <td><c:out value="${aluno.email}" /></td>
-                        <td><a href="AlunoController?action=edit&CodAluno=<c:out value="${aluno.codAluno}" />"> </td>
-                        <td><a href="AlunoController?action=delete&CodAluno=<c:out value="${aluno.codAluno}" />"></td>
+                        <td><a href="AlunoController?action=edit&CodAluno=<c:out value="${aluno.codAluno}" />">Editar </td>
+                        <td><a href="AlunoController?action=delete&CodAluno=<c:out value="${aluno.codAluno}" />">deletar</td>
                     </tr>
                 </c:forEach>
             </tbody>

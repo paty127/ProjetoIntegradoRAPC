@@ -42,12 +42,13 @@ public class AlunoController extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            forward = LIST_USER;
+            
             try {
                 request.setAttribute("Aluno", dao.getAllUsers());
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            forward = LIST_USER;
         } else if (action.equalsIgnoreCase("edit")){
             forward = INSERT_OR_EDIT;
             int CodAluno = Integer.parseInt(request.getParameter("CodAluno"));

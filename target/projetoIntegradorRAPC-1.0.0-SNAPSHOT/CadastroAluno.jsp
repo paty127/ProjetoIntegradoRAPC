@@ -86,51 +86,53 @@
         <div class="mdl-layout__content">
             <!-- Todo conteudo do Site. -->
             <main>
-                <div class="group">
-                    <h1 class="mdl-cell--12-col-desktop mdl-cell--8-col-tablet mdl-cell--6-col ">Cadastro Aluno</h1>
-                    <div class="mdl-grid">
-                        <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col mdl-cell--8-col-tablet cadastro">
-                            <form class="formulario" method="POST" action="AlunoController" name="frmAddAluno">
-                                User ID : <input type="text" readonly="readonly" name="userid"
-                                                    value="<c:out value="${user.userid}" />"/> <br />
-                                <div>
-                                    Nome:<input type="text" name="nome"
-                                                value="<c:out value="${aluno.nome}" />"/> <br />         
-                                </div>
-                                <div>
-                                    Data Nascimento:<input type="text" placeholder="dd/MM/yyyy" name="data_de_nascimento" data-date-format="dd/MM/yyyy"
-                                            value="<fmt:formatDate pattern="dd/MM/yyyy" value="${user.data_de_nascimento}" />" /> <br />
-                                </div>
-                                <div>
-                                    E-mail:<input type="text" name="email"
-                                                value="<c:out value="${aluno.email}" />" /> <br />
-                                </div>
-                                <div>
-                                    Nome do Pai:<input type="text" name="pai"
-                                                value="<c:out value="${aluno.pai}" />" /> <br />
-                                </div>
-                                <div>
-                                    Nome do mae<input type="text" name="mae"
-                                                value="<c:out value="${aluno.mae}" />" /> <br />
-                                </div>
-                                <div>
-                                    Nome do Celular: <input type="text" name="celular"
-                                                value="<c:out value="${aluno.celular}" />" /> <br />
-                                </div>
-                                <div>
-                                    Celular do Pai: <input type="text" name="celularPai"
-                                                value="<c:out value="${aluno.telefone_pai}" />" /> <br />
-                                </div>
-                                <div>
-                                    Celular da Mãe: <input type="text" name="celularMae"
-                                                value="<c:out value="${aluno.telefone_mae}" />" /><br />
-                                </div>
-                                <div>
-                                    Genero: <input type="text" name="sexo"
-                                                value="<c:out value="${aluno.sexo}" />" /><br />
-                                </div>
-                                <input type="submit" value="Submit" />
-                                
+                <div class="mdl-cell--8-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col">
+                    <div class="area">
+                        <h1>Cadastro Aluno</h1>
+                        <div class="mdl-grid">
+                            <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col mdl-cell--8-col-tablet cadastro">
+                                <form class="formulario" method="POST" action="AlunoController" name="frmAddAluno">
+                                    User ID : <input type="text" readonly="readonly" name="userid"
+                                                        value="<c:out value="${user.userid}" />"/> <br /><br />
+                                    
+                                        Nome:<input type="text" name="nome"
+                                                    value="<c:out value="${aluno.nome}" />"/> <br /><br />        
+                                    
+                                    <div>
+                                        Data Nascimento:<input type="text" placeholder="dd/MM/yyyy" name="data_de_nascimento" data-date-format="dd/MM/yyyy"
+                                                value="<fmt:formatDate pattern="dd/MM/yyyy" value="${user.data_de_nascimento}" />" /> <br /><br />
+                                    </div>
+                                    <div>
+                                        E-mail:<input type="text" name="email"
+                                                    value="<c:out value="${aluno.email}" />" /> <br /><br />
+                                    </div>
+                                    <div>
+                                        Nome do Pai:<input type="text" name="pai"
+                                                    value="<c:out value="${aluno.pai}" />" /> <br /><br />
+                                    </div>
+                                    <div>
+                                        Nome do mae<input type="text" name="mae"
+                                                    value="<c:out value="${aluno.mae}" />" /> <br /><br />
+                                    </div>
+                                    <div>
+                                        Nome do Celular: <input type="text" name="celular"
+                                                    value="<c:out value="${aluno.celular}" />" /> <br /><br />
+                                    </div>
+                                    <div>
+                                        Celular do Pai: <input type="text" name="celularPai"
+                                                    value="<c:out value="${aluno.telefone_pai}" />" /> <br /><br />
+                                    </div>
+                                    <div>
+                                        Celular da Mãe: <input type="text" name="celularMae"
+                                                    value="<c:out value="${aluno.telefone_mae}" />" /><br /><br />
+                                    </div>
+                                    <div>
+                                        Genero: <input type="text" name="sexo"
+                                                    value="<c:out value="${aluno.sexo}" />" /><br /><br />
+                                    </div>
+                                    <input type="submit" value="Submit" />
+
+                            </div>
                         </div>
                     </div>
                 </div>

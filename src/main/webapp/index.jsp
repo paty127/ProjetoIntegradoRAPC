@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:forward page="/AlunoController?action=ListAluno"/>
+        <a href="<jsp:forward page="/AlunoController?action=ListAluno"/>">adicionar aluno</a>
     </body>
 </html>
