@@ -92,12 +92,12 @@
                         <div class="mdl-grid">
                             <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col mdl-cell--8-col-tablet cadastro">
                                 <form class="formulario" method="POST" action="AlunoController" name="frmAddAluno">
-                                    User ID : <input type="text" readonly="readonly" name="userid"
-                                                        value="<c:out value="${user.userid}" />"/> <br /><br />
-                                    
+                                    User ID : <input type="text" readonly="readonly" name="codAluno"
+                                                        value="<c:out value="${aluno.codAluno}" />"/> <br /><br />
+                                    <div>
                                         Nome:<input type="text" name="nome"
                                                     value="<c:out value="${aluno.nome}" />"/> <br /><br />        
-                                    
+                                    </div>
                                     <div>
                                         Data Nascimento:<input type="text" placeholder="dd/MM/yyyy" name="data_de_nascimento" data-date-format="dd/MM/yyyy"
                                                 value="<fmt:formatDate pattern="dd/MM/yyyy" value="${user.data_de_nascimento}" />" /> <br /><br />
@@ -108,11 +108,11 @@
                                     </div>
                                     <div>
                                         Nome do Pai:<input type="text" name="pai"
-                                                    value="<c:out value="${aluno.pai}" />" /> <br /><br />
+                                                    value="<c:out value="${aluno.nomePai}" />" /> <br /><br />
                                     </div>
                                     <div>
                                         Nome do mae<input type="text" name="mae"
-                                                    value="<c:out value="${aluno.mae}" />" /> <br /><br />
+                                                    value="<c:out value="${aluno.nomeMae}" />" /> <br /><br />
                                     </div>
                                     <div>
                                         Nome do Celular: <input type="text" name="celular"
