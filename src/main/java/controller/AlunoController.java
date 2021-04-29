@@ -45,23 +45,19 @@ public class AlunoController extends HttpServlet {
             
             try {
                 request.setAttribute("Aluno", dao.getAllUsers());
+                forward = LIST_USER;
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            forward = LIST_USER;
+            
         } else if (action.equalsIgnoreCase("edit")){
             forward = INSERT_OR_EDIT;
-            int codAluno = Integer.parseInt(request.getParameter("codAluno"));      
-            Aluno aluno;
-            try {
-                aluno = dao.getUserById(codAluno);
-                request.setAttribute("aluno", aluno);
+            int codAluno = Integer.parseInt(request.getParameter("CodAluno"));      
+            try {                
+                request.setAttribute("aluno", dao.getUserById(codAluno));
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
-            
+            }      
         } else if (action.equalsIgnoreCase("ListAluno")){
             forward = LIST_USER;
             try {

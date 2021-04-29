@@ -120,11 +120,11 @@
                                     </div>
                                     <div>
                                         Celular do Pai: <input type="text" name="celularPai"
-                                                    value="<c:out value="${aluno.telefone_pai}" />" /> <br /><br />
+                                                    value="<c:out value="${aluno.celularPai}" />" /> <br /><br />
                                     </div>
                                     <div>
                                         Celular da Mãe: <input type="text" name="celularMae"
-                                                    value="<c:out value="${aluno.telefone_mae}" />" /><br /><br />
+                                                    value="<c:out value="${aluno.celularMae}" />" /><br /><br />
                                     </div>
                                     <div>
                                         Genero: <input type="text" name="sexo"
