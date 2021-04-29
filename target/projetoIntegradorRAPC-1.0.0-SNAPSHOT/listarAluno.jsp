@@ -25,21 +25,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <c:forEach items="${alunos}" var="aluno">
-                        <td><c:out value="${aluno.cod_aluno}" /></td>
-                        <td><c:out value="${aluno.data_de_nascimento}" /></td>
-                        <td><fmt:formatDate pattern="dd/MM/yyyy" value="${aluno.sexo}" /></td>
-                        <td><c:out value="${aluno.pai}" /></td>
-                        <td><c:out value="${aluno.mae}" /></td>
+                <c:forEach items="${alunos}" var="aluno">
+                    <tr>
+                        <td><c:out value="${aluno.codAluno}" /></td>
+                        <td><c:out value="${aluno.nome}" /></td>
+                        <td><fmt:formatDate pattern="dd/MM/yyyy" value="${aluno.dataNasc}" /></td>
+                        <td><c:out value="${aluno.sexo}" /></td>
+                        <td><c:out value="${aluno.nomePai}" /></td>
+                        <td><c:out value="${aluno.nomeMae}" /></td>
                         <td><c:out value="${aluno.celular}" /></td>
                         <td><c:out value="${aluno.celularPai}" /></td>
                         <td><c:out value="${aluno.celularMae}" /></td>
                         <td><c:out value="${aluno.email}" /></td>
-                        <td><a href="AlunoController?action=edit&CodAluno=<c:out value="${aluno.cod_aluno}" />"> </td>
-                        <td><a href="AlunoController?action=delete&CodAluno=<c:out value="${aluno.cod_aluno}" />"></td>
-                    </c:forEach>
-                </tr>
+                        <td><a href="AlunoController?action=edit&CodAluno=<c:out value="${aluno.codAluno}" />"> </td>
+                        <td><a href="AlunoController?action=delete&CodAluno=<c:out value="${aluno.codAluno}" />"></td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
         <p><a href="AlunoController?action=insert">Add aluno</a></p>
