@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Aluno;
 
-@WebServlet(name = "AlunoController", urlPatterns = {"/AlunoController"})
+@WebServlet(name = "Alunos", urlPatterns = {"/AlunoController"})
 public class AlunoController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
@@ -33,35 +33,38 @@ public class AlunoController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward="";
+        //Pegar o parametro de Action 
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("delete")){
-            int CodAluno = Integer.parseInt(request.getParameter("CodAluno"));
+            int CodAluno = Integer.parseInt(request.getParameter("codAluno"));
             try {
                 dao.deletarAluno(CodAluno);
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+            forward = LIST_USER;
             try {
-                request.setAttribute("Aluno", dao.getAllUsers());
-                forward = LIST_USER;
+                request.setAttribute("alunos", dao.getAllAlunos());
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         } else if (action.equalsIgnoreCase("edit")){
-            forward = INSERT_OR_EDIT;
-            int codAluno = Integer.parseInt(request.getParameter("CodAluno"));      
-            try {                
-                request.setAttribute("aluno", dao.getUserById(codAluno));
+            forward = INSERT_OR_EDIT; 
+            int codAluno = Integer.parseInt(request.getParameter("codAluno"));
+            try {
+                //Passar o codigo de aluno para o metodo getAlunoByID
+                Aluno aluno = dao.getAlunoById(codAluno);
+                dao.updateUser(aluno);
+                request.setAttribute("alunos",aluno );
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }      
         } else if (action.equalsIgnoreCase("ListAluno")){
             forward = LIST_USER;
             try {
-                request.setAttribute("alunos", dao.getAllUsers());
+                //Criando um atributo chamado Alunos e inserindo a lista que veio do metodo getAllAlunos
+                request.setAttribute("alunos", dao.getAllAlunos());
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -70,6 +73,7 @@ public class AlunoController extends HttpServlet {
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
+        //Redireciona  para Forward
         view.forward(request, response);
     }
 
@@ -105,7 +109,7 @@ public class AlunoController extends HttpServlet {
         aluno.setEmail(request.getParameter("email"));
         aluno.setSexo(request.getParameter("sexo"));
         
-        String userid = request.getParameter("userid");
+        String userid = request.getParameter("CodAluno");
         
         if(userid == null || userid.isEmpty())
         {
@@ -126,7 +130,7 @@ public class AlunoController extends HttpServlet {
         }
         RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
         try {
-            request.setAttribute("alunos", dao.getAllUsers());
+            request.setAttribute("alunos", dao.getAllAlunos());
         } catch (SQLException ex) {
             Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
         }

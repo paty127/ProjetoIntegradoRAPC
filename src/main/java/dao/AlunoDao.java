@@ -22,7 +22,7 @@ private final DbUtil dbUtil = new DbUtil();
     
     
     public void adicionarAluno(Aluno aluno) throws SQLException, IOException {
-        String sql = "INSERT INTO `projetorapc`.`aluno`(nome,data_de_nascimento,sexo,pai,mae,celular,telefone_pai,telefone_mae,email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? );";
+        String sql = "INSERT INTO aluno(nome,data_de_nascimento,sexo,pai,mae,celular,telefone_pai,telefone_mae,email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? );";
             try(Connection conn = dbUtil.getConnection();
                      PreparedStatement stmt = conn.prepareStatement(sql)) {
                 
@@ -35,7 +35,7 @@ private final DbUtil dbUtil = new DbUtil();
             stmt.setString(7, aluno.getCelularPai());
             stmt.setString(8, aluno.getCelularMae());
             stmt.setString(9, aluno.getEmail());
-
+            //Executar atualização no banco
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
@@ -60,7 +60,7 @@ private final DbUtil dbUtil = new DbUtil();
     public void updateUser(Aluno aluno) throws SQLException, IOException {
         String sql ="update aluno set nome=?,data_de_nascimento=?,"
                             + "sexo=?,pai=?,mae=?,celular=?,telefone_pai=?,"
-                            + "telefone_mae=?,email=? where userid=?;";
+                            + "telefone_mae=?,email=? where cod_aluno=?;";
         try (Connection conn = dbUtil.getConnection();
                      PreparedStatement stmt = conn.prepareStatement(sql)){            
             stmt.setString(1, aluno.getNome());
@@ -71,19 +71,19 @@ private final DbUtil dbUtil = new DbUtil();
             stmt.setString(6, aluno.getCelular());
             stmt.setString(7, aluno.getCelularPai());
             stmt.setString(8, aluno.getCelularMae());
-            stmt.setString(9, aluno.getEmail());            
+            stmt.setString(9, aluno.getEmail());  
+            stmt.setInt(10,aluno.getCodAluno());
             
             stmt.executeUpdate();
             
         } catch (SQLException e) {
             System.err.println("Erro na execução");
-            e.printStackTrace();
         }
     }
     
-    public List<Aluno> getAllUsers() throws SQLException, IOException {
+    public List<Aluno> getAllAlunos() throws SQLException, IOException {
         String sql = "SELECT * from aluno;";
-        List<Aluno> listaDeUsuario = new ArrayList<>();
+        List<Aluno> listaDeAluno = new ArrayList<>();
         try (
             Connection conn = dbUtil.getConnection();
             Statement stmt = conn.createStatement();
@@ -100,25 +100,24 @@ private final DbUtil dbUtil = new DbUtil();
                 aluno.setCelularMae(rst.getString("telefone_mae"));
                 aluno.setEmail(rst.getString("email"));
                 aluno.setSexo(rst.getString("sexo"));
-                listaDeUsuario.add(aluno);
+                
+                listaDeAluno.add(aluno);
             }
         } catch (SQLException e) {
             System.err.println("Erro na execução");
-            e.printStackTrace();
         }
 
-        return listaDeUsuario;
+        return listaDeAluno;
     }
 
 
-    public Aluno getUserById(int CodAluno) throws SQLException, IOException {
-        String sql ="select * from aluno where cod_aluno=?;";
+    public Aluno getAlunoById(int CodAluno) throws SQLException, IOException {
+        String sql ="select * from aluno where cod_aluno=?";
         Aluno aluno = new Aluno();
         try(Connection conn = dbUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rst = stmt.executeQuery(sql)){
-            stmt.setInt(1, CodAluno);
-            
+                PreparedStatement stmt = conn.prepareStatement(sql)){               
+                stmt.setInt(1, CodAluno);
+                ResultSet rst = stmt.executeQuery(sql);
 
             if (rst.next()) {
                 aluno.setCodAluno(rst.getInt("cod_aluno"));
@@ -128,13 +127,12 @@ private final DbUtil dbUtil = new DbUtil();
                 aluno.setNomeMae(rst.getString("mae"));
                 aluno.setCelular(rst.getString("celular"));
                 aluno.setCelularPai(rst.getString("telefone_pai"));
-                aluno.setCelularMae(rst.getString(" telefone_mae"));
+                aluno.setCelularMae(rst.getString("telefone_mae"));
                 aluno.setEmail(rst.getString("email"));
                 aluno.setSexo(rst.getString("sexo"));
             }
         } catch (SQLException e) {
             System.err.println("Erro na execução");
-            e.printStackTrace();
         }
 
         return aluno;

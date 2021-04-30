@@ -25,6 +25,7 @@
                 </tr>
             </thead>
             <tbody>
+                <!<!-- atributo Alunos vem da classe AlunoControlles na linha 65  -->
                 <c:forEach items="${alunos}" var="aluno">
                     <tr>
                         <td><c:out value="${aluno.codAluno}" /></td>
@@ -37,8 +38,8 @@
                         <td><c:out value="${aluno.celularPai}" /></td>
                         <td><c:out value="${aluno.celularMae}" /></td>
                         <td><c:out value="${aluno.email}" /></td>
-                        <td><a href="AlunoController?action=edit&CodAluno=<c:out value="${aluno.codAluno}" />">Editar </td>
-                        <td><a href="AlunoController?action=delete&CodAluno=<c:out value="${aluno.codAluno}" />">deletar</td>
+                        <td><a href="AlunoController?action=edit&codAluno=<c:out value="${aluno.codAluno}" />">Editar </td>
+                        <td><a href="AlunoController?action=delete&codAluno=<c:out value="${aluno.codAluno}" />">deletar</td>
                     </tr>
                 </c:forEach>
             </tbody>

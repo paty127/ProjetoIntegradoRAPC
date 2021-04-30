@@ -92,7 +92,7 @@
                         <div class="mdl-grid">
                             <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col mdl-cell--8-col-tablet cadastro">
                                 <form class="formulario" method="POST" action="AlunoController" name="frmAddAluno">
-                                    User ID : <input type="text" readonly="readonly" name="codAluno"
+                                    User ID : <input type="text" readonly="readonly" name="CodAluno"
                                                         value="<c:out value="${aluno.codAluno}" />"/> <br /><br />
                                     <div>
                                         Nome:<input type="text" name="nome"
@@ -100,7 +100,7 @@
                                     </div>
                                     <div>
                                         Data Nascimento:<input type="text" placeholder="dd/MM/yyyy" name="data_de_nascimento" data-date-format="dd/MM/yyyy"
-                                                value="<fmt:formatDate pattern="dd/MM/yyyy" value="${user.data_de_nascimento}" />" /> <br /><br />
+                                                value="<fmt:formatDate pattern="dd/MM/yyyy" value="${aluno.dataNasc}" />" /> <br /><br />
                                     </div>
                                     <div>
                                         E-mail:<input type="text" name="email"
