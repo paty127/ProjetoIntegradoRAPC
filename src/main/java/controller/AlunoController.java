@@ -57,6 +57,7 @@ public class AlunoController extends HttpServlet {
                 Aluno aluno = dao.getAlunoById(codAluno);
                 dao.updateUser(aluno);
                 request.setAttribute("alunos",aluno );
+
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }      

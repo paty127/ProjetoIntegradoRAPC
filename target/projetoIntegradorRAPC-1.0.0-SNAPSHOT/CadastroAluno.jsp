@@ -92,51 +92,52 @@
                         <div class="mdl-grid">
                             <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col mdl-cell--8-col-tablet cadastro">
                                 <form class="formulario" method="POST" action="AlunoController" name="frmAddAluno">
-                                    User ID : <input type="text" readonly="readonly" name="CodAluno"
-                                                        value="<c:out value="${aluno.codAluno}" />"/> <br /><br />
                                     <div>
-                                        Nome:<input type="text" name="nome"
-                                                    value="<c:out value="${aluno.nome}" />"/> <br /><br />        
+                                        User ID : <input type="text" readonly="readonly" name="CodAluno" value="<c:out value="${aluno.codAluno}" />" /> <br />
                                     </div>
+
+                                    <div>
+                                        Nome:<input type="text" name="nome" value="<c:out value="${aluno.nome}" />"/> <br />
+                                    </div>
+
                                     <div>
                                         Data Nascimento:<input type="text" placeholder="dd/MM/yyyy" name="data_de_nascimento" data-date-format="dd/MM/yyyy"
-                                                value="<fmt:formatDate pattern="dd/MM/yyyy" value="${aluno.dataNasc}" />" /> <br /><br />
+                                                value="<fmt:formatDate pattern="dd/MM/yyyy" value="${aluno.dataNasc}" />" /> <br />
                                     </div>
-                                    <div>
-                                        E-mail:<input type="text" name="email"
-                                                    value="<c:out value="${aluno.email}" />" /> <br /><br />
-                                    </div>
-                                    <div>
-                                        Nome do Pai:<input type="text" name="pai"
-                                                    value="<c:out value="${aluno.nomePai}" />" /> <br /><br />
-                                    </div>
-                                    <div>
-                                        Nome do mae<input type="text" name="mae"
-                                                    value="<c:out value="${aluno.nomeMae}" />" /> <br /><br />
-                                    </div>
-                                    <div>
-                                        Nome do Celular: <input type="text" name="celular"
-                                                    value="<c:out value="${aluno.celular}" />" /> <br /><br />
-                                    </div>
-                                    <div>
-                                        Celular do Pai: <input type="text" name="celularPai"
-                                                    value="<c:out value="${aluno.celularPai}" />" /> <br /><br />
-                                    </div>
-                                    <div>
-                                        Celular da Mãe: <input type="text" name="celularMae"
-                                                    value="<c:out value="${aluno.celularMae}" />" /><br /><br />
-                                    </div>
-                                    <div>
-                                        Genero: <input type="text" name="sexo"
-                                                    value="<c:out value="${aluno.sexo}" />" /><br /><br />
-                                    </div>
-                                    <input type="submit" value="Submit" />
 
+                                    <div>
+                                        E-mail:<input type="text" name="email" value="<c:out value="${aluno.email}" />" /> <br />
+                                    </div>
+
+                                    <div>
+                                        Nome do Pai:<input type="text" name="pai" value="<c:out value="${aluno.nomePai}" />" /> <br />
+                                    </div>
+
+                                    <div>
+                                        Nome do mae<input type="text" name="mae" value="<c:out value="${aluno.nomeMae}" />" /> <br />
+                                    </div>
+
+                                    <div>
+                                        Nome do Celular: <input type="text" name="celular" value="<c:out value="${aluno.celular}" />" /> <br />
+                                    </div>
+
+                                    <div>
+                                        Celular do Pai: <input type="text" name="celularPai" value="<c:out value="${aluno.celularPai}" />" /> <br />
+                                    </div>
+
+                                    <div>
+                                        Celular da Mãe: <input type="text" name="celularMae" value="<c:out value="${aluno.celularMae}" />" /><br />
+                                    </div>
+
+                                    <div>
+                                        Genero: <input type="text" name="sexo" value="<c:out value="${aluno.sexo}" />" /> <br />                                    </div>
+
+                                    <input type="submit" value="Submit" />
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            
             </main>
         </div>
 

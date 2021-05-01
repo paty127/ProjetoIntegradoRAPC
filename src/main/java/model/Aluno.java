@@ -1,6 +1,6 @@
 package model;
 
-import java.time.LocalDate;
+
 import java.util.Date;
 
 /**
@@ -19,7 +19,7 @@ private String Celular;
 private String CelularPai;
 private String CelularMae;
 private String email;
-
+    
     public int getCodAluno() {
         return codAluno;
     }
