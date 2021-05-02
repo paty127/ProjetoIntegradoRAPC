@@ -1,5 +1,4 @@
 controller\AlunoController.class
-dao\AlunoDAO2.class
 model\Funcionario.class
 dao\AlunoDao.class
 model\Aluno.class

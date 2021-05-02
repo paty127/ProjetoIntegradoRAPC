@@ -31,15 +31,16 @@ public class AlunoController extends HttpServlet {
     }
 
     @Override
+    
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String forward="";
         //Pegar o parametro de Action 
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("delete")){
-            int CodAluno = Integer.parseInt(request.getParameter("codAluno"));
+            int codAluno = Integer.parseInt(request.getParameter("codAluno"));
             try {
-                dao.deletarAluno(CodAluno);
+                dao.deletarAluno(codAluno);
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -55,8 +56,7 @@ public class AlunoController extends HttpServlet {
             try {
                 //Passar o codigo de aluno para o metodo getAlunoByID
                 Aluno aluno = dao.getAlunoById(codAluno);
-                dao.updateUser(aluno);
-                request.setAttribute("alunos",aluno );
+                request.setAttribute("aluno",aluno );
 
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,7 +77,6 @@ public class AlunoController extends HttpServlet {
         //Redireciona  para Forward
         view.forward(request, response);
     }
-
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -88,9 +87,9 @@ public class AlunoController extends HttpServlet {
         aluno.setNome(request.getParameter("nome"));
         
         try {
-            Date data_de_nascimento=null;
+            Date data_de_nascimento = null;
             String teste = request.getParameter("data_de_nascimento");
-            System.out.println(teste);
+            //System.out.println(teste);
             if(request.getParameter("data_de_nascimento")!=null){
                 data_de_nascimento = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_de_nascimento"));
             }
@@ -110,9 +109,9 @@ public class AlunoController extends HttpServlet {
         aluno.setEmail(request.getParameter("email"));
         aluno.setSexo(request.getParameter("sexo"));
         
-        String userid = request.getParameter("CodAluno");
+        String codAluno = request.getParameter("codAluno");
         
-        if(userid == null || userid.isEmpty())
+        if(codAluno == null || codAluno.isEmpty())
         {
             try {
                 dao.adicionarAluno(aluno);
@@ -122,7 +121,7 @@ public class AlunoController extends HttpServlet {
         }
         else
         {
-            aluno.setCodAluno(Integer.parseInt(userid));
+            aluno.setCodAluno(Integer.parseInt(codAluno));
             try {
                 dao.updateUser(aluno);
             } catch (SQLException ex) {

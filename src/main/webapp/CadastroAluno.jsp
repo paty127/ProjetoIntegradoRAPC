@@ -91,7 +91,7 @@
                         <h1>Cadastro Aluno</h1>
                         <div class="mdl-grid">
                             <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col mdl-cell--8-col-tablet cadastro">
-                                <form class="formulario" method="POST" action="AlunoController" name="frmAddAluno">
+                                <form class="formulario" method="POST" action="${request.contextPath}AlunoController" name="frmAddAluno">
                                     <div>
                                         User ID : <input type="text" readonly="readonly" name="CodAluno" value="<c:out value="${aluno.codAluno}" />" /> <br />
                                     </div>

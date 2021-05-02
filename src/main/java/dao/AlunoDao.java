@@ -24,7 +24,7 @@ private final DbUtil dbUtil = new DbUtil();
     public void adicionarAluno(Aluno aluno) throws SQLException, IOException {
         String sql = "INSERT INTO aluno(nome,data_de_nascimento,sexo,pai,mae,celular,telefone_pai,telefone_mae,email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? );";
             try(Connection conn = dbUtil.getConnection();
-                     PreparedStatement stmt = conn.prepareStatement(sql)) {
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
                 
             stmt.setString(1, aluno.getNome());
             stmt.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
@@ -60,7 +60,7 @@ private final DbUtil dbUtil = new DbUtil();
                             + "sexo=?,pai=?,mae=?,celular=?,telefone_pai=?,"
                             + "telefone_mae=?,email=? where cod_aluno=?;";
         try (Connection conn = dbUtil.getConnection();
-                     PreparedStatement stmt = conn.prepareStatement(sql)){            
+            PreparedStatement stmt = conn.prepareStatement(sql)){            
             stmt.setString(1, aluno.getNome());
             stmt.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
             stmt.setString(3, aluno.getSexo());
@@ -111,14 +111,14 @@ private final DbUtil dbUtil = new DbUtil();
 
 
     
-    public Aluno getAlunoById(int CodAluno) throws SQLException, IOException {
+    public Aluno getAlunoById(int codAluno) throws SQLException, IOException {
         String sql ="select * from aluno where cod_aluno=?";
         Aluno aluno = new Aluno();
         Connection conn = dbUtil.getConnection();
         
         try{
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, CodAluno);
+            stmt.setInt(1, codAluno);
             //Execultando o comando            
             String Teste = stmt.toString();
             ResultSet rst = stmt.executeQuery();

@@ -15,11 +15,11 @@ private Date dataNasc;
 private String sexo;
 private String nomePai;
 private String nomeMae;
-private String Celular;
-private String CelularPai;
-private String CelularMae;
+private String celular;
+private String celularPai;
+private String celularMae;
 private String email;
-    
+
     public int getCodAluno() {
         return codAluno;
     }
@@ -43,8 +43,6 @@ private String email;
     public void setDataNasc(Date dataNasc) {
         this.dataNasc = dataNasc;
     }
-
-   
 
     public String getSexo() {
         return sexo;
@@ -71,27 +69,27 @@ private String email;
     }
 
     public String getCelular() {
-        return Celular;
+        return celular;
     }
 
-    public void setCelular(String Celular) {
-        this.Celular = Celular;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
     public String getCelularPai() {
-        return CelularPai;
+        return celularPai;
     }
 
-    public void setCelularPai(String CelularPai) {
-        this.CelularPai = CelularPai;
+    public void setCelularPai(String celularPai) {
+        this.celularPai = celularPai;
     }
 
     public String getCelularMae() {
-        return CelularMae;
+        return celularMae;
     }
 
-    public void setCelularMae(String CelularMae) {
-        this.CelularMae = CelularMae;
+    public void setCelularMae(String celularMae) {
+        this.celularMae = celularMae;
     }
 
     public String getEmail() {
@@ -101,9 +99,4 @@ private String email;
     public void setEmail(String email) {
         this.email = email;
     }
-
-    
-
-
-
 }
