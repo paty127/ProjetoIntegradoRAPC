@@ -31,7 +31,7 @@
             type="text" name="sexo"
             value="<c:out value="${aluno.sexo}" />" /> <br /> 
         Celular aluno : <input
-            type="text" name="pai"
+            type="text" name="celular"
             value="<c:out value="${aluno.celular}" />" /> <br /> 
         Email : <input type="text" name="email"
             value="<c:out value="${aluno.email}" />" /> <br />
@@ -45,7 +45,7 @@
             type="text" name="pai"
             value="<c:out value="${aluno.nomePai}" />" /> <br /> 
         Telefone Pai : <input
-            type="text" name="CelularPai"
+            type="text" name="celularPai"
             value="<c:out value="${aluno.celularPai}" />" /> <br />
         <input
             type="submit" value="Submit" />
