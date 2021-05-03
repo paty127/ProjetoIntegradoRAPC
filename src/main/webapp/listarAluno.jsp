@@ -21,6 +21,10 @@
                     <th>telefone do pai</th>
                     <th>telefone da Mãe</th>
                     <th>E-mail</th>
+                    <th>Rua</th>
+                    <th>Número</th>
+                    <th>Bairro</th>
+                    <th>CEP</th>
                     <th colspan="2">Ação</th>
                 </tr>
             </thead>
@@ -38,6 +42,10 @@
                         <td><c:out value="${aluno.celularPai}" /></td>
                         <td><c:out value="${aluno.celularMae}" /></td>
                         <td><c:out value="${aluno.email}" /></td>
+                        <td><c:out value="${aluno.rua}" /></td>
+                        <td><c:out value="${aluno.numero}" /></td>
+                        <td><c:out value="${aluno.bairro}" /></td>
+                        <td><c:out value="${aluno.cep}" /></td>
                         <td><a href="AlunoController?action=edit&codAluno=<c:out value="${aluno.codAluno}" />">Editar </td>
                         <td><a href="AlunoController?action=delete&codAluno=<c:out value="${aluno.codAluno}" />">deletar</td>
                     </tr>

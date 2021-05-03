@@ -56,7 +56,7 @@ public class AlunoController extends HttpServlet {
             try {
                 //Passar o codigo de aluno para o metodo getAlunoByID
                 Aluno aluno = dao.getAlunoById(codAluno);
-                request.setAttribute("aluno",aluno );
+                request.setAttribute("aluno",aluno);
 
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,7 +107,10 @@ public class AlunoController extends HttpServlet {
         aluno.setCelularPai(request.getParameter("celularPai"));
         aluno.setCelularMae(request.getParameter("celularMae"));
         aluno.setEmail(request.getParameter("email"));
-        aluno.setSexo(request.getParameter("sexo"));
+        aluno.setRua(request.getParameter("rua"));
+        aluno.setNumero(Integer.parseInt(request.getParameter("numero")));
+        aluno.setBairro(request.getParameter("bairro"));
+        aluno.setCep(request.getParameter("cep"));
         
         String codAluno = request.getParameter("codAluno");
         

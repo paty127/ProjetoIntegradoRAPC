@@ -9,7 +9,7 @@
     href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="http://www.godtur.no/godtur/js/jquery-ui-1.8.18.custom.min.js"></script>
-<title>Add new user</title>
+<title>Adiciona novo Aluno</title>
 </head>
 <body>
     <script>
@@ -46,7 +46,24 @@
             value="<c:out value="${aluno.nomePai}" />" /> <br /> 
         Telefone Pai : <input
             type="text" name="celularPai"
-            value="<c:out value="${aluno.celularPai}" />" /> <br />
+            value="<c:out value="${aluno.celularPai}" />" /> 
+        <br /><br />
+        <fieldset>
+            <legend>Endereço</legend>
+            Rua: <input
+                type="text" name="rua"
+                value="<c:out value="${aluno.rua}" />" />
+            Número: <input
+                type="text" name="numero"
+                value="<c:out value="${aluno.numero}" />" />
+            Bairro : <input
+                type="text" name="bairro"
+                value="<c:out value="${aluno.bairro}" />" />
+            CEP : <input
+                type="text" name="cep"
+                value="<c:out value="${aluno.cep}" />" />
+        </fieldset>
+        <br /><br />
         <input
             type="submit" value="Submit" />
     </form>

@@ -22,19 +22,24 @@ private final DbUtil dbUtil = new DbUtil();
     String erro = "Erro na execução";
     
     public void adicionarAluno(Aluno aluno) throws SQLException, IOException {
-        String sql = "INSERT INTO aluno(nome,data_de_nascimento,sexo,pai,mae,celular,telefone_pai,telefone_mae,email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? );";
+        //String sql = "INSERT INTO aluno(nome,data_de_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? );";
+        String sql = "call novo_aluno(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             try(Connection conn = dbUtil.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
                 
             stmt.setString(1, aluno.getNome());
             stmt.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
             stmt.setString(3, aluno.getSexo());
-            stmt.setString(4, aluno.getNomePai());
-            stmt.setString(5, aluno.getNomeMae());
-            stmt.setString(6, aluno.getCelular());
+            stmt.setString(4, aluno.getCelular());
+            stmt.setString(5, aluno.getEmail());
+            stmt.setString(6, aluno.getNomePai());
             stmt.setString(7, aluno.getCelularPai());
-            stmt.setString(8, aluno.getCelularMae());
-            stmt.setString(9, aluno.getEmail());
+            stmt.setString(8, aluno.getNomeMae());
+            stmt.setString(9, aluno.getCelularMae());
+            stmt.setString(10, aluno.getRua());
+            stmt.setInt(11, aluno.getNumero());
+            stmt.setString(12, aluno.getBairro());
+            stmt.setString(13, aluno.getCep());
             //Executar atualização no banco
             stmt.executeUpdate();
 
@@ -43,7 +48,10 @@ private final DbUtil dbUtil = new DbUtil();
         }
     }
     public void deletarAluno(int alunoID) throws SQLException, IOException {
-        String sql = "delete from aluno where cod_aluno=?;";
+        //String sql = "delete from aluno where cod_aluno=?;";
+        String sql = "DELETE aluno,endereco FROM aluno" +
+                     "INNER JOIN endereco ON aluno.fk_endereco = endereco.id_endereco"
+                +    "WHERE cod_aluno = ?";
         try(Connection conn = dbUtil.getConnection();
                      PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -56,21 +64,37 @@ private final DbUtil dbUtil = new DbUtil();
     }
     
     public void updateUser(Aluno aluno) throws SQLException, IOException {
-        String sql ="update aluno set nome=?,data_de_nascimento=?,"
+        /*String sql ="update aluno set nome=?,data_de_nascimento=?,"
                             + "sexo=?,pai=?,mae=?,celular=?,telefone_pai=?,"
-                            + "telefone_mae=?,email=? where cod_aluno=?;";
+                            + "telefone_mae=?,email=? where cod_aluno=?;";*/
+        /*String sql = "UPDATE aluno INNER JOIN endereco ON aluno.fk_endereco = endereco.id_endereco SET"
+                + " aluno.nome = ?,aluno.data_de_nascimento = ?,aluno.sexo = ?,"
+                + "aluno.celular = ?,aluno.email = ?,aluno.pai = ?,"
+                + "aluno.telefone_pai = ?,aluno.mae = ?,aluno.telefone_mae = ?,"
+                + "endereco.rua = ?,endereco.numero = ?,endereco.bairro = ?,"
+                + "endereco.cep = ? WHERE cod_aluno = ?";*/
+        String sql = "UPDATE aluno INNER JOIN endereco ON "
+                + "aluno.fk_endereco = id_endereco SET aluno.nome = ?,"
+                + "aluno.data_de_nascimento = ?,aluno.sexo = ?,aluno.celular = ?,"
+                + "aluno.email = ?,aluno.pai = ?,aluno.telefone_pai = ?,"
+                + "aluno.mae = ?,aluno.telefone_mae = ?,endereco.rua = ?,"
+                + "endereco.numero = ?,endereco.bairro = ?,endereco.cep = ? WHERE cod_aluno = ?";
         try (Connection conn = dbUtil.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)){            
             stmt.setString(1, aluno.getNome());
             stmt.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
             stmt.setString(3, aluno.getSexo());
-            stmt.setString(4, aluno.getNomePai());
-            stmt.setString(5, aluno.getNomeMae());
-            stmt.setString(6, aluno.getCelular());
+            stmt.setString(4, aluno.getCelular());
+            stmt.setString(5, aluno.getEmail());
+            stmt.setString(6, aluno.getNomePai());
             stmt.setString(7, aluno.getCelularPai());
-            stmt.setString(8, aluno.getCelularMae());
-            stmt.setString(9, aluno.getEmail());  
-            stmt.setInt(10,aluno.getCodAluno());
+            stmt.setString(8, aluno.getNomeMae());
+            stmt.setString(9, aluno.getCelularMae());
+            stmt.setString(10, aluno.getRua());
+            stmt.setInt(11, aluno.getNumero());
+            stmt.setString(12, aluno.getBairro());
+            stmt.setString(13, aluno.getCep());
+            stmt.setInt(14,aluno.getCodAluno());
             
             stmt.executeUpdate();
             
@@ -80,7 +104,8 @@ private final DbUtil dbUtil = new DbUtil();
     }
     
     public List<Aluno> getAllAlunos() throws SQLException, IOException {
-        String sql = "SELECT * from aluno;";
+        //String sql = "SELECT * from aluno;";
+        String sql = "select * FROM aluno INNER JOIN endereco on aluno.fk_endereco = endereco.id_endereco";
         List<Aluno> listaDeAluno = new ArrayList<>();
         try (
             Connection conn = dbUtil.getConnection();
@@ -98,6 +123,10 @@ private final DbUtil dbUtil = new DbUtil();
                 aluno.setCelularPai(rst.getString("telefone_pai"));
                 aluno.setCelularMae(rst.getString("telefone_mae"));
                 aluno.setEmail(rst.getString("email"));
+                aluno.setRua(rst.getString("rua"));
+                aluno.setNumero(Integer.parseInt(rst.getString("numero")));
+                aluno.setBairro(rst.getString("bairro"));
+                aluno.setCep(rst.getString("cep"));
                 
                 
                 listaDeAluno.add(aluno);
@@ -112,7 +141,8 @@ private final DbUtil dbUtil = new DbUtil();
 
     
     public Aluno getAlunoById(int codAluno) throws SQLException, IOException {
-        String sql ="select * from aluno where cod_aluno=?";
+        //String sql ="select * from aluno where cod_aluno=?";
+        String sql = "select * FROM aluno INNER JOIN endereco ON aluno.fk_endereco = endereco.id_endereco WHERE cod_aluno = ?";
         Aluno aluno = new Aluno();
         Connection conn = dbUtil.getConnection();
         
@@ -133,7 +163,10 @@ private final DbUtil dbUtil = new DbUtil();
                 aluno.setCelularPai(rst.getString("telefone_pai"));
                 aluno.setCelularMae(rst.getString("telefone_mae"));
                 aluno.setEmail(rst.getString("email"));
-                aluno.setSexo(rst.getString("sexo"));
+                aluno.setRua(rst.getString("rua"));
+                aluno.setNumero(Integer.parseInt(rst.getString("numero")));
+                aluno.setBairro(rst.getString("bairro"));
+                aluno.setCep(rst.getString("cep"));
             }
         } catch (SQLException e) {
             System.err.println("Erro na execução");

@@ -7,18 +7,47 @@ FLUSH PRIVILEGES;
 USE ProjetoRAPC;
 
 /* Banco Logico: */
+CREATE TABLE Endereco (
+    id_endereco integer not null auto_increment PRIMARY KEY,
+    rua varchar(30),
+    numero integer,
+    bairro varchar(30),
+    cep varchar(9)
+);
+
 CREATE TABLE Aluno (
     cod_aluno integer not null auto_increment PRIMARY KEY,
     nome varchar(50),
     data_de_nascimento date,
     sexo varchar(2),
-    pai varchar(30),
-    mae varchar(30),
     celular varchar(15),
+    email varchar(40),
+    pai varchar(30),
     telefone_pai varchar(15),
+    mae varchar(30),
     telefone_mae varchar(15),
-    email varchar(40)
+    fk_endereco integer,
+    FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
 );
+
+delimiter $$
+create procedure novo_aluno (
+	nome varchar(50),data_de_nascimento date,sexo varchar(2),celular varchar(15),email varchar(40),pai varchar(30),telefone_pai varchar(15),mae varchar(30),telefone_mae varchar(15),rua varchar(30),numero integer,bairro varchar(30),cep varchar(9))
+    begin
+    insert into endereco (rua,numero,bairro,cep) values (rua,numero,bairro,cep);
+    insert into aluno(nome,data_de_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae,fk_endereco)values(nome,data_de_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae,@@identity);
+    end $$
+/* Exemplo de criação do usuário com a procedure
+call novo_aluno ('Fulano','1988/08/14','M','1196291-0587','fulano@msn.com','Pai', '11962910587','Mãe','11962910587','Avenida Circular', 113,'Jardim Raposo','05547-025');
+
+Exemplo de consula:
+select *
+FROM aluno as A
+JOIN endereco as E on A.fk_endereco = E.id_endereco;
+
+*/
+
+
 CREATE TABLE Turma (
     cod_turma integer not null auto_increment PRIMARY KEY,
     serie varchar(3),
@@ -37,10 +66,10 @@ CREATE TABLE Professor (
     telefone varchar(13),
     cpf varchar(11),
     rg varchar(15),
-    email varchar(40)
+    email varchar(40),
+    fk_endereco integer,
+    FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
 );
-
-
 
 CREATE TABLE Disciplinas (
     cod_disciplina integer not null auto_increment PRIMARY KEY,
@@ -61,23 +90,11 @@ CREATE TABLE Funcionario (
     senha varchar(8) not null,
     cargo varchar(10) not null,
     fk_cod_professor integer,
-    FOREIGN KEY (fk_cod_professor) references Professor(cod_professor)
+    FOREIGN KEY (fk_cod_professor) references Professor(cod_professor),
+    fk_endereco integer,
+    FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
 );
 
-
-CREATE TABLE Endereco (
-    cod_endereco integer not null auto_increment PRIMARY KEY,
-    rua varchar(30),
-    numero integer,
-    bairro varchar(30),
-    cep varchar(9),
-    fk_cod_professor integer,
-    fk_cod_funcionario integer,
-    fk_Aluno_cod_aluno integer,
-    FOREIGN KEY (fk_cod_professor) REFERENCES Professor (cod_professor),
-    FOREIGN KEY (fk_cod_funcionario) REFERENCES Funcionario (cod_funcionario),
-	FOREIGN KEY (fk_Aluno_cod_aluno) REFERENCES Aluno (cod_aluno)
-);
 CREATE TABLE Ministrante (
     codigo int not null auto_increment PRIMARY KEY,
     fk_cod_professor int,
@@ -103,3 +120,36 @@ CREATE TABLE Desempenho (
     FOREIGN KEY (fk_cod_disciplina) REFERENCES Disciplinas (cod_disciplina),
 	FOREIGN KEY (fk_cod_aluno) REFERENCES Aluno (cod_aluno)
 );
+
+
+/* Teste de consultas
+select *
+FROM aluno as A
+JOIN endereco as E on A.fk_endereco = E.id_endereco;
+
+select * FROM aluno INNER JOIN endereco on aluno.fk_endereco = endereco.id_endereco WHERE cod_aluno = 2;
+
+select * FROM aluno JOIN endereco ON aluno.fk_endereco = endereco.id_endereco WHERE cod_aluno = 4;
+
+UPDATE FROM aluno set aluno.sexo = 'M' JOIN endereco ON aluno.fk_endereco = endereco.id_endereco WHERE cod_aluno = 4;
+
+UPDATE aluno set sexo = '' WHERE cod_aluno = 4;
+
+
+UPDATE aluno INNER JOIN endereco ON aluno.fk_endereco = endereco.id_endereco 
+aluno.sexo = 'M' where cod_aluno = 4;
+
+UPDATE aluno INNER JOIN endereco ON aluno.fk_endereco = id_endereco SET endereco.numero = 100 WHERE cod_aluno = 7;
+
+
+
+select * from aluno;
+select * from endereco;
+
+DELETE aluno,endereco
+FROM aluno
+INNER JOIN endereco
+ON aluno.fk_endereco = endereco.id_endereco
+WHERE cod_aluno = 1;
+
+*/
