@@ -49,9 +49,9 @@ private final DbUtil dbUtil = new DbUtil();
     }
     public void deletarAluno(int alunoID) throws SQLException, IOException {
         //String sql = "delete from aluno where cod_aluno=?;";
-        String sql = "DELETE aluno,endereco FROM aluno" +
-                     "INNER JOIN endereco ON aluno.fk_endereco = endereco.id_endereco"
-                +    "WHERE cod_aluno = ?";
+        String sql = "DELETE aluno,endereco FROM aluno INNER JOIN endereco"
+                + " ON aluno.fk_endereco = endereco.id_endereco"
+                + " WHERE cod_aluno = ?";
         try(Connection conn = dbUtil.getConnection();
                      PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -166,7 +166,6 @@ private final DbUtil dbUtil = new DbUtil();
         } catch (SQLException e) {
             System.err.println("Erro na execução");
         }
-
         return aluno;
 }
 

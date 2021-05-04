@@ -122,10 +122,15 @@ CREATE TABLE Desempenho (
 );
 
 
-/* Teste de consultas
+/* Exemplos de consultas
+SELECT * from endereco;
+SELECT * from aluno;
+
 select *
 FROM aluno as A
 JOIN endereco as E on A.fk_endereco = E.id_endereco;
+
+DELETE aluno,endereco FROM aluno INNER JOIN endereco ON aluno.fk_endereco = endereco.id_endereco WHERE cod_aluno = 2;
 
 select * FROM aluno INNER JOIN endereco on aluno.fk_endereco = endereco.id_endereco WHERE cod_aluno = 2;
 
@@ -133,23 +138,9 @@ select * FROM aluno JOIN endereco ON aluno.fk_endereco = endereco.id_endereco WH
 
 UPDATE FROM aluno set aluno.sexo = 'M' JOIN endereco ON aluno.fk_endereco = endereco.id_endereco WHERE cod_aluno = 4;
 
-UPDATE aluno set sexo = '' WHERE cod_aluno = 4;
-
-
 UPDATE aluno INNER JOIN endereco ON aluno.fk_endereco = endereco.id_endereco 
 aluno.sexo = 'M' where cod_aluno = 4;
 
 UPDATE aluno INNER JOIN endereco ON aluno.fk_endereco = id_endereco SET endereco.numero = 100 WHERE cod_aluno = 7;
-
-
-
-select * from aluno;
-select * from endereco;
-
-DELETE aluno,endereco
-FROM aluno
-INNER JOIN endereco
-ON aluno.fk_endereco = endereco.id_endereco
-WHERE cod_aluno = 1;
 
 */
