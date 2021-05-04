@@ -104,6 +104,7 @@ public class AlunoController extends HttpServlet {
         aluno.setNomePai(request.getParameter("pai"));
         aluno.setNomeMae(request.getParameter("mae"));
         aluno.setCelular(request.getParameter("celular"));
+        aluno.setSexo(request.getParameter("sexo"));
         aluno.setCelularPai(request.getParameter("celularPai"));
         aluno.setCelularMae(request.getParameter("celularMae"));
         aluno.setEmail(request.getParameter("email"));

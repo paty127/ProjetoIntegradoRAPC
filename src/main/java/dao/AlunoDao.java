@@ -67,12 +67,6 @@ private final DbUtil dbUtil = new DbUtil();
         /*String sql ="update aluno set nome=?,data_de_nascimento=?,"
                             + "sexo=?,pai=?,mae=?,celular=?,telefone_pai=?,"
                             + "telefone_mae=?,email=? where cod_aluno=?;";*/
-        /*String sql = "UPDATE aluno INNER JOIN endereco ON aluno.fk_endereco = endereco.id_endereco SET"
-                + " aluno.nome = ?,aluno.data_de_nascimento = ?,aluno.sexo = ?,"
-                + "aluno.celular = ?,aluno.email = ?,aluno.pai = ?,"
-                + "aluno.telefone_pai = ?,aluno.mae = ?,aluno.telefone_mae = ?,"
-                + "endereco.rua = ?,endereco.numero = ?,endereco.bairro = ?,"
-                + "endereco.cep = ? WHERE cod_aluno = ?";*/
         String sql = "UPDATE aluno INNER JOIN endereco ON "
                 + "aluno.fk_endereco = id_endereco SET aluno.nome = ?,"
                 + "aluno.data_de_nascimento = ?,aluno.sexo = ?,aluno.celular = ?,"
@@ -94,7 +88,7 @@ private final DbUtil dbUtil = new DbUtil();
             stmt.setInt(11, aluno.getNumero());
             stmt.setString(12, aluno.getBairro());
             stmt.setString(13, aluno.getCep());
-            stmt.setInt(14,aluno.getCodAluno());
+            stmt.setInt(14, aluno.getCodAluno());
             
             stmt.executeUpdate();
             
@@ -163,6 +157,7 @@ private final DbUtil dbUtil = new DbUtil();
                 aluno.setCelularPai(rst.getString("telefone_pai"));
                 aluno.setCelularMae(rst.getString("telefone_mae"));
                 aluno.setEmail(rst.getString("email"));
+                aluno.setSexo(rst.getString("sexo"));
                 aluno.setRua(rst.getString("rua"));
                 aluno.setNumero(Integer.parseInt(rst.getString("numero")));
                 aluno.setBairro(rst.getString("bairro"));
