@@ -21,7 +21,7 @@ import model.Aluno;
 public class AlunoController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
-    private static String INSERT_OR_EDIT = "/teste.jsp";
+    private static String INSERT_OR_EDIT = "/adicionarEditarAluno.jsp";
     private static String LIST_USER = "/listarAluno.jsp";
     private AlunoDao dao;
 
