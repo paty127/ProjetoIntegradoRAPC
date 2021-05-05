@@ -71,6 +71,13 @@ CREATE TABLE Professor (
     FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
 );
 
+create procedure novo_professor (
+	nome varchar(50),data_de_nascimento date,sexo varchar(2),celular varchar(15),telefone varchar(13),cpf varchar(11),rg varchar(15),email varchar(40),rua varchar(30),numero integer,bairro varchar(30),cep varchar(9))
+    begin
+    insert into endereco (rua,numero,bairro,cep) values (rua,numero,bairro,cep);
+    insert into Professor(nome,data_de_nascimento,sexo,celular,telefone,cpf,rg,email,fk_endereco)values(nome,data_de_nascimento,sexo,celular,telefone,cpf,rg,email,@@identity);
+    end $$
+
 CREATE TABLE Disciplinas (
     cod_disciplina integer not null auto_increment PRIMARY KEY,
     nome varchar(30),

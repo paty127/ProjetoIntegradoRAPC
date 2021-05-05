@@ -22,7 +22,6 @@ private final DbUtil dbUtil = new DbUtil();
     String erro = "Erro na execução";
     
     public void adicionarAluno(Aluno aluno) throws SQLException, IOException {
-        //String sql = "INSERT INTO aluno(nome,data_de_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? );";
         String sql = "call novo_aluno(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             try(Connection conn = dbUtil.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -48,7 +47,6 @@ private final DbUtil dbUtil = new DbUtil();
         }
     }
     public void deletarAluno(int alunoID) throws SQLException, IOException {
-        //String sql = "delete from aluno where cod_aluno=?;";
         String sql = "DELETE aluno,endereco FROM aluno INNER JOIN endereco"
                 + " ON aluno.fk_endereco = endereco.id_endereco"
                 + " WHERE cod_aluno = ?";
@@ -64,9 +62,6 @@ private final DbUtil dbUtil = new DbUtil();
     }
     
     public void updateUser(Aluno aluno) throws SQLException, IOException {
-        /*String sql ="update aluno set nome=?,data_de_nascimento=?,"
-                            + "sexo=?,pai=?,mae=?,celular=?,telefone_pai=?,"
-                            + "telefone_mae=?,email=? where cod_aluno=?;";*/
         String sql = "UPDATE aluno INNER JOIN endereco ON "
                 + "aluno.fk_endereco = id_endereco SET aluno.nome = ?,"
                 + "aluno.data_de_nascimento = ?,aluno.sexo = ?,aluno.celular = ?,"
@@ -98,7 +93,6 @@ private final DbUtil dbUtil = new DbUtil();
     }
     
     public List<Aluno> getAllAlunos() throws SQLException, IOException {
-        //String sql = "SELECT * from aluno;";
         String sql = "select * FROM aluno INNER JOIN endereco on aluno.fk_endereco = endereco.id_endereco";
         List<Aluno> listaDeAluno = new ArrayList<>();
         try (
@@ -135,7 +129,6 @@ private final DbUtil dbUtil = new DbUtil();
 
     
     public Aluno getAlunoById(int codAluno) throws SQLException, IOException {
-        //String sql ="select * from aluno where cod_aluno=?";
         String sql = "select * FROM aluno INNER JOIN endereco ON aluno.fk_endereco = endereco.id_endereco WHERE cod_aluno = ?";
         Aluno aluno = new Aluno();
         Connection conn = dbUtil.getConnection();
