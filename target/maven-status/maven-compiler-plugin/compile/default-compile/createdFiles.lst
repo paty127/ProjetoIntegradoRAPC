@@ -1,5 +1,8 @@
-controller\AlunoController.class
+controller\ProfessorController.class
 model\Funcionario.class
 dao\AlunoDao.class
 model\Aluno.class
 util\DbUtil.class
+controller\AlunoController.class
+dao\ProfessorDao.class
+model\Professor.class

@@ -13,6 +13,6 @@
     </head>
     <body>
         <!--Redireciona para pagina de listagem-->
-        <a href="<jsp:forward page="/AlunoController?action=ListAluno"/>">adicionar aluno</a>
+        <a href="<jsp:forward page="AlunoController?action=ListAluno"/>">adicionar aluno</a>
     </body>
 </html>

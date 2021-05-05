@@ -22,7 +22,7 @@ public class AlunoController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
     private static String INSERT_OR_EDIT = "/adicionarEditarAluno.jsp";
-    private static String LIST_USER = "/listarAluno.jsp";
+    private static String LIST_ALUNO = "/listarAluno.jsp";
     private AlunoDao dao;
 
     public AlunoController() {
@@ -33,6 +33,9 @@ public class AlunoController extends HttpServlet {
     @Override
     
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        
         String forward="";
         //Pegar o parametro de Action 
         String action = request.getParameter("action");
@@ -44,7 +47,7 @@ public class AlunoController extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            forward = LIST_USER;
+            forward = LIST_ALUNO;
             try {
                 request.setAttribute("alunos", dao.getAllAlunos());
             } catch (SQLException ex) {
@@ -62,7 +65,7 @@ public class AlunoController extends HttpServlet {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }      
         } else if (action.equalsIgnoreCase("ListAluno")){
-            forward = LIST_USER;
+            forward = LIST_ALUNO;
             try {
                 //Criando um atributo chamado Alunos e inserindo a lista que veio do metodo getAllAlunos
                 request.setAttribute("alunos", dao.getAllAlunos());
@@ -132,7 +135,7 @@ public class AlunoController extends HttpServlet {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
+        RequestDispatcher view = request.getRequestDispatcher(LIST_ALUNO);
         try {
             request.setAttribute("alunos", dao.getAllAlunos());
         } catch (SQLException ex) {
