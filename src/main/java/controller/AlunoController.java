@@ -22,7 +22,7 @@ public class AlunoController extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
     private static String INSERT_OR_EDIT = "/adicionarEditarAluno.jsp";
-    private static String LIST_USER = "/listarAluno.jsp";
+    private static String LIST_ALUNO = "/listarAluno.jsp";
     private AlunoDao dao;
 
     public AlunoController() {
@@ -33,6 +33,9 @@ public class AlunoController extends HttpServlet {
     @Override
     
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        
         String forward="";
         //Pegar o parametro de Action 
         String action = request.getParameter("action");
@@ -44,7 +47,7 @@ public class AlunoController extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            forward = LIST_USER;
+            forward = LIST_ALUNO;
             try {
                 request.setAttribute("alunos", dao.getAllAlunos());
             } catch (SQLException ex) {
@@ -62,7 +65,7 @@ public class AlunoController extends HttpServlet {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }      
         } else if (action.equalsIgnoreCase("ListAluno")){
-            forward = LIST_USER;
+            forward = LIST_ALUNO;
             try {
                 //Criando um atributo chamado Alunos e inserindo a lista que veio do metodo getAllAlunos
                 request.setAttribute("alunos", dao.getAllAlunos());
@@ -81,46 +84,26 @@ public class AlunoController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        int numero;
-        boolean temErro = false;
+        
         Aluno aluno = new Aluno();
         
-        Date dataNascimento = null;
+        aluno.setNome(request.getParameter("nome"));
+        
         try {
-            if(request.getParameter("dataNascimento")!=null){
-                dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("dataNascimento"));
+            Date data_de_nascimento = null;
+            String teste = request.getParameter("data_de_nascimento");
+            //System.out.println(teste);
+            if(request.getParameter("data_de_nascimento")!=null){
+                data_de_nascimento = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_de_nascimento"));
             }
             else{
-                dataNascimento = null;
-                temErro = true;
-                request.setAttribute("erroData", "Data não informada."); 
+                data_de_nascimento = null;
             }
-            aluno.setDataNasc(dataNascimento);
+
+            aluno.setDataNasc(data_de_nascimento);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if(request.getParameter("numero").equals("")){
-            numero = 0;
-            temErro = true;
-        }else{
-            numero = Integer.parseInt(request.getParameter("numero"));
-            aluno.setNumero(Integer.parseInt(request.getParameter("numero")));
-        }
-        
-        String nome = (request.getParameter("nome"));
-        String sexo = (request.getParameter("sexo"));
-        String email = (request.getParameter("email"));
-        String celular = (request.getParameter("celular"));
-        String nomePai = (request.getParameter("pai"));
-        String celularPai = (request.getParameter("celularPai"));
-        String nomeMae = (request.getParameter("mae"));
-        String celularMae = (request.getParameter("celularMae"));
-        String rua = (request.getParameter("rua"));
-        String bairro = (request.getParameter("bairro"));
-        String cep = (request.getParameter("cep"));
-        String codAluno = request.getParameter("codAluno");
-        
-        aluno.setNome(request.getParameter("nome"));
         aluno.setNomePai(request.getParameter("pai"));
         aluno.setNomeMae(request.getParameter("mae"));
         aluno.setCelular(request.getParameter("celular"));
@@ -129,96 +112,35 @@ public class AlunoController extends HttpServlet {
         aluno.setCelularMae(request.getParameter("celularMae"));
         aluno.setEmail(request.getParameter("email"));
         aluno.setRua(request.getParameter("rua"));
+        aluno.setNumero(Integer.parseInt(request.getParameter("numero")));
         aluno.setBairro(request.getParameter("bairro"));
         aluno.setCep(request.getParameter("cep"));
         
-        // VALIDACOES
-        if (nome == null || nome.trim().length() == 0) {
-            temErro = true;
-            request.setAttribute("erroNome", "Nome não informado.");
-        }
-
-        if (dataNascimento == null) {
-            temErro = true;
-            request.setAttribute("erroData", "Data não informada.");
-        }
-        if (sexo == null|| nome.trim().length() == 0){
-            temErro = true;
-            request.setAttribute("erroSexo", "Gênero não informado.");
-        }
-        if (celular == null|| nome.trim().length() == 0){
-            temErro = true;
-            request.setAttribute("erroCelular", "Celular não informado.");
-        }
-        if (email == null|| nome.trim().length() == 0){
-            temErro = true;
-            request.setAttribute("erroEmail", "E-mail não informado.");
-        }
-        if (nomeMae == null|| nome.trim().length() == 0){
-            temErro = true;
-            request.setAttribute("erroNomeMae", "Nome da mãe não informado.");
-        }
-        if (celularMae == null|| nome.trim().length() == 0){
-            temErro = true;
-            request.setAttribute("erroCelularMae", "Celular da mãe não informado.");
-        }
-        if (nomePai == null|| nome.trim().length() == 0){
-            temErro = true;
-            request.setAttribute("erroNomePai", "Nome do pai não informado.");
-        }
-        if (celularPai == null|| nome.trim().length() == 0){
-            temErro = true;
-            request.setAttribute("erroCelularPai", "Celular do pai não informado.");
-        }
-        if (rua == null|| nome.trim().length() == 0){
-            temErro = true;
-            request.setAttribute("erroRua", "Logradouro não informado.");
-        }
-        if (numero == 0){
-            temErro = true;
-            request.setAttribute("erroNumero", "Número não informado.");
-        }
-        if (bairro == null|| nome.trim().length() == 0){
-            temErro = true;
-            request.setAttribute("erroBairro", "Bairro não informado.");
-        }
-        if (cep == null|| nome.trim().length() == 0){
-            temErro = true;
-            request.setAttribute("erroCep", "Cep não informado.");
-        }
- 
-        Aluno dados = new Aluno (nome,dataNascimento,sexo,nomePai,nomeMae,
-                celular,celularPai,celularMae,email,rua,numero,bairro,cep);
+        String codAluno = request.getParameter("codAluno");
         
-        request.setAttribute("dados", dados);
-        
-        
-        if (temErro) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/adcionarAlunoValidacao.jsp");
-            dispatcher.forward(request, response);
-        } else {
-            if (codAluno == null || codAluno.isEmpty()) {
-                try {
-                    dao.adicionarAluno(dados);
-                    RequestDispatcher view = request.getRequestDispatcher(INSERT_OR_EDIT);
-                } catch (SQLException ex) {
-                    Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                aluno.setCodAluno(Integer.parseInt(codAluno));
-                try {
-                    dao.updateUser(aluno);
-                } catch (SQLException ex) {
-                    Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            RequestDispatcher view = request.getRequestDispatcher(INSERT_OR_EDIT);
+        if(codAluno == null || codAluno.isEmpty())
+        {
             try {
-                request.setAttribute("alunos", dao.getAllAlunos());
+                dao.adicionarAluno(aluno);
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            view.forward(request, response);
         }
+        else
+        {
+            aluno.setCodAluno(Integer.parseInt(codAluno));
+            try {
+                dao.updateUser(aluno);
+            } catch (SQLException ex) {
+                Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        RequestDispatcher view = request.getRequestDispatcher(LIST_ALUNO);
+        try {
+            request.setAttribute("alunos", dao.getAllAlunos());
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        view.forward(request, response);
     }
 }

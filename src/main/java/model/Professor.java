@@ -7,7 +7,7 @@ import java.util.Date;
  * @author Carlos Pavão <carlos.henrique93@msn.com>
  */
 public class Professor {
-    private int cod_professor;
+    private int codProfessor;
     private String nome;
     private Date dataNasc;
     private String sexo;
@@ -20,13 +20,14 @@ public class Professor {
     private int    numero;
     private String bairro;
     private String cep;
+  
 
-    public int getCod_professor() {
-        return cod_professor;
+    public int getCodProfessor() {
+        return codProfessor;
     }
 
-    public void setCod_professor(int cod_professor) {
-        this.cod_professor = cod_professor;
+    public void setCodProfessor(int codProfessor) {
+        this.codProfessor = codProfessor;
     }
 
     public String getNome() {
@@ -124,6 +125,8 @@ public class Professor {
     public void setCep(String cep) {
         this.cep = cep;
     }
+
+   
     
     
 }

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 28 de abr. de 2021, 12:26:21
+    Document   : listarProfessor
+    Created on : 5 de mai. de 2021, 10:31:39
     Author     : Carlos Pavão
 --%>
 
@@ -12,7 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <!--Redireciona para pagina de listagem-->
-        <a href="<jsp:forward page="AlunoController?action=ListAluno"/>">adicionar aluno</a>
+        <h1>Hello World!</h1>
     </body>
 </html>
