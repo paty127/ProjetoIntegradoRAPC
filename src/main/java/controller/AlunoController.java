@@ -95,7 +95,6 @@ public class AlunoController extends HttpServlet {
             }
             else{
                 dataNascimento = null;
-                temErro = true;
                 request.setAttribute("erroData", "Data não informada."); 
             }
             aluno.setDataNasc(dataNascimento);
@@ -104,7 +103,6 @@ public class AlunoController extends HttpServlet {
         }
         if(request.getParameter("numero").equals("")){
             numero = 0;
-            temErro = true;
         }else{
             numero = Integer.parseInt(request.getParameter("numero"));
             aluno.setNumero(Integer.parseInt(request.getParameter("numero")));
@@ -136,44 +134,43 @@ public class AlunoController extends HttpServlet {
         aluno.setCep(request.getParameter("cep"));
         
         // VALIDACOES
-        if (nome == null || nome.trim().length() == 0) {
+        if (nome.equals("")) {
             temErro = true;
             request.setAttribute("erroNome", "Nome não informado.");
         }
-
         if (dataNascimento == null) {
             temErro = true;
             request.setAttribute("erroData", "Data não informada.");
         }
-        if (sexo == null|| nome.trim().length() == 0){
+        if (sexo.equals("")){
             temErro = true;
             request.setAttribute("erroSexo", "Gênero não informado.");
         }
-        if (celular == null|| nome.trim().length() == 0){
+        if (celular.equals("")){
             temErro = true;
             request.setAttribute("erroCelular", "Celular não informado.");
         }
-        if (email == null|| nome.trim().length() == 0){
+        if (email.equals("")){
             temErro = true;
             request.setAttribute("erroEmail", "E-mail não informado.");
         }
-        if (nomeMae == null|| nome.trim().length() == 0){
+        if (nomeMae.equals("")){
             temErro = true;
             request.setAttribute("erroNomeMae", "Nome da mãe não informado.");
         }
-        if (celularMae == null|| nome.trim().length() == 0){
+        if (celularMae.equals("")){
             temErro = true;
             request.setAttribute("erroCelularMae", "Celular da mãe não informado.");
         }
-        if (nomePai == null|| nome.trim().length() == 0){
+        if (nomePai.equals("")){
             temErro = true;
             request.setAttribute("erroNomePai", "Nome do pai não informado.");
         }
-        if (celularPai == null|| nome.trim().length() == 0){
+        if (celularPai.equals("")){
             temErro = true;
             request.setAttribute("erroCelularPai", "Celular do pai não informado.");
         }
-        if (rua == null|| nome.trim().length() == 0){
+        if (rua.equals("")){
             temErro = true;
             request.setAttribute("erroRua", "Logradouro não informado.");
         }
@@ -181,11 +178,11 @@ public class AlunoController extends HttpServlet {
             temErro = true;
             request.setAttribute("erroNumero", "Número não informado.");
         }
-        if (bairro == null|| nome.trim().length() == 0){
+        if (bairro.equals("")){
             temErro = true;
             request.setAttribute("erroBairro", "Bairro não informado.");
         }
-        if (cep == null|| nome.trim().length() == 0){
+        if (cep.equals("")){
             temErro = true;
             request.setAttribute("erroCep", "Cep não informado.");
         }
