@@ -186,6 +186,7 @@ public class AlunoController extends HttpServlet {
             temErro = true;
             request.setAttribute("erroCep", "Cep não informado.");
         }
+        
  
         Aluno dados = new Aluno (nome,dataNascimento,sexo,nomePai,nomeMae,
                 celular,celularPai,celularMae,email,rua,numero,bairro,cep);
@@ -193,11 +194,11 @@ public class AlunoController extends HttpServlet {
         request.setAttribute("dados", dados);
         
         
-        if (temErro) {
+        if (temErro){
             RequestDispatcher dispatcher = request.getRequestDispatcher("/adcionarAlunoValidacao.jsp");
             dispatcher.forward(request, response);
         } else {
-            if (codAluno == null || codAluno.isEmpty()) {
+            if (codAluno.equals("")) {
                 try {
                     dao.adicionarAluno(dados);
                     RequestDispatcher view = request.getRequestDispatcher(INSERT_OR_EDIT);
