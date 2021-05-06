@@ -90,7 +90,7 @@ public class AlunoController extends HttpServlet {
         
         Date dataNascimento = null;
         try {
-            if(request.getParameter("dataNascimento")!=null){
+            if(!request.getParameter("dataNascimento").equals("")){
                 dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("dataNascimento"));
             }
             else{
