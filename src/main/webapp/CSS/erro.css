@@ -1,0 +1,8 @@
+@charset "UTF-8";
+.msg-erro {
+    /*background-color: lightpink;*/
+    font-family: Arial Black;
+    color: red;
+    padding: 2px 5px;
+    
+}

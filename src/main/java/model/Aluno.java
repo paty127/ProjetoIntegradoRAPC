@@ -24,6 +24,26 @@ private int    numero;
 private String bairro;
 private String cep;
 
+    public Aluno(){
+        
+    }
+
+    public Aluno(String nome, Date dataNasc, String sexo, String nomePai, String nomeMae, String celular, String celularPai, String celularMae, String email, String rua, int numero, String bairro, String cep) {
+        this.nome = nome;
+        this.dataNasc = dataNasc;
+        this.sexo = sexo;
+        this.nomePai = nomePai;
+        this.nomeMae = nomeMae;
+        this.celular = celular;
+        this.celularPai = celularPai;
+        this.celularMae = celularMae;
+        this.email = email;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cep = cep;
+    }
+
     public int getCodAluno() {
         return codAluno;
     }

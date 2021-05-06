@@ -1,0 +1,125 @@
+@charset "UTF-8";
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-family: sans-serif;
+        font-size: 14px;
+    }
+
+    body{
+        width: 100%;
+        min-height: 100vh;
+        background: url("Imagens/fundo.jpg") center/cover;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+    #area{
+      position:relative;
+      left:37%;
+      top:29%;
+      width:320px;
+      height:270px;
+    }
+
+
+    h1 {
+        font: bold;
+        color: rgb(16, 87, 87);
+        align-items: right;
+        text-align: center;
+        text-justify: auto;
+    }
+    .campo {
+        background: rgb(255, 255, 255);
+    }
+
+    .textoCaixa {
+        font-family: Roboto, sans-serif;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        font-size: 22;
+        letter-spacing: normal;
+        text-decoration: inherit;
+        text-transform: inherit;
+        color: #000000;
+        font: bold;
+
+    }
+
+    .container {
+
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center
+    }
+    
+
+    .box {
+        width: 300px;
+        height: 300px;
+
+    }
+    .rodape{
+        font-size: xx-large;
+        font: bold;
+        color: black;
+    }
+    .formulario{
+        width: 75%;
+        height: 50%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction:column;
+    background-color: #ffffff;
+    width: 100%;
+    padding: 1.3rem 0;
+    border: 1px solid lightgray;
+    
+    }
+    .cadastro{
+        background-color: rgb(155, 156, 156);
+    }
+    
+    .getSexo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1.3rem 0;
+    }
+    .sexo{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1rem;
+    }
+    #botao{
+	background-color: #c00000;
+	color: #ffffff;
+	width: 90px;
+	height: 40px;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+    }
+    
+    .msg-erro {
+        background-color: lightpink;
+        color: red;
+        padding: 2px 5px;
+}
