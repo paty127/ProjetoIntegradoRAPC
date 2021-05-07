@@ -29,6 +29,11 @@ CREATE TABLE Aluno (
     fk_endereco integer,
     FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
 );
+use projetorapc;
+
+select * from aluno;
+
+select * from endereco;
 
 delimiter $$
 create procedure novo_aluno (

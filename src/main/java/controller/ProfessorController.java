@@ -1,11 +1,3 @@
-/*
- * Desenvolvedores: 
- * ALEXSANDRO DA SILVA RAMOS
- * CARLOS HENRIQUE PAVAO INACIO
- * PATRICIA
- * FERREIRA DE SOUSA RENAN FERREIRA NOVAES
- * MATHEUS MARCHENA
-*/
 package controller;
 
 import dao.ProfessorDao;
@@ -24,32 +16,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Professor;
 
-
 @WebServlet(name = "Professores", urlPatterns = {"/ProfessorController"})
 public class ProfessorController extends HttpServlet {
-    
+
     private static final long serialVersionUID = 1L;
     private static String INSERT_OR_EDIT = "/adicionarEditarProfessor.jsp";
     private static String LIST_PROFESSOR = "/listarProfessor.jsp";
     private ProfessorDao dao;
-    
-    public ProfessorController(){
+
+    public ProfessorController() {
         super();
         dao = new ProfessorDao();
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        
-        String forward="";
+
+        String forward = "";
         //Pegar o parametro de Action 
         String action = request.getParameter("action");
 
-        if (action.equalsIgnoreCase("delete")){
+        if (action.equalsIgnoreCase("delete")) {
             int codProfessor = Integer.parseInt(request.getParameter("codProfessor"));
             try {
                 dao.deletarProfessor(codProfessor);
@@ -62,18 +53,18 @@ public class ProfessorController extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if (action.equalsIgnoreCase("edit")){
-            forward = INSERT_OR_EDIT; 
+        } else if (action.equalsIgnoreCase("edit")) {
+            forward = INSERT_OR_EDIT;
             int codProfessor = Integer.parseInt(request.getParameter("codProfessor"));
             try {
                 //Passar o codigo de aluno para o metodo getAlunoByID
                 Professor professor = dao.getProfessorById(codProfessor);
-                request.setAttribute("professor",professor);
+                request.setAttribute("professor", professor);
 
             } catch (SQLException ex) {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
-            }      
-        } else if (action.equalsIgnoreCase("ListProfessor")){
+            }
+        } else if (action.equalsIgnoreCase("ListProfessor")) {
             forward = LIST_PROFESSOR;
             try {
                 //Criando um atributo chamado Alunos e inserindo a lista que veio do metodo getAllAlunos
@@ -88,29 +79,26 @@ public class ProfessorController extends HttpServlet {
         RequestDispatcher view = request.getRequestDispatcher(forward);
         //Redireciona  para Forward
         view.forward(request, response);
-        
+
     }
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        
+
         int numero;
         int codProfessor;
         boolean temErro = false;
         Professor professor = new Professor();
-        
-        professor.setNome(request.getParameter("nome"));
+
         Date dataNascimento = null;
         try {
-            if(request.getParameter("dataNascimento").equals("")){
+            if (!request.getParameter("dataNascimento").equals("")) {
                 dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("dataNascimento"));
-            }
-            else{
+            } else {
                 dataNascimento = null;
             }
 
@@ -134,7 +122,7 @@ public class ProfessorController extends HttpServlet {
         String rua = (request.getParameter("rua"));
         String bairro = (request.getParameter("bairro"));
         String cep = (request.getParameter("cep"));
-        
+
         if (request.getParameter("codProfessor").equals("")) {
             codProfessor = 0;
         } else {
@@ -148,12 +136,11 @@ public class ProfessorController extends HttpServlet {
         professor.setRg(request.getParameter("rg"));
         professor.setEmail(request.getParameter("email"));
         professor.setRua(request.getParameter("rua"));
-        professor.setNumero(Integer.parseInt(request.getParameter("numero")));
         professor.setBairro(request.getParameter("bairro"));
         professor.setCep(request.getParameter("cep"));
-        
+
         //validações
-        if(nome.equals("")){
+        if (nome.equals("")) {
             temErro = true;
             request.setAttribute("erroNome", "Nome não informado.");
         }
@@ -171,17 +158,17 @@ public class ProfessorController extends HttpServlet {
         }
         if (telefone.equals("")) {
             temErro = true;
-            request.setAttribute("erroTelefone", "Celular não informado.");
+            request.setAttribute("erroTelefone", "Telefone não informado.");
         }
         if (email.equals("")) {
             temErro = true;
             request.setAttribute("erroEmail", "E-mail não informado.");
         }
-        if(cpf.equals("")){
+        if (cpf.equals("")) {
             temErro = true;
             request.setAttribute("erroCPF", "Cpf não informado.");
         }
-        if(rg.equals("")){
+        if (rg.equals("")) {
             temErro = true;
             request.setAttribute("erroRG", "RG não informado.");
         }
@@ -201,11 +188,11 @@ public class ProfessorController extends HttpServlet {
             temErro = true;
             request.setAttribute("erroCep", "Cep não informado.");
         }
-        
-        Professor dados = new Professor(codProfessor,nome,dataNascimento, sexo,celular,telefone,cpf,rg,email,rua, numero, bairro, cep);
-         
+
+        Professor dados = new Professor(codProfessor, nome, dataNascimento, sexo, celular, telefone, cpf, rg, email, rua, numero, bairro, cep);
+
         request.setAttribute("dados", dados);
-        
+
         if (temErro) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/validacaoProfessor.jsp");
             dispatcher.forward(request, response);

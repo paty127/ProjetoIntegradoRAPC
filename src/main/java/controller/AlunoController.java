@@ -1,11 +1,3 @@
-/*
- * Desenvolvedores: 
- * ALEXSANDRO DA SILVA RAMOS
- * CARLOS HENRIQUE PAVAO INACIO
- * PATRICIA
- * FERREIRA DE SOUSA RENAN FERREIRA NOVAES
- * MATHEUS MARCHENA
-*/
 package controller;
 
 import dao.AlunoDao;
@@ -88,9 +80,12 @@ public class AlunoController extends HttpServlet {
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        
         int numero;
         int codAluno;
         boolean temErro = false;
