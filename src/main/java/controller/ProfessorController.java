@@ -1,13 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ * Desenvolvedores: 
+ * ALEXSANDRO DA SILVA RAMOS
+ * CARLOS HENRIQUE PAVAO INACIO
+ * PATRICIA
+ * FERREIRA DE SOUSA RENAN FERREIRA NOVAES
+ * MATHEUS MARCHENA
+*/
 package controller;
 
 import dao.ProfessorDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,13 +22,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Aluno;
 import model.Professor;
 
-/**
- *
- * @author Carlos Pavão
- */
+
 @WebServlet(name = "Professores", urlPatterns = {"/ProfessorController"})
 public class ProfessorController extends HttpServlet {
     

@@ -1,12 +1,17 @@
+/*
+ * Desenvolvedores: 
+ * ALEXSANDRO DA SILVA RAMOS
+ * CARLOS HENRIQUE PAVAO INACIO
+ * PATRICIA
+ * FERREIRA DE SOUSA RENAN FERREIRA NOVAES
+ * MATHEUS MARCHENA
+*/
+
 package model;
 
 
 import java.util.Date;
 
-/**
- *
- * @author Carlos Pavão <carlos.henrique93@msn.com>
- */
 public class Aluno {
     
 private int codAluno;
@@ -28,7 +33,8 @@ private String cep;
         
     }
 
-    public Aluno(String nome, Date dataNasc, String sexo, String nomePai, String nomeMae, String celular, String celularPai, String celularMae, String email, String rua, int numero, String bairro, String cep) {
+    public Aluno(int codAluno, String nome, Date dataNasc, String sexo, String nomePai, String nomeMae, String celular, String celularPai, String celularMae, String email, String rua, int numero, String bairro, String cep) {
+        this.codAluno = codAluno;
         this.nome = nome;
         this.dataNasc = dataNasc;
         this.sexo = sexo;
@@ -42,8 +48,8 @@ private String cep;
         this.numero = numero;
         this.bairro = bairro;
         this.cep = cep;
-    }
-
+    }    
+    
     public int getCodAluno() {
         return codAluno;
     }

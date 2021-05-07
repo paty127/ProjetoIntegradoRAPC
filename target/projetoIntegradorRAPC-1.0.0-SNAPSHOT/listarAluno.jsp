@@ -1,3 +1,13 @@
+<!--
+ * Desenvolvedores: 
+ * ALEXSANDRO DA SILVA RAMOS
+ * CARLOS HENRIQUE PAVAO INACIO
+ * PATRICIA
+ * FERREIRA DE SOUSA RENAN FERREIRA NOVAES
+ * MATHEUS MARCHENA
+ */
+-->
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

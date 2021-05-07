@@ -1,3 +1,12 @@
+/*
+ * Desenvolvedores: 
+ * ALEXSANDRO DA SILVA RAMOS
+ * CARLOS HENRIQUE PAVAO INACIO
+ * PATRICIA
+ * FERREIRA DE SOUSA RENAN FERREIRA NOVAES
+ * MATHEUS MARCHENA
+*/
+
 package dao;
 
 import java.io.IOException;
@@ -12,20 +21,16 @@ import java.util.List;
 import model.Aluno;
 import util.DbUtil;
 
-/**
- *
- * @author Carlos Pavão <carlos.henrique93@msn.com>
- */
 public class AlunoDao {
-    
-private final DbUtil dbUtil = new DbUtil();
+
+    private final DbUtil dbUtil = new DbUtil();
     String erro = "Erro na execução";
-    
+
     public void adicionarAluno(Aluno aluno) throws SQLException, IOException {
         String sql = "call novo_aluno(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            try(Connection conn = dbUtil.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
-                
+        try (Connection conn = dbUtil.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
             stmt.setString(1, aluno.getNome());
             stmt.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
             stmt.setString(3, aluno.getSexo());
@@ -46,12 +51,13 @@ private final DbUtil dbUtil = new DbUtil();
             System.err.println(erro);
         }
     }
+
     public void deletarAluno(int alunoID) throws SQLException, IOException {
         String sql = "DELETE aluno,endereco FROM aluno INNER JOIN endereco"
                 + " ON aluno.fk_endereco = endereco.id_endereco"
                 + " WHERE cod_aluno = ?";
-        try(Connection conn = dbUtil.getConnection();
-                     PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = dbUtil.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, alunoID);
             stmt.executeUpdate();
@@ -60,8 +66,8 @@ private final DbUtil dbUtil = new DbUtil();
             System.err.println(erro);
         }
     }
-    
-    public void updateUser(Aluno aluno) throws SQLException, IOException {
+
+    public void updateAluno(Aluno aluno) throws SQLException, IOException {
         String sql = "UPDATE aluno INNER JOIN endereco ON "
                 + "aluno.fk_endereco = id_endereco SET aluno.nome = ?,"
                 + "aluno.data_de_nascimento = ?,aluno.sexo = ?,aluno.celular = ?,"
@@ -69,7 +75,7 @@ private final DbUtil dbUtil = new DbUtil();
                 + "aluno.mae = ?,aluno.telefone_mae = ?,endereco.rua = ?,"
                 + "endereco.numero = ?,endereco.bairro = ?,endereco.cep = ? WHERE cod_aluno = ?";
         try (Connection conn = dbUtil.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)){            
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, aluno.getNome());
             stmt.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
             stmt.setString(3, aluno.getSexo());
@@ -84,21 +90,21 @@ private final DbUtil dbUtil = new DbUtil();
             stmt.setString(12, aluno.getBairro());
             stmt.setString(13, aluno.getCep());
             stmt.setInt(14, aluno.getCodAluno());
-            
+
             stmt.executeUpdate();
-            
+
         } catch (SQLException e) {
             System.err.println(erro);
         }
     }
-    
+
     public List<Aluno> getAllAlunos() throws SQLException, IOException {
         String sql = "select * FROM aluno INNER JOIN endereco on aluno.fk_endereco = endereco.id_endereco";
         List<Aluno> listaDeAluno = new ArrayList<>();
         try (
-            Connection conn = dbUtil.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rst = stmt.executeQuery(sql)){
+                Connection conn = dbUtil.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rst = stmt.executeQuery(sql)) {
             while (rst.next()) {
                 Aluno aluno = new Aluno();
                 aluno.setCodAluno(rst.getInt("cod_aluno"));
@@ -115,8 +121,7 @@ private final DbUtil dbUtil = new DbUtil();
                 aluno.setNumero(Integer.parseInt(rst.getString("numero")));
                 aluno.setBairro(rst.getString("bairro"));
                 aluno.setCep(rst.getString("cep"));
-                
-                
+
                 listaDeAluno.add(aluno);
             }
         } catch (SQLException e) {
@@ -126,14 +131,12 @@ private final DbUtil dbUtil = new DbUtil();
         return listaDeAluno;
     }
 
-
-    
     public Aluno getAlunoById(int codAluno) throws SQLException, IOException {
         String sql = "select * FROM aluno INNER JOIN endereco ON aluno.fk_endereco = endereco.id_endereco WHERE cod_aluno = ?";
         Aluno aluno = new Aluno();
         Connection conn = dbUtil.getConnection();
-        
-        try{
+
+        try {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, codAluno);
             //Execultando o comando            
@@ -160,6 +163,5 @@ private final DbUtil dbUtil = new DbUtil();
             System.err.println("Erro na execução");
         }
         return aluno;
-}
-
+    }
 }
