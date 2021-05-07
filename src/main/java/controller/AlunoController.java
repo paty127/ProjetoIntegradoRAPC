@@ -195,7 +195,7 @@ public class AlunoController extends HttpServlet {
         
         
         if (temErro){
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/adcionarAlunoValidacao.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/adicionarAlunoValidacao.jsp");
             dispatcher.forward(request, response);
         } else {
             if (codAluno.equals("")) {
