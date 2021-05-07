@@ -20,6 +20,27 @@ public class Professor {
     private int    numero;
     private String bairro;
     private String cep;
+
+    public Professor() {
+    }
+    
+    
+    
+    public Professor(int codProfessor, String nome, Date dataNasc, String sexo, String celular, String telefone, String cpf, String rg, String email, String rua, int numero, String bairro, String cep) {
+        this.codProfessor = codProfessor;
+        this.nome = nome;
+        this.dataNasc = dataNasc;
+        this.sexo = sexo;
+        this.celular = celular;
+        this.telefone = telefone;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.email = email;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cep = cep;
+    }
   
 
     public int getCodProfessor() {

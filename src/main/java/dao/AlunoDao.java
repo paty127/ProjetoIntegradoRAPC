@@ -140,7 +140,6 @@ public class AlunoDao {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, codAluno);
             //Execultando o comando            
-            String Teste = stmt.toString();
             ResultSet rst = stmt.executeQuery();
 
             if (rst.next()) {

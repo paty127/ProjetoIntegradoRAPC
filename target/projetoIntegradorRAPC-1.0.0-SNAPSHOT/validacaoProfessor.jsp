@@ -36,7 +36,7 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="AlunoController?action=ListAluno">Aluno Matriculados</a>
-                    <a class="dropdown-item" href="#">Professores</a>
+                    <a class="dropdown-item" href="ProfessorController?action=ListProfessor">Professores</a>
                     <a class="dropdown-item" href="#">Turmas</a>
                   </div>
                 </li>
@@ -46,7 +46,7 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="adicionarEditarAluno.jsp">Cadastrar Aluno</a>
-                    <a class="dropdown-item" href="#">Cadastrar Professor</a>
+                    <a class="dropdown-item" href="adicionarEditarProfessor.jsp">Cadastrar Professor</a>
                     <a class="dropdown-item" href="#">Cadastrar Turma</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Algo mais aqui</a>
@@ -63,14 +63,14 @@
             </div>
           </nav>
     <div class="container">
-        <h4>Dados do Aluno</h4>
-        <form method="POST" action='${request.contextPath}AlunoController' name="frmAddUser">
-            <!-- Matricula -->
+        <h4>Dados do Professor</h4>
+        <form method="POST" action='${request.contextPath}ProfessorController' name="frmAddUser">
+            <!-- codigo do Professor -->
             <div class="form-row">
                 <div class="form-group col-md-1">
-                    <label>Matricula</label>
-                    <input type="text" readonly="readonly" name="codAluno"
-                    value="<c:out value="${dados.codAluno}" />" >
+                    <label>Código do Professor</label>
+                    <input type="text" readonly="readonly" name="codProfessor"
+                    value="<c:out value="${dados.codProfessor}" />" >
                 </div>
             </div>
             <div class="form-row">
@@ -101,16 +101,50 @@
                                 type="text" name="sexo" placeholder="M/F"
                                 value="<c:out value="${dados.sexo}" />" >
                         <c:if test="${not empty erroSexo}">
-                        <span class="msg-erro"><c:out value="${erroSexo}" /></span>
+                            <span class="msg-erro"><c:out value="${erroSexo}" /></span>
                         </c:if>
                     </div>
+                    <div class="form-group col-md-3">   
+                        <!-- Nome -->
+                        <label for="inputCpf">CPF</label>
+                        <input class="form-control"  id="inputCpf" type="text" name="cpf"
+                                value="<c:out value="${dados.cpf}" />" 
+                                placeholder="999.999.999-99"> 
+                        <c:if test="${not empty erroCPF}">
+                            <span class="msg-erro"><c:out value="${erroCPF}" /></span>
+                        </c:if>
+                    </div>
+                    <div class="form-group col-md-3">   
+                        <!-- Nome -->
+                        <label for="inputCpf">Rg</label>
+                        <input class="form-control"  id="inputCpf" type="text" name="rg"
+                        value="<c:out value="${dados.rg}" />" 
+                        placeholder="99.999.999-5">
+                        <c:if test="${not empty erroRG}">
+                            <span class="msg-erro"><c:out value="${erroRG}" /></span>
+                        </c:if>
+                    </div>
+
+                        
+                        
+                        
+                        
                     <div class="form-group col-md-2">
-                        <label for="inputCelularAluno">Celular do Aluno</label>
+                        <label for="inputCelularAluno">Celular</label>
                         <input class="form-control" id="inputCelularAluno"type="text" 
                                name="celular" value="<c:out value="${dados.celular}" />" 
                                placeholder="(11)99999-9999">
                         <c:if test="${not empty erroCelular}">
                         <span class="msg-erro"><c:out value="${erroCelular}" /></span>
+                        </c:if>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputTelefone">Telefone</label>
+                        <input class="form-control" id="inputCelularAluno"type="text" 
+                               name="celular" value="<c:out value="${dados.telefone}" />" 
+                               placeholder="(11)9999-9999">
+                        <c:if test="${not empty erroTelefone}">
+                        <span class="msg-erro"><c:out value="${erroTelefone}" /></span>
                         </c:if>
                     </div>
                     <div class="form-group col-md-3">

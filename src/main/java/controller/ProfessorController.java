@@ -99,25 +99,48 @@ public class ProfessorController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         
+        int numero;
+        int codProfessor;
+        boolean temErro = false;
         Professor professor = new Professor();
         
         professor.setNome(request.getParameter("nome"));
-        
+        Date dataNascimento = null;
         try {
-            Date data_de_nascimento = null;
-            String teste = request.getParameter("data_de_nascimento");
-            
-            if(request.getParameter("data_de_nascimento")!=null){
-                data_de_nascimento = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data_de_nascimento"));
+            if(request.getParameter("dataNascimento").equals("")){
+                dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("dataNascimento"));
             }
             else{
-                data_de_nascimento = null;
+                dataNascimento = null;
             }
 
-            professor.setDataNasc(data_de_nascimento);
+            professor.setDataNasc(dataNascimento);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        if (request.getParameter("numero").equals("")) {
+            numero = 0;
+        } else {
+            numero = Integer.parseInt(request.getParameter("numero"));
+            professor.setNumero(Integer.parseInt(request.getParameter("numero")));
+        }
+        String nome = (request.getParameter("nome"));
+        String sexo = (request.getParameter("sexo"));
+        String email = (request.getParameter("email"));
+        String celular = (request.getParameter("celular"));
+        String telefone = (request.getParameter("telefone"));
+        String cpf = (request.getParameter("cpf"));
+        String rg = (request.getParameter("rg"));
+        String rua = (request.getParameter("rua"));
+        String bairro = (request.getParameter("bairro"));
+        String cep = (request.getParameter("cep"));
+        
+        if (request.getParameter("codProfessor").equals("")) {
+            codProfessor = 0;
+        } else {
+            codProfessor = Integer.parseInt(request.getParameter("codProfessor"));
+        }
+        professor.setNome(request.getParameter("nome"));
         professor.setSexo(request.getParameter("sexo"));
         professor.setCelular(request.getParameter("celular"));
         professor.setTelefone(request.getParameter("telefone"));
@@ -129,33 +152,89 @@ public class ProfessorController extends HttpServlet {
         professor.setBairro(request.getParameter("bairro"));
         professor.setCep(request.getParameter("cep"));
         
-        String codProfessor = request.getParameter("codProfessor");
+        //validações
+        if(nome.equals("")){
+            temErro = true;
+            request.setAttribute("erroNome", "Nome não informado.");
+        }
+        if (dataNascimento == null) {
+            temErro = true;
+            request.setAttribute("erroData", "Data não informada.");
+        }
+        if (sexo.equals("")) {
+            temErro = true;
+            request.setAttribute("erroSexo", "Gênero não informado.");
+        }
+        if (celular.equals("")) {
+            temErro = true;
+            request.setAttribute("erroCelular", "Celular não informado.");
+        }
+        if (telefone.equals("")) {
+            temErro = true;
+            request.setAttribute("erroTelefone", "Celular não informado.");
+        }
+        if (email.equals("")) {
+            temErro = true;
+            request.setAttribute("erroEmail", "E-mail não informado.");
+        }
+        if(cpf.equals("")){
+            temErro = true;
+            request.setAttribute("erroCPF", "Cpf não informado.");
+        }
+        if(rg.equals("")){
+            temErro = true;
+            request.setAttribute("erroRG", "RG não informado.");
+        }
+        if (rua.equals("")) {
+            temErro = true;
+            request.setAttribute("erroRua", "Logradouro não informado.");
+        }
+        if (numero == 0) {
+            temErro = true;
+            request.setAttribute("erroNumero", "Número não informado.");
+        }
+        if (bairro.equals("")) {
+            temErro = true;
+            request.setAttribute("erroBairro", "Bairro não informado.");
+        }
+        if (cep.equals("")) {
+            temErro = true;
+            request.setAttribute("erroCep", "Cep não informado.");
+        }
         
-        if(codProfessor == null || codProfessor.isEmpty())
-        {
+        Professor dados = new Professor(codProfessor,nome,dataNascimento, sexo,celular,telefone,cpf,rg,email,rua, numero, bairro, cep);
+         
+        request.setAttribute("dados", dados);
+        
+        if (temErro) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/validacaoProfessor.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            if (codProfessor == 0) {
+                try {
+                    dao.adicionarProfessor(dados);
+                    RequestDispatcher view = request.getRequestDispatcher(INSERT_OR_EDIT);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                professor.setCodProfessor(codProfessor);
+                try {
+                    dao.updateProfessor(professor);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            RequestDispatcher view = request.getRequestDispatcher(INSERT_OR_EDIT);
             try {
-                dao.adicionarProfessor(professor);
+                request.setAttribute("professores", dao.getAllProfessor());
             } catch (SQLException ex) {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            view.forward(request, response);
         }
-        else
-        {
-            professor.setCodProfessor(Integer.parseInt(codProfessor));
-            try {
-                dao.updateProfessor(professor);
-            } catch (SQLException ex) {
-                Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        RequestDispatcher view = request.getRequestDispatcher(LIST_PROFESSOR);
-        try {
-            request.setAttribute("Professores", dao.getAllProfessor());
-        } catch (SQLException ex) {
-            Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        view.forward(request, response);
     }
 }
+
 
 
