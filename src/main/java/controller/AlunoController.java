@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -91,18 +92,14 @@ public class AlunoController extends HttpServlet {
         boolean temErro = false;
         Aluno aluno = new Aluno();
 
-        Date dataNascimento = null;
-        try {
-            if (!request.getParameter("dataNascimento").equals("")) {
-                dataNascimento = new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("dataNascimento"));
-            } else {
-                dataNascimento = null;
-                request.setAttribute("erroData", "Data não informada.");
-            }
-            aluno.setDataNasc(dataNascimento);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        LocalDate dataNascimento = null;
+        if (!request.getParameter("dataNascimento").equals("")) {
+            dataNascimento = LocalDate.parse(request.getParameter("dataNascimento"));
+        } else {
+            dataNascimento = null;
+            request.setAttribute("erroData", "Data não informada.");
         }
+        aluno.setDataNasc(dataNascimento);
         if (request.getParameter("numero").equals("")) {
             numero = 0;
         } else {
@@ -198,7 +195,7 @@ public class AlunoController extends HttpServlet {
         request.setAttribute("dados", dados);
 
         if (temErro) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/adicionarEditarValidacaoA.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/validacaoAluno.jsp");
             dispatcher.forward(request, response);
         } else {
             if (codAluno == 0) {

@@ -32,7 +32,7 @@ public class AlunoDao {
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, aluno.getNome());
-            stmt.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
+            stmt.setDate(2, java.sql.Date.valueOf(aluno.getDataNasc()));
             stmt.setString(3, aluno.getSexo());
             stmt.setString(4, aluno.getCelular());
             stmt.setString(5, aluno.getEmail());
@@ -77,7 +77,7 @@ public class AlunoDao {
         try (Connection conn = dbUtil.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, aluno.getNome());
-            stmt.setDate(2, new java.sql.Date(aluno.getDataNasc().getTime()));
+            stmt.setDate(2, java.sql.Date.valueOf(aluno.getDataNasc()));
             stmt.setString(3, aluno.getSexo());
             stmt.setString(4, aluno.getCelular());
             stmt.setString(5, aluno.getEmail());
@@ -110,7 +110,7 @@ public class AlunoDao {
                 aluno.setCodAluno(rst.getInt("cod_aluno"));
                 aluno.setNome(rst.getString("nome"));
                 aluno.setSexo(rst.getString("sexo"));
-                aluno.setDataNasc(rst.getDate("data_de_nascimento"));
+                aluno.setDataNasc(rst.getDate("data_de_nascimento").toLocalDate());
                 aluno.setNomePai(rst.getString("pai"));
                 aluno.setNomeMae(rst.getString("mae"));
                 aluno.setCelular(rst.getString("celular"));
@@ -145,7 +145,7 @@ public class AlunoDao {
             if (rst.next()) {
                 aluno.setCodAluno(rst.getInt("cod_aluno"));
                 aluno.setNome(rst.getString("nome"));
-                aluno.setDataNasc(rst.getDate("data_de_nascimento"));
+                aluno.setDataNasc(rst.getDate("data_de_nascimento").toLocalDate());
                 aluno.setNomePai(rst.getString("pai"));
                 aluno.setNomeMae(rst.getString("mae"));
                 aluno.setCelular(rst.getString("celular"));

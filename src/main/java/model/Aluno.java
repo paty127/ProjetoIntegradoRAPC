@@ -10,13 +10,14 @@
 package model;
 
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Aluno {
     
 private int codAluno;
 private String nome;
-private Date dataNasc;
+private LocalDate dataNasc;
 private String sexo;
 private String nomePai;
 private String nomeMae;
@@ -33,7 +34,7 @@ private String cep;
         
     }
 
-    public Aluno(int codAluno, String nome, Date dataNasc, String sexo, String nomePai, String nomeMae, String celular, String celularPai, String celularMae, String email, String rua, int numero, String bairro, String cep) {
+    public Aluno(int codAluno, String nome, LocalDate dataNasc, String sexo, String nomePai, String nomeMae, String celular, String celularPai, String celularMae, String email, String rua, int numero, String bairro, String cep) {
         this.codAluno = codAluno;
         this.nome = nome;
         this.dataNasc = dataNasc;
@@ -48,8 +49,8 @@ private String cep;
         this.numero = numero;
         this.bairro = bairro;
         this.cep = cep;
-    }    
-    
+    }
+
     public int getCodAluno() {
         return codAluno;
     }
@@ -66,11 +67,11 @@ private String cep;
         this.nome = nome;
     }
 
-    public Date getDataNasc() {
+    public LocalDate getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(Date dataNasc) {
+    public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
 

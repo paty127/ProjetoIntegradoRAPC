@@ -83,10 +83,9 @@
                     <div class="form-group col-md-2">    
                         <!-- Data -->
                         <label for="inputData">Data de Nascimento</label> 
-                        <input class="form-control"  id="inputData" type="text" 
-                               placeholder="DD/MM/YYYY" name="dataNascimento" 
-                               data-date-format="dd/MM/yyyy"value="<fmt:formatDate 
-                                   pattern="dd/MM/yyyy" value="${aluno.dataNasc}" />" >
+                        <input class="form-control"  id="inputData" type="date" 
+                               maxlength="10" name="dataNascimento" 
+                               value="<c:out value="${dados.dataNasc}" />" >
                     </div>
                     <div class="form-group col-md-1">
                         <!-- Gênero -->

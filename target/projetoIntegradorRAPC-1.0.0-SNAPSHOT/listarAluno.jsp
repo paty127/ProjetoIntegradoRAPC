@@ -81,7 +81,8 @@
                     <tr>
                         <th scope="row"><c:out value="${aluno.codAluno}" /></th>
                         <td><c:out value="${aluno.nome}" /></td>
-                        <td><fmt:formatDate pattern="dd/MM/yyyy" value="${aluno.dataNasc}" /></td>
+                        <fmt:parseDate value="${aluno.dataNasc}" type="date" pattern="yyyy-MM-dd" var="dataDateParsed" />
+                        <td><fmt:formatDate value="${dataDateParsed}" pattern="dd/MM/yyyy" /></td>
                         <td><c:out value="${aluno.sexo}" /></td>
                         <td><c:out value="${aluno.nomePai}" /></td>
                         <td><c:out value="${aluno.nomeMae}" /></td>
