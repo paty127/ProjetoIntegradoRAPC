@@ -144,7 +144,7 @@ public class AlunoController extends HttpServlet {
             temErro = true;
             request.setAttribute("erroData", "Data não informada.");
         }
-        if (dataNascimento.isAfter(LocalDate.now())) {
+        if (dataNascimento != null && dataNascimento.isAfter(LocalDate.now())) {
             temErro = true;
             request.setAttribute("erroData", "Data inválida - Está no futuro");
         }

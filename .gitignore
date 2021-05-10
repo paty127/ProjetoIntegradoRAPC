@@ -1,1 +1,4 @@
 /projetoIntegradorRAPC/target/
+target/maven-archiver/pom.properties
+target/projetoIntegradorRAPC-1.0.0-SNAPSHOT.war
+target/projetoIntegradorRAPC-1.0.0-SNAPSHOT/WEB-INF/classes/controller/AlunoController.class
