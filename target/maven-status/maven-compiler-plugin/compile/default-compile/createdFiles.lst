@@ -6,3 +6,4 @@ util\DbUtil.class
 controller\AlunoController.class
 dao\ProfessorDao.class
 model\Professor.class
+controller\ResultadoAluno.class

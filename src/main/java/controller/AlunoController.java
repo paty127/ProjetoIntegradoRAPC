@@ -9,12 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import model.Aluno;
 
 @WebServlet(name = "Alunos", urlPatterns = {"/AlunoController"})
@@ -26,7 +24,6 @@ public class AlunoController extends HttpServlet {
     private AlunoDao dao;
 
     public AlunoController() {
-        super();
         dao = new AlunoDao();
     }
 
@@ -202,28 +199,34 @@ public class AlunoController extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/validacaoAluno.jsp");
             dispatcher.forward(request, response);
         } else {
-            if (codAluno == 0) {
+            HttpSession sessao = request.getSession();
+            sessao.setAttribute("dados", dados);
+            sessao.setAttribute("codAluno", codAluno);
+            response.sendRedirect(request.getContextPath() + "/resultado");
+/*
+                if (codAluno == 0) {
+                    try {
+                        dao.adicionarAluno(dados);
+                        RequestDispatcher view = request.getRequestDispatcher("/alunoSucesso.jsp");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    aluno.setCodAluno(codAluno);
+                    try {
+                        dao.updateAluno(aluno);
+                        RequestDispatcher view = request.getRequestDispatcher("/alunoSucesso.jsp");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                RequestDispatcher view = request.getRequestDispatcher(INSERT_OR_EDIT);
                 try {
-                    dao.adicionarAluno(dados);
-                    RequestDispatcher view = request.getRequestDispatcher(INSERT_OR_EDIT);
+                    request.setAttribute("alunos", dao.getAllAlunos());
                 } catch (SQLException ex) {
                     Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                aluno.setCodAluno(codAluno);
-                try {
-                    dao.updateAluno(aluno);
-                } catch (SQLException ex) {
-                    Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            RequestDispatcher view = request.getRequestDispatcher(INSERT_OR_EDIT);
-            try {
-                request.setAttribute("alunos", dao.getAllAlunos());
-            } catch (SQLException ex) {
-                Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            view.forward(request, response);
+                }*/
+                //view.forward(request, response);                       
         }
     }
 }
