@@ -15,6 +15,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -162,5 +164,13 @@ public class AlunoDao {
             System.err.println("Erro na execução");
         }
         return aluno;
+    }
+    
+    public long calcularIdade(LocalDate data) {
+        long idade = -1;
+        if (data != null) {
+            idade = ChronoUnit.YEARS.between(data,LocalDate.now());
+        }
+        return idade;
     }
 }

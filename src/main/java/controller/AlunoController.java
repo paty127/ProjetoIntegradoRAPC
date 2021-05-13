@@ -19,9 +19,9 @@ import model.Aluno;
 public class AlunoController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static String INSERT_OR_EDIT = "/adicionarEditarAluno.jsp";
-    private static String LIST_ALUNO = "/listarAluno.jsp";
-    private AlunoDao dao;
+    private static final String INSERT_OR_EDIT = "/adicionarEditarAluno.jsp";
+    private static final String LIST_ALUNO = "/listarAluno.jsp";
+    private final AlunoDao dao;
 
     public AlunoController() {
         dao = new AlunoDao();
@@ -40,6 +40,8 @@ public class AlunoController extends HttpServlet {
             int codAluno = Integer.parseInt(request.getParameter("codAluno"));
             try {
                 dao.deletarAluno(codAluno);
+                //RequestDispatcher delete = request.getRequestDispatcher("/alunoDelete.jsp");
+                //delete.forward(request, response);
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -73,17 +75,16 @@ public class AlunoController extends HttpServlet {
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
-        //Redireciona  para Forward
         view.forward(request, response);
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        
+
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        
+
         int numero;
         int codAluno;
         boolean temErro = false;
@@ -140,11 +141,11 @@ public class AlunoController extends HttpServlet {
         if (dataNascimento == null) {
             temErro = true;
             request.setAttribute("erroData", "Data não informada.");
-        }
-        if (dataNascimento != null && dataNascimento.isAfter(LocalDate.now())) {
+        }/*
+        if (dataNascimento != null && dao.calcularIdade(dataNascimento) <= 5) {
             temErro = true;
-            request.setAttribute("erroData", "Data inválida - Está no futuro");
-        }
+            request.setAttribute("erroData", "Idade mínima para ser matriculado é 6 anos.");
+        }*/
         if (sexo.equals("")) {
             temErro = true;
             request.setAttribute("erroSexo", "Gênero não informado.");
@@ -203,30 +204,6 @@ public class AlunoController extends HttpServlet {
             sessao.setAttribute("dados", dados);
             sessao.setAttribute("codAluno", codAluno);
             response.sendRedirect(request.getContextPath() + "/resultado");
-/*
-                if (codAluno == 0) {
-                    try {
-                        dao.adicionarAluno(dados);
-                        RequestDispatcher view = request.getRequestDispatcher("/alunoSucesso.jsp");
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else {
-                    aluno.setCodAluno(codAluno);
-                    try {
-                        dao.updateAluno(aluno);
-                        RequestDispatcher view = request.getRequestDispatcher("/alunoSucesso.jsp");
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                RequestDispatcher view = request.getRequestDispatcher(INSERT_OR_EDIT);
-                try {
-                    request.setAttribute("alunos", dao.getAllAlunos());
-                } catch (SQLException ex) {
-                    Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
-                //view.forward(request, response);                       
         }
     }
 }

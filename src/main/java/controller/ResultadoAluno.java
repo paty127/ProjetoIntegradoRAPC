@@ -8,7 +8,6 @@ package controller;
 import dao.AlunoDao;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -28,12 +27,11 @@ import model.Aluno;
 public class ResultadoAluno extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
-    private static String INSERT_OR_EDIT = "/adicionarEditarAluno.jsp";
-    private static String LIST_ALUNO = "/listarAluno.jsp";
-    private AlunoDao dao;
+    private static final String INSERT_OR_EDIT = "/adicionarEditarAluno.jsp";
+    private static final String LIST_ALUNO = "/listarAluno.jsp";
+    private final AlunoDao dao;
 
     public ResultadoAluno() {
-        super();
         dao = new AlunoDao();
     }
 
@@ -45,29 +43,17 @@ public class ResultadoAluno extends HttpServlet {
         int codAluno = (int) sessao.getAttribute("codAluno");
         Aluno aluno = new Aluno();
         
-        /*
-        aluno.setNome(request.getParameter("nome"));
-        aluno.setNomePai(request.getParameter("pai"));
-        aluno.setNomeMae(request.getParameter("mae"));
-        aluno.setCelular(request.getParameter("celular"));
-        aluno.setSexo(request.getParameter("sexo"));
-        aluno.setCelularPai(request.getParameter("celularPai"));
-        aluno.setCelularMae(request.getParameter("celularMae"));
-        aluno.setEmail(request.getParameter("email"));
-        aluno.setRua(request.getParameter("rua"));
-        aluno.setBairro(request.getParameter("bairro"));
-        aluno.setCep(request.getParameter("cep"));
-        */
-        System.out.println(codAluno);
         if (sessao.getAttribute("dados") != null) {
             Aluno dados = (Aluno) sessao.getAttribute("dados");
             sessao.removeAttribute("dados");
 
             request.setAttribute("dados", dados);
+            
             if (codAluno == 0) {
                 try {
                     dao.adicionarAluno(dados);
                     RequestDispatcher view = request.getRequestDispatcher("/alunoSucesso.jsp");
+                    view.forward(request, response);
                 } catch (SQLException ex) {
                     Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -75,7 +61,8 @@ public class ResultadoAluno extends HttpServlet {
                 aluno.setCodAluno(codAluno);
                 try {
                     dao.updateAluno(dados);
-                    RequestDispatcher view = request.getRequestDispatcher("/alunoSucesso.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/alunoSucessoEd.jsp");
+                    dispatcher.forward(request, response);
                 } catch (SQLException ex) {
                     Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -86,8 +73,6 @@ public class ResultadoAluno extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/alunoSucesso.jsp");
-            dispatcher.forward(request, response);
         } else {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/alunoErro.jsp");
             dispatcher.forward(request, response);

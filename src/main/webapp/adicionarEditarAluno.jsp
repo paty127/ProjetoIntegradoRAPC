@@ -85,7 +85,7 @@
                         <label for="inputData">Data de Nascimento</label> 
                         <input class="form-control"  id="inputData" type="date" 
                                maxlength="10" name="dataNascimento" 
-                               value="<c:out value="${dados.dataNasc}" />" >
+                               value="<c:out value="${aluno.dataNasc}" />" >
                     </div>
                     <div class="form-group col-md-1">
                         <!-- Gênero -->
