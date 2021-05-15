@@ -9,7 +9,7 @@
     <body>
         <div>
     <script>
-        if(!alert("Dados gravados com sucesso!")) document.location = '${pageContext.request.contextPath}/adicionarEditarAluno.jsp';
+        if(!alert("Dados gravados com sucesso!")) document.location = '${pageContext.request.contextPath}/aluno/AlunoController?action=ListAluno';
     </script>    
         </div>
     </body>
