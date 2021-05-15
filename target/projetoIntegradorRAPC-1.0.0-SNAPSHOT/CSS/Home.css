@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica;
+    color: #323232;
+    border: none;
+}
+
+body {
+    background-image: url('../Imagens/fundo.jpg');
+    background-size: cover;
+    background-position-y: -200px;
+}

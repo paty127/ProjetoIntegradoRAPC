@@ -23,12 +23,12 @@ import model.Aluno;
  *
  * @author Alexsandro
  */
-@WebServlet(name = "ResultadoAluno", urlPatterns = {"/resultado"})
+@WebServlet(name = "ResultadoAluno", urlPatterns = {"/aluno/resultado"})
 public class ResultadoAluno extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
-    private static final String INSERT_OR_EDIT = "/adicionarEditarAluno.jsp";
-    private static final String LIST_ALUNO = "/listarAluno.jsp";
+    private static final String INSERT_OR_EDIT = "/aluno/adicionarEditarAluno.jsp";
+    private static final String LIST_ALUNO = "/aluno/listarAluno.jsp";
     private final AlunoDao dao;
 
     public ResultadoAluno() {
@@ -52,7 +52,7 @@ public class ResultadoAluno extends HttpServlet {
             if (codAluno == 0) {
                 try {
                     dao.adicionarAluno(dados);
-                    RequestDispatcher view = request.getRequestDispatcher("/alunoSucesso.jsp");
+                    RequestDispatcher view = request.getRequestDispatcher("/aluno/alunoSucesso.jsp");
                     view.forward(request, response);
                 } catch (SQLException ex) {
                     Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,20 +61,21 @@ public class ResultadoAluno extends HttpServlet {
                 aluno.setCodAluno(codAluno);
                 try {
                     dao.updateAluno(dados);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/alunoSucessoEd.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/aluno/alunoSucessoEd.jsp");
                     dispatcher.forward(request, response);
                 } catch (SQLException ex) {
                     Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            RequestDispatcher view = request.getRequestDispatcher(INSERT_OR_EDIT);
+            RequestDispatcher view = request.getRequestDispatcher(LIST_ALUNO);
+            
             try {
                 request.setAttribute("alunos", dao.getAllAlunos());
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/alunoErro.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/aluno/alunoErro.jsp");
             dispatcher.forward(request, response);
         }
     }

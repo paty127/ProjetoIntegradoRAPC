@@ -15,12 +15,12 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import model.Aluno;
 
-@WebServlet(name = "Alunos", urlPatterns = {"/AlunoController"})
+@WebServlet(name = "Alunos", urlPatterns = {"/aluno/AlunoController"})
 public class AlunoController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static final String INSERT_OR_EDIT = "/adicionarEditarAluno.jsp";
-    private static final String LIST_ALUNO = "/listarAluno.jsp";
+    private static final String INSERT_OR_EDIT = "/aluno/adicionarEditarAluno.jsp";
+    private static final String LIST_ALUNO = "/aluno/listarAluno.jsp";
     private final AlunoDao dao;
 
     public AlunoController() {
@@ -197,13 +197,13 @@ public class AlunoController extends HttpServlet {
         request.setAttribute("dados", dados);
 
         if (temErro) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/validacaoAluno.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/aluno/validacaoAluno.jsp");
             dispatcher.forward(request, response);
         } else {
             HttpSession sessao = request.getSession();
             sessao.setAttribute("dados", dados);
             sessao.setAttribute("codAluno", codAluno);
-            response.sendRedirect(request.getContextPath() + "/resultado");
+            response.sendRedirect(request.getContextPath() + "/aluno/resultado");
         }
     }
 }
