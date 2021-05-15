@@ -28,7 +28,7 @@ public class ResultadoAluno extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
     private static final String INSERT_OR_EDIT = "/aluno/adicionarEditarAluno.jsp";
-    private static final String LIST_ALUNO = "/aluno/listarAluno.jsp";
+    private static final String LIST_ALUNO = "/relatorio/alunosMatriculados.jsp";
     private final AlunoDao dao;
 
     public ResultadoAluno() {
