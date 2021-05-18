@@ -91,5 +91,7 @@
                 </c:forEach>
             </tbody>
         </table>
+        
+        <a href="report"> Imprimir</a>
     </body>
 </html>
