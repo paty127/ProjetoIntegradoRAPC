@@ -40,7 +40,7 @@
                         Cadastro
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="adicionarEditarAluno.jsp">Cadastrar Aluno</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
                         <a class="dropdown-item" href="adicionarEditarProfessor.jsp">Cadastrar Professor</a>
                         <a class="dropdown-item" href="#">Cadastrar Turma</a>
                         <div class="dropdown-divider"></div>
@@ -65,7 +65,7 @@
                         <img src="Imagens/Cadastro.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Cadastros</h5>
-                            <a class="dropdown-item" href="aluno/adicionarEditarAluno.jsp">Cadastrar Aluno</a>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
                             <a class="dropdown-item" href="adicionarEditarProfessor.jsp">Cadastrar Professor</a>
                             <a class="dropdown-item" href="#">Turmas</a>
                             <a class="dropdown-item" href="#">Presença</a>

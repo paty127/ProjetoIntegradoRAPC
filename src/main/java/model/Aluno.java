@@ -11,32 +11,33 @@ package model;
 
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Aluno {
     
-private int codAluno;
-private String nome;
-private LocalDate dataNasc;
-private String sexo;
-private String nomePai;
-private String nomeMae;
-private String celular;
-private String celularPai;
-private String celularMae;
-private String email;
-private String rua;
-private int    numero;
-private String bairro;
-private String cep;
+    private int codAluno;
+    private String nome;
+    private String cpf;
+    private LocalDate dataNasc;
+    private String sexo;
+    private String nomePai;
+    private String nomeMae;
+    private String celular;
+    private String celularPai;
+    private String celularMae;
+    private String email;
+    private String rua;
+    private int numero;
+    private String complemento;
+    private String bairro;
+    private String cep;
 
-    public Aluno(){
-        
+    public Aluno() {
     }
 
-    public Aluno(int codAluno, String nome, LocalDate dataNasc, String sexo, String nomePai, String nomeMae, String celular, String celularPai, String celularMae, String email, String rua, int numero, String bairro, String cep) {
+    public Aluno(int codAluno, String nome, String cpf, LocalDate dataNasc, String sexo, String nomePai, String nomeMae, String celular, String celularPai, String celularMae, String email, String rua, int numero, String complemento, String bairro, String cep) {
         this.codAluno = codAluno;
         this.nome = nome;
+        this.cpf = cpf;
         this.dataNasc = dataNasc;
         this.sexo = sexo;
         this.nomePai = nomePai;
@@ -47,6 +48,7 @@ private String cep;
         this.email = email;
         this.rua = rua;
         this.numero = numero;
+        this.complemento = complemento;
         this.bairro = bairro;
         this.cep = cep;
     }
@@ -65,6 +67,14 @@ private String cep;
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public LocalDate getDataNasc() {
@@ -145,6 +155,14 @@ private String cep;
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
     }
 
     public String getBairro() {

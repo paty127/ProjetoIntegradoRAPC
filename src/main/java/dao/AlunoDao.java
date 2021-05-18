@@ -29,23 +29,25 @@ public class AlunoDao {
     String erro = "Erro na execução";
 
     public void adicionarAluno(Aluno aluno) throws SQLException, IOException {
-        String sql = "call novo_aluno(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "call novo_aluno(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection conn = dbUtil.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, aluno.getNome());
-            stmt.setDate(2, java.sql.Date.valueOf(aluno.getDataNasc()));
-            stmt.setString(3, aluno.getSexo());
-            stmt.setString(4, aluno.getCelular());
-            stmt.setString(5, aluno.getEmail());
-            stmt.setString(6, aluno.getNomePai());
-            stmt.setString(7, aluno.getCelularPai());
-            stmt.setString(8, aluno.getNomeMae());
-            stmt.setString(9, aluno.getCelularMae());
-            stmt.setString(10, aluno.getRua());
-            stmt.setInt(11, aluno.getNumero());
-            stmt.setString(12, aluno.getBairro());
-            stmt.setString(13, aluno.getCep());
+            stmt.setString(2, aluno.getCpf());
+            stmt.setDate(3, java.sql.Date.valueOf(aluno.getDataNasc()));
+            stmt.setString(4, aluno.getSexo());
+            stmt.setString(5, aluno.getCelular());
+            stmt.setString(6, aluno.getEmail());
+            stmt.setString(7, aluno.getNomePai());
+            stmt.setString(8, aluno.getCelularPai());
+            stmt.setString(9, aluno.getNomeMae());
+            stmt.setString(10, aluno.getCelularMae());
+            stmt.setString(11, aluno.getRua());
+            stmt.setInt(12, aluno.getNumero());
+            stmt.setString(13, aluno.getComplemento());
+            stmt.setString(14, aluno.getBairro());
+            stmt.setString(15, aluno.getCep());
             //Executar atualização no banco
             stmt.executeUpdate();
 
@@ -72,26 +74,29 @@ public class AlunoDao {
     public void updateAluno(Aluno aluno) throws SQLException, IOException {
         String sql = "UPDATE aluno INNER JOIN endereco ON "
                 + "aluno.fk_endereco = id_endereco SET aluno.nome = ?,"
-                + "aluno.data_de_nascimento = ?,aluno.sexo = ?,aluno.celular = ?,"
-                + "aluno.email = ?,aluno.pai = ?,aluno.telefone_pai = ?,"
-                + "aluno.mae = ?,aluno.telefone_mae = ?,endereco.rua = ?,"
-                + "endereco.numero = ?,endereco.bairro = ?,endereco.cep = ? WHERE cod_aluno = ?";
+                + "aluno.cpf =?, aluno.data_de_nascimento = ?,aluno.sexo = ?,"
+                + "aluno.celular = ?,aluno.email = ?,aluno.pai = ?,"
+                + "aluno.telefone_pai = ?, aluno.mae = ?,aluno.telefone_mae = ?,"
+                + "endereco.rua = ?,endereco.numero = ?, endereco.complemento = ?,"
+                + "endereco.bairro = ?, endereco.cep = ? WHERE cod_aluno = ?";
         try (Connection conn = dbUtil.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, aluno.getNome());
-            stmt.setDate(2, java.sql.Date.valueOf(aluno.getDataNasc()));
-            stmt.setString(3, aluno.getSexo());
-            stmt.setString(4, aluno.getCelular());
-            stmt.setString(5, aluno.getEmail());
-            stmt.setString(6, aluno.getNomePai());
-            stmt.setString(7, aluno.getCelularPai());
-            stmt.setString(8, aluno.getNomeMae());
-            stmt.setString(9, aluno.getCelularMae());
-            stmt.setString(10, aluno.getRua());
-            stmt.setInt(11, aluno.getNumero());
-            stmt.setString(12, aluno.getBairro());
-            stmt.setString(13, aluno.getCep());
-            stmt.setInt(14, aluno.getCodAluno());
+            stmt.setString(2, aluno.getCpf());
+            stmt.setDate(3, java.sql.Date.valueOf(aluno.getDataNasc()));
+            stmt.setString(4, aluno.getSexo());
+            stmt.setString(5, aluno.getCelular());
+            stmt.setString(6, aluno.getEmail());
+            stmt.setString(7, aluno.getNomePai());
+            stmt.setString(8, aluno.getCelularPai());
+            stmt.setString(9, aluno.getNomeMae());
+            stmt.setString(10, aluno.getCelularMae());
+            stmt.setString(11, aluno.getRua());
+            stmt.setInt(12, aluno.getNumero());
+            stmt.setString(13, aluno.getComplemento());
+            stmt.setString(14, aluno.getBairro());
+            stmt.setString(15, aluno.getCep());
+            stmt.setInt(16, aluno.getCodAluno());
 
             stmt.executeUpdate();
 
@@ -111,6 +116,7 @@ public class AlunoDao {
                 Aluno aluno = new Aluno();
                 aluno.setCodAluno(rst.getInt("cod_aluno"));
                 aluno.setNome(rst.getString("nome"));
+                aluno.setCpf(rst.getString("cpf"));
                 aluno.setSexo(rst.getString("sexo"));
                 aluno.setDataNasc(rst.getDate("data_de_nascimento").toLocalDate());
                 aluno.setNomePai(rst.getString("pai"));
@@ -121,6 +127,7 @@ public class AlunoDao {
                 aluno.setEmail(rst.getString("email"));
                 aluno.setRua(rst.getString("rua"));
                 aluno.setNumero(Integer.parseInt(rst.getString("numero")));
+                aluno.setComplemento(rst.getString("complemento"));
                 aluno.setBairro(rst.getString("bairro"));
                 aluno.setCep(rst.getString("cep"));
 
@@ -147,6 +154,7 @@ public class AlunoDao {
             if (rst.next()) {
                 aluno.setCodAluno(rst.getInt("cod_aluno"));
                 aluno.setNome(rst.getString("nome"));
+                aluno.setCpf(rst.getString("cpf"));
                 aluno.setDataNasc(rst.getDate("data_de_nascimento").toLocalDate());
                 aluno.setNomePai(rst.getString("pai"));
                 aluno.setNomeMae(rst.getString("mae"));
@@ -157,6 +165,7 @@ public class AlunoDao {
                 aluno.setSexo(rst.getString("sexo"));
                 aluno.setRua(rst.getString("rua"));
                 aluno.setNumero(Integer.parseInt(rst.getString("numero")));
+                aluno.setComplemento(rst.getString("complemento"));
                 aluno.setBairro(rst.getString("bairro"));
                 aluno.setCep(rst.getString("cep"));
             }

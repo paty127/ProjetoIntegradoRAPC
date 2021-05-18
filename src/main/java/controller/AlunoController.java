@@ -28,8 +28,11 @@ import model.Aluno;
 public class AlunoController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static final String INSERT_OR_EDIT = "adicionarEditarAluno.jsp";
-    private static final String LIST_ALUNO = "../relatorio/alunosMatriculados.jsp";
+    private static final String INSERT_Aluno = "/cadastroAluno";
+    private static final String INSERT_OR_EDIT = "/cadastroAluno";
+    private static final String GERAR_RELATORIO = "/PDF";
+    
+    private static final String LIST_ALUNO = "/listarAlunos";
     
     private final AlunoDao dao;
 
@@ -71,7 +74,8 @@ public class AlunoController extends HttpServlet {
             
         }else if (action.equals("aluno/report")) {
             
-            gerarRelatorio(request, response);
+            forward = GERAR_RELATORIO;
+            //gerarRelatorio(request, response);
             
         } else {
             
@@ -112,6 +116,7 @@ public class AlunoController extends HttpServlet {
         }
 
         String nome = (request.getParameter("nome"));
+        String cpf = (request.getParameter("cpf"));
         String sexo = (request.getParameter("sexo"));
         String email = (request.getParameter("email"));
         String celular = (request.getParameter("celular"));
@@ -120,6 +125,7 @@ public class AlunoController extends HttpServlet {
         String nomeMae = (request.getParameter("mae"));
         String celularMae = (request.getParameter("celularMae"));
         String rua = (request.getParameter("rua"));
+        String complemento = (request.getParameter("complemento"));
         String bairro = (request.getParameter("bairro"));
         String cep = (request.getParameter("cep"));
         if (request.getParameter("codAluno").equals("")) {
@@ -136,6 +142,7 @@ public class AlunoController extends HttpServlet {
         aluno.setCelularMae(request.getParameter("celularMae"));
         aluno.setEmail(request.getParameter("email"));
         aluno.setRua(request.getParameter("rua"));
+        aluno.setComplemento(request.getParameter("complemento"));
         aluno.setBairro(request.getParameter("bairro"));
         aluno.setCep(request.getParameter("cep"));
 
@@ -143,6 +150,10 @@ public class AlunoController extends HttpServlet {
         if (nome.equals("")) {
             temErro = true;
             request.setAttribute("erroNome", "Nome não informado.");
+        }
+        if (cpf.equals("")) {
+            temErro = true;
+            request.setAttribute("erroCpf", "CPF não informado.");
         }
         if (dataNascimento == null) {
             temErro = true;
@@ -188,6 +199,10 @@ public class AlunoController extends HttpServlet {
             temErro = true;
             request.setAttribute("erroNumero", "Número não informado.");
         }
+        if (complemento.equals("")) {
+            temErro = true;
+            request.setAttribute("erroComplmento", "Complemento não informado.");
+        }
         if (bairro.equals("")) {
             temErro = true;
             request.setAttribute("erroBairro", "Bairro não informado.");
@@ -197,19 +212,19 @@ public class AlunoController extends HttpServlet {
             request.setAttribute("erroCep", "Cep não informado.");
         }
 
-        Aluno dados = new Aluno(codAluno, nome, dataNascimento, sexo, nomePai, nomeMae,
-                celular, celularPai, celularMae, email, rua, numero, bairro, cep);
+        Aluno dados = new Aluno(codAluno, nome, cpf, dataNascimento, sexo, nomePai, nomeMae,
+                celular, celularPai, celularMae, email, rua, numero,complemento, bairro, cep);
 
         request.setAttribute("dados", dados);
 
         if (temErro) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/aluno/validacaoAluno.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/validacaoAluno.jsp");
             dispatcher.forward(request, response);
         } else {
             HttpSession sessao = request.getSession();
             sessao.setAttribute("dados", dados);
             sessao.setAttribute("codAluno", codAluno);
-            response.sendRedirect(request.getContextPath() + "/aluno/resultado");
+            response.sendRedirect(request.getContextPath() + "/resultado");
         }
     }
 
@@ -253,7 +268,7 @@ public class AlunoController extends HttpServlet {
             Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /*
     private void gerarRelatorio(HttpServletRequest request, HttpServletResponse response) {
         Document documento = new Document();
         try{
@@ -272,4 +287,5 @@ public class AlunoController extends HttpServlet {
             documento.close();
         }
     }
+*/
 }

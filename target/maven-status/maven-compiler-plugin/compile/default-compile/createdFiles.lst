@@ -1,9 +1,13 @@
-controller\ProfessorController.class
 model\Funcionario.class
-dao\AlunoDao.class
-model\Aluno.class
+controller\EditarAluno.class
 util\DbUtil.class
 controller\AlunoController.class
 dao\ProfessorDao.class
 model\Professor.class
+controller\ListarAluno.class
+controller\ProfessorController.class
+controller\CadastroAluno.class
+dao\AlunoDao.class
+model\Aluno.class
 controller\ResultadoAluno.class
+controller\Report_pdf.class

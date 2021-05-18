@@ -23,12 +23,12 @@ import model.Aluno;
  *
  * @author Alexsandro
  */
-@WebServlet(name = "ResultadoAluno", urlPatterns = {"/aluno/resultado"})
+@WebServlet(name = "ResultadoAluno", urlPatterns = {"/resultado"})
 public class ResultadoAluno extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
-    private static final String INSERT_OR_EDIT = "/aluno/adicionarEditarAluno.jsp";
-    private static final String LIST_ALUNO = "/relatorio/alunosMatriculados.jsp";
+    private static final String INSERT_OR_EDIT = "/cadastroAluno";
+    private static final String LIST_ALUNO = "/listarAlunos";
     private final AlunoDao dao;
 
     public ResultadoAluno() {
@@ -52,7 +52,7 @@ public class ResultadoAluno extends HttpServlet {
             if (codAluno == 0) {
                 try {
                     dao.adicionarAluno(dados);
-                    RequestDispatcher view = request.getRequestDispatcher("/aluno/alunoSucesso.jsp");
+                    RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/aluno/alunoSucesso.jsp");
                     view.forward(request, response);
                 } catch (SQLException ex) {
                     Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,7 +61,7 @@ public class ResultadoAluno extends HttpServlet {
                 aluno.setCodAluno(codAluno);
                 try {
                     dao.updateAluno(dados);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/aluno/alunoSucessoEd.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/aluno/alunoSucessoEd.jsp");
                     dispatcher.forward(request, response);
                 } catch (SQLException ex) {
                     Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,7 +75,7 @@ public class ResultadoAluno extends HttpServlet {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/aluno/alunoErro.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/aluno/alunoErro.jsp");
             dispatcher.forward(request, response);
         }
     }
