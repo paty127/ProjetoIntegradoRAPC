@@ -32,23 +32,24 @@ CREATE TABLE Aluno (
 );
 delimiter $$
 create procedure novo_aluno (
-	nome varchar(50),cpf varchar(15),data_de_nascimento date,sexo varchar(2),celular varchar(15),email varchar(40),
+	nome varchar(50),cpf varchar(15),data_nascimento date,sexo varchar(9),celular varchar(15),email varchar(40),
     pai varchar(30),telefone_pai varchar(15),mae varchar(30),telefone_mae varchar(15),
     rua varchar(30),numero integer,complemento varchar (30),bairro varchar(30),cep varchar(9))
     begin
     insert into endereco (rua,numero,complemento,bairro,cep) values (rua,numero,complemento,bairro,cep);
-    insert into aluno(nome,cpf,data_de_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae,fk_endereco)values(nome,cpf,data_de_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae,@@identity);
+    insert into aluno(nome,cpf,data_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae,fk_endereco)values(nome,cpf,data_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae,@@identity);
     end $$
     
+
 /* Exemplo de criação do usuário com a procedure
-call novo_aluno ('Fulano','111.1111.111-11','1988/08/14','M','1196291-0587','fulano@msn.com','Pai', '11962910587','Mãe','11962910587','Avenida Circular', 113,'Jardim Raposo','05547-025');
+call novo_aluno ('Fulano','111.1111.111-11','1988/08/14','Masculino','1196291-0587','fulano@msn.com','Pai', '11962910587','Mãe','11962910587','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025');
 
 Exemplo de consula:
 select *
 FROM aluno as A
 JOIN endereco as E on A.fk_endereco = E.id_endereco;
-
 */
+
 
 CREATE TABLE Turma (
     cod_turma integer not null auto_increment PRIMARY KEY,

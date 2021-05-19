@@ -37,7 +37,7 @@
                     Listagem
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="AlunoController?action=ListAluno">Aluno Matriculados</a>
+                    <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
                     <a class="dropdown-item" href="ProfessorController?action=ListProfessor">Professores</a>
                     <a class="dropdown-item" href="#">Turmas</a>
                 </div>
@@ -66,8 +66,15 @@
     </nav>
     <div class="container">
         <h4>Dados do Aluno</h4>
-        <form method="POST" action='${request.contextPath}AlunoController' name="frmAddUser">
+        <form method="POST" action='${request.contextPath}alunoController' name="frmAddUser">
             <!-- Matricula -->
+            <div class="form-row" id="matricula">
+                    <div class="form-group col-md-1">
+                        <label>Matricula</label>
+                        <input type="text" readonly="readonly" name="codAluno"
+                               value="<c:out value="${aluno.codAluno}" />" >
+                    </div>
+            </div>
             <div class="form-row">
                 <div class="form-group col-md-3">   
                     <!-- Nome -->
@@ -94,8 +101,9 @@
                 <div class="form-group col-md-2">
                     <!-- Gênero -->
                     <label for="inputGenero">Gênero</label><br/> 
-                    <select class="custom-select mr-sm-2" name="Genero" id="inputGenero" value="<c:out value="${aluno.sexo}" />"> 
-                        <option value=""></option>
+                    <select class="custom-select mr-sm-2" name="sexo"
+                        id="inputGenero" value="<c:out value="${aluno.sexo}" />"> 
+                        <option value=""> Selecione</option>
                         <option value="Masculino">Masculino</option>
                         <option value="Feminino">Feminino</option>
                     </select>
@@ -105,7 +113,7 @@
                     <input class="form-control" id="inputCelularAluno"type="text" 
                            onkeypress="$(this).mask('(00) 00000-0000')""
                            name="celular" value="<c:out value="${aluno.celular}" />" 
-                           placeholder="(XX)XXXXX-XXXX">
+                           placeholder="(XX) XXXXX-XXXX">
                 </div>
                 <div class="form-group col-md-3">
                     <!-- E-mail -->
@@ -130,7 +138,7 @@
                     <input class="form-control" id="inputCelularAluno"type="text" 
                            onkeypress="$(this).mask('(00) 00000-0000')"
                            name="celularMae" value="<c:out value="${aluno.celularMae}" />" 
-                           placeholder="(XX)XXXXX-XXXX">
+                           placeholder="(XX) XXXXX-XXXX">
                 </div>
             </div>
             <div class="form-row">
@@ -145,7 +153,7 @@
                     <input class="form-control" id="inputCelularAluno"type="text" 
                            name="celularPai" value="<c:out value="${aluno.celularPai}" />" 
                            onkeypress="$(this).mask('(00) 00000-0000')"
-                           placeholder="(XX)XXXXX-XXXX">
+                           placeholder="(XX) XXXXX-XXXX">
                 </div>
             </div>
             <h4>Endereço</h4>

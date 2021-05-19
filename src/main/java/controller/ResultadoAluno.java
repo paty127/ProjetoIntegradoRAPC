@@ -52,7 +52,7 @@ public class ResultadoAluno extends HttpServlet {
             if (codAluno == 0) {
                 try {
                     dao.adicionarAluno(dados);
-                    RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/aluno/alunoSucesso.jsp");
+                    RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/jsp/aluno/alunoSucesso.jsp");
                     view.forward(request, response);
                 } catch (SQLException ex) {
                     Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,7 +61,7 @@ public class ResultadoAluno extends HttpServlet {
                 aluno.setCodAluno(codAluno);
                 try {
                     dao.updateAluno(dados);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/aluno/alunoSucessoEd.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/aluno/alunoSucessoEd.jsp");
                     dispatcher.forward(request, response);
                 } catch (SQLException ex) {
                     Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,7 +75,7 @@ public class ResultadoAluno extends HttpServlet {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/aluno/alunoErro.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/aluno/alunoErro.jsp");
             dispatcher.forward(request, response);
         }
     }

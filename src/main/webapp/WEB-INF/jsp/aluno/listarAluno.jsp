@@ -26,7 +26,7 @@
                         Listagem
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="AlunoController?action=ListAluno">Aluno Matriculados</a>
+                        <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
                         <a class="dropdown-item" href="ProfessorController?action=ListProfessor">Professores</a>
                         <a class="dropdown-item" href="#">Turmas</a>
                     </div>
@@ -94,13 +94,13 @@
                         <td><c:out value="${aluno.numero}" /></td>
                         <td><c:out value="${aluno.bairro}" /></td>
                         <td><c:out value="${aluno.cep}" /></td>
-                        <td><a type="button" class="btn btn-primary" href="AlunoController?action=edit&codAluno=<c:out value="${aluno.codAluno}" />">Editar</a>
-                        <td><a type="button" class="btn btn-danger" href="AlunoController?action=delete&codAluno=<c:out value="${aluno.codAluno}" />">deletar</a> 
+                        <td><a type="button" class="btn btn-primary" href="alunoController?action=edit&codAluno=<c:out value="${aluno.codAluno}" />">Editar</a>
+                        <td><a type="button" class="btn btn-danger" href="alunoController?action=delete&codAluno=<c:out value="${aluno.codAluno}" />">deletar</a> 
                             </div
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
-        <p><a type="button" class="btn btn-success" href="AlunoController?action=insert">Adicionar Aluno</a> 
+        <p><a type="button" class="btn btn-success" href="alunoController?action=insert">Adicionar Aluno</a> 
     </body>
 </html>

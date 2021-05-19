@@ -74,7 +74,7 @@ public class AlunoDao {
     public void updateAluno(Aluno aluno) throws SQLException, IOException {
         String sql = "UPDATE aluno INNER JOIN endereco ON "
                 + "aluno.fk_endereco = id_endereco SET aluno.nome = ?,"
-                + "aluno.cpf =?, aluno.data_de_nascimento = ?,aluno.sexo = ?,"
+                + "aluno.cpf =?, aluno.data_nascimento = ?,aluno.sexo = ?,"
                 + "aluno.celular = ?,aluno.email = ?,aluno.pai = ?,"
                 + "aluno.telefone_pai = ?, aluno.mae = ?,aluno.telefone_mae = ?,"
                 + "endereco.rua = ?,endereco.numero = ?, endereco.complemento = ?,"
@@ -118,7 +118,7 @@ public class AlunoDao {
                 aluno.setNome(rst.getString("nome"));
                 aluno.setCpf(rst.getString("cpf"));
                 aluno.setSexo(rst.getString("sexo"));
-                aluno.setDataNasc(rst.getDate("data_de_nascimento").toLocalDate());
+                aluno.setDataNasc(rst.getDate("data_nascimento").toLocalDate());
                 aluno.setNomePai(rst.getString("pai"));
                 aluno.setNomeMae(rst.getString("mae"));
                 aluno.setCelular(rst.getString("celular"));
@@ -155,7 +155,7 @@ public class AlunoDao {
                 aluno.setCodAluno(rst.getInt("cod_aluno"));
                 aluno.setNome(rst.getString("nome"));
                 aluno.setCpf(rst.getString("cpf"));
-                aluno.setDataNasc(rst.getDate("data_de_nascimento").toLocalDate());
+                aluno.setDataNasc(rst.getDate("data_nascimento").toLocalDate());
                 aluno.setNomePai(rst.getString("pai"));
                 aluno.setNomeMae(rst.getString("mae"));
                 aluno.setCelular(rst.getString("celular"));

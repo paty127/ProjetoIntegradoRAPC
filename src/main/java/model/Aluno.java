@@ -34,7 +34,10 @@ public class Aluno {
     public Aluno() {
     }
 
-    public Aluno(int codAluno, String nome, String cpf, LocalDate dataNasc, String sexo, String nomePai, String nomeMae, String celular, String celularPai, String celularMae, String email, String rua, int numero, String complemento, String bairro, String cep) {
+    public Aluno(int codAluno, String nome, String cpf, LocalDate dataNasc,
+            String sexo, String nomePai, String nomeMae, String celular,
+            String celularPai, String celularMae, String email, String rua,
+            int numero, String complemento, String bairro, String cep) {
         this.codAluno = codAluno;
         this.nome = nome;
         this.cpf = cpf;

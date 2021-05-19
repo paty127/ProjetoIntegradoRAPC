@@ -17,6 +17,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script>
         $(function() {
             $('input[name=data_de_nascimento]').datepicker();
@@ -35,7 +36,7 @@
                     Listagem
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="AlunoController?action=ListAluno">Aluno Matriculados</a>
+                    <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
                     <a class="dropdown-item" href="#">Professores</a>
                     <a class="dropdown-item" href="#">Turmas</a>
                   </div>
@@ -45,7 +46,7 @@
                     Cadastro
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="adicionarEditarAluno.jsp">Cadastrar Aluno</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
                     <a class="dropdown-item" href="#">Cadastrar Professor</a>
                     <a class="dropdown-item" href="#">Cadastrar Turma</a>
                     <div class="dropdown-divider"></div>
@@ -64,8 +65,15 @@
           </nav>
     <div class="container">
         <h4>Dados do Aluno</h4>
-        <form method="POST" action='${request.contextPath}AlunoController' name="frmAddUser">
+        <form method="POST" action='${request.contextPath}alunoController' name="frmAddUser">
             <!-- Matricula -->
+            <div class="form-row" id="matricula">
+                <div class="form-group col-md-1">
+                    <label>Matricula</label>
+                    <input type="text" readonly="readonly" name="codAluno"
+                           value="<c:out value="${dados.codAluno}" />" >
+                </div>
+            </div>
             <div class="form-row">
                 <div class="form-group col-md-3">   
                     <!-- Nome -->
@@ -101,7 +109,7 @@
                 <div class="form-group col-md-2">
                     <!-- Gênero -->
                     <label for="inputGenero">Gênero</label><br/> 
-                    <select class="custom-select mr-sm-2" name="Genero" id="inputGenero" value="<c:out value="${dados.sexo}" />"> 
+                    <select class="custom-select mr-sm-2" name="sexo" id="inputGenero"> 
                         <option value=""></option>
                         <option value="Masculino">Masculino</option>
                         <option value="Feminino">Feminino</option>
@@ -115,7 +123,7 @@
                     <input class="form-control" id="inputCelularAluno"type="text" 
                            onkeypress="$(this).mask('(00) 00000-0000')""
                            name="celular" value="<c:out value="${dados.celular}" />" 
-                           placeholder="(XX)XXXXX-XXXX">
+                           placeholder="(XX) XXXXX-XXXX">
                         <c:if test="${not empty erroCelular}">
                         <span class="msg-erro"><c:out value="${erroCelular}" /></span>
                         </c:if>
@@ -149,7 +157,7 @@
                     <input class="form-control" id="inputCelularAluno"type="text" 
                            onkeypress="$(this).mask('(00) 00000-0000')"
                            name="celularMae" value="<c:out value="${dados.celularMae}" />" 
-                           placeholder="(XX)XXXXX-XXXX">
+                           placeholder="(XX) XXXXX-XXXX">
                     <c:if test="${not empty erroCelularMae}">
                     <span class="msg-erro"><c:out value="${erroCelularMae}" /></span>
                     </c:if>  
@@ -170,7 +178,7 @@
                     <input class="form-control" id="inputCelularAluno"type="text" 
                            name="celularPai" value="<c:out value="${dados.celularPai}" />" 
                            onkeypress="$(this).mask('(00) 00000-0000')"
-                           placeholder="(XX)XXXXX-XXXX">
+                           placeholder="(XX) XXXXX-XXXX">
                     <c:if test="${not empty erroCelularPai}">
                     <span class="msg-erro"><c:out value="${erroCelularPai}" /></span>
                     </c:if>    

@@ -9,7 +9,7 @@
     <body>
         <div>
     <script>
-        if(!alert("Ocorre um erro durante operação, tente novamente.")) document.location = '${pageContext.request.contextPath}/adicionarEditarAluno.jsp';
+        if(!alert("Ocorre um erro durante operação, tente novamente.")) document.location = '${pageContext.request.contextPath}/cadastro';
     </script>    
         </div>
     </body>

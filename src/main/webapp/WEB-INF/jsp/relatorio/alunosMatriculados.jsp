@@ -26,7 +26,7 @@
                         Listagem
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="AlunoController?action=ListAluno">Aluno Matriculados</a>
+                        <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
                         <a class="dropdown-item" href="ProfessorController?action=ListProfessor">Professores</a>
                         <a class="dropdown-item" href="#">Turmas</a>
                     </div>
@@ -61,6 +61,7 @@
                     <th scope="col">Matricula</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Data de nascimento</th>
+                    <th scope="col">Sexo</th>
                     <th scope="col">Pai</th>
                     <th scope="col">Mãe</th>
                     <th scope="col">Celular</th>
@@ -78,14 +79,15 @@
                         <td><c:out value="${aluno.nome}" /></td>
                         <fmt:parseDate value="${aluno.dataNasc}" type="date" pattern="yyyy-MM-dd" var="dataDateParsed" />
                         <td><fmt:formatDate value="${dataDateParsed}" pattern="dd/MM/yyyy" /></td>
+                        <td><c:out value="${aluno.sexo}" /></td>
                         <td><c:out value="${aluno.nomePai}" /></td>
                         <td><c:out value="${aluno.nomeMae}" /></td>
                         <td><c:out value="${aluno.celular}" /></td>
                         <td><c:out value="${aluno.celularPai}" /></td>
                         <td><c:out value="${aluno.celularMae}" /></td>
                         <td><c:out value="${aluno.email}" /></td>
-                        <td><a type="button" class="btn btn-primary" href="AlunoController?action=edit&codAluno=<c:out value="${aluno.codAluno}" />">Editar</a>
-                        <td><a type="button" class="btn btn-danger" href="AlunoController?action=delete&codAluno=<c:out value="${aluno.codAluno}" />">deletar</a> 
+                        <td><a type="button" class="btn btn-primary" href="alunoController?action=edit&codAluno=<c:out value="${aluno.codAluno}" />">Editar</a>
+                        <td><a type="button" class="btn btn-danger" href="alunoController?action=delete&codAluno=<c:out value="${aluno.codAluno}" />">deletar</a> 
                             </div
                     </tr>
                 </c:forEach>

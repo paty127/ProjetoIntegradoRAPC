@@ -14,17 +14,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
-
-
 import model.Aluno;
 
 
-@WebServlet(name = "Alunos", urlPatterns = {"/aluno/AlunoController"})
+@WebServlet(name = "alunos", urlPatterns = {"/alunoController"})
 public class AlunoController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -45,48 +38,51 @@ public class AlunoController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        String forward = "";
+         String forward = "";
         //Pegar o parametro de Action 
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("delete")) {
-            
-            deletarAluno(request,response);
-            
+            int codAluno = Integer.parseInt(request.getParameter("codAluno"));
+            try {
+                dao.deletarAluno(codAluno);
+                //RequestDispatcher delete = request.getRequestDispatcher("/alunoDelete.jsp");
+                //delete.forward(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             forward = LIST_ALUNO;
-        
             try {
                 request.setAttribute("alunos", dao.getAllAlunos());
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equalsIgnoreCase("edit")) {
-            
             forward = INSERT_OR_EDIT;
-            
-            editarAluno(request,response);
-            
+            int codAluno = Integer.parseInt(request.getParameter("codAluno"));
+            try {
+                //Passar o codigo de aluno para o metodo getAlunoByID
+                Aluno aluno = dao.getAlunoById(codAluno);
+                request.setAttribute("aluno", aluno);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if (action.equalsIgnoreCase("ListAluno")) {
-            
             forward = LIST_ALUNO;
-            
-            listarAluno(request,response);
-            
-        }else if (action.equals("aluno/report")) {
-            
-            forward = GERAR_RELATORIO;
-            //gerarRelatorio(request, response);
-            
+            try {
+                //Criando um atributo chamado Alunos e inserindo a lista que veio do metodo getAllAlunos
+                request.setAttribute("alunos", dao.getAllAlunos());
+            } catch (SQLException ex) {
+                Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
-            
             forward = INSERT_OR_EDIT;
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
-
-    
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) 
@@ -153,7 +149,7 @@ public class AlunoController extends HttpServlet {
         }
         if (cpf.equals("")) {
             temErro = true;
-            request.setAttribute("erroCpf", "CPF não informado.");
+            request.setAttribute("erroCPF", "CPF não informado.");
         }
         if (dataNascimento == null) {
             temErro = true;
@@ -201,7 +197,7 @@ public class AlunoController extends HttpServlet {
         }
         if (complemento.equals("")) {
             temErro = true;
-            request.setAttribute("erroComplmento", "Complemento não informado.");
+            request.setAttribute("erroComplemento", "Complemento não informado.");
         }
         if (bairro.equals("")) {
             temErro = true;
@@ -218,7 +214,7 @@ public class AlunoController extends HttpServlet {
         request.setAttribute("dados", dados);
 
         if (temErro) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/validacaoAluno.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/aluno/validacaoAluno.jsp");
             dispatcher.forward(request, response);
         } else {
             HttpSession sessao = request.getSession();
@@ -227,65 +223,4 @@ public class AlunoController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/resultado");
         }
     }
-
-    
-    
-    private void deletarAluno(HttpServletRequest request, HttpServletResponse response)
-              throws ServletException, IOException{
-        
-        int codAluno = Integer.parseInt(request.getParameter("codAluno"));
-        
-        String forward = "";
-        
-        try {
-            dao.deletarAluno(codAluno);
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void editarAluno(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-        
-        int codAluno = Integer.parseInt(request.getParameter("codAluno"));
-        
-        try {
-            
-            Aluno aluno = dao.getAlunoById(codAluno);
-            request.setAttribute("aluno", aluno);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    private void listarAluno(HttpServletRequest request, HttpServletResponse response) 
-              throws ServletException, IOException {
-        try {
-            //Criando um atributo chamado Alunos e inserindo a lista que veio do metodo getAllAlunos
-            request.setAttribute("alunos", dao.getAllAlunos());
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    /*
-    private void gerarRelatorio(HttpServletRequest request, HttpServletResponse response) {
-        Document documento = new Document();
-        try{
-            //Tipo de conteudo
-            response.setContentType("apllication/pdf");
-            //Nome do documento
-            response.addHeader("Content-Desposition", "inline;filename="+"matriculados.pdf");
-            //Criar o documento
-            PdfWriter.getInstance(documento,response.getOutputStream());
-            //Abrir documento
-            documento.open();
-            documento.add(new Paragraph("Lista de Alunos Maticulados"));
-            documento.close();
-        }catch(Exception e){
-            System.out.println(e);
-            documento.close();
-        }
-    }
-*/
 }
