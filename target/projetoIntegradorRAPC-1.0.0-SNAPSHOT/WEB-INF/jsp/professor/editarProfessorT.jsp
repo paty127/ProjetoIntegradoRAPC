@@ -9,7 +9,7 @@
               href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="http://www.godtur.no/godtur/js/jquery-ui-1.8.18.custom.min.js"></script>
-        <title>Cadastro de Professor</title>
+        <title>Cadastro de Aluno</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/erro.css" />
     </head>
@@ -37,7 +37,7 @@
                     Listagem
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="professorController?action=ListProfessor">Professor Matriculados</a>
+                    <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
                     <a class="dropdown-item" href="ProfessorController?action=ListProfessor">Professores</a>
                     <a class="dropdown-item" href="#">Turmas</a>
                 </div>
@@ -47,8 +47,8 @@
                     Cadastro
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
-                    <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
+                    <a class="dropdown-item" href="adicionarEditarProfessor.jsp">Cadastrar Professor</a>
                     <a class="dropdown-item" href="#">Cadastrar Turma</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Algo mais aqui</a>
@@ -65,21 +65,14 @@
         </div>
     </nav>
     <div class="container">
-        <h4>Dados do Professor</h4>
-        <form method="POST" action='${request.contextPath}professorController' name="frmAddUser">
+        <h4>Dados do Aluno</h4>
+        <form method="POST" action='${request.contextPath}alunoController' name="frmAddUser">
             <!-- Matricula -->
             <div class="form-row">
                     <div class="form-group col-md-1">
                         <label>Matrícula</label>
-                        <input type="text" readonly="readonly" name="codProfessor"
-                               value="<c:out value="${professor.codProfessor}" />" >
-                    </div>
-                    <div class="form-group col-md-1">
-                    <label for="inputPerfil">Disciplina1</label><br/> 
-                    <select class="custom-select mr-sm-2" name="perfil"
-                        id="inputPerfil" value="<c:out value="${professor.perfil}" />"> 
-                        <option value="Professor">Professor</option>
-                    </select>
+                        <input type="text" readonly="readonly" name="codAluno"
+                               value="<c:out value="${aluno.codAluno}" />" >
                     </div>
             </div>
             <div class="form-row">
@@ -87,95 +80,80 @@
                     <!-- Nome -->
                     <label for="inputNome">Nome</label>
                     <input class="form-control"  id="inputNome" type="text" name="nome"
-                           value="<c:out value="${professor.nome}" />" >
+                           value="<c:out value="${aluno.nome}" />" >
                 </div>
                 <div class="form-group col-md-2">
-                    <!-- Gênero -->
-                    <label for="inputGenero">Gênero</label><br/> 
-                    <select class="custom-select mr-sm-2" name="sexo"
-                        id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
-                        <option value=""> Selecione</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Feminino">Feminino</option>
-                    </select>
+                    <label for="inputCPFAluno">CPF</label>
+                    <input type="text" class="form-control" id="inputCPFAluno" name="cpf"
+                           value="<c:out value="${aluno.cpf}" />" 
+                           placeholder="XXX.XXX.XXX-XX"
+                           onkeypress="$(this).mask('000.000.000-00');">
                 </div>
                 <div class="form-group col-md-2">    
                     <!-- Data -->
                     <label for="inputData">Data de Nascimento</label> 
                     <input class="form-control"  id="inputData" type="date" 
                            maxlength="10" name="dataNascimento" 
-                           value="<c:out value="${professor.dataNasc}" />" >
+                           value="<c:out value="${aluno.dataNasc}" />" >
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <label for="inputRGProfessor">RG</label>
-                    <input type="text" class="form-control" id="inputRGProfessor" name="cpf"
-                           value="<c:out value="${professor.rg}" />" 
-                           placeholder="XXX.XXX.XXX-X"
-                           onkeypress="$(this).mask('00.000.000-0');">
+                    <!-- Gênero -->
+                    <label for="inputGenero">Gênero</label><br/> 
+                    <select class="custom-select mr-sm-2" name="sexo"
+                        id="inputGenero" value="<c:out value="${aluno.sexo}" />"> 
+                        <option value="${aluno.sexo}">${aluno.sexo}</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                    </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputCPFProfessor">CPF</label>
-                    <input type="text" class="form-control" id="inputCPFProfessor" name="cpf"
-                           value="<c:out value="${professor.cpf}" />" 
-                           placeholder="XXX.XXX.XXX-XX"
-                           onkeypress="$(this).mask('000.000.000-00');">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputCelularProfessor">Celular</label>
-                    <input class="form-control" id="inputCelularProfessor"type="text" 
+                    <label for="inputCelularAluno">Celular do Aluno</label>
+                    <input class="form-control" id="inputCelularAluno"type="text" 
                            onkeypress="$(this).mask('(00) 00000-0000')""
-                           name="celular" value="<c:out value="${professor.celular}" />" 
+                           name="celular" value="<c:out value="${aluno.celular}" />" 
                            placeholder="(XX) XXXXX-XXXX">
                 </div>
                 <div class="form-group col-md-3">
                     <!-- E-mail -->
                     <label for="inputEmail4">E-mail</label>
                     <input type="email" class="form-control" id="inputEmail4"
-                           name="email" value="<c:out value="${professor.email}" />" >
+                           name="email" value="<c:out value="${aluno.email}" />" >
                 </div>
             </div>
             <div class="form-row">
 
             </div>
-            <h4>Leciona</h4>
-            <div class="form-row">
-                <div class="form-group col-md-3">   
-                    <label for="inputGenero">Disciplina 1</label><br/> 
-                    <select class="custom-select mr-sm-2" name="sexo"
-                        id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
-                        <option value="">Humanas</option>
-                        <option value="Masculino">Português</option>
-                        <option value="Feminino">História</option>
-                        <option value="Feminino">Artes</option>
-                        <option value="Feminino">Geografia</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputGenero">Disciplina 2</label><br/> 
-                    <select class="custom-select mr-sm-2" name="sexo"
-                        id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
-                        <option value="">Exatas</option>
-                        <option value="Masculino">Matemática</option>
-                        <option value="Feminino">Quimica</option>
-                        <option value="Feminino">Biologia</option>
-                    </select>
-                </div>
-            </div>
-            <h4>Senha de acesso</h4>    
+            <h4>Dados dos Responsaveis</h4>
             <div class="form-row">
                 <div class="form-group col-md-3">   
                     <!-- Nome -->
-                    <label for="senha">Senha</label>
-                    <input class="form-control"  id="inputSenha" type="password" name="senha"
-                           placeholder="XXXXXXXX" maxlength="8"> 
+                    <label for="inputNomeMae">Nome da Mãe</label>
+                    <input class="form-control"  id="inputNomeMae" type="text" name="mae"
+                           value="<c:out value="${aluno.nomeMae}" />" >  
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="senhaRepetida">Repita a senha</label>
-                    <input class="form-control" id="inputSenhaRepetida"type="password" 
-                           name="senhaRepetida" maxlength="8"
-                           placeholder="XXXXXXXX">
+                    <label for="inputCelularMae">Celular da Mãe</label>
+                    <input class="form-control" id="inputCelularAluno"type="text" 
+                           onkeypress="$(this).mask('(00) 00000-0000')"
+                           name="celularMae" value="<c:out value="${aluno.celularMae}" />" 
+                           placeholder="(XX) XXXXX-XXXX">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">   
+                    <!-- Nome -->
+                    <label for="inputNomePai">Nome do Pai</label>
+                    <input class="form-control"  id="inputNomePai" type="text" name="pai"
+                           value="<c:out value="${aluno.nomePai}" />">  
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputCelularMae">Celular do Pai</label>
+                    <input class="form-control" id="inputCelularAluno"type="text" 
+                           name="celularPai" value="<c:out value="${aluno.celularPai}" />" 
+                           onkeypress="$(this).mask('(00) 00000-0000')"
+                           placeholder="(XX) XXXXX-XXXX">
                 </div>
             </div>
             <h4>Endereço</h4>
@@ -183,31 +161,31 @@
                 <div class="form-group col-md-3">
                     <label for="inputLogradouro">Logradouro</label>
                     <input class="form-control" id="inputLogradouro" type="text" 
-                           name="rua" value="<c:out value="${professor.rua}" />">
+                           name="rua" value="<c:out value="${aluno.rua}" />">
                 </div>
                 <div class="form-group col-md-1">
                     <label for="inputNumero">Nº</label>
                     <input class="form-control" id="inputNumero" type="text" 
-                           name="numero" value="<c:out value="${professor.numero}" />">
+                           name="numero" value="<c:out value="${aluno.numero}" />">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputComplemento">Complemento</label>
                     <input class="form-control" id="inputComplemento" type="text" 
-                           name="complemento" value="<c:out value="${professor.complemento}" />">
+                           name="complemento" value="<c:out value="${aluno.complemento}" />">
                 </div>
             </div>
                 <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="inputBairro">Bairro</label>
                     <input class="form-control" id="inputBairro" type="text" 
-                           name="bairro" value="<c:out value="${professor.bairro}" />">
+                           name="bairro" value="<c:out value="${aluno.bairro}" />">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputCEP">CEP</label>
                     <input class="form-control" id="inputCEP" type="text" name="cep"
                            onkeypress="$(this).mask('00000-000')"
                            placeholder="XXXXX-XXX"
-                           value="<c:out value="${professor.cep}" />" >
+                           value="<c:out value="${aluno.cep}" />" >
                 </div>
                 </div>
             </div>

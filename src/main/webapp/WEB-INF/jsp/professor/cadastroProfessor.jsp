@@ -74,6 +74,13 @@
                         <input type="text" readonly="readonly" name="codProfessor"
                                value="<c:out value="${professor.codProfessor}" />" >
                     </div>
+                    <div class="form-group col-md-1">
+                    <label for="inputPerfil">Disciplina1</label><br/> 
+                    <select class="custom-select mr-sm-2" name="perfil"
+                        id="inputPerfil" value="<c:out value="${professor.perfil}" />"> 
+                        <option value="Professor">Professor</option>
+                    </select>
+                    </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">   
@@ -81,30 +88,6 @@
                     <label for="inputNome">Nome</label>
                     <input class="form-control"  id="inputNome" type="text" name="nome"
                            value="<c:out value="${professor.nome}" />" >
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputCPFProfessor">CPF</label>
-                    <input type="text" class="form-control" id="inputCPFProfessor" name="cpf"
-                           value="<c:out value="${professor.cpf}" />" 
-                           placeholder="XXX.XXX.XXX-XX"
-                           onkeypress="$(this).mask('000.000.000-00');">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputRGProfessor">RG</label>
-                    <input type="text" class="form-control" id="inputRGProfessor" name="cpf"
-                           value="<c:out value="${professor.rg}" />" 
-                           placeholder="XXX.XXX.XXX-XX"
-                           onkeypress="$(this).mask('00.000.000-0');">
-                </div>
-
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-2">    
-                    <!-- Data -->
-                    <label for="inputData">Data de Nascimento</label> 
-                    <input class="form-control"  id="inputData" type="date" 
-                           maxlength="10" name="dataNascimento" 
-                           value="<c:out value="${professor.dataNasc}" />" >
                 </div>
                 <div class="form-group col-md-2">
                     <!-- Gênero -->
@@ -116,8 +99,31 @@
                         <option value="Feminino">Feminino</option>
                     </select>
                 </div>
+                <div class="form-group col-md-2">    
+                    <!-- Data -->
+                    <label for="inputData">Data de Nascimento</label> 
+                    <input class="form-control"  id="inputData" type="date" 
+                           maxlength="10" name="dataNascimento" 
+                           value="<c:out value="${professor.dataNasc}" />" >
+                </div>
+            </div>
+            <div class="form-row">
                 <div class="form-group col-md-2">
-                    <label for="inputCelularProfessor">Celular do Professor</label>
+                    <label for="inputRGProfessor">RG</label>
+                    <input type="text" class="form-control" id="inputRGProfessor" name="cpf"
+                           value="<c:out value="${professor.rg}" />" 
+                           placeholder="XXX.XXX.XXX-X"
+                           onkeypress="$(this).mask('00.000.000-0');">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputCPFProfessor">CPF</label>
+                    <input type="text" class="form-control" id="inputCPFProfessor" name="cpf"
+                           value="<c:out value="${professor.cpf}" />" 
+                           placeholder="XXX.XXX.XXX-XX"
+                           onkeypress="$(this).mask('000.000.000-00');">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputCelularProfessor">Celular</label>
                     <input class="form-control" id="inputCelularProfessor"type="text" 
                            onkeypress="$(this).mask('(00) 00000-0000')""
                            name="celular" value="<c:out value="${professor.celular}" />" 
@@ -136,21 +142,24 @@
             <h4>Leciona</h4>
             <div class="form-row">
                 <div class="form-group col-md-3">   
-                    <label for="inputGenero">Disciplina1</label><br/> 
+                    <label for="inputGenero">Disciplina 1</label><br/> 
                     <select class="custom-select mr-sm-2" name="sexo"
                         id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
                         <option value="">Humanas</option>
                         <option value="Masculino">Português</option>
-                        <option value="Feminino">Inglês</option>
+                        <option value="Feminino">História</option>
+                        <option value="Feminino">Artes</option>
+                        <option value="Feminino">Geografia</option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputGenero">Disciplina2</label><br/> 
+                    <label for="inputGenero">Disciplina 2</label><br/> 
                     <select class="custom-select mr-sm-2" name="sexo"
                         id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
                         <option value="">Exatas</option>
                         <option value="Masculino">Matemática</option>
-                        <option value="Feminino">Física</option>
+                        <option value="Feminino">Quimica</option>
+                        <option value="Feminino">Biologia</option>
                     </select>
                 </div>
             </div>
@@ -160,12 +169,12 @@
                     <!-- Nome -->
                     <label for="senha">Senha</label>
                     <input class="form-control"  id="inputSenha" type="password" name="senha"
-                           placeholder="XXXXXXXX"> 
+                           placeholder="XXXXXXXX" maxlength="8"> 
                 </div>
                 <div class="form-group col-md-2">
                     <label for="senhaRepetida">Repita a senha</label>
                     <input class="form-control" id="inputSenhaRepetida"type="password" 
-                           name="senhaRepetida" 
+                           name="senhaRepetida" maxlength="8"
                            placeholder="XXXXXXXX">
                 </div>
             </div>

@@ -6,6 +6,7 @@ dao\ProfessorDao.class
 model\Professor.class
 controller\ListarAluno.class
 controller\ProfessorController.class
+controller\ListarProfessor.class
 controller\CadastroAluno.class
 controller\CadastroProfessor.class
 dao\AlunoDao.class

@@ -63,15 +63,14 @@ CREATE TABLE Turma (
 CREATE TABLE Adm (
     id_adm integer not null auto_increment PRIMARY KEY,
     nome varchar(30),
-    data_Nascimento date,
     sexo varchar(9),
-    celular varchar(15),
-    telefone varchar(15),
-    cpf varchar(16),
+    data_Nascimento date,
     rg varchar(13),
-    perfil varchar(14),
+    cpf varchar(16),
+    celular varchar(15),
     senha varchar(60) not null,
     senha_repetida varchar(60) not null,
+	perfil varchar(14),
     fk_endereco integer,
     FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
 );
@@ -79,30 +78,30 @@ CREATE TABLE Adm (
 CREATE TABLE Professor (
     cod_professor integer not null auto_increment PRIMARY KEY,
     nome varchar(50),
-    data_nascimento date,
     sexo varchar(9),
-    celular varchar(15),
-    telefone varchar(13),
-    cpf varchar(16),
+    data_nascimento date,
     rg varchar(13),
+    cpf varchar(16) unique,
+    celular varchar(15),  
     email varchar(40),
-	disciplina1 varchar(40),
-    disciplina2 varchar(40),
+	disciplina1 varchar(15),
+    disciplina2 varchar(15),
 	senha varchar(60) not null,
     senha_repetida varchar(60) not null,
     perfil varchar(9),
     fk_endereco integer,
-    fk_funcionario integer,
     FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
 );
 delimiter $$
 create procedure novo_professor (
-	nome varchar(50),data_nascimento date,sexo varchar(9),celular varchar(15),telefone varchar(13),
-    cpf varchar(16),rg varchar(13),email varchar(40),
-    rua varchar(30),numero integer,complemento varchar(30),bairro varchar(30),cep varchar(9))
+nome varchar(50),sexo varchar(9),data_nascimento date,
+rg varchar(13),cpf varchar(16),celular varchar(15),  
+email varchar(40),disciplina1 varchar(15), disciplina2 varchar(15),
+senha varchar(60), senha_repetida varchar(60),perfil varchar(9),
+rua varchar(30),numero integer,complemento varchar(30),bairro varchar(30),cep varchar(9))
     begin
 	insert into Endereco(rua,numero,complemento,bairro,cep)values(rua,numero,complemento,bairro,cep);
-    insert into Professor(nome,data_nascimento,sexo,celular,telefone,cpf,rg,email,fk_endereco)values(nome,data_nascimento,sexo,celular,telefone,cpf,rg,email,@@identity);
+    insert into Professor(nome,sexo,data_nascimento,celular,rg,cpf,email,fk_endereco)values(nome,data_nascimento,sexo,celular,telefone,cpf,rg,email,@@identity);
     end $$
 CREATE TABLE Disciplinas (
     cod_disciplina integer not null auto_increment PRIMARY KEY,
