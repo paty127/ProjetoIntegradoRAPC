@@ -9,39 +9,45 @@ import java.util.Date;
 public class Professor {
     private int codProfessor;
     private String nome;
-    private Date dataNasc;
     private String sexo;
-    private String celular;
-    private String telefone;
-    private String cpf;
+    private Date dataNasc;
     private String rg;
+    private String cpf;
+    private String celular;
     private String email;
+    private String disciplina1;
+    private String disciplina2;
+    private String senha;
+    private String senha_repetida;
     private String rua;
     private int    numero;
     private String bairro;
     private String cep;
 
-    public Professor() {
-    }
-    
-    
-    
-    public Professor(int codProfessor, String nome, Date dataNasc, String sexo, String celular, String telefone, String cpf, String rg, String email, String rua, int numero, String bairro, String cep) {
+    public Professor() {}
+
+    public Professor(int codProfessor, String nome, String sexo, Date dataNasc,
+        String rg, String cpf, String celular, String email,
+        String disciplina1, String disciplina2, String senha,
+        String senha_repetida, String rua, int numero,
+        String bairro, String cep) {
         this.codProfessor = codProfessor;
         this.nome = nome;
-        this.dataNasc = dataNasc;
         this.sexo = sexo;
-        this.celular = celular;
-        this.telefone = telefone;
-        this.cpf = cpf;
+        this.dataNasc = dataNasc;
         this.rg = rg;
+        this.cpf = cpf;
+        this.celular = celular;
         this.email = email;
+        this.disciplina1 = disciplina1;
+        this.disciplina2 = disciplina2;
+        this.senha = senha;
+        this.senha_repetida = senha_repetida;
         this.rua = rua;
         this.numero = numero;
         this.bairro = bairro;
         this.cep = cep;
     }
-  
 
     public int getCodProfessor() {
         return codProfessor;
@@ -59,14 +65,6 @@ public class Professor {
         this.nome = nome;
     }
 
-    public Date getDataNasc() {
-        return dataNasc;
-    }
-
-    public void setDataNasc(Date dataNasc) {
-        this.dataNasc = dataNasc;
-    }
-
     public String getSexo() {
         return sexo;
     }
@@ -75,28 +73,12 @@ public class Professor {
         this.sexo = sexo;
     }
 
-    public String getCelular() {
-        return celular;
+    public Date getDataNasc() {
+        return dataNasc;
     }
 
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setDataNasc(Date dataNasc) {
+        this.dataNasc = dataNasc;
     }
 
     public String getRg() {
@@ -107,12 +89,60 @@ public class Professor {
         this.rg = rg;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDisciplina1() {
+        return disciplina1;
+    }
+
+    public void setDisciplina1(String disciplina1) {
+        this.disciplina1 = disciplina1;
+    }
+
+    public String getDisciplina2() {
+        return disciplina2;
+    }
+
+    public void setDisciplina2(String disciplina2) {
+        this.disciplina2 = disciplina2;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getSenha_repetida() {
+        return senha_repetida;
+    }
+
+    public void setSenha_repetida(String senha_repetida) {
+        this.senha_repetida = senha_repetida;
     }
 
     public String getRua() {
@@ -146,8 +176,4 @@ public class Professor {
     public void setCep(String cep) {
         this.cep = cep;
     }
-
-   
-    
-    
 }

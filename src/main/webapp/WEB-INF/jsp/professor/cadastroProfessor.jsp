@@ -144,21 +144,28 @@
                     <label for="inputGenero">Disciplina 1</label><br/> 
                     <select class="custom-select mr-sm-2" name="sexo"
                         id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
-                        <option value="">Humanas</option>
-                        <option value="Masculino">Português</option>
-                        <option value="Feminino">História</option>
-                        <option value="Feminino">Artes</option>
-                        <option value="Feminino">Geografia</option>
+                        <option value="">Selecione</option>
+                        <option value="Português">Português</option>
+                        <option value="História">História</option>
+                        <option value="Artes">Artes</option>
+                        <option value="Geografia">Geografia</option>
+                        <option value="Matemática">Matemática</option>
+                        <option value="Quimica">Quimica</option>
+                        <option value="Biologia">Biologia</option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputGenero">Disciplina 2</label><br/> 
                     <select class="custom-select mr-sm-2" name="sexo"
                         id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
-                        <option value="">Exatas</option>
-                        <option value="Masculino">Matemática</option>
-                        <option value="Feminino">Quimica</option>
-                        <option value="Feminino">Biologia</option>
+                        <option value="">Selecione</option>
+                        <option value="Português">Português</option>
+                        <option value="História">História</option>
+                        <option value="Artes">Artes</option>
+                        <option value="Geografia">Geografia</option>
+                        <option value="Matemática">Matemática</option>
+                        <option value="Quimica">Quimica</option>
+                        <option value="Biologia">Biologia</option>
                     </select>
                 </div>
             </div>

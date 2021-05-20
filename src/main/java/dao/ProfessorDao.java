@@ -30,7 +30,6 @@ private final DbUtil dbUtil = new DbUtil();
             stmt.setDate(2, new java.sql.Date(professor.getDataNasc().getTime()));
             stmt.setString(3, professor.getSexo());
             stmt.setString(4, professor.getCelular());
-            stmt.setString(5, professor.getTelefone());
             stmt.setString(6, professor.getCpf());
             stmt.setString(7, professor.getRg());
             stmt.setString(8, professor.getEmail());
