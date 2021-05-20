@@ -7,6 +7,7 @@ model\Professor.class
 controller\ListarAluno.class
 controller\ProfessorController.class
 controller\CadastroAluno.class
+controller\CadastroProfessor.class
 dao\AlunoDao.class
 model\Aluno.class
 controller\ResultadoAluno.class

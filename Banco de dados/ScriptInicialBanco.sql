@@ -60,19 +60,18 @@ CREATE TABLE Turma (
 	foreign key (fk_cod_aluno) references Aluno(cod_aluno)
 );
 
-CREATE TABLE Funcionario (
-    id_funcionario integer not null auto_increment PRIMARY KEY,
+CREATE TABLE Adm (
+    id_adm integer not null auto_increment PRIMARY KEY,
     nome varchar(30),
-    sobrenome varchar(30),
     data_Nascimento date,
     sexo varchar(9),
-    celular varchar(13),
-    telefone varchar(10),
+    celular varchar(15),
+    telefone varchar(15),
     cpf varchar(16),
     rg varchar(13),
+    perfil varchar(14),
     senha varchar(60) not null,
     senha_repetida varchar(60) not null,
-    cargo varchar(10) not null,
     fk_endereco integer,
     FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
 );
@@ -87,10 +86,14 @@ CREATE TABLE Professor (
     cpf varchar(16),
     rg varchar(13),
     email varchar(40),
+	disciplina1 varchar(40),
+    disciplina2 varchar(40),
+	senha varchar(60) not null,
+    senha_repetida varchar(60) not null,
+    perfil varchar(9),
     fk_endereco integer,
     fk_funcionario integer,
     FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
-    FOREIGN KEY (fk_funcionario) references funcionario(id_funcionario)
 );
 delimiter $$
 create procedure novo_professor (
@@ -159,3 +162,5 @@ select *
 FROM aluno as A
 JOIN endereco as E on A.fk_endereco = E.id_endereco;
 */
+
+select * from professor;
