@@ -4,3 +4,8 @@ target/projetoIntegradorRAPC-1.0.0-SNAPSHOT.war
 target/projetoIntegradorRAPC-1.0.0-SNAPSHOT/WEB-INF/classes/controller/AlunoController.class
 target/classes/.netbeans_automatic_build
 target/test-classes/.netbeans_automatic_build
+target/classes/controller/AlunoController.class
+target/maven-archiver/pom.properties
+target/projetoIntegradorRAPC-1.0.0-SNAPSHOT.war
+target/projetoIntegradorRAPC-1.0.0-SNAPSHOT/Tomcat.dpf
+target/projetoIntegradorRAPC-1.0.0-SNAPSHOT/WEB-INF/classes/controller/AlunoController.class

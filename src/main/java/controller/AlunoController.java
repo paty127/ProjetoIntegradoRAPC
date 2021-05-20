@@ -194,11 +194,11 @@ public class AlunoController extends HttpServlet {
         if (numero == 0) {
             temErro = true;
             request.setAttribute("erroNumero", "Número não informado.");
-        }
+        }/*
         if (complemento.equals("")) {
             temErro = true;
             request.setAttribute("erroComplemento", "Complemento não informado.");
-        }
+        }*/
         if (bairro.equals("")) {
             temErro = true;
             request.setAttribute("erroBairro", "Bairro não informado.");
