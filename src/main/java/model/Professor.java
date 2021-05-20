@@ -17,10 +17,12 @@ public class Professor {
     private String email;
     private String disciplina1;
     private String disciplina2;
+    private String perfil;
     private String senha;
     private String senha_repetida;
     private String rua;
     private int    numero;
+    private String complemento;
     private String bairro;
     private String cep;
 
@@ -28,8 +30,8 @@ public class Professor {
 
     public Professor(int codProfessor, String nome, String sexo, Date dataNasc,
         String rg, String cpf, String celular, String email,
-        String disciplina1, String disciplina2, String senha,
-        String senha_repetida, String rua, int numero,
+        String disciplina1, String disciplina2,String perfil, String senha,
+        String senha_repetida, String rua, int numero, String complemento,
         String bairro, String cep) {
         this.codProfessor = codProfessor;
         this.nome = nome;
@@ -41,10 +43,12 @@ public class Professor {
         this.email = email;
         this.disciplina1 = disciplina1;
         this.disciplina2 = disciplina2;
+        this.perfil = perfil;
         this.senha = senha;
         this.senha_repetida = senha_repetida;
         this.rua = rua;
         this.numero = numero;
+        this.complemento = complemento;
         this.bairro = bairro;
         this.cep = cep;
     }
@@ -129,6 +133,14 @@ public class Professor {
         this.disciplina2 = disciplina2;
     }
 
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
+    }
+
     public String getSenha() {
         return senha;
     }
@@ -161,6 +173,14 @@ public class Professor {
         this.numero = numero;
     }
 
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
     public String getBairro() {
         return bairro;
     }
@@ -176,4 +196,6 @@ public class Professor {
     public void setCep(String cep) {
         this.cep = cep;
     }
+
+    
 }
