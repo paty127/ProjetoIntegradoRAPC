@@ -22,7 +22,7 @@ public class AlunoController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private static final String INSERT_Aluno = "/cadastroAluno";
-    private static final String INSERT_OR_EDIT = "/cadastroAluno";
+    private static final String EDIT = "/editarAluno";
     private static final String GERAR_RELATORIO = "/PDF";
     
     private static final String LIST_ALUNO = "/listarAlunos";
@@ -58,7 +58,7 @@ public class AlunoController extends HttpServlet {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equalsIgnoreCase("edit")) {
-            forward = INSERT_OR_EDIT;
+            forward = EDIT;
             int codAluno = Integer.parseInt(request.getParameter("codAluno"));
             try {
                 //Passar o codigo de aluno para o metodo getAlunoByID
@@ -77,7 +77,7 @@ public class AlunoController extends HttpServlet {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            forward = INSERT_OR_EDIT;
+            forward = EDIT;
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
