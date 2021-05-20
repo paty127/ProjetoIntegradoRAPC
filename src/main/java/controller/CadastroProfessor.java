@@ -25,7 +25,7 @@ public class CadastroProfessor extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         
-        request.getRequestDispatcher("/cadastroProfessor.jsp")
+        request.getRequestDispatcher("/WEB-INF/jsp/professor/cadastroProfessor.jsp")
                 .forward(request, response);
     }
 }
