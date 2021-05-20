@@ -31,7 +31,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
-                        <a class="dropdown-item" href="ProfessorController?action=ListProfessor">Professores</a>
+                        <a class="dropdown-item" href="professorController?action=ListProfessor">Professores</a>
                         <a class="dropdown-item" href="#">Turmas</a>
                     </div>
                 </li>
@@ -78,7 +78,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Relatorios</h5>
                             <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
-                            <a class="dropdown-item" href="ProfessorController?action=ListProfessor">Professores</a>
+                            <a class="dropdown-item" href="professorController?action=ListProfessor">Professores</a>
                             <a class="dropdown-item" href="#">Turmas</a>
                             <a class="dropdown-item" href="#">Presença</a>
                             <a class="dropdown-item" href="#">Notas</a>

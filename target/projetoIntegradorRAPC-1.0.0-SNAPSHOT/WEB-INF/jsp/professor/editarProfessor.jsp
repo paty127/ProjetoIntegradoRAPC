@@ -67,15 +67,14 @@
     <div class="container">
         <h4>Dados do Professor</h4>
         <form method="POST" action='${request.contextPath}professorController' name="frmAddUser">
-            <!-- Matricula -->
             <div class="form-row">
                     <div class="form-group col-md-1">
                         <label>Matrícula</label>
-                        <input type="text" readonly="readonly" name="codProfessor"
+                        <input type="text" class="form-control" readonly="readonly" name="codProfessor"
                                value="<c:out value="${professor.codProfessor}" />" >
                     </div>
-                    <div class="form-group col-md-1">
-                    <label for="inputPerfil">Disciplina1</label><br/> 
+                    <div class="form-group col-md-2" id="matricula">
+                    <label for="inputPerfil">Perfil</label><br/> 
                     <select class="custom-select mr-sm-2" name="perfil"
                         id="inputPerfil" value="<c:out value="${professor.perfil}" />"> 
                         <option value="Professor">Professor</option>
@@ -94,7 +93,7 @@
                     <label for="inputGenero">Gênero</label><br/> 
                     <select class="custom-select mr-sm-2" name="sexo"
                         id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
-                        <option value=""> Selecione</option>
+                        <option value="${professor.sexo}">${professor.sexo}</option>
                         <option value="Masculino">Masculino</option>
                         <option value="Feminino">Feminino</option>
                     </select>
@@ -109,8 +108,8 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <label for="inputRGProfessor">RG</label>
-                    <input type="text" class="form-control" id="inputRGProfessor" name="cpf"
+                    <label for="inputRG">RG</label>
+                    <input type="text" class="form-control" id="inputRG" name="rg"
                            value="<c:out value="${professor.rg}" />" 
                            placeholder="XXX.XXX.XXX-X"
                            onkeypress="$(this).mask('00.000.000-0');">
@@ -131,8 +130,8 @@
                 </div>
                 <div class="form-group col-md-3">
                     <!-- E-mail -->
-                    <label for="inputEmail4">E-mail</label>
-                    <input type="email" class="form-control" id="inputEmail4"
+                    <label for="inputEmail">E-mail</label>
+                    <input type="email" class="form-control" id="inputEmail"
                            name="email" value="<c:out value="${professor.email}" />" >
                 </div>
             </div>
@@ -142,24 +141,31 @@
             <h4>Leciona</h4>
             <div class="form-row">
                 <div class="form-group col-md-3">   
-                    <label for="inputGenero">Disciplina 1</label><br/> 
-                    <select class="custom-select mr-sm-2" name="sexo"
-                        id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
-                        <option value="">Humanas</option>
-                        <option value="Masculino">Português</option>
-                        <option value="Feminino">História</option>
-                        <option value="Feminino">Artes</option>
-                        <option value="Feminino">Geografia</option>
+                    <label for="inputDisciplina1">Disciplina 1</label><br/> 
+                    <select class="custom-select mr-sm-2" name="disciplina1"
+                        id="inputDisciplina1" value="<c:out value="${professor.disciplina1}" />"> 
+                        <option value="${professor.disciplina1}">${professor.disciplina1}</option>
+                        <option value="Português">Português</option>
+                        <option value="Matemática">Matemática</option>
+                        <option value="História">História</option>
+                        <option value="Geografia">Geografia</option>
+                        <option value="Ciências">Ciências</option>
+                        <option value="Artes">Artes</option>
+                        <option value="Inglês">Inglês</option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputGenero">Disciplina 2</label><br/> 
-                    <select class="custom-select mr-sm-2" name="sexo"
-                        id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
-                        <option value="">Exatas</option>
-                        <option value="Masculino">Matemática</option>
-                        <option value="Feminino">Quimica</option>
-                        <option value="Feminino">Biologia</option>
+                    <label for="inputdisciplina2">Disciplina 2</label><br/> 
+                    <select class="custom-select mr-sm-2" name="disciplina2"
+                        id="inputdisciplina2" value="<c:out value="${professor.disciplina2}" />"> 
+                        <option value="${professor.disciplina2}">${professor.disciplina2}</option>
+                        <option value="Português">Português</option>
+                        <option value="Matemática">Matemática</option>
+                        <option value="História">História</option>
+                        <option value="Geografia">Geografia</option>
+                        <option value="Ciências">Ciências</option>
+                        <option value="Artes">Artes</option>
+                        <option value="Inglês">Inglês</option>
                     </select>
                 </div>
             </div>

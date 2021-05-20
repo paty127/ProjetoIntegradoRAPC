@@ -9,7 +9,7 @@
               href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="http://www.godtur.no/godtur/js/jquery-ui-1.8.18.custom.min.js"></script>
-        <title>Cadastro de Aluno</title>
+        <title>Cadastro de Professor</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/erro.css" />
     </head>
@@ -37,7 +37,7 @@
                     Listagem
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
+                    <a class="dropdown-item" href="professorController?action=ListAlunos">Alunos Matriculados</a>
                     <a class="dropdown-item" href="ProfessorController?action=ListProfessor">Professores</a>
                     <a class="dropdown-item" href="#">Turmas</a>
                 </div>
@@ -48,7 +48,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
-                    <a class="dropdown-item" href="adicionarEditarProfessor.jsp">Cadastrar Professor</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
                     <a class="dropdown-item" href="#">Cadastrar Turma</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Algo mais aqui</a>
@@ -65,15 +65,22 @@
         </div>
     </nav>
     <div class="container">
-        <h4>Dados do Aluno</h4>
-        <form method="POST" action='${request.contextPath}alunoController' name="frmAddUser">
-            <!-- Matricula -->
+        <h4>Dados do Professor</h4>
+        <form method="POST" action='${request.contextPath}professorController' name="frmAddUser">
             <div class="form-row" id="matricula">
-                <div class="form-group col-md-1">
-                    <label>Matricula</label>
-                    <input type="text" readonly="readonly" name="codAluno"
-                           value="<c:out value="${aluno.codAluno}" />" >
-                </div>
+                    <div class="form-group col-md-1">
+                        <label>Matrícula</label>
+                        <input type="text" class="form-control" readonly="readonly" name="codProfessor"
+                               value="<c:out value="${dados.codProfessor}" />" >
+                    </div>
+                    <div class="form-group col-md-2">
+                    <label for="inputPerfil">Perfil</label><br/> 
+                    <select class="custom-select mr-sm-2" name="perfil"
+                        id="inputPerfil" value="<c:out value="${dados.perfil}" />"> 
+                        <option value="${dados.perfil}">${dados.perfil}</option>
+                        <option value="Professor">Professor</option>
+                    </select>
+                    </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">   
@@ -86,13 +93,16 @@
                     </c:if>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputCPFAluno">CPF</label>
-                    <input type="text" class="form-control" id="inputCPFAluno" name="cpf"
-                           value="<c:out value="${dados.cpf}" />" 
-                           placeholder="XXX.XXX.XXX-XX"
-                           onkeypress="$(this).mask('000.000.000-00');">
-                    <c:if test="${not empty erroCPF}">
-                        <span class="msg-erro"><c:out value="${erroCPF}" /></span>
+                    <!-- Gênero -->
+                    <label for="inputGenero">Gênero</label><br/> 
+                    <select class="custom-select mr-sm-2" name="sexo"
+                        id="inputGenero" value="<c:out value="${dados.sexo}" />"> 
+                        <option value="${dados.sexo}">${dados.sexo}</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                    </select>
+                    <c:if test="${not empty erroSexo}">
+                        <span class="msg-erro"><c:out value="${erroSexo}" /></span>
                     </c:if>
                 </div>
                 <div class="form-group col-md-2">    
@@ -108,21 +118,28 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-2">
-                    <!-- Gênero -->
-                    <label for="inputGenero">Gênero</label><br/> 
-                    <select class="custom-select mr-sm-2" name="sexo"
-                            id="inputGenero" value="<c:out value="${dados.sexo}" />"> 
-                        <option value="${dados.sexo}">${dados.sexo}</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Feminino">Feminino</option>
-                    </select>
-                    <c:if test="${not empty erroSexo}">
-                        <span class="msg-erro"><c:out value="${erroSexo}" /></span>
+                    <label for="inputRGProfessor">RG</label>
+                    <input type="text" class="form-control" id="inputRGProfessor" name="rg"
+                           value="<c:out value="${dados.rg}" />" 
+                           placeholder="XXX.XXX.XXX-X"
+                           onkeypress="$(this).mask('00.000.000-0');">
+                    <c:if test="${not empty erroRG}">
+                        <span class="msg-erro"><c:out value="${erroRG}" /></span>
                     </c:if>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputCelularAluno">Celular do Aluno</label>
-                    <input class="form-control" id="inputCelularAluno"type="text" 
+                    <label for="inputCPFProfessor">CPF</label>
+                    <input type="text" class="form-control" id="inputCPFProfessor" name="cpf"
+                           value="<c:out value="${dados.cpf}" />" 
+                           placeholder="XXX.XXX.XXX-XX"
+                           onkeypress="$(this).mask('000.000.000-00');">
+                    <c:if test="${not empty erroCPF}">
+                        <span class="msg-erro"><c:out value="${erroCPF}" /></span>
+                    </c:if>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputCelularProfessor">Celular</label>
+                    <input class="form-control" id="inputCelularProfessor"type="text" 
                            onkeypress="$(this).mask('(00) 00000-0000')""
                            name="celular" value="<c:out value="${dados.celular}" />" 
                            placeholder="(XX) XXXXX-XXXX">
@@ -143,47 +160,61 @@
             <div class="form-row">
 
             </div>
-            <h4>Dados dos Responsaveis</h4>
+            <h4>Leciona</h4>
             <div class="form-row">
                 <div class="form-group col-md-3">   
-                    <!-- Nome -->
-                    <label for="inputNomeMae">Nome da Mãe</label>
-                    <input class="form-control"  id="inputNomeMae" type="text" name="mae"
-                           value="<c:out value="${dados.nomeMae}" />" >
-                    <c:if test="${not empty erroNomeMae}">
-                        <span class="msg-erro"><c:out value="${erroNomeMae}" /></span>
+                    <label for="inputGenero">Disciplina 1</label><br/> 
+                    <select class="custom-select mr-sm-2" name="disciplina1"
+                        id="inputGenero" value="<c:out value="${dados.disciplina1}" />"> 
+                        <option value="${dados.disciplina1}">${dados.disciplina1}</option>
+                        <option value="Português">Português</option>
+                        <option value="Matemática">Matemática</option>
+                        <option value="História">História</option>
+                        <option value="Geografia">Geografia</option>
+                        <option value="Ciências">Ciências</option>
+                        <option value="Artes">Artes</option>
+                        <option value="Inglês">Inglês</option>
+                    </select>
+                    <c:if test="${not empty erroDisciplina1}">
+                        <span class="msg-erro"><c:out value="${erroDisciplina1}" /></span>
                     </c:if>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputCelularMae">Celular da Mãe</label>
-                    <input class="form-control" id="inputCelularAluno"type="text" 
-                           onkeypress="$(this).mask('(00) 00000-0000')"
-                           name="celularMae" value="<c:out value="${dados.celularMae}" />" 
-                           placeholder="(XX) XXXXX-XXXX">
-                    <c:if test="${not empty erroCelularMae}">
-                        <span class="msg-erro"><c:out value="${erroCelularMae}" /></span>
-                    </c:if>  
+                    <label for="inputGenero">Disciplina 2</label><br/> 
+                    <select class="custom-select mr-sm-2" name="disciplina2"
+                        id="inputGenero" value="<c:out value="${dados.disciplina2}" />"> 
+                        <option value="${dados.disciplina2}">${dados.disciplina2}</option>
+                        <option value="Português">Português</option>
+                        <option value="Matemática">Matemática</option>
+                        <option value="História">História</option>
+                        <option value="Geografia">Geografia</option>
+                        <option value="Ciências">Ciências</option>
+                        <option value="Artes">Artes</option>
+                        <option value="Inglês">Inglês</option>
+                    </select>
+                    <c:if test="${not empty erroDisciplina2}">
+                        <span class="msg-erro"><c:out value="${erroDisciplina2}" /></span>
+                    </c:if>
                 </div>
             </div>
             <div class="form-row">
+                <c:if test="${not empty erroDisciplinas}">
+                    <span class="msg-erro"><c:out value="${erroDisciplinas}" /></span>
+                </c:if>
+            </div>  
+            <h4>Senha de acesso</h4>    
+            <div class="form-row">
                 <div class="form-group col-md-3">   
                     <!-- Nome -->
-                    <label for="inputNomePai">Nome do Pai</label>
-                    <input class="form-control"  id="inputNomePai" type="text" name="pai"
-                           value="<c:out value="${dados.nomePai}" />">
-                    <c:if test="${not empty erroNomePai}">
-                        <span class="msg-erro"><c:out value="${erroNomePai}" /></span>
-                    </c:if> 
+                    <label for="senha">Senha</label>
+                    <input class="form-control"  id="inputSenha" type="password" name="senha"
+                           placeholder="XXXXXXXX" maxlength="8"> 
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputCelularMae">Celular do Pai</label>
-                    <input class="form-control" id="inputCelularAluno"type="text" 
-                           name="celularPai" value="<c:out value="${dados.celularPai}" />" 
-                           onkeypress="$(this).mask('(00) 00000-0000')"
-                           placeholder="(XX) XXXXX-XXXX">
-                    <c:if test="${not empty erroCelularPai}">
-                        <span class="msg-erro"><c:out value="${erroCelularPai}" /></span>
-                    </c:if>   
+                    <label for="senhaRepetida">Repita a senha</label>
+                    <input class="form-control" id="inputSenhaRepetida"type="password" 
+                           name="senhaRepetida" maxlength="8"
+                           placeholder="XXXXXXXX">
                 </div>
             </div>
             <h4>Endereço</h4>
@@ -202,7 +233,7 @@
                            name="numero" value="<c:out value="${dados.numero}" />">
                     <c:if test="${not empty erroNumero}">
                         <span class="msg-erro"><c:out value="${erroNumero}" /></span>
-                    </c:if>  
+                    </c:if> 
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputComplemento">Complemento</label>
@@ -210,17 +241,17 @@
                            name="complemento" value="<c:out value="${dados.complemento}" />">
                     <c:if test="${not empty erroComplemento}">
                         <span class="msg-erro"><c:out value="${erroComplemento}" /></span>
-                    </c:if>  
+                    </c:if> 
                 </div>
             </div>
-            <div class="form-row">
+                <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="inputBairro">Bairro</label>
                     <input class="form-control" id="inputBairro" type="text" 
                            name="bairro" value="<c:out value="${dados.bairro}" />">
                     <c:if test="${not empty erroBairro}">
                         <span class="msg-erro"><c:out value="${erroBairro}" /></span>
-                    </c:if>  
+                    </c:if> 
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputCEP">CEP</label>
@@ -230,18 +261,18 @@
                            value="<c:out value="${dados.cep}" />" >
                     <c:if test="${not empty erroCep}">
                         <span class="msg-erro"><c:out value="${erroCep}" /></span>
-                    </c:if>  
+                    </c:if>
+                </div>
                 </div>
             </div>
-    </div>
-    <div class="container">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <input class="btn btn-primary btn-lg active" role="button" aria-pressed="true" type="submit" value="Enviar" />     
+            <div class="container">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input class="btn btn-primary btn-lg active" role="button" aria-pressed="true" type="submit" value="Enviar" />     
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
-</form>
-</div>
 </body>
 </html>

@@ -27,7 +27,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
-                        <a class="dropdown-item" href="ProfessorController?action=ListProfessor">Professores</a>
+                        <a class="dropdown-item" href="professorController?action=ListProfessor">Professores</a>
                         <a class="dropdown-item" href="#">Turmas</a>
                     </div>
                 </li>
@@ -37,7 +37,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
-                        <a class="dropdown-item" href="adicionarEditarProfessor.jsp">Cadastrar Professor</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
                         <a class="dropdown-item" href="#">Cadastrar Turma</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Algo mais aqui</a>

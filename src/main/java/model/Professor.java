@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -10,7 +10,7 @@ public class Professor {
     private int codProfessor;
     private String nome;
     private String sexo;
-    private Date dataNasc;
+    private LocalDate dataNasc;
     private String rg;
     private String cpf;
     private String celular;
@@ -28,7 +28,7 @@ public class Professor {
 
     public Professor() {}
 
-    public Professor(int codProfessor, String nome, String sexo, Date dataNasc,
+    public Professor(int codProfessor, String nome, String sexo, LocalDate dataNasc,
         String rg, String cpf, String celular, String email,
         String disciplina1, String disciplina2,String perfil, String senha,
         String senha_repetida, String rua, int numero, String complemento,
@@ -77,11 +77,11 @@ public class Professor {
         this.sexo = sexo;
     }
 
-    public Date getDataNasc() {
+    public LocalDate getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(Date dataNasc) {
+    public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
 

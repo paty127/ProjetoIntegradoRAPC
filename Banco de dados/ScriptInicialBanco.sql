@@ -92,6 +92,7 @@ CREATE TABLE Professor (
     fk_endereco integer,
     FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
 );
+
 delimiter $$
 create procedure novo_professor (
 nome varchar(50),sexo varchar(9),data_nascimento date,
@@ -101,8 +102,20 @@ senha varchar(60), senha_repetida varchar(60),perfil varchar(9),
 rua varchar(30),numero integer,complemento varchar(30),bairro varchar(30),cep varchar(9))
     begin
 	insert into Endereco(rua,numero,complemento,bairro,cep)values(rua,numero,complemento,bairro,cep);
-    insert into Professor(nome,sexo,data_nascimento,celular,rg,cpf,email,fk_endereco)values(nome,data_nascimento,sexo,celular,telefone,cpf,rg,email,@@identity);
+    insert into Professor(nome,sexo,data_nascimento,rg,cpf,celular,email,disciplina1,disciplina2,perfil,senha,senha_repetida,fk_endereco)values(nome,sexo,data_nascimento,rg,cpf,celular,email,disciplina1,disciplina2,perfil,senha,senha_repetida,@@identity);
     end $$
+
+
+    
+/*Exemplo de criação do usuário com a procedure
+call novo_professor ('Fulano','Masculino','1988/08/14','11.111.111-1','111.1111.111-11','1196291-0587','fulano@msn.com','Matemática', 'Quimica','12345678','12345678','Professor','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025');
+
+Exemplo de consula:
+select *
+FROM professor as A
+JOIN endereco as E on A.fk_endereco = E.id_endereco;
+*/
+    
 CREATE TABLE Disciplinas (
     cod_disciplina integer not null auto_increment PRIMARY KEY,
     nome varchar(30),
@@ -161,5 +174,3 @@ select *
 FROM aluno as A
 JOIN endereco as E on A.fk_endereco = E.id_endereco;
 */
-
-select * from professor;

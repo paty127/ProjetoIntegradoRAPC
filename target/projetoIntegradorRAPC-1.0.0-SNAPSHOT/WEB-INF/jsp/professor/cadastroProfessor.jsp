@@ -36,8 +36,8 @@
                     Listagem
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="professorController?action=ListProfessor">Professor Matriculados</a>
-                    <a class="dropdown-item" href="ProfessorController?action=ListProfessor">Professores</a>
+                    <a class="dropdown-item" href="alunoController?action=ListAlunos">Alunos Matriculados</a>
+                    <a class="dropdown-item" href="professorController?action=ListProfessor">Professores</a>
                     <a class="dropdown-item" href="#">Turmas</a>
                 </div>
             </li>
@@ -46,7 +46,7 @@
                     Cadastro
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
                     <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
                     <a class="dropdown-item" href="#">Cadastrar Turma</a>
                     <div class="dropdown-divider"></div>
@@ -66,15 +66,14 @@
     <div class="container">
         <h4>Dados do Professor</h4>
         <form method="POST" action='${request.contextPath}professorController' name="frmAddUser">
-            <!-- Matricula -->
             <div class="form-row" id="matricula">
                     <div class="form-group col-md-1">
-                        <label>Matricula</label>
-                        <input type="text" readonly="readonly" name="codProfessor"
+                        <label>Matrícula</label>
+                        <input type="text" class="form-control" readonly="readonly" name="codProfessor"
                                value="<c:out value="${professor.codProfessor}" />" >
                     </div>
-                    <div class="form-group col-md-1">
-                    <label for="inputPerfil">Disciplina1</label><br/> 
+                    <div class="form-group col-md-2">
+                    <label for="inputPerfil">Perfil</label><br/> 
                     <select class="custom-select mr-sm-2" name="perfil"
                         id="inputPerfil" value="<c:out value="${professor.perfil}" />"> 
                         <option value="Professor">Professor</option>
@@ -107,7 +106,7 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputRGProfessor">RG</label>
-                    <input type="text" class="form-control" id="inputRGProfessor" name="cpf"
+                    <input type="text" class="form-control" id="inputRGProfessor" name="rg"
                            value="<c:out value="${professor.rg}" />" 
                            placeholder="XXX.XXX.XXX-X"
                            onkeypress="$(this).mask('00.000.000-0');">
@@ -142,7 +141,7 @@
             <div class="form-row">
                 <div class="form-group col-md-3">   
                     <label for="inputGenero">Disciplina 1</label><br/> 
-                    <select class="custom-select mr-sm-2" name="sexo"
+                    <select class="custom-select mr-sm-2" name="disciplina1"
                         id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
                         <option value="">Selecione</option>
                         <option value="Português">Português</option>
@@ -156,7 +155,7 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputGenero">Disciplina 2</label><br/> 
-                    <select class="custom-select mr-sm-2" name="sexo"
+                    <select class="custom-select mr-sm-2" name="disciplina2"
                         id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
                         <option value="">Selecione</option>
                         <option value="Português">Português</option>

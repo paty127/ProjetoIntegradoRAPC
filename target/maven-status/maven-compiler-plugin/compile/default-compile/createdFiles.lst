@@ -5,6 +5,7 @@ controller\AlunoController.class
 dao\ProfessorDao.class
 model\Professor.class
 controller\ListarAluno.class
+controller\RedirectProfessor.class
 controller\ProfessorController.class
 controller\ListarProfessor.class
 controller\CadastroAluno.class

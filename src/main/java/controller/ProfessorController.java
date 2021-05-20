@@ -1,6 +1,6 @@
 package controller;
 
-import dao.AlunoDao;
+import dao.ProfessorDao;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,23 +14,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 
-import model.Aluno;
+import model.Professor;
 
 
 @WebServlet(name = "professores", urlPatterns = {"/professorController"})
 public class ProfessorController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static final String INSERT_Aluno = "/cadastroProfessor";
+    private static final String INSERT_Professor = "/cadastroProfessor";
     private static final String EDIT = "/editarProfessor";
     private static final String GERAR_RELATORIO = "/PDF";
     
     private static final String LIST_ALUNO = "/listarProfessor";
     
-    private final AlunoDao dao;
+    private final ProfessorDao dao;
 
     public ProfessorController() {
-        dao = new AlunoDao();
+        dao = new ProfessorDao();
     }
 
     @Override
@@ -43,36 +43,36 @@ public class ProfessorController extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("delete")) {
-            int codAluno = Integer.parseInt(request.getParameter("codAluno"));
+            int codProfessor = Integer.parseInt(request.getParameter("codProfessor"));
             try {
-                dao.deletarAluno(codAluno);
-                //RequestDispatcher delete = request.getRequestDispatcher("/alunoDelete.jsp");
+                dao.deletarProfessor(codProfessor);
+                //RequestDispatcher delete = request.getRequestDispatcher("/professorDelete.jsp");
                 //delete.forward(request, response);
             } catch (SQLException ex) {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
             forward = LIST_ALUNO;
             try {
-                request.setAttribute("alunos", dao.getAllAlunos());
+                request.setAttribute("professores", dao.getAllProfessor());
             } catch (SQLException ex) {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equalsIgnoreCase("edit")) {
             forward = EDIT;
-            int codAluno = Integer.parseInt(request.getParameter("codAluno"));
+            int codProfessor = Integer.parseInt(request.getParameter("codProfessor"));
             try {
-                //Passar o codigo de aluno para o metodo getAlunoByID
-                Aluno aluno = dao.getAlunoById(codAluno);
-                request.setAttribute("aluno", aluno);
+                //Passar o codigo de professor para o metodo getProfessorByID
+                Professor professor = dao.getProfessorById(codProfessor);
+                request.setAttribute("professor", professor);
 
             } catch (SQLException ex) {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if (action.equalsIgnoreCase("ListAluno")) {
+        } else if (action.equalsIgnoreCase("ListProfessor")) {
             forward = LIST_ALUNO;
             try {
-                //Criando um atributo chamado Alunos e inserindo a lista que veio do metodo getAllAlunos
-                request.setAttribute("alunos", dao.getAllAlunos());
+                //Criando um atributo chamado Professors e inserindo a lista que veio do metodo getAllProfessors
+                request.setAttribute("professores", dao.getAllProfessor());
             } catch (SQLException ex) {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -92,9 +92,9 @@ public class ProfessorController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         int numero;
-        int codAluno;
+        int codProfessor;
         boolean temErro = false;
-        Aluno aluno = new Aluno();
+        Professor professor = new Professor();
 
         LocalDate dataNascimento = null;
         if (!request.getParameter("dataNascimento").equals("")) {
@@ -103,66 +103,72 @@ public class ProfessorController extends HttpServlet {
             dataNascimento = null;
             request.setAttribute("erroData", "Data não informada.");
         }
-        aluno.setDataNasc(dataNascimento);
+        professor.setDataNasc(dataNascimento);
         if (request.getParameter("numero").equals("")) {
             numero = 0;
         } else {
             numero = Integer.parseInt(request.getParameter("numero"));
-            aluno.setNumero(Integer.parseInt(request.getParameter("numero")));
+            professor.setNumero(Integer.parseInt(request.getParameter("numero")));
         }
 
         String nome = (request.getParameter("nome"));
-        String cpf = (request.getParameter("cpf"));
         String sexo = (request.getParameter("sexo"));
-        String email = (request.getParameter("email"));
+        String rg = (request.getParameter("rg"));
+        String cpf = (request.getParameter("cpf"));
         String celular = (request.getParameter("celular"));
-        String nomePai = (request.getParameter("pai"));
-        String celularPai = (request.getParameter("celularPai"));
-        String nomeMae = (request.getParameter("mae"));
-        String celularMae = (request.getParameter("celularMae"));
+        String email = (request.getParameter("email"));
+        String disciplina1 = (request.getParameter("disciplina1"));
+        String disciplina2 = (request.getParameter("disciplina2"));
+        String senha = (request.getParameter("senha"));
+        String senha_repetida = (request.getParameter("senha_repetida"));
+        String perfil = (request.getParameter("perfil"));
         String rua = (request.getParameter("rua"));
         String complemento = (request.getParameter("complemento"));
         String bairro = (request.getParameter("bairro"));
         String cep = (request.getParameter("cep"));
-        if (request.getParameter("codAluno").equals("")) {
-            codAluno = 0;
+        if (request.getParameter("codProfessor").equals("")) {
+            codProfessor = 0;
         } else {
-            codAluno = Integer.parseInt(request.getParameter("codAluno"));
+            codProfessor = Integer.parseInt(request.getParameter("codProfessor"));
         }
-        aluno.setNome(request.getParameter("nome"));
-        aluno.setNomePai(request.getParameter("pai"));
-        aluno.setNomeMae(request.getParameter("mae"));
-        aluno.setCelular(request.getParameter("celular"));
-        aluno.setSexo(request.getParameter("sexo"));
-        aluno.setCelularPai(request.getParameter("celularPai"));
-        aluno.setCelularMae(request.getParameter("celularMae"));
-        aluno.setEmail(request.getParameter("email"));
-        aluno.setRua(request.getParameter("rua"));
-        aluno.setComplemento(request.getParameter("complemento"));
-        aluno.setBairro(request.getParameter("bairro"));
-        aluno.setCep(request.getParameter("cep"));
+        professor.setNome(request.getParameter("nome"));
+        professor.setSexo(request.getParameter("sexo"));
+        professor.setRg(request.getParameter("rg"));
+        professor.setCpf(request.getParameter("cpf"));
+        professor.setCelular(request.getParameter("celular"));
+        professor.setEmail(request.getParameter("email"));
+        professor.setDisciplina1(request.getParameter("disciplina1"));
+        professor.setDisciplina2(request.getParameter("disciplina2"));
+        professor.setSenha(request.getParameter("senha"));
+        professor.setSenha_repetida(request.getParameter("senha_repetida"));
+        professor.setPerfil(request.getParameter("perfil"));
+        professor.setRua(request.getParameter("rua"));
+        professor.setComplemento(request.getParameter("complemento"));
+        professor.setBairro(request.getParameter("bairro"));
+        professor.setCep(request.getParameter("cep"));
 
         // VALIDAÇÕES
         if (nome.equals("")) {
             temErro = true;
             request.setAttribute("erroNome", "Nome não informado.");
         }
-        if (cpf.equals("")) {
-            temErro = true;
-            request.setAttribute("erroCPF", "CPF não informado.");
-        }
-        if (dataNascimento == null) {
-            temErro = true;
-            request.setAttribute("erroData", "Data não informada.");
-        }/*
-        if (dataNascimento != null && dao.calcularIdade(dataNascimento) <= 5) {
-            temErro = true;
-            request.setAttribute("erroData", "Idade mínima para ser matriculado é 6 anos.");
-        }*/
         if (sexo.equals("")) {
             temErro = true;
             request.setAttribute("erroSexo", "Gênero não informado.");
         }
+        if (dataNascimento == null) {
+            temErro = true;
+            request.setAttribute("erroData", "Data não informada.");
+        }
+        if (rg.equals("")) {
+            temErro = true;
+            request.setAttribute("erroRG", "RG não informado.");
+        }
+        if (cpf.equals("")) {
+            temErro = true;
+            request.setAttribute("erroCPF", "CPF não informado.");
+        }      
+
         if (celular.equals("")) {
             temErro = true;
             request.setAttribute("erroCelular", "Celular não informado.");
@@ -171,21 +177,21 @@ public class ProfessorController extends HttpServlet {
             temErro = true;
             request.setAttribute("erroEmail", "E-mail não informado.");
         }
-        if (nomeMae.equals("")) {
+        if (rua.equals("")) {
             temErro = true;
-            request.setAttribute("erroNomeMae", "Nome da mãe não informado.");
+            request.setAttribute("erroRua", "Logradouro não informado.");
         }
-        if (celularMae.equals("")) {
+        if (disciplina1.equals("")) {
             temErro = true;
-            request.setAttribute("erroCelularMae", "Celular da mãe não informado.");
+            request.setAttribute("errodisciplina1", "Disciplina 1 não informada.");
         }
-        if (nomePai.equals("")) {
+        if (disciplina2.equals("")) {
             temErro = true;
-            request.setAttribute("erroNomePai", "Nome do pai não informado.");
+            request.setAttribute("errodisciplina2", "Disciplina 2 não informada.");
         }
-        if (celularPai.equals("")) {
+        if (disciplina1 == disciplina2) {
             temErro = true;
-            request.setAttribute("erroCelularPai", "Celular do pai não informado.");
+            request.setAttribute("erroDisciplinas", "As disciplinas não podem ser iguais.");
         }
         if (rua.equals("")) {
             temErro = true;
@@ -208,8 +214,9 @@ public class ProfessorController extends HttpServlet {
             request.setAttribute("erroCep", "Cep não informado.");
         }
 
-        Aluno dados = new Aluno(codAluno, nome, cpf, dataNascimento, sexo, nomePai, nomeMae,
-                celular, celularPai, celularMae, email, rua, numero,complemento, bairro, cep);
+        Professor dados = new Professor(codProfessor,nome,sexo,dataNascimento,
+               rg,cpf,celular,email,disciplina1,disciplina2,perfil,senha,
+               senha_repetida,rua,numero,complemento,bairro,cep);
 
         request.setAttribute("dados", dados);
 
@@ -219,8 +226,8 @@ public class ProfessorController extends HttpServlet {
         } else {
             HttpSession sessao = request.getSession();
             sessao.setAttribute("dados", dados);
-            sessao.setAttribute("codAluno", codAluno);
-            response.sendRedirect(request.getContextPath() + "/resultado");
+            sessao.setAttribute("codProfessor", codProfessor);
+            response.sendRedirect(request.getContextPath() + "/redirectProfessor");
         }
     }
 }

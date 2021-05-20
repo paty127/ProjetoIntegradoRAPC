@@ -19,8 +19,8 @@ import util.DbUtil;
 public class ProfessorDao {
     
 private final DbUtil dbUtil = new DbUtil();
-    String erro = "Erro na execução";
-    
+    //String erro = "Erro na execução";
+   
     public void adicionarProfessor(Professor professor) throws SQLException, IOException {
         String sql = "call novo_professor(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             try(Connection conn = dbUtil.getConnection();
@@ -28,7 +28,7 @@ private final DbUtil dbUtil = new DbUtil();
                 
             stmt.setString(1, professor.getNome());
             stmt.setString(2, professor.getSexo());
-            stmt.setDate(3, new java.sql.Date(professor.getDataNasc().getTime()));
+            stmt.setDate(3, java.sql.Date.valueOf(professor.getDataNasc()));
             stmt.setString(4, professor.getRg());
             stmt.setString(5, professor.getCpf());
             stmt.setString(6, professor.getCelular());
@@ -78,7 +78,7 @@ private final DbUtil dbUtil = new DbUtil();
             
             stmt.setString(1, professor.getNome());
             stmt.setString(2, professor.getSexo());
-            stmt.setDate(3, new java.sql.Date(professor.getDataNasc().getTime()));
+            stmt.setDate(3, java.sql.Date.valueOf(professor.getDataNasc()));
             stmt.setString(4, professor.getRg());
             stmt.setString(5, professor.getCpf());
             stmt.setString(6, professor.getCelular());
@@ -114,24 +114,23 @@ private final DbUtil dbUtil = new DbUtil();
                 Professor professor = new Professor();
                 professor.setCodProfessor(rst.getInt("cod_professor"));
                 professor.setNome(rst.getString("nome"));
-                professor.setDataNasc(rst.getDate("data_de_nascimento"));
+                professor.setDataNasc(rst.getDate("data_nascimento").toLocalDate());
                 professor.setSexo(rst.getString("sexo"));
-                professor.setCelular(rst.getString("celular"));
-                professor.setCpf(rst.getString("cpf"));
                 professor.setRg(rst.getString("rg"));
+                professor.setCpf(rst.getString("cpf"));
+                professor.setCelular(rst.getString("celular"));
                 professor.setEmail(rst.getString("email"));
                 professor.setRua(rst.getString("rua"));
                 professor.setNumero(Integer.parseInt(rst.getString("numero")));
+                professor.setComplemento(rst.getString("complemento"));
                 professor.setBairro(rst.getString("bairro"));
                 professor.setCep(rst.getString("cep"));
-                
-                
-                listaDeProfessor.add(professor);
+                 listaDeProfessor.add(professor);
             }
         } catch (SQLException e) {
-            System.err.println(erro);
+            System.err.println("Ocorreu um erro recuperar os dados do"
+                    + " professor do banco.");
         }
-
         return listaDeProfessor;
     }
 
@@ -154,7 +153,7 @@ private final DbUtil dbUtil = new DbUtil();
                 professor.setCodProfessor(rst.getInt("cod_professor"));
                 professor.setNome(rst.getString("nome"));
                 professor.setSexo(rst.getString("sexo"));
-                professor.setDataNasc(rst.getDate("data_de_nascimento"));
+                professor.setDataNasc(rst.getDate("data_nascimento").toLocalDate());
                 professor.setRg(rst.getString("rg"));
                 professor.setCpf(rst.getString("cpf"));
                 professor.setCelular(rst.getString("celular"));

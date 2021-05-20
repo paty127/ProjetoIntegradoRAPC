@@ -27,7 +27,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
-                        <a class="dropdown-item" href="ProfessorController?action=ListProfessor">Professores</a>
+                        <a class="dropdown-item" href="professorController?action=ListProfessor">Professores</a>
                         <a class="dropdown-item" href="#">Turmas</a>
                     </div>
                 </li>
@@ -37,7 +37,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
-                        <a class="dropdown-item" href="adicionarEditarProfessor.jsp">Cadastrar Professor</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
                         <a class="dropdown-item" href="#">Cadastrar Turma</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Algo mais aqui</a>
@@ -65,7 +65,6 @@
                     <th scope="col">CPF</th>
                     <th scope="col">RG</th>
                     <th scope="col">Celular</th>
-                    <th scope="col">Telefone</th>
                     <th scope="col">E-mail</th>
                     <th scope="col">Rua</th>
                     <th scope="col">Nº</th>
@@ -80,24 +79,24 @@
                     <tr>
                         <th scope="row"><c:out value="${professor.codProfessor}" /></th>
                         <td><c:out value="${professor.nome}" /></td>
-                        <td><fmt:formatDate pattern="dd/MM/yyyy" value="${professor.dataNasc}" /></td>
+                        <fmt:parseDate value="${professor.dataNasc}" type="date" pattern="yyyy-MM-dd" var="dataDateParsed" />
+                        <td><fmt:formatDate value="${dataDateParsed}" pattern="dd/MM/yyyy" /></td>
                         <td><c:out value="${professor.sexo}" /></td>
                         <td><c:out value="${professor.cpf}" /></td>
                         <td><c:out value="${professor.rg}" /></td>
                         <td><c:out value="${professor.celular}" /></td>
-                        <td><c:out value="${professor.telefone}" /></td>
                         <td><c:out value="${professor.email}" /></td>
                         <td><c:out value="${professor.rua}" /></td>
                         <td><c:out value="${professor.numero}" /></td>
                         <td><c:out value="${professor.bairro}" /></td>
                         <td><c:out value="${professor.cep}" /></td>
-                        <td><a type="button" class="btn btn-primary" href="ProfessorController?action=edit&codProfessor=<c:out value="${professor.codProfessor}" />">Editar</a>
-                        <td><a type="button" class="btn btn-danger" href="ProfessorController?action=delete&codProfessor=<c:out value="${professor.codProfessor}" />">deletar</a> 
+                        <td><a type="button" class="btn btn-primary" href="professorController?action=edit&codProfessor=<c:out value="${professor.codProfessor}" />">Editar</a>
+                        <td><a type="button" class="btn btn-danger" href="professorController?action=delete&codProfessor=<c:out value="${professor.codProfessor}" />">deletar</a> 
                             </div
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
-        <p><a type="button" class="btn btn-success" href="ProfessorController?action=insert">Adicionar Professor</a> 
+        <p><a type="button" class="btn btn-success" href="professorController?action=insert">Adicionar Professor</a> 
     </body>
 </html>
