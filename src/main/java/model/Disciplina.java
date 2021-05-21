@@ -9,6 +9,9 @@ public class Disciplina {
     private String Nome;
     private int CargaHorario;
 
+    public Disciplina() {
+    }
+    
     public Disciplina(int diciplinaID, String Nome, int CargaHorario) {
         this.diciplinaID = diciplinaID;
         this.Nome = Nome;
