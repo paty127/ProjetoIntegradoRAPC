@@ -86,7 +86,7 @@ rua varchar(30),numero integer,complemento varchar(30),bairro varchar(30),cep va
 	insert into Endereco(rua,numero,complemento,bairro,cep)values(rua,numero,complemento,bairro,cep);
     insert into Adm(nome,sexo,data_nascimento,rg,cpf,celular,email,perfil,senha,senha_repetida,fk_endereco)values(nome,sexo,data_nascimento,rg,cpf,celular,email,perfil,senha,senha_repetida,@@identity);
     end $$
-
+/*
 Exemplo de criação do usuário com a procedure
 call novo_adm ('Fulano','Masculino','1988/08/14','11.111.111-1','111.1111.111-11','1196291-0587','fulano@msn.com','12345678','12345678','administrativo','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025');
 
@@ -188,7 +188,7 @@ aluno.sexo = 'M' where cod_aluno = 4;
 UPDATE aluno INNER JOIN endereco ON aluno.fk_endereco = id_endereco SET endereco.numero = 100 WHERE cod_aluno = 7;
 
 */
-
+/*
 use projetorapc;
 drop database projetorapc;
 
