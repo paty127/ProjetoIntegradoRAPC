@@ -220,7 +220,7 @@ public class AlunoController extends HttpServlet {
             HttpSession sessao = request.getSession();
             sessao.setAttribute("dados", dados);
             sessao.setAttribute("codAluno", codAluno);
-            response.sendRedirect(request.getContextPath() + "/resultado");
+            response.sendRedirect(request.getContextPath() + "/redirectAluno");
         }
     }
 }

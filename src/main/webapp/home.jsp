@@ -30,9 +30,9 @@
                         Listagem
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
-                        <a class="dropdown-item" href="professorController?action=ListProfessor">Professores</a>
-                        <a class="dropdown-item" href="#">Turmas</a>
+                        <a class="dropdown-item" href="alunoController?action=ListAlunos">Alunos Matriculados</a>
+                        <a class="dropdown-item" href="admController?action=ListProfessor">Lista de Professores</a>
+                        <a class="dropdown-item" href="admController?action=ListAdm">Lista de Adm</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -42,7 +42,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
-                        <a class="dropdown-item" href="#">Cadastrar Turma</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAdm">Cadastrar Adm</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Algo mais aqui</a>
                     </div>
@@ -67,19 +67,19 @@
                             <h5 class="card-title">Cadastros</h5>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
-                            <a class="dropdown-item" href="#">Turmas</a>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAdm">Cadastrar Adm</a>
                             <a class="dropdown-item" href="#">Presença</a>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card h-100" style="width: 18rem;">
-                      <img src="Imagens/relatorio.png" class="card-img-top img-thumbnail" alt="...">
+                        <img src="Imagens/relatorio.png" class="card-img-top img-thumbnail" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Relatorios</h5>
                             <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
                             <a class="dropdown-item" href="professorController?action=ListProfessor">Professores</a>
-                            <a class="dropdown-item" href="#">Turmas</a>
+                            <a class="dropdown-item" href="admController?action=ListAdm">Lista Adm's"</a>
                             <a class="dropdown-item" href="#">Presença</a>
                             <a class="dropdown-item" href="#">Notas</a>
                         </div>
