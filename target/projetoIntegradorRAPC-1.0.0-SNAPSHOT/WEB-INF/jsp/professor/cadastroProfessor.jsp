@@ -24,7 +24,7 @@
             });
         </script>
     <nav class="navbar navbar-dark bg-dark  navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="Imagens/logo.png" alt="some text" width=120 height=60>CyberSchool</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}"><img src="Imagens/logo.png" alt="some text" width=120 height=60>CyberSchool</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
             <span class="navbar-toggler-icon"></span>
@@ -130,7 +130,7 @@
                 <div class="form-group col-md-3">
                     <!-- E-mail -->
                     <label for="inputEmail4">E-mail</label>
-                    <input type="email" class="form-control" id="inputEmail4"
+                    <input type="email" class="form-control" id="inputEmail"
                            name="email" value="<c:out value="${professor.email}" />" >
                 </div>
             </div>
@@ -140,9 +140,9 @@
             <h4>Leciona</h4>
             <div class="form-row">
                 <div class="form-group col-md-3">   
-                    <label for="inputGenero">Disciplina 1</label><br/> 
+                    <label for="inputDisciplina1">Disciplina 1</label><br/> 
                     <select class="custom-select mr-sm-2" name="disciplina1"
-                        id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
+                        id="inputDisciplina1" value="<c:out value="${professor.disciplina1}" />"> 
                         <option value="">Selecione</option>
                         <option value="Português">Português</option>
                         <option value="História">História</option>
@@ -154,9 +154,9 @@
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputGenero">Disciplina 2</label><br/> 
+                    <label for="inputDisciplina2">Disciplina 2</label><br/> 
                     <select class="custom-select mr-sm-2" name="disciplina2"
-                        id="inputGenero" value="<c:out value="${professor.sexo}" />"> 
+                        id="inputDisciplina2" value="<c:out value="${professor.disciplina2}" />"> 
                         <option value="">Selecione</option>
                         <option value="Português">Português</option>
                         <option value="História">História</option>

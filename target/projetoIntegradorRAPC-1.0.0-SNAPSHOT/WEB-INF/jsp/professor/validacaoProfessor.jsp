@@ -25,7 +25,7 @@
             });
         </script>
     <nav class="navbar navbar-dark bg-dark  navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="Imagens/logo.png" alt="some text" width=120 height=60>CyberSchool</a>
+        <a class="navbar-brand" href="${pageContext.request.contextPath}"><img src="Imagens/logo.png" alt="some text" width=120 height=60>CyberSchool</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
             <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="professorController?action=ListAlunos">Alunos Matriculados</a>
-                    <a class="dropdown-item" href="ProfessorController?action=ListProfessor">Professores</a>
+                    <a class="dropdown-item" href="professorController?action=ListProfessor">Professores</a>
                     <a class="dropdown-item" href="#">Turmas</a>
                 </div>
             </li>
@@ -209,13 +209,24 @@
                     <label for="senha">Senha</label>
                     <input class="form-control"  id="inputSenha" type="password" name="senha"
                            placeholder="XXXXXXXX" maxlength="8"> 
+                    <c:if test="${not empty erroSenha}">
+                        <span class="msg-erro"><c:out value="${erroSenha}" /></span>
+                    </c:if>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="senhaRepetida">Repita a senha</label>
                     <input class="form-control" id="inputSenhaRepetida"type="password" 
                            name="senhaRepetida" maxlength="8"
                            placeholder="XXXXXXXX">
+                    <c:if test="${not empty erroSenhaRepetida}">
+                        <span class="msg-erro"><c:out value="${erroSenhaRepetida}" /></span>
+                    </c:if>
                 </div>
+                <div class="form-group col-md-2">
+                <c:if test="${not empty erroSenhas}">
+                    <span class="msg-erro"><c:out value="${erroSenhas}" /></span>
+                </c:if>
+            </div>  
             </div>
             <h4>Endereço</h4>
             <div class="form-row">

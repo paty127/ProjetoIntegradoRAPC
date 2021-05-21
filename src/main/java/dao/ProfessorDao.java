@@ -68,11 +68,13 @@ private final DbUtil dbUtil = new DbUtil();
     public void updateProfessor(Professor professor) throws SQLException, IOException {
         String sql = "UPDATE professor INNER JOIN endereco ON "
                 + "professor.fk_endereco = id_endereco SET professor.nome = ?,"
-                + "professor.sexo = ?,professor.data_de_nascimento = ?,professor.rg = ?,"
+                + "professor.sexo = ?,professor.data_nascimento = ?,professor.rg = ?,"
                 + "professor.cpf = ?,professor.celular = ?,professor.email = ?,"
-                + "professor.disciplina1 = ?,professor.disciplina2 = ?,professor.perfil = ?,"
-                + "endereco.rua = ?,endereco.numero = ?,endereco.complemento = ?,"
-                + "endereco.bairro = ?,endereco.cep = ? WHERE cod_professor = ?";
+                + "professor.disciplina1 = ?,professor.disciplina2 = ?,"
+                + "professor.senha = ?, professor.senha_repetida = ?,"                
+                + "professor.perfil = ?,endereco.rua = ?,endereco.numero = ?,"
+                + "endereco.complemento = ?,endereco.bairro = ?,"
+                + "endereco.cep = ? WHERE cod_professor = ?";
         try (Connection conn = dbUtil.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)){ 
             
@@ -120,6 +122,11 @@ private final DbUtil dbUtil = new DbUtil();
                 professor.setCpf(rst.getString("cpf"));
                 professor.setCelular(rst.getString("celular"));
                 professor.setEmail(rst.getString("email"));
+                professor.setDisciplina1(rst.getString("disciplina1"));
+                professor.setDisciplina2(rst.getString("disciplina2"));
+                professor.setSenha(rst.getString("senha"));
+                professor.setSenha_repetida(rst.getString("senha_repetida"));
+                professor.setPerfil(rst.getString("perfil"));
                 professor.setRua(rst.getString("rua"));
                 professor.setNumero(Integer.parseInt(rst.getString("numero")));
                 professor.setComplemento(rst.getString("complemento"));
@@ -159,7 +166,9 @@ private final DbUtil dbUtil = new DbUtil();
                 professor.setCelular(rst.getString("celular"));
                 professor.setEmail(rst.getString("email"));
                 professor.setDisciplina1(rst.getString("disciplina1"));
-                professor.setDisciplina2(rst.getString("disciplina1"));
+                professor.setDisciplina2(rst.getString("disciplina2"));
+                professor.setSenha(rst.getString("senha"));
+                professor.setSenha_repetida(rst.getString("senha_repetida"));
                 professor.setPerfil(rst.getString("perfil"));
                 professor.setRua(rst.getString("rua"));
                 professor.setNumero(Integer.parseInt(rst.getString("numero")));

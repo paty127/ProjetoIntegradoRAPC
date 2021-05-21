@@ -1,4 +1,5 @@
 model\Funcionario.class
+controller\EditarProfessor.class
 controller\EditarAluno.class
 util\DbUtil.class
 controller\AlunoController.class

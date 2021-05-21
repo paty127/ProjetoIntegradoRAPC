@@ -77,7 +77,7 @@ public class ProfessorController extends HttpServlet {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            forward = EDIT;
+            forward = INSERT_Professor;
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
@@ -120,7 +120,7 @@ public class ProfessorController extends HttpServlet {
         String disciplina1 = (request.getParameter("disciplina1"));
         String disciplina2 = (request.getParameter("disciplina2"));
         String senha = (request.getParameter("senha"));
-        String senha_repetida = (request.getParameter("senha_repetida"));
+        String senha_repetida = (request.getParameter("senhaRepetida"));
         String perfil = (request.getParameter("perfil"));
         String rua = (request.getParameter("rua"));
         String complemento = (request.getParameter("complemento"));
@@ -140,7 +140,7 @@ public class ProfessorController extends HttpServlet {
         professor.setDisciplina1(request.getParameter("disciplina1"));
         professor.setDisciplina2(request.getParameter("disciplina2"));
         professor.setSenha(request.getParameter("senha"));
-        professor.setSenha_repetida(request.getParameter("senha_repetida"));
+        professor.setSenha_repetida(request.getParameter("senhaRepetida"));
         professor.setPerfil(request.getParameter("perfil"));
         professor.setRua(request.getParameter("rua"));
         professor.setComplemento(request.getParameter("complemento"));
@@ -189,9 +189,22 @@ public class ProfessorController extends HttpServlet {
             temErro = true;
             request.setAttribute("errodisciplina2", "Disciplina 2 não informada.");
         }
-        if (disciplina1 == disciplina2) {
+        if (disciplina1.equals(disciplina2)) {
             temErro = true;
             request.setAttribute("erroDisciplinas", "As disciplinas não podem ser iguais.");
+        }
+        if (senha.equals("")) {
+            temErro = true;
+            request.setAttribute("erroSenha", "A senha não foi informada.");
+        }
+        if (senha_repetida.equals("")) {
+            temErro = true;
+            request.setAttribute("erroSenhaRepetida", "A senha repetida não foi informada.");
+        }
+        if (!(senha.equals(senha_repetida))) {
+            temErro = true;
+            request.setAttribute("erroSenhas", "A senha e a senha repetida não "
+                    + "são iguais.");
         }
         if (rua.equals("")) {
             temErro = true;
