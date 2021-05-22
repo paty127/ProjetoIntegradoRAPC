@@ -89,8 +89,8 @@
                     <div class="card h-100" style="width: 18rem;">
                         <img src="Imagens/user.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                            <h5 class="card-title">Registro</h5>
+                            <a class="dropdown-item" href="Registro-nota">Registro Notas</a>
                         </div>
                     </div>
                 </div>

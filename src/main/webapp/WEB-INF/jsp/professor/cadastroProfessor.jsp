@@ -14,56 +14,59 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/erro.css" />
     </head>
     <body>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-        <script>
-            $(function () {
-                $('input[name=data_de_nascimento]').datepicker();
-            });
-        </script>
-    <nav class="navbar navbar-dark bg-dark  navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}"><img src="Imagens/logo.png" alt="some text" width=120 height=60>CyberSchool</a>
+        <nav class="navbar navbar-dark bg-dark  navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}"><img src="Imagens/logo.png" alt="some text" width=120 height=60>CyberSchool</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Listagem
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="alunoController?action=ListAlunos">Alunos Matriculados</a>
-                    <a class="dropdown-item" href="professorController?action=ListProfessor">Professores</a>
-                    <a class="dropdown-item" href="#">Turmas</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Cadastro
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
-                    <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
-                    <a class="dropdown-item" href="#">Cadastrar Turma</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Algo mais aqui</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Desativado</a>
-            </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-            </form>
-        </div>
-    </nav>
-    <div class="container">
+            <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Listagem
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="alunoController?action=ListAlunos">Alunos Matriculados</a>
+                        <a class="dropdown-item" href="professorController?action=ListProfessor">Professores</a>
+                        <a class="dropdown-item" href="#">Turmas</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Cadastro
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
+                        <a class="dropdown-item" href="#">Cadastrar Turma</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Algo mais aqui</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Desativado</a>
+                </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </nav>
+
+
+        <c:forEach items="${disciplinas}" var="disciplina">
+            <select name="disciplina">
+                <option><c:out value="${disciplina.nome}" /></option>
+                <option></option>
+            </select>
+        </c:forEach>
+
+
+
+
+        <div class="container">
         <h4>Dados do Professor</h4>
         <form method="POST" action='${request.contextPath}professorController' name="frmAddUser">
             <div class="form-row" id="matricula">
@@ -144,13 +147,19 @@
                     <select class="custom-select mr-sm-2" name="disciplina1"
                         id="inputDisciplina1" value="<c:out value="${professor.disciplina1}" />"> 
                         <option value="">Selecione</option>
-                        <option value="Português">Português</option>
-                        <option value="História">História</option>
-                        <option value="Artes">Artes</option>
-                        <option value="Geografia">Geografia</option>
-                        <option value="Matemática">Matemática</option>
-                        <option value="Quimica">Quimica</option>
-                        <option value="Biologia">Biologia</option>
+                        <option value="1">Artes</option>
+                        <option value="2">Biologia</option>
+                        <option value="3">Ciências</option>
+                        <option value="4">Ed. Fisica</option>
+                        <option value="5">Filosofia</option>
+                        <option value="6">Fisíca</option>
+                        <option value="7">Geografia</option>
+                        <option value="8">História</option>
+                        <option value="9">Inglês</option>
+                        <option value="10">Matemática</option>
+                        <option value="11">Portguês</option>
+                        <option value="12">Quimica</option>
+                        <option value="13">Biologia</option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
@@ -158,13 +167,19 @@
                     <select class="custom-select mr-sm-2" name="disciplina2"
                         id="inputDisciplina2" value="<c:out value="${professor.disciplina2}" />"> 
                         <option value="">Selecione</option>
-                        <option value="Português">Português</option>
-                        <option value="História">História</option>
-                        <option value="Artes">Artes</option>
-                        <option value="Geografia">Geografia</option>
-                        <option value="Matemática">Matemática</option>
-                        <option value="Quimica">Quimica</option>
-                        <option value="Biologia">Biologia</option>
+                        <option value="1">Artes</option>
+                        <option value="2">Biologia</option>
+                        <option value="3">Ciências</option>
+                        <option value="4">Ed. Fisica</option>
+                        <option value="5">Filosofia</option>
+                        <option value="6">Fisíca</option>
+                        <option value="7">Geografia</option>
+                        <option value="8">História</option>
+                        <option value="9">Inglês</option>
+                        <option value="10">Matemática</option>
+                        <option value="11">Portguês</option>
+                        <option value="12">Quimica</option>
+                        <option value="13">Biologia</option>
                     </select>
                 </div>
             </div>
@@ -225,5 +240,18 @@
             </div>
         </form>
     </div>
+    
+    
+    
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script>
+        $(function () {
+            $('input[name=data_de_nascimento]').datepicker();
+        });
+    </script>
 </body>
 </html>

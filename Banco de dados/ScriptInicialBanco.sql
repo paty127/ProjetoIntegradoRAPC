@@ -6,6 +6,7 @@ FLUSH PRIVILEGES;
 
 USE ProjetoRAPC;
 
+
 /* Banco Logico: */
 CREATE TABLE Endereco (
     id_endereco integer not null auto_increment PRIMARY KEY,
@@ -49,17 +50,6 @@ select *
 FROM aluno as A
 JOIN endereco as E on A.fk_endereco = E.id_endereco;
 */
-
-
-CREATE TABLE Turma (
-    cod_turma integer not null auto_increment PRIMARY KEY,
-    serie varchar(3),
-    horario varchar(50),
-    turno varchar(5),
-    fk_cod_aluno integer,
-	foreign key (fk_cod_aluno) references Aluno(cod_aluno)
-);
-
 CREATE TABLE Adm (
     cod_adm integer not null auto_increment PRIMARY KEY,
     nome varchar(30),
@@ -106,8 +96,6 @@ CREATE TABLE Professor (
     cpf varchar(16) unique,
     celular varchar(15),  
     email varchar(40),
-	disciplina1 varchar(15),
-    disciplina2 varchar(15),
 	senha varchar(60) not null,
     senha_repetida varchar(60) not null,
     perfil varchar(9),
@@ -137,35 +125,80 @@ select *
 FROM professor as A
 JOIN endereco as E on A.fk_endereco = E.id_endereco;
 */
-    
+CREATE TABLE Turma (
+    cod_turma integer not null auto_increment PRIMARY KEY,
+    serie varchar(3),
+    horario varchar(50),
+    turno varchar(5),
+    fk_cod_aluno integer,
+	foreign key (fk_cod_aluno) references Aluno(cod_aluno)
+);
+
 CREATE TABLE Disciplinas (
-    cod_disciplina integer not null auto_increment PRIMARY KEY,
+    disciplinaID integer not null auto_increment PRIMARY KEY,
     nome varchar(30),
     cargahoraria integer
 );
+
+insert into Disciplinas(nome,cargahoraria)values
+						("Artes",80),
+                        ("Biologia",80),
+                        ("Ciências",80),
+                        ("Educação Fisíca",80),
+                        ("Filosofia",40),
+                        ("Fisíca",120),
+                        ("Geografia",80),
+                        ("História",80),
+                        ("Inglês",80),
+                        ("Matemática",200),
+                        ("Língua Portuguesa",200),
+                        ("Química",120),
+                        ("Sociologia",40);
+                        
+                        
 CREATE TABLE Ministrante (
-    codigo int not null auto_increment PRIMARY KEY,
-    fk_professor integer,
-    fk_disciplina integer,
-    /*FOREIGN KEY (fk_professor) REFERENCES Professor (cod_professor)*/
-    FOREIGN KEY (fk_disciplina) REFERENCES Disciplinas (cod_disciplina)
+    fk_cod_professor integer,
+    fk_disciplinaID integer,
+    FOREIGN KEY (fk_cod_professor) REFERENCES Professor (cod_professor),
+    FOREIGN KEY (fk_disciplinaID) REFERENCES Disciplinas (disciplinaID)
 );
+
 CREATE TABLE Grade (
-    codigo_grade integer not null auto_increment PRIMARY KEY,
-    fk_cod_turma integer,
-    fk_cod_disciplina integer,
-    /*FOREIGN KEY (fk_cod_turma) REFERENCES Turma(cod_turma)*/
-    FOREIGN KEY (fk_cod_disciplina) REFERENCES Disciplinas(cod_disciplina)
+    fk_cod_turma int,
+    fk_disciplinaID integer
 );
+
+ALTER TABLE Grade ADD CONSTRAINT FK_Grade_1
+    FOREIGN KEY (fk_cod_turma)
+    REFERENCES Turma (cod_turma)
+    ON DELETE RESTRICT;
+    
+ALTER TABLE Grade ADD CONSTRAINT FK_Grade_2
+    FOREIGN KEY (fk_disciplinaID)
+    REFERENCES Disciplinas (disciplinaID)
+    ON DELETE SET NULL;
+
+
+
 CREATE TABLE Desempenho (
-    Codigo int PRIMARY KEY,
+	desempenhoID integer not null auto_increment PRIMARY KEY,
     notas decimal,
     frequencia int,
-    fk_cod_disciplina int,
-    fk_cod_aluno int,
-    FOREIGN KEY (fk_cod_disciplina) REFERENCES Disciplinas (cod_disciplina),
-	FOREIGN KEY (fk_cod_aluno) REFERENCES Aluno (cod_aluno)
+    fk_disciplinaID int,
+    fk_cod_aluno int
 );
+
+ALTER TABLE Desempenho ADD CONSTRAINT FK_Desempenho_2
+    FOREIGN KEY (fk_disciplinaID)
+    REFERENCES Disciplinas (disciplinaID)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE Desempenho ADD CONSTRAINT FK_Desempenho_3
+    FOREIGN KEY (fk_cod_aluno)
+    REFERENCES Aluno (cod_aluno)
+    ON DELETE SET NULL;
+
+
 /* Exemplos de consultas
 SELECT * from endereco;
 SELECT * from aluno;

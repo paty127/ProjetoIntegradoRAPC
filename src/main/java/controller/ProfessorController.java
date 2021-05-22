@@ -1,5 +1,6 @@
 package controller;
 
+import dao.DisciplinaDao;
 import dao.ProfessorDao;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
@@ -23,15 +25,19 @@ public class ProfessorController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String INSERT_Professor = "/cadastroProfessor";
     private static final String EDIT = "/editarProfessor";
-    private static final String GERAR_RELATORIO = "/PDF";
+
     
     private static final String LIST_ALUNO = "/listarProfessor";
     
     private final ProfessorDao dao;
 
+    private DisciplinaDao disDAO;
+
     public ProfessorController() {
         dao = new ProfessorDao();
     }
+
+
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
