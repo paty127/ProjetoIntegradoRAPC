@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -58,7 +59,7 @@
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Registro</th>
+                    <th scope="col">ID ADM</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Data de nascimento</th>
                     <th scope="col">Sexo</th>
@@ -73,6 +74,7 @@
             </thead>
             <tbody>
                 <!<!-- atributo Adms vem da classe AdmControlles na linha 65  -->
+                         
                 <c:forEach items="${adms}" var="adm">
                     <tr>
                         <th scope="row"><c:out value="${adm.codAdm}" /></th>
@@ -87,8 +89,11 @@
                         <td><c:out value="${adm.rua}" /></td>
                         <td><c:out value="${adm.numero}" /></td>
                         <td><a type="button" class="btn btn-primary" href="admController?action=edit&codAdm=<c:out value="${adm.codAdm}" />">Editar</a>
-                        <td><a type="button" class="btn btn-danger" href="admController?action=delete&codAdm=<c:out value="${adm.codAdm}" />">deletar</a> 
-                            </div
+                        <td>
+                            <form action="admDeleta?action=delete" method="post">
+                                <input type="hidden" class="form-control" readonly="readonly" name="codAdm" value="<c:out value="${adm.codAdm}" />" >
+                                <input class="btn btn-danger" role="button" aria-pressed="true" type="submit" name="remove" value="Deletar"/>   
+                            </form>
                     </tr>
                 </c:forEach>
             </tbody>

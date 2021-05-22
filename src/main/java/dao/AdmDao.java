@@ -129,8 +129,8 @@ public class AdmDao {
                 listaDeAdm.add(adm);
             }
         } catch (SQLException e) {
-            System.err.println("Ocorreu um erro recuperar os dados do"
-                    + " adm do banco.");
+            System.err.println("Ocorreu um erro ao recuperar a"
+                    + " lista de todos ADM's.");
         }
         return listaDeAdm;
     }

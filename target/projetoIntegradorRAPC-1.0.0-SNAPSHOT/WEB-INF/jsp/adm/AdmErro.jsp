@@ -4,12 +4,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Erro</title>
     </head>
     <body>
         <div>
     <script>
-        if(!alert("Ocorre um erro durante operação, tente novamente.")) document.location = '${pageContext.request.contextPath}/cadastro';
+        if(!alert("Ocorre um erro durante operação, tente novamente.")) document.location = 'admController?action=ListAdm';
     </script>    
         </div>
     </body>

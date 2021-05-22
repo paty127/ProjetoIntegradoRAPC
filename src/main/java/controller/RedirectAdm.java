@@ -43,6 +43,7 @@ public class RedirectAdm extends HttpServlet {
         int numero;
         int codAdm = (int) sessao.getAttribute("codAdm");
         Adm adm = new Adm();
+        String action = request.getParameter("action");
         
         if (sessao.getAttribute("dados") != null) {
             Adm dados = (Adm) sessao.getAttribute("dados");
@@ -58,25 +59,19 @@ public class RedirectAdm extends HttpServlet {
                 } catch (SQLException ex) {
                     Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else {
-                adm.setCodAdm(codAdm);
-                try {
-                    dao.updateAdm(dados);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/aluno/alunoSucessoEd.jsp");
+            }
+
+        } else if(codAdm != 0){
+            try {
+                    dao.deletarAdm(codAdm);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/adm/admSucessoExc.jsp");
                     dispatcher.forward(request, response);
                 } catch (SQLException ex) {
                     Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            RequestDispatcher view = request.getRequestDispatcher(LIST_ALUNO);
-            
-            try {
-                request.setAttribute("alunos", dao.getAllAdm());
-            } catch (SQLException ex) {
-                Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/aluno/alunoErro.jsp");
+                } 
+        }
+        else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/adm/admErro.jsp");
             dispatcher.forward(request, response);
         }
     }

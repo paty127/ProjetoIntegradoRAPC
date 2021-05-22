@@ -5,6 +5,7 @@ util\DbUtil.class
 controller\AlunoController.class
 dao\ProfessorDao.class
 model\Professor.class
+controller\CadastroAdm.class
 controller\ListarAluno.class
 controller\RedirectProfessor.class
 controller\AdmController.class

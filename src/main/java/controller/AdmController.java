@@ -42,46 +42,32 @@ public class AdmController extends HttpServlet {
         //Pegar o parametro de Action 
         String action = request.getParameter("action");
 
-        if (action.equalsIgnoreCase("delete")) {
+            if (action.equalsIgnoreCase("edit")) {
+            
             int codAdm = Integer.parseInt(request.getParameter("codAdm"));
+            //Passar o codigo de adm para o metodo getAdmByID
             try {
-                dao.deletarAdm(codAdm);
-                //RequestDispatcher delete = request.getRequestDispatcher("/admDelete.jsp");
-                //delete.forward(request, response);
+                request.setAttribute("adm",  dao.getAdmById(codAdm));
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/editarAdm");
+                    dispatcher.forward(request, response);
             } catch (SQLException ex) {
                 Logger.getLogger(AdmController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            forward = LIST_ALUNO;
-            try {
-                request.setAttribute("admes", dao.getAllAdm());
-            } catch (SQLException ex) {
-                Logger.getLogger(AdmController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if (action.equalsIgnoreCase("edit")) {
-            forward = EDIT;
-            int codAdm = Integer.parseInt(request.getParameter("codAdm"));
-            try {
-                //Passar o codigo de adm para o metodo getAdmByID
-                Adm adm = dao.getAdmById(codAdm);
-                request.setAttribute("adm", adm);
-
-            } catch (SQLException ex) {
-                Logger.getLogger(AdmController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
+            //request.setAttribute("adm", adm);
         } else if (action.equalsIgnoreCase("ListAdm")) {
-            forward = LIST_ALUNO;
             try {
                 //Criando um atributo chamado Adms e inserindo a lista que veio do metodo getAllAdms
-                request.setAttribute("admes", dao.getAllAdm());
+                request.setAttribute("adms", dao.getAllAdm());
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/listarAdm");
+                    dispatcher.forward(request, response);
             } catch (SQLException ex) {
                 Logger.getLogger(AdmController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            forward = INSERT_Adm;
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroAdm");
+                    dispatcher.forward(request, response);
         }
-
-        RequestDispatcher view = request.getRequestDispatcher(forward);
-        view.forward(request, response);
     }
 
     @Override
@@ -94,6 +80,7 @@ public class AdmController extends HttpServlet {
         int numero;
         int codAdm;
         boolean temErro = false;
+        String action = request.getParameter("action");
         Adm adm = new Adm();
 
         LocalDate dataNascimento = null;
@@ -220,7 +207,8 @@ public class AdmController extends HttpServlet {
         if (temErro) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/adm/validacaoAdm.jsp");
             dispatcher.forward(request, response);
-        } else {
+        } 
+        else {
             HttpSession sessao = request.getSession();
             sessao.setAttribute("dados", dados);
             sessao.setAttribute("codAdm", codAdm);

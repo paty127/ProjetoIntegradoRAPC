@@ -18,10 +18,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-        <
         <script>
             $(function () {
-                $('input[name=data_de_nascimento]').datepicker();
+                $('input[name=data_nascimento]').datepicker();
             });
         </script>
     <nav class="navbar navbar-dark bg-dark  navbar-expand-lg navbar-light bg-light">
@@ -38,8 +37,8 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="alunoController?action=ListAluno">Aluno Matriculados</a>
-                    <a class="dropdown-item" href="professorController?action=ListProfessor">Professores</a>
-                    <a class="dropdown-item" href="#">Turmas</a>
+                    <a class="dropdown-item" href="professorController?action=ListProfessor">Lista de Professores</a>
+                    <a class="dropdown-item" href="admController?action=ListAdm">Lista de Adm's</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -49,7 +48,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
                     <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
-                    <a class="dropdown-item" href="#">Cadastrar Turma</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Adm</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Algo mais aqui</a>
                 </div>

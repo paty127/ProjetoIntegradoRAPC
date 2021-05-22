@@ -61,10 +61,10 @@ CREATE TABLE Turma (
 );
 
 CREATE TABLE Adm (
-    id_adm integer not null auto_increment PRIMARY KEY,
+    cod_adm integer not null auto_increment PRIMARY KEY,
     nome varchar(30),
     sexo varchar(9),
-    data_Nascimento date,
+    data_nascimento date,
     rg varchar(13),
     cpf varchar(16),
     celular varchar(15),
@@ -86,8 +86,8 @@ rua varchar(30),numero integer,complemento varchar(30),bairro varchar(30),cep va
 	insert into Endereco(rua,numero,complemento,bairro,cep)values(rua,numero,complemento,bairro,cep);
     insert into Adm(nome,sexo,data_nascimento,rg,cpf,celular,email,perfil,senha,senha_repetida,fk_endereco)values(nome,sexo,data_nascimento,rg,cpf,celular,email,perfil,senha,senha_repetida,@@identity);
     end $$
-/*
-Exemplo de criação do usuário com a procedure
+
+/*Exemplo de criação do usuário com a procedure
 call novo_adm ('Fulano','Masculino','1988/08/14','11.111.111-1','111.1111.111-11','1196291-0587','fulano@msn.com','12345678','12345678','administrativo','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025');
 
 Exemplo de consula:

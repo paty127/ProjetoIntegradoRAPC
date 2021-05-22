@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -19,12 +20,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ListarAdm", urlPatterns = {"/listarAdm"})
 public class ListarAdm extends HttpServlet {
 
-     @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        
+
         request.getRequestDispatcher("/WEB-INF/jsp/relatorio/ListaAdm.jsp")
                 .forward(request, response);
     }

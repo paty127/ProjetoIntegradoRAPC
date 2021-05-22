@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Lista de professores</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </head>
     <body>
@@ -92,7 +92,6 @@
                         <td><c:out value="${professor.cep}" /></td>
                         <td><a type="button" class="btn btn-primary" href="professorController?action=edit&codProfessor=<c:out value="${professor.codProfessor}" />">Editar</a>
                         <td><a type="button" class="btn btn-danger" href="professorController?action=delete&codProfessor=<c:out value="${professor.codProfessor}" />">deletar</a> 
-                            </div
                     </tr>
                 </c:forEach>
             </tbody>
