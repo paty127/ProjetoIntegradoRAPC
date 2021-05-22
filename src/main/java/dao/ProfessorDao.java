@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Professor;
+import model.Disciplina;
 import util.DbUtil;
 
 /**
@@ -183,4 +184,5 @@ private final DbUtil dbUtil = new DbUtil();
         return professor;
 }
 
+   
 }
