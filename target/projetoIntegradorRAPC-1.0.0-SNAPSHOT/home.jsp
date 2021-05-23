@@ -66,7 +66,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Cadastros</h5>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAluno">Cadastrar Aluno</a>
-                            <a class="dropdown-item" href="professorController?action=INSERT_Professor">Cadastrar Professor</a>
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroProfessor">Cadastrar Professor</a>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/cadastroAdm">Cadastrar Adm</a>
                             <a class="dropdown-item" href="#">Presença</a>
                         </div>
