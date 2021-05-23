@@ -128,11 +128,24 @@ JOIN endereco as E on A.fk_endereco = E.id_endereco;
 CREATE TABLE Turma (
     cod_turma integer not null auto_increment PRIMARY KEY,
     serie varchar(3),
-    horario varchar(50),
-    turno varchar(5),
     fk_cod_aluno integer,
 	foreign key (fk_cod_aluno) references Aluno(cod_aluno)
 );
+
+insert into turma(serie)values(
+		'1ºA'),
+        ('1ºB'),
+        ('2ºA'),
+        ('2ºB'),
+		('3ºA'),
+        ('3ºB'),
+		('4ºA'),
+        ('4ºB'),
+		('5ºA'),
+        ('5ºB');
+
+
+select * from turma;
 
 CREATE TABLE Disciplinas (
     disciplinaID integer not null auto_increment PRIMARY KEY,
@@ -158,22 +171,85 @@ CREATE TABLE Ministrante (
 );
 
 CREATE TABLE Grade (
-    fk_cod_turma int,
-    fk_disciplinaID integer
+    fk_cod_turma integer,
+    fk_disciplinaID integer,
+    FOREIGN KEY (fk_cod_turma) REFERENCES turma (cod_turma),
+    FOREIGN KEY (fk_disciplinaID) REFERENCES disciplinas (disciplinaID)
 );
+select * from grade;
 
-ALTER TABLE Grade ADD CONSTRAINT FK_Grade_1
-    FOREIGN KEY (fk_cod_turma)
-    REFERENCES Turma (cod_turma)
-    ON DELETE RESTRICT;
-    
-ALTER TABLE Grade ADD CONSTRAINT FK_Grade_2
-    FOREIGN KEY (fk_disciplinaID)
-    REFERENCES Disciplinas (disciplinaID)
-    ON DELETE SET NULL;
-
-
-
+insert into grade(fk_cod_turma,fk_disciplinaID)values(
+	1,1),
+    (1,2),
+    (1,3),
+    (1,4),
+    (1,5),
+    (1,6),
+    (1,7),
+    (2,1),
+    (2,2),
+    (2,3),
+    (2,4),
+    (2,5),
+    (2,6),
+    (2,7),
+	(3,1),
+    (3,2),
+    (3,3),
+    (3,4),
+    (3,5),
+    (3,6),
+    (3,7),
+	(4,1),
+    (4,2),
+    (4,3),
+    (4,4),
+    (4,5),
+    (4,6),
+    (4,7),
+	(5,1),
+    (5,2),
+    (5,3),
+    (5,4),
+    (5,5),
+    (5,6),
+    (5,7),
+	(6,1),
+    (6,2),
+    (6,3),
+    (6,4),
+    (6,5),
+    (6,6),
+    (6,7),
+	(7,1),
+    (7,2),
+    (7,3),
+    (7,4),
+    (7,5),
+    (7,6),
+    (7,7),
+	(8,1),
+    (8,2),
+    (8,3),
+    (8,4),
+    (8,5),
+    (8,6),
+    (8,7),
+	(9,1),
+    (9,2),
+    (9,3),
+    (9,4),
+    (9,5),
+    (9,6),
+    (9,7),
+	(10,1),
+    (10,2),
+    (10,3),
+    (10,4),
+    (10,5),
+    (10,6),
+    (10,7);
+select * from grade;
 CREATE TABLE Desempenho (
 	desempenhoID integer not null auto_increment PRIMARY KEY,
     notas decimal,
