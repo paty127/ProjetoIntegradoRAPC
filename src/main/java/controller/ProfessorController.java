@@ -104,6 +104,8 @@ public class ProfessorController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         int numero;
+        int fk_disciplinaID;
+        int fk_disciplina2ID;
         int codProfessor;
         boolean temErro = false;
         Professor professor = new Professor();
@@ -122,6 +124,16 @@ public class ProfessorController extends HttpServlet {
             numero = Integer.parseInt(request.getParameter("numero"));
             professor.setNumero(Integer.parseInt(request.getParameter("numero")));
         }
+        if (request.getParameter("disciplina1").equals("")) {
+            fk_disciplinaID = 0;
+        } else {
+            fk_disciplinaID = Integer.parseInt(request.getParameter("disciplina1"));
+        }
+        if (request.getParameter("disciplina2").equals("")) {
+            fk_disciplina2ID = 0;
+        } else {
+            fk_disciplina2ID = Integer.parseInt(request.getParameter("disciplina2"));
+        }
 
         String nome = (request.getParameter("nome"));
         String sexo = (request.getParameter("sexo"));
@@ -129,8 +141,6 @@ public class ProfessorController extends HttpServlet {
         String cpf = (request.getParameter("cpf"));
         String celular = (request.getParameter("celular"));
         String email = (request.getParameter("email"));
-        String disciplina1 = (request.getParameter("disciplina1"));
-        String disciplina2 = (request.getParameter("disciplina2"));
         String senha = (request.getParameter("senha"));
         String senha_repetida = (request.getParameter("senhaRepetida"));
         String perfil = (request.getParameter("perfil"));
@@ -149,8 +159,6 @@ public class ProfessorController extends HttpServlet {
         professor.setCpf(request.getParameter("cpf"));
         professor.setCelular(request.getParameter("celular"));
         professor.setEmail(request.getParameter("email"));
-        professor.setDisciplina1(request.getParameter("disciplina1"));
-        professor.setDisciplina2(request.getParameter("disciplina2"));
         professor.setSenha(request.getParameter("senha"));
         professor.setSenha_repetida(request.getParameter("senhaRepetida"));
         professor.setPerfil(request.getParameter("perfil"));
@@ -193,15 +201,11 @@ public class ProfessorController extends HttpServlet {
             temErro = true;
             request.setAttribute("erroRua", "Logradouro não informado.");
         }
-        if (disciplina1.equals("")) {
+        if (fk_disciplinaID == 0) {
             temErro = true;
             request.setAttribute("errodisciplina1", "Disciplina 1 não informada.");
         }
-        if (disciplina2.equals("")) {
-            temErro = true;
-            request.setAttribute("errodisciplina2", "Disciplina 2 não informada.");
-        }
-        if (disciplina1.equals(disciplina2)) {
+        if (fk_disciplinaID == fk_disciplina2ID) {
             temErro = true;
             request.setAttribute("erroDisciplinas", "As disciplinas não podem ser iguais.");
         }
@@ -240,8 +244,8 @@ public class ProfessorController extends HttpServlet {
         }
 
         Professor dados = new Professor(codProfessor,nome,sexo,dataNascimento,
-               rg,cpf,celular,email,disciplina1,disciplina2,perfil,senha,
-               senha_repetida,rua,numero,complemento,bairro,cep);
+               rg,cpf,celular,email,perfil,senha,
+               senha_repetida,rua,numero,complemento,bairro,cep,fk_disciplinaID,fk_disciplina2ID);
 
         request.setAttribute("dados", dados);
 

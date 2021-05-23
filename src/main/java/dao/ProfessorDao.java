@@ -32,16 +32,17 @@ private final DbUtil dbUtil = new DbUtil();
             stmt.setString(5, professor.getCpf());
             stmt.setString(6, professor.getCelular());
             stmt.setString(7, professor.getEmail());
-            stmt.setString(8, professor.getDisciplina1());
-            stmt.setString(9, professor.getDisciplina2());
-            stmt.setString(10, professor.getSenha());
-            stmt.setString(11, professor.getSenha_repetida());
-            stmt.setString(12, professor.getPerfil());
-            stmt.setString(13, professor.getRua());
-            stmt.setInt(14, professor.getNumero());
-            stmt.setString(15, professor.getComplemento());
-            stmt.setString(16, professor.getBairro());
-            stmt.setString(17, professor.getCep());
+            stmt.setString(8, professor.getSenha());
+            stmt.setString(9, professor.getSenha_repetida());
+            stmt.setString(10, professor.getPerfil());
+            stmt.setString(11, professor.getRua());
+            stmt.setInt(12, professor.getNumero());
+            stmt.setString(13, professor.getComplemento());
+            stmt.setString(14, professor.getBairro());
+            stmt.setString(15, professor.getCep());
+            stmt.setInt(16, professor.getFk_disciplinaID());
+            stmt.setInt(17, professor.getFk_disciplina2ID());
+            
             //Executar atualização no banco
             stmt.executeUpdate();
 
@@ -69,7 +70,6 @@ private final DbUtil dbUtil = new DbUtil();
                 + "professor.fk_endereco = id_endereco SET professor.nome = ?,"
                 + "professor.sexo = ?,professor.data_nascimento = ?,professor.rg = ?,"
                 + "professor.cpf = ?,professor.celular = ?,professor.email = ?,"
-                + "professor.disciplina1 = ?,professor.disciplina2 = ?,"
                 + "professor.senha = ?, professor.senha_repetida = ?,"                
                 + "professor.perfil = ?,endereco.rua = ?,endereco.numero = ?,"
                 + "endereco.complemento = ?,endereco.bairro = ?,"
@@ -84,8 +84,6 @@ private final DbUtil dbUtil = new DbUtil();
             stmt.setString(5, professor.getCpf());
             stmt.setString(6, professor.getCelular());
             stmt.setString(7, professor.getEmail());
-            stmt.setString(8, professor.getDisciplina1());
-            stmt.setString(9, professor.getDisciplina2());
             stmt.setString(10, professor.getSenha());
             stmt.setString(11, professor.getSenha_repetida());
             stmt.setString(12, professor.getPerfil());
@@ -121,8 +119,6 @@ private final DbUtil dbUtil = new DbUtil();
                 professor.setCpf(rst.getString("cpf"));
                 professor.setCelular(rst.getString("celular"));
                 professor.setEmail(rst.getString("email"));
-                professor.setDisciplina1(rst.getString("disciplina1"));
-                professor.setDisciplina2(rst.getString("disciplina2"));
                 professor.setSenha(rst.getString("senha"));
                 professor.setSenha_repetida(rst.getString("senha_repetida"));
                 professor.setPerfil(rst.getString("perfil"));
@@ -164,8 +160,6 @@ private final DbUtil dbUtil = new DbUtil();
                 professor.setCpf(rst.getString("cpf"));
                 professor.setCelular(rst.getString("celular"));
                 professor.setEmail(rst.getString("email"));
-                professor.setDisciplina1(rst.getString("disciplina1"));
-                professor.setDisciplina2(rst.getString("disciplina2"));
                 professor.setSenha(rst.getString("senha"));
                 professor.setSenha_repetida(rst.getString("senha_repetida"));
                 professor.setPerfil(rst.getString("perfil"));
@@ -181,6 +175,4 @@ private final DbUtil dbUtil = new DbUtil();
         }
         return professor;
 }
-
-   
 }

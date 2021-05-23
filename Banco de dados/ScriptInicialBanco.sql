@@ -103,13 +103,12 @@ CREATE TABLE Professor (
     FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
 );
 
-
 delimiter $$
 create procedure novo_professor (
 nome varchar(50),sexo varchar(9),data_nascimento date,
 rg varchar(13),cpf varchar(16),celular varchar(15),  
 email varchar(40),senha varchar(60), senha_repetida varchar(60),perfil varchar(9),
-rua varchar(30),numero integer,complemento varchar(30),bairro varchar(30),cep varchar(9),fk_cod_professor integer,fk_disciplinaID integer,fk_cod_professor2 integer,fk_disciplina2ID integer)
+rua varchar(30),numero integer,complemento varchar(30),bairro varchar(30),cep varchar(9),fk_disciplinaID integer,fk_disciplina2ID integer)
     begin
 	insert into Endereco(rua,numero,complemento,bairro,cep)values(rua,numero,complemento,bairro,cep);
     insert into Professor(nome,sexo,data_nascimento,rg,cpf,celular,email,perfil,senha,senha_repetida,fk_endereco)values(nome,sexo,data_nascimento,rg,cpf,celular,email,perfil,senha,senha_repetida,@@identity);
