@@ -29,13 +29,15 @@ public class ProfessorController extends HttpServlet {
     
     private static final String LIST_ALUNO = "/listarProfessor";
     
-    private final ProfessorDao dao;
+    private ProfessorDao dao;
 
-    private DisciplinaDao disDAO;
+    private  DisciplinaDao disDAO;
 
     public ProfessorController() {
         dao = new ProfessorDao();
+        disDAO = new DisciplinaDao();
     }
+
 
 
 
@@ -43,7 +45,7 @@ public class ProfessorController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-
+        
          String forward = "";
         //Pegar o parametro de Action 
         String action = request.getParameter("action");
@@ -84,6 +86,11 @@ public class ProfessorController extends HttpServlet {
             }
         } else {
             forward = INSERT_Professor;
+            try {
+                request.setAttribute("disciplinas", disDAO.getAllDisciplinas());
+            } catch (SQLException ex) {
+                Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);

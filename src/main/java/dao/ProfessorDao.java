@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Professor;
-import model.Disciplina;
 import util.DbUtil;
 
 /**
@@ -19,8 +18,7 @@ import util.DbUtil;
  */
 public class ProfessorDao {
     
-private final DbUtil dbUtil = new DbUtil();
-    //String erro = "Erro na execução";
+private final DbUtil dbUtil = new DbUtil();    
    
     public void adicionarProfessor(Professor professor) throws SQLException, IOException {
         String sql = "call novo_professor(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -136,8 +134,8 @@ private final DbUtil dbUtil = new DbUtil();
                  listaDeProfessor.add(professor);
             }
         } catch (SQLException e) {
-            System.err.println("Ocorreu um erro recuperar os dados do"
-                    + " professor do banco.");
+            System.err.println("Ocorreu um erro ao montar a lista de"
+                    + " professores.");
         }
         return listaDeProfessor;
     }
@@ -178,8 +176,8 @@ private final DbUtil dbUtil = new DbUtil();
                 professor.setCep(rst.getString("cep"));
             }
         } catch (SQLException e) {
-            System.err.println("Ocorreu um erro ao tentar recuperar"
-                    + " os dados do Professor.");
+            System.err.println("Ocorreu um erro ao recuperar o professor: "
+                    + "" + codProfessor);
         }
         return professor;
 }

@@ -54,19 +54,7 @@
                 </form>
             </div>
         </nav>
-
-
-        <c:forEach items="${disciplinas}" var="disciplina">
-            <select name="disciplina">
-                <option><c:out value="${disciplina.nome}" /></option>
-                <option></option>
-            </select>
-        </c:forEach>
-
-
-
-
-        <div class="container">
+       <div class="container">
         <h4>Dados do Professor</h4>
         <form method="POST" action='${request.contextPath}professorController' name="frmAddUser">
             <div class="form-row" id="matricula">
@@ -142,44 +130,25 @@
             </div>
             <h4>Leciona</h4>
             <div class="form-row">
-                <div class="form-group col-md-3">   
+                <div class="form-group col-md-3"> 
+                    
                     <label for="inputDisciplina1">Disciplina 1</label><br/> 
                     <select class="custom-select mr-sm-2" name="disciplina1"
-                        id="inputDisciplina1" value="<c:out value="${professor.disciplina1}" />"> 
-                        <option value="">Selecione</option>
-                        <option value="1">Artes</option>
-                        <option value="2">Biologia</option>
-                        <option value="3">Ciências</option>
-                        <option value="4">Ed. Fisica</option>
-                        <option value="5">Filosofia</option>
-                        <option value="6">Fisíca</option>
-                        <option value="7">Geografia</option>
-                        <option value="8">História</option>
-                        <option value="9">Inglês</option>
-                        <option value="10">Matemática</option>
-                        <option value="11">Portguês</option>
-                        <option value="12">Quimica</option>
-                        <option value="13">Biologia</option>
+                        id="inputDisciplina1"> 
+                    <option value="" />Selecione</option>
+                        <c:forEach items="${disciplinas}" var="d">
+                        <option value="${d.disciplinaID}" />${d.nome}</option>
+                    </c:forEach>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputDisciplina2">Disciplina 2</label><br/> 
                     <select class="custom-select mr-sm-2" name="disciplina2"
-                        id="inputDisciplina2" value="<c:out value="${professor.disciplina2}" />"> 
-                        <option value="">Selecione</option>
-                        <option value="1">Artes</option>
-                        <option value="2">Biologia</option>
-                        <option value="3">Ciências</option>
-                        <option value="4">Ed. Fisica</option>
-                        <option value="5">Filosofia</option>
-                        <option value="6">Fisíca</option>
-                        <option value="7">Geografia</option>
-                        <option value="8">História</option>
-                        <option value="9">Inglês</option>
-                        <option value="10">Matemática</option>
-                        <option value="11">Portguês</option>
-                        <option value="12">Quimica</option>
-                        <option value="13">Biologia</option>
+                        id="inputDisciplina2"> 
+                    <option value="" />Selecione</option>
+                        <c:forEach items="${disciplinas}" var="d">
+                        <option value="${d.disciplinaID}" />${d.nome}</option>
+                    </c:forEach>
                     </select>
                 </div>
             </div>

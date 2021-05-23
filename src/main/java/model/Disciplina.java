@@ -5,42 +5,40 @@ package model;
  * @author Carlos Pavão <carlos.henrique93@msn.com>
  */
 public class Disciplina {
-    private int diciplinaID;
-    private String Nome;
-    private int CargaHorario;
+    private int disciplinaID;
+    private String nome;
+    private int cargahoraria;
 
     public Disciplina() {
     }
-    
-    public Disciplina(int diciplinaID, String Nome, int CargaHorario) {
-        this.diciplinaID = diciplinaID;
-        this.Nome = Nome;
-        this.CargaHorario = CargaHorario;
+
+    public Disciplina(int disciplinaID, String nome, int cargahoraria) {
+        this.disciplinaID = disciplinaID;
+        this.nome = nome;
+        this.cargahoraria = cargahoraria;
     }
 
-    public int getDiciplinaID() {
-        return diciplinaID;
+    public int getDisciplinaID() {
+        return disciplinaID;
     }
 
-    public void setDiciplinaID(int diciplinaID) {
-        this.diciplinaID = diciplinaID;
+    public void setDisciplinaID(int disciplinaID) {
+        this.disciplinaID = disciplinaID;
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
-    public void setNome(String Nome) {
-        this.Nome = Nome;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public int getCargaHorario() {
-        return CargaHorario;
+    public int getCargahoraria() {
+        return cargahoraria;
     }
 
-    public void setCargaHorario(int CargaHorario) {
-        this.CargaHorario = CargaHorario;
+    public void setCargahoraria(int cargahoraria) {
+        this.cargahoraria = cargahoraria;
     }
-    
-
 }

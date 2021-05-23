@@ -93,15 +93,19 @@ CREATE TABLE Professor (
     sexo varchar(9),
     data_nascimento date,
     rg varchar(13),
-    cpf varchar(16) unique,
+    cpf varchar(16),
     celular varchar(15),  
     email varchar(40),
+    disciplina1 varchar(20) not null,
+    disciplina2 varchar(20),
 	senha varchar(60) not null,
     senha_repetida varchar(60) not null,
     perfil varchar(9),
     fk_endereco integer,
     FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
 );
+drop table professor;
+select * from professor;
 
 delimiter $$
 create procedure novo_professor (
@@ -115,10 +119,11 @@ rua varchar(30),numero integer,complemento varchar(30),bairro varchar(30),cep va
     insert into Professor(nome,sexo,data_nascimento,rg,cpf,celular,email,disciplina1,disciplina2,perfil,senha,senha_repetida,fk_endereco)values(nome,sexo,data_nascimento,rg,cpf,celular,email,disciplina1,disciplina2,perfil,senha,senha_repetida,@@identity);
     end $$
 
-
+drop procedure novo_professor;
+select * from professor;
     
-/*Exemplo de criação do usuário com a procedure
-call novo_professor ('Fulano','Masculino','1988/08/14','11.111.111-1','111.1111.111-11','1196291-0587','fulano@msn.com','Matemática', 'Quimica','12345678','12345678','Professor','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025');
+Exemplo de criação do usuário com a procedure
+call novo_professor ('Fulano','Masculino','1988/08/14','11.111.111-1','111.1111.111-11','1196291-0587','fulano@msn.com','Matemática','Quimica','12345678','12345678','Professor','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025');
 
 Exemplo de consula:
 select *
@@ -141,28 +146,22 @@ CREATE TABLE Disciplinas (
 );
 
 insert into Disciplinas(nome,cargahoraria)values
-						("Artes",80),
-                        ("Biologia",80),
-                        ("Ciências",80),
-                        ("Educação Fisíca",80),
-                        ("Filosofia",40),
-                        ("Fisíca",120),
-                        ("Geografia",80),
+						("Português",80),
+                        ("Matemática",80),
                         ("História",80),
-                        ("Inglês",80),
-                        ("Matemática",200),
-                        ("Língua Portuguesa",200),
-                        ("Química",120),
-                        ("Sociologia",40);
-                        
-                        
+                        ("Geografia",80),
+                        ("Ciências",40),
+                        ("Fisíca",120),
+                        ("Artes",80),
+                        ("Inglês",80);                 
+					
 CREATE TABLE Ministrante (
     fk_cod_professor integer,
     fk_disciplinaID integer,
     FOREIGN KEY (fk_cod_professor) REFERENCES Professor (cod_professor),
     FOREIGN KEY (fk_disciplinaID) REFERENCES Disciplinas (disciplinaID)
 );
-
+drop table ministrante;
 CREATE TABLE Grade (
     fk_cod_turma int,
     fk_disciplinaID integer
@@ -192,6 +191,7 @@ ALTER TABLE Desempenho ADD CONSTRAINT FK_Desempenho_2
     FOREIGN KEY (fk_disciplinaID)
     REFERENCES Disciplinas (disciplinaID)
     ON DELETE SET NULL;
+ 
  
 ALTER TABLE Desempenho ADD CONSTRAINT FK_Desempenho_3
     FOREIGN KEY (fk_cod_aluno)
