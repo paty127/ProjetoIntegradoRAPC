@@ -45,7 +45,7 @@ public class ProfessorController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         
-         String forward = "";
+        String forward = "";
         //Pegar o parametro de Action 
         String action = request.getParameter("action");
 
@@ -108,6 +108,7 @@ public class ProfessorController extends HttpServlet {
         int fk_disciplina2ID;
         int codProfessor;
         boolean temErro = false;
+        
         Professor professor = new Professor();
 
         LocalDate dataNascimento = null;

@@ -46,8 +46,6 @@ public class AlunoController extends HttpServlet {
             int codAluno = Integer.parseInt(request.getParameter("codAluno"));
             try {
                 dao.deletarAluno(codAluno);
-                //RequestDispatcher delete = request.getRequestDispatcher("/alunoDelete.jsp");
-                //delete.forward(request, response);
             } catch (SQLException ex) {
                 Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
             }

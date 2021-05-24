@@ -1,5 +1,6 @@
 controller\RedirectAdm.class
 dao\Ministrante.class
+dao\TurmaDao.class
 controller\EditarAluno.class
 model\Disciplina.class
 util\DbUtil.class
@@ -7,9 +8,9 @@ controller\Teste.class
 model\Professor.class
 controller\CadastroAdm.class
 dao\DesempenhoDao.class
-controller\RegistroNotas.class
 model\Desempenho.class
 controller\RedirectAluno.class
+controller\NotasController.class
 controller\CadastroAluno.class
 controller\CadastroProfessor.class
 dao\AlunoDao.class
@@ -29,3 +30,4 @@ dao\AdmDao.class
 controller\EditarAdm.class
 controller\ListarProfessor.class
 dao\DisciplinaDao.class
+controller\FrequenciaController.class

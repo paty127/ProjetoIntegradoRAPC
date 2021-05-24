@@ -55,6 +55,7 @@
             </div>
         </nav>
        <div class="container">
+           
         <h4>Dados do Professor</h4>
         <form method="POST" action='${request.contextPath}professorController' name="frmAddUser">
             <div class="form-row" id="matricula">
@@ -125,25 +126,32 @@
             </div>
             <h4>Leciona</h4>
             <div class="form-row">
+                //Cadastro de Disciplina
                 <div class="form-group col-md-3"> 
                     
                     <label for="inputDisciplina1">Disciplina 1</label><br/> 
                     <select class="custom-select mr-sm-2" name="disciplina1"
                         id="inputDisciplina1"> 
-                    <option value="" />Selecione</option>
+                        
+                        //Carregando o select do Banco
+                        
+                        <option value="" />Selecione</option>
                         <c:forEach items="${disciplinas}" var="d">
                         <option value="${d.disciplinaID}" />${d.nome}</option>
-                    </c:forEach>
+                        </c:forEach>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputDisciplina2">Disciplina 2</label><br/> 
                     <select class="custom-select mr-sm-2" name="disciplina2"
                         id="inputDisciplina2"> 
-                    <option value="" />Selecione</option>
+                        
+                        //Carregando o select do Banco
+                        
+                        <option value="" />Selecione</option>
                         <c:forEach items="${disciplinas}" var="d">
                         <option value="${d.disciplinaID}" />${d.nome}</option>
-                    </c:forEach>
+                        </c:forEach>
                     </select>
                 </div>
             </div>
