@@ -51,49 +51,51 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        
-                        <!-- Código do Aluno -->
-                        
-                        <td>
-                            <input type="text" readonly="readonly" name="codAluno"
-                               value="<c:out value="${aluno.codAluno}" />" >
-                        </td>
-                        
-                        <!-- Nome do Aluno -->
-                        
-                        <td>
-                            
-                        </td>
-                        
-                        <!-- Nota 1 -->
-                        
-                        <td>
-                            <input class="form-control" id="inputComplemento" type="text" 
-                           name="complemento" value="<c:out value="${professor.complemento}" />">
-                        </td>
-                        
-                        <!-- Nota 2 -->
-                        
-                        <td>
-                            <input class="form-control" id="inputComplemento" type="text" 
-                           name="complemento" value="<c:out value="${professor.complemento}" />">
-                        </td>
-                        
-                        <!-- Nota 3 -->
-                        
-                        <td>
-                            <input class="form-control" id="inputComplemento" type="text" 
-                           name="complemento" value="<c:out value="${professor.complemento}" />">
-                        </td>
-                        
-                        <!-- Nota 4 -->
-                        
-                        <td>
-                            <input class="form-control" id="inputComplemento" type="text" 
-                           name="complemento" value="<c:out value="${professor.complemento}" />">
-                        </td>
-                    </tr>
+                    <!<!-- atributo Alunos vem da classe AlunoControlles na linha 65  -->
+                    <c:forEach items="${alunos}" var="aluno">
+                        <tr>
+
+                            <!-- Código do Aluno -->
+                        <c:forEach items="${alunos}" var="aluno">
+                            <td>
+                                <th scope="row"><c:out value="${aluno.codAluno}" /></th>
+                            </td>
+
+                            <!-- Nome do Aluno -->
+
+                            <td>
+                                <td><c:out value="${aluno.nome}" /></td>
+                            </td>
+                        </c:forEach>
+                            <!-- Nota 1 -->
+
+                            <td>
+                                <input class="form-control" id="inputComplemento" type="text" 
+                               name="complemento" value="<c:out value="${professor.complemento}" />">
+                            </td>
+
+                            <!-- Nota 2 -->
+
+                            <td>
+                                <input class="form-control" id="inputComplemento" type="text" 
+                               name="complemento" value="<c:out value="${professor.complemento}" />">
+                            </td>
+
+                            <!-- Nota 3 -->
+
+                            <td>
+                                <input class="form-control" id="inputComplemento" type="text" 
+                               name="complemento" value="<c:out value="${professor.complemento}" />">
+                            </td>
+
+                            <!-- Nota 4 -->
+
+                            <td>
+                                <input class="form-control" id="inputComplemento" type="text" 
+                               name="complemento" value="<c:out value="${professor.complemento}" />">
+                            </td>
+                        </tr>
+                    
                 </tbody>
             </table>
 
