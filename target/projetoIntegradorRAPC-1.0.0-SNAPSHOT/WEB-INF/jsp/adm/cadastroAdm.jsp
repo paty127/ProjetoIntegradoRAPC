@@ -20,7 +20,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
         <script>
             $(function () {
-                $('input[name=data_de_nascimento]').datepicker();
+                $('input[name=dataNascimento]').datepicker();
             });
         </script>
     <nav class="navbar navbar-dark bg-dark  navbar-expand-lg navbar-light bg-light">
@@ -69,13 +69,12 @@
             <div class="form-row" id="matricula">
                 <div class="form-group col-md-1">
                     <label>Matrícula</label>
-                    <input type="text" class="form-control" readonly="readonly" name="codAdm"
-                           value="<c:out value="${adm.codAdm}" />" >
+                    <input type="text" class="form-control" readonly="readonly" name="codAdm">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputPerfil">Perfil</label><br/> 
                     <select class="custom-select mr-sm-2" name="perfil"
-                            id="inputPerfil" value="<c:out value="${adm.perfil}" />"> 
+                            id="inputPerfil"> 
                         <option value="Adm">Administrativo</option>
                     </select>
                 </div>
@@ -84,14 +83,13 @@
                 <div class="form-group col-md-3">   
                     <!-- Nome -->
                     <label for="inputNome">Nome</label>
-                    <input class="form-control"  id="inputNome" type="text" name="nome"
-                           value="<c:out value="${adm.nome}" />" >
+                    <input class="form-control"  id="inputNome" type="text" name="nome">
                 </div>
                 <div class="form-group col-md-2">
                     <!-- Gênero -->
                     <label for="inputGenero">Gênero</label><br/> 
                     <select class="custom-select mr-sm-2" name="sexo"
-                            id="inputGenero" value="<c:out value="${adm.sexo}" />"> 
+                            id="inputGenero"> 
                         <option value=""> Selecione</option>
                         <option value="Masculino">Masculino</option>
                         <option value="Feminino">Feminino</option>
@@ -101,37 +99,31 @@
                     <!-- Data -->
                     <label for="inputData">Data de Nascimento</label> 
                     <input class="form-control"  id="inputData" type="date" 
-                           maxlength="10" name="dataNascimento" 
-                           value="<c:out value="${adm.dataNasc}" />" >
+                           maxlength="10" name="dataNascimento">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputRGAdm">RG</label>
                     <input type="text" class="form-control" id="inputRGAdm" name="rg"
-                           value="<c:out value="${adm.rg}" />" 
-                           placeholder="XXX.XXX.XXX-X"
-                           onkeypress="$(this).mask('00.000.000-0');">
+                           placeholder="XXX.XXX.XXX-X" onkeypress="$(this).mask('00.000.000-0');">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="inputCPFAdm">CPF</label>
-                    <input type="text" class="form-control" id="inputCPFAdm" name="cpf"
-                           value="<c:out value="${adm.cpf}" />" 
-                           placeholder="XXX.XXX.XXX-XX"
-                           onkeypress="$(this).mask('000.000.000-00');">
+                    <input type="text" class="form-control" id="inputCPFAdm" name="cpf" 
+                           placeholder="XXX.XXX.XXX-XX" onkeypress="$(this).mask('000.000.000-00');">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputCelularAdm">Celular</label>
                     <input class="form-control" id="inputCelularAdm"type="text" 
                            onkeypress="$(this).mask('(00) 00000-0000')""
-                           name="celular" value="<c:out value="${adm.celular}" />" 
-                           placeholder="(XX) XXXXX-XXXX">
+                           name="celular"placeholder="(XX) XXXXX-XXXX">
                 </div>
                 <div class="form-group col-md-3">
                     <!-- E-mail -->
                     <label for="inputEmail4">E-mail</label>
                     <input type="email" class="form-control" id="inputEmail"
-                           name="email" value="<c:out value="${adm.email}" />" >
+                           name="email">
                 </div>
             </div>
             <div class="form-row">
@@ -157,31 +149,30 @@
                 <div class="form-group col-md-3">
                     <label for="inputLogradouro">Logradouro</label>
                     <input class="form-control" id="inputLogradouro" type="text" 
-                           name="rua" value="<c:out value="${adm.rua}" />">
+                           name="rua">
                 </div>
                 <div class="form-group col-md-1">
                     <label for="inputNumero">Nº</label>
                     <input class="form-control" id="inputNumero" type="text" 
-                           name="numero" value="<c:out value="${adm.numero}" />">
+                           name="numero">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputComplemento">Complemento</label>
                     <input class="form-control" id="inputComplemento" type="text" 
-                           name="complemento" value="<c:out value="${adm.complemento}" />">
+                           name="complemento">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="inputBairro">Bairro</label>
                     <input class="form-control" id="inputBairro" type="text" 
-                           name="bairro" value="<c:out value="${adm.bairro}" />">
+                           name="bairro">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputCEP">CEP</label>
                     <input class="form-control" id="inputCEP" type="text" name="cep"
                            onkeypress="$(this).mask('00000-000')"
-                           placeholder="XXXXX-XXX"
-                           value="<c:out value="${adm.cep}" />" >
+                           placeholder="XXXXX-XXX">
                 </div>
             </div>
     </div>

@@ -21,7 +21,7 @@
         <
         <script>
             $(function () {
-                $('input[name=data_de_nascimento]').datepicker();
+                $('input[name=dataNascimento]').datepicker();
             });
         </script>
     <nav class="navbar navbar-dark bg-dark  navbar-expand-lg navbar-light bg-light">

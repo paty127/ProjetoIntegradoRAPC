@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
+import model.Disciplina;
 
 import model.Professor;
 
@@ -28,9 +29,9 @@ public class ProfessorController extends HttpServlet {
     
     private static final String LIST_ALUNO = "/listarProfessor";
     
-    private ProfessorDao dao;
+    private final ProfessorDao dao;
 
-    private  DisciplinaDao disDAO;
+    private final  DisciplinaDao disDAO;
 
     public ProfessorController() {
         dao = new ProfessorDao();
@@ -67,10 +68,16 @@ public class ProfessorController extends HttpServlet {
         } else if (action.equalsIgnoreCase("edit")) {
             forward = EDIT;
             int codProfessor = Integer.parseInt(request.getParameter("codProfessor"));
+            int fk_disciplinaID = Integer.parseInt(request.getParameter("disciplina1"));
+            int fk_disciplina2ID = Integer.parseInt(request.getParameter("disciplina2"));
             try {
                 //Passar o codigo de professor para o metodo getProfessorByID
                 Professor professor = dao.getProfessorById(codProfessor);
                 request.setAttribute("professor", professor);
+                Disciplina disciplina1 = disDAO.getDisciplinaById(fk_disciplinaID);
+                request.setAttribute("disciplina1", disciplina1);
+                Disciplina disciplina2 = disDAO.getDisciplinaById(fk_disciplina2ID);
+                request.setAttribute("disciplina1", disciplina2);
 
             } catch (SQLException ex) {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);

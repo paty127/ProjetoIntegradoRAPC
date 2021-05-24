@@ -34,15 +34,13 @@ public class CadastroProfessor extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        
-            try {
-                request.setAttribute("disciplinas", disDAO.getAllDisciplinas());
-                request.getRequestDispatcher("/WEB-INF/jsp/professor/cadastroProfessor.jsp")
-                .forward(request, response);
-            } catch (SQLException ex) {
-                Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        request.getRequestDispatcher("/WEB-INF/jsp/professor/cadastroProfessor.jsp")
-                .forward(request, response);
+
+        try {
+            request.setAttribute("disciplinas", disDAO.getAllDisciplinas());
+            request.getRequestDispatcher("/WEB-INF/jsp/professor/cadastroProfessor.jsp")
+            .forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

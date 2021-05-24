@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@page buffer="8192kb" autoFlush="true" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -18,10 +19,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-        <
         <script>
             $(function () {
-                $('input[name=data_de_nascimento]').datepicker();
+                $('input[name=dataNascimento]').datepicker();
             });
         </script>
     <nav class="navbar navbar-dark bg-dark  navbar-expand-lg navbar-light bg-light">
@@ -165,8 +165,8 @@
                 <div class="form-group col-md-3">   
                     <label for="inputGenero">Disciplina 1</label><br/> 
                     <select class="custom-select mr-sm-2" name="disciplina1"
-                        id="inputGenero" value="<c:out value="${dados.disciplina1}" />"> 
-                        <option value="${dados.disciplina1}">${dados.disciplina1}</option>
+                        id="inputGenero"> 
+                        <option value="${dados.fk_disciplinaID}">${dados.fk_disciplinaID}</option>
                         <option value="Português">Português</option>
                         <option value="Matemática">Matemática</option>
                         <option value="História">História</option>
@@ -182,8 +182,8 @@
                 <div class="form-group col-md-2">
                     <label for="inputGenero">Disciplina 2</label><br/> 
                     <select class="custom-select mr-sm-2" name="disciplina2"
-                        id="inputGenero" value="<c:out value="${dados.disciplina2}" />"> 
-                        <option value="${dados.disciplina2}">${dados.disciplina2}</option>
+                        id="inputGenero"> 
+                        <option value="${dados.fk_disciplina2ID}">${dados.fk_disciplina2ID}</option>
                         <option value="Português">Português</option>
                         <option value="Matemática">Matemática</option>
                         <option value="História">História</option>

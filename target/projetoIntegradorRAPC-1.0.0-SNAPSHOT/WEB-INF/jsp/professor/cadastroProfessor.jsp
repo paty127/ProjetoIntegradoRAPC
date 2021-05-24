@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@page buffer="8192kb" autoFlush="true" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -96,23 +97,20 @@
                 <div class="form-group col-md-2">
                     <label for="inputRGProfessor">RG</label>
                     <input type="text" class="form-control" id="inputRGProfessor" name="rg"
-                           placeholder="XXX.XXX.XXX-X"
-                           onkeypress="$(this).mask('00.000.000-0');">
+                           placeholder="XXX.XXX.XXX-X" onkeypress="$(this).mask('00.000.000-0');">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="inputCPFProfessor">CPF</label>
                     <input type="text" class="form-control" id="inputCPFProfessor" name="cpf"
-                           placeholder="XXX.XXX.XXX-XX"
-                           onkeypress="$(this).mask('000.000.000-00');">
+                           placeholder="XXX.XXX.XXX-XX" onkeypress="$(this).mask('000.000.000-00');">
                 </div>
                 <div class="form-group col-md-2">
                     <label for="inputCelularProfessor">Celular</label>
                     <input class="form-control" id="inputCelularProfessor"type="text" 
                            onkeypress="$(this).mask('(00) 00000-0000')""
-                           name="celular" value="<c:out value="${professor.celular}" />" 
-                           placeholder="(XX) XXXXX-XXXX">
+                           name="celular" placeholder="(XX) XXXXX-XXXX">
                 </div>
                 <div class="form-group col-md-3">
                     <!-- E-mail -->
@@ -126,15 +124,13 @@
             </div>
             <h4>Leciona</h4>
             <div class="form-row">
-                //Cadastro de Disciplina
+                <!--//Cadastro de Disciplina-->
                 <div class="form-group col-md-3"> 
                     
-                    <label for="inputDisciplina1">Disciplina 1</label><br/> 
+                    <label for="inputDisciplina1">Disciplina 1</label><br/>
                     <select class="custom-select mr-sm-2" name="disciplina1"
                         id="inputDisciplina1"> 
-                        
-                        //Carregando o select do Banco
-                        
+                        <!--  //Carregando o select do Banco-->
                         <option value="" />Selecione</option>
                         <c:forEach items="${disciplinas}" var="d">
                         <option value="${d.disciplinaID}" />${d.nome}</option>
@@ -145,9 +141,7 @@
                     <label for="inputDisciplina2">Disciplina 2</label><br/> 
                     <select class="custom-select mr-sm-2" name="disciplina2"
                         id="inputDisciplina2"> 
-                        
-                        //Carregando o select do Banco
-                        
+                        <!--  //Carregando o select do Banco-->
                         <option value="" />Selecione</option>
                         <c:forEach items="${disciplinas}" var="d">
                         <option value="${d.disciplinaID}" />${d.nome}</option>
@@ -185,7 +179,7 @@
                 <div class="form-group col-md-2">
                     <label for="inputComplemento">Complemento</label>
                     <input class="form-control" id="inputComplemento" type="text" 
-                           name="complemento" value="<c:out value="${professor.complemento}" />">
+                           name="complemento">
                 </div>
             </div>
                 <div class="form-row">
@@ -221,7 +215,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script>
         $(function () {
-            $('input[name=data_de_nascimento]').datepicker();
+            $('input[name=dataNascimento]').datepicker();
         });
     </script>
 </body>

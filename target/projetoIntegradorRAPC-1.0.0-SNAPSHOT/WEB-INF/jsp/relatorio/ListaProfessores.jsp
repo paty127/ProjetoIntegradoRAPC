@@ -95,6 +95,7 @@
                     </tr>
                 </c:forEach>
             </tbody>
+            
         </table>
         <p><a type="button" class="btn btn-success" href="professorController?action=insert">Adicionar Professor</a> 
     </body>

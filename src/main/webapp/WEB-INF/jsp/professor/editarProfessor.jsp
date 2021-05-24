@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@page buffer="8192kb" autoFlush="true" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -20,7 +21,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
         <script>
             $(function () {
-                $('input[name=data_de_nascimento]').datepicker();
+                $('input[name=dataNascimento]').datepicker();
             });
         </script>
     <nav class="navbar navbar-dark bg-dark  navbar-expand-lg navbar-light bg-light">
@@ -142,8 +143,8 @@
                 <div class="form-group col-md-3">   
                     <label for="inputDisciplina1">Disciplina 1</label><br/> 
                     <select class="custom-select mr-sm-2" name="disciplina1"
-                        id="inputDisciplina1" value="<c:out value="${professor.disciplina1}" />"> 
-                        <option value="${professor.disciplina1}">${professor.disciplina1}</option>
+                        id="inputDisciplina1"> 
+                        <option value="${professor.fk_disciplinaID}">${professor.fk_disciplinaID}</option>
                         <option value="Português">Português</option>
                         <option value="Matemática">Matemática</option>
                         <option value="História">História</option>
@@ -156,8 +157,8 @@
                 <div class="form-group col-md-2">
                     <label for="inputdisciplina2">Disciplina 2</label><br/> 
                     <select class="custom-select mr-sm-2" name="disciplina2"
-                        id="inputdisciplina2" value="<c:out value="${professor.disciplina2}" />"> 
-                        <option value="${professor.disciplina2}">${professor.disciplina2}</option>
+                        id="inputdisciplina2"> 
+                        <option value="${professor.fk_disciplina2ID}">${professor.fk_disciplina2ID}</option>
                         <option value="Português">Português</option>
                         <option value="Matemática">Matemática</option>
                         <option value="História">História</option>
