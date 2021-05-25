@@ -21,10 +21,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Turma;
 
 
 
-@WebServlet(name = "notasController", urlPatterns = {"/notasController","/selecaoTurma"})
+@WebServlet(name = "notasController", urlPatterns = {"/notasController","/selectionDisc"})
 public class NotasController extends HttpServlet {
     
     private final DisciplinaDao daoD;
@@ -41,6 +43,7 @@ public class NotasController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int numero;
         
         String action = request.getServletPath();
         
@@ -57,8 +60,18 @@ public class NotasController extends HttpServlet {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
             Redirecionar(request,response);
-            double codTurma = Double.parseDouble("inputTurma");
-            double codDisciplina = Double.parseDouble("inputDisciplina");
+            
+            
+        }else if(action.equals("/selectionDisc")){
+            int codTurma = Integer.parseInt(request.getParameter("codTurma"));
+            
+            try {
+                ListaAlunos(request,response,codTurma);
+            } catch (SQLException ex) {
+                Logger.getLogger(NotasController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            response.sendRedirect("home.jsp");
         }
     }
     
@@ -69,6 +82,7 @@ public class NotasController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        
     }
     
     //Listar Alunos
@@ -77,8 +91,17 @@ public class NotasController extends HttpServlet {
         //Direcionando para tela JSP.
         request.getRequestDispatcher("/WEB-INF/jsp/registro/notas.jsp").forward(request, response);
     }
-    protected void ListaAlunos(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void ListaAlunos(HttpServletRequest request, HttpServletResponse response,int codTurma)
+            throws ServletException, IOException, SQLException {
+        
+        daoT.getTurmaById(codTurma);
+        
+        Turma turma = null;
+        
+        int codAluno = turma.getCodAluno();
+        
+        request.setAttribute("alunos", daoA.getAlunoById(codAluno));
+        
         
     }
     

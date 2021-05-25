@@ -7,13 +7,15 @@ package model;
 public class Turma {
     private int turmaID;
     private String serie;
+    private int codAluno;
 
     public Turma() {
     }
 
-    public Turma(int turmaID, String serie) {
+    public Turma(int turmaID, String serie, int codAluno) {
         this.turmaID = turmaID;
         this.serie = serie;
+        this.codAluno = codAluno;
     }
 
     public int getTurmaID() {
@@ -32,5 +34,11 @@ public class Turma {
         this.serie = serie;
     }
 
-   
+    public int getCodAluno() {
+        return codAluno;
+    }
+
+    public void setCodAluno(int codAluno) {
+        this.codAluno = codAluno;
+    }
 }

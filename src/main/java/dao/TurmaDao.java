@@ -27,7 +27,7 @@ public class TurmaDao {
                 Turma turma = new Turma();
                 turma.setTurmaID(rst.getInt("cod_turma"));
                 turma.setSerie(rst.getString("serie"));
-                
+                turma.setCodAluno(rst.getInt("fk_cod_aluno"));
                 listaTurma.add(turma);
             }
         } catch (SQLException e) {
@@ -37,7 +37,7 @@ public class TurmaDao {
         return listaTurma;
     }
 
-    public Turma getDisciplinaById(int turmaID) throws SQLException, IOException {
+    public Turma getTurmaById(int turmaID) throws SQLException, IOException {
         String sql = "select * FROM turma WHERE cod_turma = ?";
         Turma turma = new Turma();
         Connection conn = dbUtil.getConnection();
@@ -51,6 +51,7 @@ public class TurmaDao {
             if (rst.next()) {
                 turma.setTurmaID(rst.getInt("cod_turma"));
                 turma.setSerie(rst.getString("serie"));
+                turma.setCodAluno(rst.getInt("fk_cod_aluno"));
             }
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao tentar recuperar"

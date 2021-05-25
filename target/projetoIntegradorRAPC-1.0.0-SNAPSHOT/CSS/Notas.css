@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-image: url("fundo.jpg");
+    background-size: cover;
+    background-position-y: -200px;
+}
+#logo{
+    margin: 0;
+    margin-left: 0;
+    width: 115px;
+
+}
+
+#user{
+    width: 70px;
+    height: 70px;
+}
+
+#title{
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 2rem;
+    color: #FFF;
+}
+
+#table-title{
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+#textcolor{  
+    color: #FFF;
+
+}
+
+#space{
+    margin-top: 0.5rem;
+
+}
+
+#footer{
+    text-align: center;
+    font-size: 16px;
+    color: #FFF;
+    place-content: bottom;
+    margin-top: 7rem;
+
+}
+
+#img-footer{
+    width: 48px;
+    height: 57px;
+    margin-top: 5rem;
+    
+}

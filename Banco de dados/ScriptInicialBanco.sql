@@ -67,6 +67,13 @@ CREATE TABLE Turma (
     fk_cod_aluno integer,
 	foreign key (fk_cod_aluno) references Aluno(cod_aluno)
 );
+
+select * from Turma;
+
+SELECT turma.fk_cod_aluno
+FROM Turma
+INNER JOIN aluno
+ON turma.fk_cod_aluno=aluno.cod_aluno,aluno.nome;
 CREATE TABLE Disciplinas (
     disciplinaID integer not null auto_increment PRIMARY KEY,
     nome varchar(30),
@@ -85,6 +92,7 @@ CREATE TABLE Grade (
     FOREIGN KEY (fk_cod_turma) REFERENCES turma (cod_turma),
     FOREIGN KEY (fk_disciplinaID) REFERENCES disciplinas (disciplinaID)
 );
+
 CREATE TABLE Desempenho (
 	desempenhoID integer not null auto_increment PRIMARY KEY,
     nota1 decimal,

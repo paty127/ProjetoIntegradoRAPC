@@ -10,7 +10,8 @@
     </head>
     <body>
         <h1>Teste</h1>
-                   
+            
+        <form name="frmContato" action="selectionDisc">
             <label for="Turma">Turma</label><br/> 
                 <select class="custom-select mr-sm-2" name="codTurma"
                     id="inputTurma"> 
@@ -27,18 +28,17 @@
                 <!-- Select de Disciplina   -->
 
                 <label for="Turma">Disciplina</label><br/> 
-                <select class="custom-select mr-sm-2" name="Disciplina"
+                <select class="" name="codDisciplina"
                     id="inputDisciplina"> 
-
-
                     <!-- Carregando o select do Banco -->
                     <option value="" />Selecione</option>
                     <c:forEach items="${Disciplinas}" var="d">
                     <option value="${d.disciplinaID}" />${d.nome}</option>
                     </c:forEach>
                 </select>
+                <input role="button" aria-pressed="true" type="submit" value="Pesquisar" />
+        </form>    
             
-            <input role="button" aria-pressed="true" type="submit" value="Pesquisar" />
             
             <table border="1">
                 <thead>
@@ -70,33 +70,31 @@
                             <!-- Nota 1 -->
 
                             <td>
-                                <input class="form-control" id="inputComplemento" type="text" 
-                               name="complemento" value="<c:out value="${professor.complemento}" />">
+                                
+                            
                             </td>
 
                             <!-- Nota 2 -->
 
                             <td>
-                                <input class="form-control" id="inputComplemento" type="text" 
-                               name="complemento" value="<c:out value="${professor.complemento}" />">
+                                
                             </td>
 
                             <!-- Nota 3 -->
 
                             <td>
-                                <input class="form-control" id="inputComplemento" type="text" 
-                               name="complemento" value="<c:out value="${professor.complemento}" />">
+                                
                             </td>
 
                             <!-- Nota 4 -->
 
                             <td>
-                                <input class="form-control" id="inputComplemento" type="text" 
-                               name="complemento" value="<c:out value="${professor.complemento}" />">
+                            
                             </td>
                         </tr>
                     
                 </tbody>
-            </table> 
+            </table>
+          
     </body>
 </html>
