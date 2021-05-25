@@ -16,6 +16,11 @@ CREATE TABLE Endereco (
     bairro varchar(30),
     cep varchar(9)
 );
+CREATE TABLE Turma (
+    cod_turma integer not null auto_increment PRIMARY KEY,
+    serie varchar(3) not null,
+    qte integer not null
+);
 CREATE TABLE Aluno (
     cod_aluno integer not null auto_increment PRIMARY KEY,
     nome varchar(50),
@@ -29,7 +34,9 @@ CREATE TABLE Aluno (
     mae varchar(30),
     telefone_mae varchar(15),
     fk_endereco integer,
-    FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
+    fk_turma integer,
+    FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco),
+    FOREIGN KEY (fk_turma) REFERENCES turma (cod_turma)
 );
 CREATE TABLE Adm (
     cod_adm integer not null auto_increment PRIMARY KEY,
@@ -61,12 +68,7 @@ CREATE TABLE Professor (
     fk_endereco integer,
     FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco)
 );
-CREATE TABLE Turma (
-    cod_turma integer not null auto_increment PRIMARY KEY,
-    serie varchar(3),
-    fk_cod_aluno integer,
-	foreign key (fk_cod_aluno) references Aluno(cod_aluno)
-);
+
 CREATE TABLE Disciplinas (
     disciplinaID integer not null auto_increment PRIMARY KEY,
     nome varchar(30),
@@ -98,12 +100,12 @@ CREATE TABLE Desempenho (
     FOREIGN KEY (fk_cod_aluno) REFERENCES Aluno (cod_aluno)
 );
    
-insert into turma(serie)values
-				 ('1ºA'),('1ºB'),
-                 ('2ºA'),('2ºB'),
-                 ('3ºA'),('3ºB'),
-                 ('4ºA'),('4ºB'),
-				 ('5ºA'),('5ºB');
+insert into turma(serie,qte)values
+				 ('1ºA',20),('1ºB',20),
+                 ('2ºA',20),('2ºB',20),
+                 ('3ºA',20),('3ºB',20),
+                 ('4ºA',20),('4ºB',20),
+				 ('5ºA',20),('5ºB',20);
         
 insert into Disciplinas(nome,cargahoraria)values
 						("Português",80),
