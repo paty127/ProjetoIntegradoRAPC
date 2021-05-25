@@ -90,13 +90,13 @@
                         <td><c:out value="${professor.numero}" /></td>
                         <td><c:out value="${professor.bairro}" /></td>
                         <td><c:out value="${professor.cep}" /></td>
-                        <td><a type="button" class="btn btn-primary" href="professorController?action=edit&codProfessor=<c:out value="${professor.codProfessor}" />">Editar</a>
+                        <td><a type="button" class="btn btn-primary" href="professorController?action=edit&codProfessor=<c:out value="${professor.codProfessor}"/>&disciplina1=professor.fkdisciplinaID=<c:out value="${professor.fk_disciplinaID}"/>&disciplina2=professor.fkdisciplina2ID=<c:out value="${professor.fk_disciplinaID}"/>">Editar</a>
                         <td><a type="button" class="btn btn-danger" href="professorController?action=delete&codProfessor=<c:out value="${professor.codProfessor}" />">deletar</a> 
                     </tr>
                 </c:forEach>
             </tbody>
-            
         </table>
+        <input type="hidden" class="form-control" readonly="readonly" name="disciplina1" value="<c:out value="${professor.fk_disciplinaID}" />">
         <p><a type="button" class="btn btn-success" href="professorController?action=insert">Adicionar Professor</a> 
     </body>
 </html>
