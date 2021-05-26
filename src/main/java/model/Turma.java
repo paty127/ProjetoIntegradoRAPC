@@ -5,17 +5,18 @@ package model;
  * @author Carlos Pavão <carlos.henrique93@msn.com>
  */
 public class Turma {
+    
     private int turmaID;
     private String serie;
-    private int codAluno;
+    private int qte;
 
     public Turma() {
     }
 
-    public Turma(int turmaID, String serie, int codAluno) {
+    public Turma(int turmaID, String serie, int qte) {
         this.turmaID = turmaID;
         this.serie = serie;
-        this.codAluno = codAluno;
+        this.qte = qte;
     }
 
     public int getTurmaID() {
@@ -34,11 +35,12 @@ public class Turma {
         this.serie = serie;
     }
 
-    public int getCodAluno() {
-        return codAluno;
+    public int getQte() {
+        return qte;
     }
 
-    public void setCodAluno(int codAluno) {
-        this.codAluno = codAluno;
+    public void setQte(int qte) {
+        this.qte = qte;
     }
+    
 }

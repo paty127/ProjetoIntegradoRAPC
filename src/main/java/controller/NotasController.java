@@ -70,6 +70,7 @@ public class NotasController extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(NotasController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            Redirecionar(request,response);
         }else{
             response.sendRedirect("home.jsp");
         }
@@ -83,6 +84,15 @@ public class NotasController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         
+        int codTurma = Integer.parseInt(request.getParameter("codTurma"));
+            
+        try {
+            ListaAlunos(request,response,codTurma);
+        } catch (SQLException ex) {
+            Logger.getLogger(NotasController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Redirecionar(request,response);
+            
     }
     
     //Listar Alunos
@@ -94,15 +104,7 @@ public class NotasController extends HttpServlet {
     protected void ListaAlunos(HttpServletRequest request, HttpServletResponse response,int codTurma)
             throws ServletException, IOException, SQLException {
         
-        daoT.getTurmaById(codTurma);
-        
-        Turma turma = null;
-        
-        int codAluno = turma.getCodAluno();
-        
-        request.setAttribute("alunos", daoA.getAlunoById(codAluno));
-        
-        
+        request.setAttribute("alunos", daoT.listarAlunosDaTurma(codTurma));
     }
     
 }

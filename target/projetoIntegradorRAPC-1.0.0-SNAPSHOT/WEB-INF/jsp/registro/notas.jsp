@@ -57,42 +57,47 @@
                         <tr>
 
                             <!-- Código do Aluno -->
-                            <td>
-                                <th scope="row"><c:out value="${aluno.codAluno}" /></th>
-                            </td>
+                            <th scope="row">
+                                
+                                <c:out value="${aluno.codAluno}" />
+                                
+                            </th>
+                                
+                            
 
                             <!-- Nome do Aluno -->
 
                             <td>
-                                <td><c:out value="${aluno.nome}" /></td>
-                            </td>
-                        </c:forEach>
-                            <!-- Nota 1 -->
-
-                            <td>
                                 
-                            
+                                <c:out value="${aluno.nome}" />
+                                
+                            </td>
+                    </c:forEach>
+                            <!-- Nota 1 -->
+                    <c:forEach items="${desempenho}" var="nota">        
+                            <td>
+                                 <c:out value="${nota.nota1}" />
                             </td>
 
                             <!-- Nota 2 -->
 
                             <td>
-                                
+                                <c:out value="${nota.nota2}" />
                             </td>
 
                             <!-- Nota 3 -->
 
                             <td>
-                                
+                                <c:out value="${nota.nota2}" />
                             </td>
 
                             <!-- Nota 4 -->
 
                             <td>
-                            
+                                <c:out value="${nota.nota2}" />
                             </td>
                         </tr>
-                    
+                    </c:forEach>
                 </tbody>
             </table>
           
