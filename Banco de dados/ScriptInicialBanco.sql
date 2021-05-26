@@ -140,15 +140,15 @@ create procedure novo_aluno (
     insert into aluno(nome,cpf,data_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae,fk_endereco)values(nome,cpf,data_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae,@@identity);
     end $$
 
- /* Exemplo de criação do usuário com a procedure
+/*Exemplo de criação do usuário com a procedure
 call novo_aluno ('Fulano','111.1111.111-11','1988/08/14','Masculino','1196291-0587','fulano@msn.com','Pai', '11962910587','Mãe','11962910587','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025');
 
-Exemplo de consula:
+Exemplo de consulta:
 select *
 FROM aluno as A
 JOIN endereco as E on A.fk_endereco = E.id_endereco;
 */
-   
+ delimiter $$  
 create procedure novo_adm (
 nome varchar(50),sexo varchar(9),data_nascimento date,
 rg varchar(13),cpf varchar(16),celular varchar(15),  
@@ -161,11 +161,13 @@ rua varchar(30),numero integer,complemento varchar(30),bairro varchar(30),cep va
  /*Exemplo de criação do usuário com a procedure
 call novo_adm ('Fulano','Masculino','1988/08/14','11.111.111-1','111.1111.111-11','1196291-0587','fulano@msn.com','12345678','12345678','administrativo','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025');
 
-Exemplo de consula:
+Exemplo de consulta:
 select *
 FROM Adm as A
 JOIN endereco as E on A.fk_endereco = E.id_endereco;
 */   
+
+delimiter $$
 create procedure novo_professor (
 nome varchar(50),sexo varchar(9),data_nascimento date,
 rg varchar(13),cpf varchar(16),celular varchar(15),  
@@ -177,20 +179,17 @@ rua varchar(30),numero integer,complemento varchar(30),bairro varchar(30),cep va
     insert into ministrante(fk_cod_professor, fk_disciplinaID)values(@@identity, fk_disciplinaID);
     insert into ministrante(fk_cod_professor, fk_disciplinaID)values(@@identity, fk_disciplina2ID);
     end $$
-
-/*Exemplo de criação do Professor com a procedure
+    
+    /*Exemplo de criação do Professor com a procedure
 call novo_professor ('Fulano','Masculino','1988/08/14','11.111.111-1','111.1111.111-11','1196291-0587','fulano@msn.com','12345678','12345678','Professor','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025',5,2,5,4);
 
 Exemplo de consula:
 select *
 FROM professor as A
 JOIN endereco as E on A.fk_endereco = E.id_endereco;
-*/
 
 
-
-
-/* Exemplos de consultas
+ Exemplos de consultas
 SELECT * from endereco;
 SELECT * from aluno;
 
@@ -211,11 +210,6 @@ aluno.sexo = 'M' where cod_aluno = 4;
 
 UPDATE aluno INNER JOIN endereco ON aluno.fk_endereco = id_endereco SET endereco.numero = 100 WHERE cod_aluno = 7;
 
-*/
-/*
-use projetorapc;
-drop database projetorapc;
-
 select *
 FROM aluno as A
 JOIN endereco as E on A.fk_endereco = E.id_endereco;
@@ -223,8 +217,33 @@ select *
 FROM professor as A
 JOIN endereco as E on A.fk_endereco = E.id_endereco;
 
+
 */
+
+delimiter $$   
+create procedure novoAluno_turma (
+IN p_cod_aluno integer, IN p_cod_turma integer)
+    begin
+	UPDATE aluno SET fk_turma = p_cod_turma WHERE cod_aluno = p_cod_aluno; 
+    UPDATE turma SET qte = qte - 1 WHERE cod_turma = p_cod_turma;
+    end $$
+
+/*
+Exemplo de chamada da procedure novoAluno_turma e consultas
+
+Manda primeiro o código do aluno e depois o código da turma.
+
+call novoAluno_turma (4,2);
+
+update turma set qte = 20;
+
+update aluno set fk_turma = null;
+
+call novoAluno_turma (1,1);
 
 select * from turma;
 
-describe aluno;
+select nome, serie from aluno inner join turma on fk_turma = cod_turma;
+select nome, serie from aluno inner join turma on fk_turma = cod_turma where serie = '1ºB';
+
+*/
