@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import model.Aluno;
 import model.Turma;
 import util.DbUtil;
 
@@ -27,17 +28,17 @@ public class TurmaDao {
                 Turma turma = new Turma();
                 turma.setTurmaID(rst.getInt("cod_turma"));
                 turma.setSerie(rst.getString("serie"));
-                turma.setCodAluno(rst.getInt("fk_cod_aluno"));
+                turma.setQte(rst.getInt("qte"));
                 listaTurma.add(turma);
             }
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao montar a lista de"
-                    + " disciplinas.");
+                    + " todas as turmas.");
         }
         return listaTurma;
     }
 
-    public Turma getTurmaById(int turmaID) throws SQLException, IOException {
+    public Turma SelecionarDesempenho(int turmaID) throws SQLException, IOException {
         String sql = "select * FROM turma WHERE cod_turma = ?";
         Turma turma = new Turma();
         Connection conn = dbUtil.getConnection();
@@ -51,12 +52,47 @@ public class TurmaDao {
             if (rst.next()) {
                 turma.setTurmaID(rst.getInt("cod_turma"));
                 turma.setSerie(rst.getString("serie"));
-                turma.setCodAluno(rst.getInt("fk_cod_aluno"));
+                turma.setQte(rst.getInt("qte"));
             }
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao tentar recuperar"
-                    + " a disciplinaID" + turmaID );
+                    + " seleciona uma unica turma" + turmaID );
         }
         return turma;
     }
+    
+    public List<Aluno> listarAlunosDaTurma(int turmaID) throws SQLException, IOException {
+        String sql = "select * FROM aluno WHERE fk_turma = ?";
+        Aluno aluno = new Aluno();
+        List<Aluno> listaDeAluno = new ArrayList<>();
+        Connection conn = dbUtil.getConnection();
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, turmaID);
+            //Execultando o comando
+            ResultSet rst = stmt.executeQuery();
+
+            if (rst.next()) {
+                aluno.setCodAluno(rst.getInt("cod_aluno"));
+                aluno.setNome(rst.getString("nome"));
+                aluno.setCpf(rst.getString("cpf"));
+                aluno.setSexo(rst.getString("sexo"));
+                aluno.setDataNasc(rst.getDate("data_nascimento").toLocalDate());
+                aluno.setNomePai(rst.getString("pai"));
+                aluno.setNomeMae(rst.getString("mae"));
+                aluno.setCelular(rst.getString("celular"));
+                aluno.setCelularPai(rst.getString("telefone_pai"));
+                aluno.setCelularMae(rst.getString("telefone_mae"));
+                aluno.setEmail(rst.getString("email"));
+
+                listaDeAluno.add(aluno);
+            }
+        } catch (SQLException e) {
+            System.err.println("Ocorreu um erro ao tentar recuperar"
+                    + " a lista de alunos" + turmaID );
+        }
+        return listaDeAluno;
+    }
+    
 }

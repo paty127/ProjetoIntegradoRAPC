@@ -10,15 +10,20 @@ public class Desempenho {
     private double nota2;
     private double nota3;
     private double nota4;
-    private int presenca;
+    private int codDisciplina;
+    private int codAluno;
 
-    public Desempenho(int idDesempenho, double nota1, double nota2, double nota3, double nota4, int presenca) {
+    public Desempenho() {
+    }
+
+    public Desempenho(int idDesempenho, double nota1, double nota2, double nota3, double nota4, int codTurma, int codAluno) {
         this.idDesempenho = idDesempenho;
         this.nota1 = nota1;
         this.nota2 = nota2;
         this.nota3 = nota3;
         this.nota4 = nota4;
-        this.presenca = presenca;
+        this.codDisciplina = codTurma;
+        this.codAluno = codAluno;
     }
 
     public int getIdDesempenho() {
@@ -61,11 +66,21 @@ public class Desempenho {
         this.nota4 = nota4;
     }
 
-    public int getPresenca() {
-        return presenca;
+    public int getCodDisciplina() {
+        return codDisciplina;
     }
 
-    public void setPresenca(int presenca) {
-        this.presenca = presenca;
-    }  
+    public void setCodDisciplina(int codTurma) {
+        this.codDisciplina = codTurma;
+    }
+
+    public int getCodAluno() {
+        return codAluno;
+    }
+
+    public void setCodAluno(int codAluno) {
+        this.codAluno = codAluno;
+    }
+    
+    
 }

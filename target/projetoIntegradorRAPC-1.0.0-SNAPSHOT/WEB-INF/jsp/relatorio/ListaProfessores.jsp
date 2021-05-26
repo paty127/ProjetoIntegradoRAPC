@@ -77,21 +77,49 @@
                 <!<!-- atributo Alunos vem da classe AlunoControlles na linha 65  -->
                 <c:forEach items="${professores}" var="professor">
                     <tr>
-                        <th scope="row"><c:out value="${professor.codProfessor}" /></th>
-                        <td><c:out value="${professor.nome}" /></td>
+                        <th scope="row">
+                            <c:out value="${professor.codProfessor}" />
+                        </th>
+                        <td>
+                            <c:out value="${professor.nome}" />
+                        </td>
                         <fmt:parseDate value="${professor.dataNasc}" type="date" pattern="yyyy-MM-dd" var="dataDateParsed" />
-                        <td><fmt:formatDate value="${dataDateParsed}" pattern="dd/MM/yyyy" /></td>
-                        <td><c:out value="${professor.sexo}" /></td>
-                        <td><c:out value="${professor.cpf}" /></td>
-                        <td><c:out value="${professor.rg}" /></td>
-                        <td><c:out value="${professor.celular}" /></td>
-                        <td><c:out value="${professor.email}" /></td>
-                        <td><c:out value="${professor.rua}" /></td>
-                        <td><c:out value="${professor.numero}" /></td>
-                        <td><c:out value="${professor.bairro}" /></td>
-                        <td><c:out value="${professor.cep}" /></td>
-                        <td><a type="button" class="btn btn-primary" href="professorController?action=edit&codProfessor=<c:out value="${professor.codProfessor}"/>&disciplina1=professor.fkdisciplinaID=<c:out value="${professor.fk_disciplinaID}"/>&disciplina2=professor.fkdisciplina2ID=<c:out value="${professor.fk_disciplinaID}"/>">Editar</a>
-                        <td><a type="button" class="btn btn-danger" href="professorController?action=delete&codProfessor=<c:out value="${professor.codProfessor}" />">deletar</a> 
+                        <td>
+                            <fmt:formatDate value="${dataDateParsed}" pattern="dd/MM/yyyy" />
+                        </td>
+                        <td>
+                            <c:out value="${professor.sexo}" />
+                        </td>
+                        <td>
+                            <c:out value="${professor.cpf}" />
+                        </td>
+                        <td>
+                            <c:out value="${professor.rg}" />
+                        </td>
+                        <td>
+                            <c:out value="${professor.celular}" />
+                        </td>
+                        <td>
+                            <c:out value="${professor.email}" />
+                        </td>
+                        <td>
+                            <c:out value="${professor.rua}" />
+                        </td>
+                        <td>
+                            <c:out value="${professor.numero}" />
+                        </td>
+                        <td>
+                            <c:out value="${professor.bairro}" />
+                        </td>
+                        <td>
+                            <c:out value="${professor.cep}" />
+                        </td>
+                        <td>
+                            <a type="button" class="btn btn-primary" href="professorController?action=edit&codProfessor=<c:out value="${professor.codProfessor}"/>&disciplina1=professor.fkdisciplinaID=<c:out value="${professor.fk_disciplinaID}"/>&disciplina2=professor.fkdisciplina2ID=<c:out value="${professor.fk_disciplinaID}"/>">
+                                Editar
+                            </a>
+                        <td>
+                            <a type="button" class="btn btn-danger" href="professorController?action=delete&codProfessor=<c:out value="${professor.codProfessor}" />">deletar</a> 
                     </tr>
                 </c:forEach>
             </tbody>
