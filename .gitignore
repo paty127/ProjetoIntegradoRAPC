@@ -10,3 +10,4 @@ target/projetoIntegradorRAPC-1.0.0-SNAPSHOT.war
 target/projetoIntegradorRAPC-1.0.0-SNAPSHOT/Tomcat.dpf
 target/projetoIntegradorRAPC-1.0.0-SNAPSHOT/WEB-INF/classes/controller/AlunoController.class
 target/classes/controller/AdmController.class
+target/classes/controller/CadastroAluno.class
