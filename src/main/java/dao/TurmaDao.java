@@ -76,16 +76,6 @@ public class TurmaDao {
             if (rst.next()) {
                 aluno.setCodAluno(rst.getInt("cod_aluno"));
                 aluno.setNome(rst.getString("nome"));
-                aluno.setCpf(rst.getString("cpf"));
-                aluno.setSexo(rst.getString("sexo"));
-                aluno.setDataNasc(rst.getDate("data_nascimento").toLocalDate());
-                aluno.setNomePai(rst.getString("pai"));
-                aluno.setNomeMae(rst.getString("mae"));
-                aluno.setCelular(rst.getString("celular"));
-                aluno.setCelularPai(rst.getString("telefone_pai"));
-                aluno.setCelularMae(rst.getString("telefone_mae"));
-                aluno.setEmail(rst.getString("email"));
-
                 listaDeAluno.add(aluno);
             }
         } catch (SQLException e) {

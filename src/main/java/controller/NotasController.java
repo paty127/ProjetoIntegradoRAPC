@@ -103,18 +103,19 @@ public class NotasController extends HttpServlet {
         Redirecionar(request,response);
             
     }
-    
-    //Listar Alunos
+
     protected void Redirecionar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Direcionando para tela JSP.
         request.getRequestDispatcher("/WEB-INF/jsp/registro/notas.jsp").forward(request, response);
     }
+
     protected void ListaAlunos(HttpServletRequest request, HttpServletResponse response,int codTurma)
             throws ServletException, IOException, SQLException {
         //Criando um atributo chamado Alunos e inserindo a lista que veio do metodo getAllAlunos
         request.setAttribute("alunos", daoT.listarAlunosDaTurma(codTurma));
     }
+
     protected void ListaDesempenho(HttpServletRequest request, HttpServletResponse response,int codTurma,int codDisciplina)
             throws ServletException, IOException, SQLException {
 
