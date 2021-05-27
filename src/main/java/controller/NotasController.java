@@ -6,45 +6,44 @@
 package controller;
 
 import dao.AlunoDao;
+import dao.DesempenhoDao;
 import dao.DisciplinaDao;
 import dao.TurmaDao;
-import model.Disciplina;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Turma;
-
 
 
 @WebServlet(name = "notasController", urlPatterns = {"/notasController","/selectionDisc"})
 public class NotasController extends HttpServlet {
-    
-    private final DisciplinaDao daoD;
+    private static final long serialVersionUID = 1L;
+
+    private final DisciplinaDao daoDisc;
     private final TurmaDao daoT;
     private final AlunoDao daoA;
+    private final DesempenhoDao daoDesp;
     
 
         public NotasController() {
             daoT = new TurmaDao();
-            daoD = new DisciplinaDao();
+            daoDisc = new DisciplinaDao();
             daoA = new AlunoDao();
+            daoDesp = new DesempenhoDao();
         }
         
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int numero;
-        
+
+
+
         String action = request.getServletPath();
         
         if(action.equals("/notasController")){
@@ -55,7 +54,7 @@ public class NotasController extends HttpServlet {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                request.setAttribute("Disciplinas", daoD.getAllDisciplinas());
+                request.setAttribute("Disciplinas", daoDisc.getAllDisciplinas());
             } catch (SQLException ex) {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -64,13 +63,23 @@ public class NotasController extends HttpServlet {
             
         }else if(action.equals("/selectionDisc")){
             int codTurma = Integer.parseInt(request.getParameter("codTurma"));
-            
+            int codDisciplina = Integer.parseInt(request.getParameter("codDisciplina"));
+
             try {
                 ListaAlunos(request,response,codTurma);
             } catch (SQLException ex) {
                 Logger.getLogger(NotasController.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            try {
+                ListaDesempenho(request,response,codTurma,codDisciplina);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
             Redirecionar(request,response);
+
+
         }else{
             response.sendRedirect("home.jsp");
         }
@@ -103,8 +112,13 @@ public class NotasController extends HttpServlet {
     }
     protected void ListaAlunos(HttpServletRequest request, HttpServletResponse response,int codTurma)
             throws ServletException, IOException, SQLException {
-        
+        //Criando um atributo chamado Alunos e inserindo a lista que veio do metodo getAllAlunos
         request.setAttribute("alunos", daoT.listarAlunosDaTurma(codTurma));
+    }
+    protected void ListaDesempenho(HttpServletRequest request, HttpServletResponse response,int codTurma,int codDisciplina)
+            throws ServletException, IOException, SQLException {
+
+            request.setAttribute("desempenho", daoDesp.DesempenhoDisciplinaTurma(codTurma,codDisciplina));
     }
     
 }
