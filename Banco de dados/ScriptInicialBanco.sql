@@ -21,7 +21,6 @@ CREATE TABLE Turma (
     serie varchar(3) not null,
     qte integer not null
 );
-select * FROM turma
 CREATE TABLE Aluno (
     cod_aluno integer not null auto_increment PRIMARY KEY,
     nome varchar(50),
@@ -94,18 +93,23 @@ CREATE TABLE Desempenho (
     nota2 decimal,
     nota3 decimal,
     nota4 decimal,
-	fk_disciplinaID int,
+    fk_disciplinaID int,
+    fk_cod_aluno int,
+    FOREIGN KEY (fk_disciplinaID) REFERENCES Disciplinas (disciplinaID),
+    FOREIGN KEY (fk_cod_aluno) REFERENCES Aluno (cod_aluno)
+);
+CREATE TABLE Frequencia (
+	ID_frequencia integer not null auto_increment PRIMARY KEY,
+    aula_assistida int ,
+    presente int,
+    ausente int,
+    fk_disciplinaID int,
     fk_cod_aluno int,
     FOREIGN KEY (fk_disciplinaID) REFERENCES Disciplinas (disciplinaID),
     FOREIGN KEY (fk_cod_aluno) REFERENCES Aluno (cod_aluno)
 );
 
-insert into desempenho(nota1,nota2,nota3,nota4,fk_disciplinaID,fk_cod_aluno)value
-					  (10.0,9.0,8.0,6.0,2,2);
-                      
-select * FROM desempenho WHERE fk_disciplinaID = 1 ;
 
-select * from desempenho;
 insert into turma(serie,qte)values
 				 ('1ºA',20),('1ºB',20),
                  ('2ºA',20),('2ºB',20),
@@ -233,10 +237,6 @@ IN p_cod_aluno integer, IN p_cod_turma integer)
 	UPDATE aluno SET fk_turma = p_cod_turma WHERE cod_aluno = p_cod_aluno; 
     UPDATE turma SET qte = qte - 1 WHERE cod_turma = p_cod_turma;
     end $$
-
-call novoAluno_turma (1,2);
-call novoAluno_turma (2,2);
-call novoAluno_turma (3,2);
 
 /*
 Exemplo de chamada da procedure novoAluno_turma e consultas
