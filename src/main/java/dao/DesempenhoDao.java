@@ -57,7 +57,7 @@ public class DesempenhoDao {
         }
         return listaTurma;
     }
-    public List<Desempenho> getAllTurmas() throws SQLException, IOException {
+    public List<Desempenho> getAllDesempenho() throws SQLException, IOException {
         String sql = "select * FROM desempenho";
         List<Desempenho> listaTurma = new ArrayList<>();
         try (
