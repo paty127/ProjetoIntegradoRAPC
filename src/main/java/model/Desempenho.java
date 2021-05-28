@@ -5,7 +5,6 @@ package model;
  * @author Carlos Pavão <carlos.henrique93@msn.com>
  */
 public class Desempenho {
-    private int idDesempenho;
     private double nota1;
     private double nota2;
     private double nota3;
@@ -16,22 +15,14 @@ public class Desempenho {
     public Desempenho() {
     }
 
-    public Desempenho(int idDesempenho, double nota1, double nota2, double nota3, double nota4, int codTurma, int codAluno) {
-        this.idDesempenho = idDesempenho;
+    public Desempenho(double nota1, double nota2, double nota3, double nota4, int codTurma, int codAluno) {
+
         this.nota1 = nota1;
         this.nota2 = nota2;
         this.nota3 = nota3;
         this.nota4 = nota4;
         this.codDisciplina = codTurma;
         this.codAluno = codAluno;
-    }
-
-    public int getIdDesempenho() {
-        return idDesempenho;
-    }
-
-    public void setIdDesempenho(int idDesempenho) {
-        this.idDesempenho = idDesempenho;
     }
 
     public double getNota1() {

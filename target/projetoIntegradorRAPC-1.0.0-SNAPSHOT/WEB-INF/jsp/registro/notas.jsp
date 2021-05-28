@@ -12,7 +12,6 @@
         <script type="text/javascript" src="http://www.godtur.no/godtur/js/jquery-ui-1.8.18.custom.min.js"></script>
         <title>Registrar Nota</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/erro.css" />
     </head>
     <body>
         <div class="container">
@@ -46,79 +45,76 @@
                     <input role="button" aria-pressed="true" type="submit" value="Pesquisar" />
             </form>
 
-
+            <form name="frmContato" action="/insertNota" var="idx">
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Nota 1</th>
-                            <th>Nota 2</th>
-                            <th>Nota 3</th>
-                            <th>Nota 4</th>
-                            <th colspan="2" scope="col">Ação</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Nota 1</th>
+                            <th scope="col">Nota 2</th>
+                            <th scope="col">Nota 3</th>
+                            <th scope="col">Nota 4</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!<!-- atributo Alunos vem da classe AlunoControlles na linha 65  -->
-                        <c:forEach items="${alunos}" var="aluno">
-                            <tr>
+                             <!<!-- atributo Alunos vem da classe AlunoControlles na linha 65  -->
+                            <c:forEach items="${alunos}" var="alunos">
 
-                                <!-- Código do Aluno -->
-                                <th scope="row">
+                                <tr>
 
-                                    <c:out value="${aluno.codAluno}" />
+                                    <!-- Código do Aluno -->
+                                    <th scope="row">
 
-                                </th>
+                                        <label class="form-control" name="codAluno[${idx}]">
+                                            <c:out value="${alunos.codAluno}" />
+                                        </label>
+
+                                    </th>
 
 
 
-                                <!-- Nome do Aluno -->
+                                    <!-- Nome do Aluno -->
 
-                                <td>
+                                    <td>
 
-                                    <c:out value="${aluno.nome}" />
+                                        <c:out value="${alunos.nome}" />
 
-                                </td>
+                                    </td>
+                            
+                                    <!-- Nota 1 -->
+
+                                    <td>
+                                        <input class="form-control"  id="nota1" type="text" name="nota1[${idx}]"
+                                               onkeypress="$(this).mask('00.0')"placeholder="00.0">
+                                    </td>
+
+                                    <!-- Nota 2 -->
+
+                                    <td>
+                                        <input class="form-control"  id="nota2" type="text" name="nota2[${idx}]"
+                                               onkeypress="$(this).mask('00.0')"placeholder="00.0">
+                                    </td>
+
+                                    <!-- Nota 3 -->
+
+                                    <td>
+                                        <input class="form-control"  id="nota3" type="text" name="nota3[${idx}]"
+                                               onkeypress="$(this).mask('00.0')"placeholder="00.0">
+                                    </td>
+
+                                    <!-- Nota 4 -->
+
+                                    <td>
+                                        <input class="form-control"  id="nota4" type="text" name="nota4[${idx}]"
+                                               onkeypress="$(this).mask('00.0')"placeholder="00.0">
+                                    </td>
+                                </tr>
                         </c:forEach>
-                                <!-- Nota 1 -->
-                                <td>
-                                    <input class="form-control"  id="nota1" type="text" name="nota1"
-                                           onkeypress="$(this).mask('00.0')"placeholder="00.0">
-                                </td>
-
-                                <!-- Nota 2 -->
-
-                                <td>
-                                    <input class="form-control"  id="nota2" type="text" name="nota2"
-                                           onkeypress="$(this).mask('00.0')"placeholder="00.0">
-                                </td>
-
-                                <!-- Nota 3 -->
-
-                                <td>
-                                    <input class="form-control"  id="nota3" type="text" name="nota3"
-                                           onkeypress="$(this).mask('00.0')"placeholder="00.0">
-                                </td>
-
-                                <!-- Nota 4 -->
-
-                                <td>
-                                    <input class="form-control"  id="nota4" type="text" name="nota4"
-                                           onkeypress="$(this).mask('00.0')"placeholder="00.0">
-                                </td>
-
-                                <td>
-                                    <a type="button" class="btn btn-primary" href=""/>
-                                        Registrar
-                                    </a>
-                                </td>
-                                <td>
-                                    <a type="button" class="btn btn-danger" href="" />editar</a>
-                                </td>
-                            </tr>
                     </tbody>
                 </table>
+                <button type="submit">Enviar</button>
+            </form>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>

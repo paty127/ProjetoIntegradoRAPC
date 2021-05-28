@@ -12,10 +12,7 @@ import model.Adm;
 
 import util.DbUtil;
 
-/**
- *
- * @author Carlos Pavão <carlos.henrique93@msn.com>
- */
+
 public class AdmDao {
 
     private final DbUtil dbUtil = new DbUtil();
@@ -43,6 +40,8 @@ public class AdmDao {
             stmt.setString(15, adm.getCep());
             //Executar atualização no banco
             stmt.executeUpdate();
+            conn.close();
+            stmt.close();
 
         } catch (SQLException ex) {
             System.err.println("Erro durante insert dos dados");
@@ -58,6 +57,8 @@ public class AdmDao {
 
             stmt.setInt(1, admID);
             stmt.executeUpdate();
+            conn.close();
+            stmt.close();
 
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro durante exclusão dos dados");
@@ -95,6 +96,9 @@ public class AdmDao {
 
             stmt.executeUpdate();
 
+            conn.close();
+            stmt.close();
+
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro na edição dos dados");
         }
@@ -128,6 +132,10 @@ public class AdmDao {
                 adm.setCep(rst.getString("cep"));
                 listaDeAdm.add(adm);
             }
+
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao recuperar a"
                     + " lista de todos ADM's.");
@@ -166,6 +174,9 @@ public class AdmDao {
                 adm.setBairro(rst.getString("bairro"));
                 adm.setCep(rst.getString("cep"));
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao tentar recuperar"
                     + " os dados do Adm.");

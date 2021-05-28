@@ -31,6 +31,9 @@ public class DisciplinaDao {
                 disciplina.setCargahoraria(rst.getInt("cargahoraria"));
                 listaDisciplina.add(disciplina);
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao montar a lista de"
                     + " disciplinas.");
@@ -54,6 +57,9 @@ public class DisciplinaDao {
                 disciplina.setNome(rst.getString("nome"));
                 disciplina.setCargahoraria(rst.getInt("cargahoraria"));
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao tentar recuperar"
                     + " a disciplinaID" + disciplinaID );

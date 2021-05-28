@@ -29,7 +29,8 @@ public class DesempenhoDao {
             stmt.setInt(6, desempenho.getCodAluno());
             //Executar atualização no banco
             stmt.executeUpdate();
-
+            conn.close();
+            stmt.close();
         } catch (SQLException ex) {
             System.err.println("Ocorreu um erro ao adicionar o desempenho.");
         }
@@ -52,6 +53,9 @@ public class DesempenhoDao {
                 desempenho.setCodDisciplina(rst.getInt("fk_cod_aluno"));
                 listaTurma.add(desempenho);
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao montar a lista de todos os desempenhos");
         }
@@ -74,6 +78,9 @@ public class DesempenhoDao {
                 desempenho.setCodDisciplina(rst.getInt("fk_cod_aluno"));
                 listaTurma.add(desempenho);
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao montar a lista de todos os desempenhos");
         }
@@ -102,6 +109,9 @@ public class DesempenhoDao {
 
                 listaDeDesempenho.add(desempenho);
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao tentar recuperar"
                     + " a lista de desempenho " + DisciplinaID );
@@ -132,6 +142,9 @@ public class DesempenhoDao {
 
                 listaDeDesempenho.add(desempenho);
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao tentar recuperar"
                     + " a lista de desempenho " + DisciplinaID );

@@ -51,6 +51,9 @@ public class AlunoDao {
             //Executar atualização no banco
             stmt.executeUpdate();
 
+            conn.close();
+            stmt.close();
+
         } catch (SQLException ex) {
             System.err.println(erro);
         }
@@ -65,6 +68,9 @@ public class AlunoDao {
 
             stmt.setInt(1, alunoID);
             stmt.executeUpdate();
+
+            conn.close();
+            stmt.close();
 
         } catch (SQLException e) {
             System.err.println(erro);
@@ -100,6 +106,9 @@ public class AlunoDao {
 
             stmt.executeUpdate();
 
+            conn.close();
+            stmt.close();
+
         } catch (SQLException e) {
             System.err.println(erro);
         }
@@ -133,6 +142,9 @@ public class AlunoDao {
 
                 listaDeAluno.add(aluno);
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println(erro);
         }
@@ -169,6 +181,9 @@ public class AlunoDao {
                 aluno.setBairro(rst.getString("bairro"));
                 aluno.setCep(rst.getString("cep"));
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Erro na execução");
         }

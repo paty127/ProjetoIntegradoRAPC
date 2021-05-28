@@ -31,6 +31,9 @@ public class TurmaDao {
                 turma.setQte(rst.getInt("qte"));
                 listaTurma.add(turma);
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao montar a lista de"
                     + " todas as turmas.");
@@ -54,6 +57,9 @@ public class TurmaDao {
                 turma.setSerie(rst.getString("serie"));
                 turma.setQte(rst.getInt("qte"));
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao tentar recuperar"
                     + " seleciona uma unica turma" + turmaID );
@@ -63,7 +69,7 @@ public class TurmaDao {
     
     public List<Aluno> listarAlunosDaTurma(int turmaID) throws SQLException, IOException {
         String sql = "select * FROM aluno WHERE fk_turma = ?";
-        Aluno aluno = new Aluno();
+        
         List<Aluno> listaDeAluno = new ArrayList<>();
         Connection conn = dbUtil.getConnection();
 
@@ -73,11 +79,15 @@ public class TurmaDao {
             //Execultando o comando
             ResultSet rst = stmt.executeQuery();
 
-            if (rst.next()) {
+            while (rst.next()) {
+                Aluno aluno = new Aluno();
                 aluno.setCodAluno(rst.getInt("cod_aluno"));
                 aluno.setNome(rst.getString("nome"));
                 listaDeAluno.add(aluno);
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao tentar recuperar"
                     + " a lista de alunos" + turmaID );

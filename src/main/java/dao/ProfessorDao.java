@@ -45,6 +45,8 @@ private final DbUtil dbUtil = new DbUtil();
             
             //Executar atualização no banco
             stmt.executeUpdate();
+                conn.close();
+                stmt.close();
 
         } catch (SQLException ex) {
             System.err.println("Erro durante insert dos dados");
@@ -59,6 +61,9 @@ private final DbUtil dbUtil = new DbUtil();
 
             stmt.setInt(1, professorID);
             stmt.executeUpdate();
+
+            conn.close();
+            stmt.close();
 
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro durante exclusão dos dados");
@@ -95,7 +100,10 @@ private final DbUtil dbUtil = new DbUtil();
             stmt.setInt(18, professor.getCodProfessor());
             
             stmt.executeUpdate();
-            
+
+            conn.close();
+            stmt.close();
+
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro na edição dos dados");
         }
@@ -129,6 +137,9 @@ private final DbUtil dbUtil = new DbUtil();
                 professor.setCep(rst.getString("cep"));
                  listaDeProfessor.add(professor);
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao montar a lista de"
                     + " professores.");
@@ -169,6 +180,9 @@ private final DbUtil dbUtil = new DbUtil();
                 professor.setBairro(rst.getString("bairro"));
                 professor.setCep(rst.getString("cep"));
             }
+            conn.close();
+            stmt.close();
+            rst.close();
         } catch (SQLException e) {
             System.err.println("Ocorreu um erro ao recuperar o professor: "
                     + "" + codProfessor);
