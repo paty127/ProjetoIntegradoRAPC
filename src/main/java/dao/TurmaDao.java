@@ -95,4 +95,57 @@ public class TurmaDao {
         return listaDeAluno;
     }
     
+    public List<Turma> recuperaListaTurmaDifer(int turmaID) throws SQLException, IOException {
+        String sql = "select cod_turma,serie FROM turma WHERE cod_turma != ?";
+        
+        List<Turma> listaDeturma = new ArrayList<>();
+        Connection conn = dbUtil.getConnection();
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, turmaID);
+            //Execultando o comando
+            ResultSet rst = stmt.executeQuery();
+
+            while (rst.next()) {
+                Turma turma = new Turma();
+                turma.setTurmaID(rst.getInt("cod_turma"));
+                turma.setSerie(rst.getString("serie"));
+                listaDeturma.add(turma);
+            }
+            conn.close();
+            stmt.close();
+            rst.close();
+        } catch (SQLException e) {
+            System.err.println("Ocorreu um erro ao recuperar"
+                    + " a lista de turmas diferente de: " + turmaID );
+        }
+        return listaDeturma;
+    }
+    
+    public Turma recuperaTurma(int turmaID) throws SQLException, IOException {
+        String sql = "select cod_turma,serie FROM turma WHERE cod_turma = ?";
+        Turma turma = new Turma();
+        Connection conn = dbUtil.getConnection();
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, turmaID);
+            //Execultando o comando
+            ResultSet rst = stmt.executeQuery();
+
+            if (rst.next()) {
+                turma.setTurmaID(rst.getInt("cod_turma"));
+                turma.setSerie(rst.getString("serie"));
+            }
+            conn.close();
+            stmt.close();
+            rst.close();
+        } catch (SQLException e) {
+            System.err.println("Ocorreu um erro ao recuperar"
+                    + "serie da turma: " + turmaID );
+        }
+        return turma;
+    }
+    
 }

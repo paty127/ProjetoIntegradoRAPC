@@ -66,4 +66,57 @@ public class DisciplinaDao {
         }
         return disciplina;
     }
+    
+        public List<Disciplina> recuperaListaDisciDifer(int disciplinaID) throws SQLException, IOException {
+        String sql = "SELECT disciplinaID,nome FROM disciplinas WHERE disciplinaID != ?";
+        
+        List<Disciplina> listaDeDisciplina = new ArrayList<>();
+        Connection conn = dbUtil.getConnection();
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, disciplinaID);
+            //Execultando o comando
+            ResultSet rst = stmt.executeQuery();
+
+            while (rst.next()) {
+                Disciplina disciplina = new Disciplina();
+                disciplina.setDisciplinaID(rst.getInt("disciplinaID"));
+                disciplina.setNome(rst.getString("nome"));
+                listaDeDisciplina.add(disciplina);
+            }
+            conn.close();
+            stmt.close();
+            rst.close();
+        } catch (SQLException e) {
+            System.err.println("Ocorreu um erro ao recuperar"
+                    + " a lista de disciplinas diferente de: " + disciplinaID );
+        }
+        return listaDeDisciplina;
+    }
+    
+    public Disciplina recuperaDisci(int disciplinaID) throws SQLException, IOException {
+        String sql = "SELECT disciplinaID,nome FROM disciplinas WHERE disciplinaID = ?";
+        Disciplina disciplina = new Disciplina();
+        Connection conn = dbUtil.getConnection();
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, disciplinaID);
+            //Execultando o comando
+            ResultSet rst = stmt.executeQuery();
+
+            if (rst.next()) {
+                disciplina.setDisciplinaID(rst.getInt("disciplinaID"));
+                disciplina.setNome(rst.getString("nome"));
+            }
+            conn.close();
+            stmt.close();
+            rst.close();
+        } catch (SQLException e) {
+            System.err.println("Ocorreu um erro ao recuperar "
+                    + "disciplina: " + disciplinaID );
+        }
+        return disciplina;
+    }
 }

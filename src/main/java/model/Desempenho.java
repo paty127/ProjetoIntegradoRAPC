@@ -14,6 +14,10 @@ public class Desempenho {
 
     public Desempenho() {
     }
+    public Desempenho(int codTurma, int codAluno) {
+        this.codDisciplina = codTurma;
+        this.codAluno = codAluno;
+    }
 
     public Desempenho(double nota1, double nota2, double nota3, double nota4, int codTurma, int codAluno) {
 

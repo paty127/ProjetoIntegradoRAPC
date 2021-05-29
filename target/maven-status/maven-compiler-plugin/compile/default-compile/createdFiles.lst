@@ -15,7 +15,9 @@ controller\CadastroAluno.class
 controller\CadastroProfessor.class
 dao\AlunoDao.class
 model\Aluno.class
+controller\PesqNotas.class
 model\Adm.class
+controller\RedirectDesempenho.class
 controller\ListarAdm.class
 model\Turma.class
 controller\AdmDeleta.class

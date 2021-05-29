@@ -17,13 +17,14 @@
         <div class="container">
             <h1>Registrar Notas</h1>
 
-            <form name="frmContato" action="selectionDisc">
+        
+            
+            <form  name="frmNotas" action="${request.contextPath}selectionDisc" var="form1">
                 <label for="Turma">Turma</label>
                     <select class="custom-select mr-sm-11" name="codTurma"
                         id="inputTurma">
 
                         <!-- Carregando o select do Banco -->
-
                         <option value="" />Selecione</option>
                         <c:forEach items="${turmas}" var="turma">
                         <option value="${turma.turmaID}" />${turma.serie}</option>
@@ -42,10 +43,10 @@
                         <option value="${d.disciplinaID}" />${d.nome}</option>
                         </c:forEach>
                     </select>
-                    <input role="button" aria-pressed="true" type="submit" value="Pesquisar" />
-            </form>
-
-            <form name="frmContato" action="/insertNota" var="idx">
+                    <button type="submit" value="form1">Pesquisar</button>
+            
+            
+            
                 <table border="1">
                     <thead>
                         <tr>
@@ -58,7 +59,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                             <!<!-- atributo Alunos vem da classe AlunoControlles na linha 65  -->
+                            <!-- atributo Alunos vem da classe AlunoControlles na linha 65  -->
                             <c:forEach items="${alunos}" var="alunos">
 
                                 <tr>
@@ -113,7 +114,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <button type="submit">Enviar</button>
+                <button type="submit" value="principal">Enviar</button>
             </form>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
