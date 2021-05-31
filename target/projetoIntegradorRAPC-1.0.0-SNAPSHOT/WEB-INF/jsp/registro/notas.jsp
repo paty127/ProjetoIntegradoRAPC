@@ -44,9 +44,9 @@
                         </c:forEach>
                     </select>
                     <button type="submit" value="form1">Pesquisar</button>
+            </form>
             
-            
-            
+            <form method="POST"  name="frmNotas" action="${request.contextPath}notasController" var="form1">
                 <table border="1">
                     <thead>
                         <tr>

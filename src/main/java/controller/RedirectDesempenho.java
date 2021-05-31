@@ -39,16 +39,17 @@ public class RedirectDesempenho extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        int numero;
+        int discplinaID = (int) sessao.getAttribute("codDisciplina");
         Desempenho notas = new Desempenho();
         
         if (sessao.getAttribute("dados") != null) {
             Desempenho dados = (Desempenho) sessao.getAttribute("dados");
             sessao.removeAttribute("dados");
+            sessao.removeAttribute("codDisciplina");
 
             request.setAttribute("dados", dados);
             try {
-                dao.adicionarDesempenho(dados);
+                dao.updateDesempenho(dados,discplinaID);
                 RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/jsp/registro/notasSucesso.jsp");
                     view.forward(request, response);
             } catch (SQLException ex) {

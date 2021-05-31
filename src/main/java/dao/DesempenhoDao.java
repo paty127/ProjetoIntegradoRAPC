@@ -35,6 +35,26 @@ public class DesempenhoDao {
             System.err.println("Ocorreu um erro ao adicionar o desempenho.");
         }
     }
+    public void updateDesempenho(Desempenho desempenho,int disciplinaID) throws SQLException, IOException {
+        String sql = "UPDATE desempenho SET nota1 = ?,nota2 = ?,nota3 = ?,"
+                + "nota4 = ? WHERE disciplinaID = ?";
+        try (Connection conn = dbUtil.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setDouble(1, desempenho.getNota1());
+            stmt.setDouble(2, desempenho.getNota2());
+            stmt.setDouble(3, desempenho.getNota3());
+            stmt.setDouble(4, desempenho.getNota4());
+            stmt.setInt(5, disciplinaID);
+            //stmt.setInt(6, cod_aluno);
+            //Executar atualização no banco
+            stmt.executeUpdate();
+            conn.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            System.err.println("Ocorreu um erro ao realizar o update da desempenho.");
+        }
+    }
     
     public List<Desempenho> getAllTurmas() throws SQLException, IOException {
         String sql = "select * FROM desempenho";

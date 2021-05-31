@@ -42,8 +42,13 @@
                         </c:forEach>
                     </select>
                     <input role="button" aria-pressed="true" type="submit" value="Pesquisar" />
-
-
+            </form>
+             
+             <form method="POST"  name="frmNotas" action="${request.contextPath}notasController" var="form1">
+                
+                 <input type="hidden" name="turmaCod" value="<c:out value="${codTurma}" />">
+                <input type="hidden" name="DisciplinaCod" value="<c:out value="${codDisciplina}" />">
+                
                 <table border="1">
                     <thead>
                         <tr>
