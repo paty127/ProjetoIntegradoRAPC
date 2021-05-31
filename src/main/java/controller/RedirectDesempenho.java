@@ -39,7 +39,7 @@ public class RedirectDesempenho extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-        int discplinaID = (int) sessao.getAttribute("codDisciplina");
+        int discplinaID = (int) sessao.getAttribute("disciplinaID");
         Desempenho notas = new Desempenho();
         
         if (sessao.getAttribute("dados") != null) {

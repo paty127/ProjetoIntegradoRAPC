@@ -37,7 +37,7 @@ public class DesempenhoDao {
     }
     public void updateDesempenho(Desempenho desempenho,int disciplinaID) throws SQLException, IOException {
         String sql = "UPDATE desempenho SET nota1 = ?,nota2 = ?,nota3 = ?,"
-                + "nota4 = ? WHERE disciplinaID = ?";
+                + "nota4 = ? WHERE fk_disciplinaID = ?";
         try (Connection conn = dbUtil.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
