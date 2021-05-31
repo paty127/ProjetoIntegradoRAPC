@@ -203,41 +203,45 @@ public class NotasController extends HttpServlet {
         
         boolean temErro = false;
         
-        if (request.getParameter("codTurma").equals("") ) {
-            request.getRequestDispatcher("/WEB-INF/jsp/registro/notas.jsp").forward(request, response);
+        if (request.getParameter("codTurma") == null || request.getParameter("codTurma").equals("")  ) {
             codTurma = 0;
+            temErro = true;
+            request.setAttribute("erroTurma", "Turma não informada.");
         } else {
               codTurma = Integer.parseInt(request.getParameter("codTurma"));
             //codTurma = request.setAttribute("dados", dados);
             //codTurma.setNumero(Integer.parseInt(request.getParameter("codDisciplina")));
         }
-        if (request.getParameter("codDisciplina").equals("")){
+        if (request.getParameter("codDisciplina") == null || request.getParameter("codDisciplina").equals("")){
             codDisciplina = 0;
-            request.getRequestDispatcher("/WEB-INF/jsp/registro/notas.jsp").forward(request, response);
-            codDisciplina = 0;
+            temErro = true;
+            request.setAttribute("erroDisciplina", "Disciplina não informada.");
         } else {
             codDisciplina = Integer.parseInt(request.getParameter("codDisciplina"));
             //codTurma.setNumero(Integer.parseInt(request.getParameter("codDisciplina")));
         }
-        if (request.getParameter("nota1").equals("")) {
+        if (request.getParameter("nota1") == null || request.getParameter("nota1").equals("")) {
             nota1 = 0.0;
+            temErro = true;
+            request.setAttribute("erroTurma", "Turma não informada.");
+            request.setAttribute("erroDisciplina", "Disciplina não informada.");
         } else {
             nota1 = Double.parseDouble(request.getParameter("nota1"));
             //codTurma.setNumero(Integer.parseInt(request.getParameter("codDisciplina")));
         }
-        if (request.getParameter("nota2").equals("")) {
+        if (request.getParameter("nota2") == null || request.getParameter("nota2").equals("")) {
             nota2 = 0.0;
         } else {
             nota2 = Double.parseDouble(request.getParameter("nota2"));
             //codTurma.setNumero(Integer.parseInt(request.getParameter("codDisciplina")));
         }
-        if (request.getParameter("nota3").equals("")) {
+        if (request.getParameter("nota3") == null || request.getParameter("nota3").equals("")) {
             nota3 = 0.0;
         } else {
             nota3 = Double.parseDouble(request.getParameter("nota3"));
             //codTurma.setNumero(Integer.parseInt(request.getParameter("codDisciplina")));
         }
-        if (request.getParameter("nota4").equals("")) {
+        if (request.getParameter("nota4") == null || request.getParameter("nota4").equals("")) {
             nota4 = 0.0;
         } else {
             nota4 = Double.parseDouble(request.getParameter("nota4"));
