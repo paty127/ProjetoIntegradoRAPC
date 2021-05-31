@@ -6,7 +6,6 @@ FLUSH PRIVILEGES;
 */
 USE ProjetoRAPC;
 
-
 /* Banco Logico: */
 CREATE TABLE Endereco (
     id_endereco integer not null auto_increment PRIMARY KEY,
@@ -154,7 +153,7 @@ create procedure novo_aluno (
     insert into endereco (rua,numero,complemento,bairro,cep) values (rua,numero,complemento,bairro,cep);
     insert into aluno(nome,cpf,data_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae,fk_endereco)values(nome,cpf,data_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae,@@identity);
     end $$
-
+/*
 Exemplo de criação do usuário com a procedure
 call novo_aluno ('Fulano','111.1111.111-11','1988/08/14','Masculino','1196291-0587','fulano@msn.com','Pai', '11962910587','Mãe','11962910587','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025');
 
@@ -195,7 +194,7 @@ rua varchar(30),numero integer,complemento varchar(30),bairro varchar(30),cep va
     insert into ministrante(fk_cod_professor, fk_disciplinaID)values(@@identity, fk_disciplina2ID);
     end $$
     
-    Exemplo de criação do Professor com a procedure
+/*   Exemplo de criação do Professor com a procedure
 call novo_professor ('Fulano','Masculino','1988/08/14','11.111.111-1','111.1111.111-11','1196291-0587','fulano@msn.com','12345678','12345678','Professor','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025',5,2);
 
 Exemplo de consula:
@@ -234,11 +233,6 @@ JOIN endereco as E on A.fk_endereco = E.id_endereco;
 
 
 */
-select * from desempenho;
-select * from turma;
-
-truncate desempenho;
-
 delimiter $$   
 create procedure novoAluno_turma (
 IN p_cod_aluno integer, IN p_cod_turma integer)
@@ -254,51 +248,18 @@ IN p_cod_aluno integer, IN p_cod_turma integer)
     insert into desempenho (nota1,nota2,nota3,nota4,fk_disciplinaID,fk_cod_aluno)values(0,0,0,0,7,p_cod_aluno);
     end $$
     
-drop procedure novoAluno_turma;
 
-select * from desempenho;
 
-select* from aluno;
+    /*Exemplo de uso da procedure
+    call novoAluno_turma (4,2);
 
-select *
-FROM professor as A
-JOIN endereco as E on A.fk_endereco = E.id_endereco;
+
 
 SELECT cod_aluno,nome,nota1,nota2,nota3,nota4 FROM desempenho INNER JOIN aluno ON desempenho.fk_cod_aluno = aluno.cod_aluno WHERE fk_disciplinaID = 2;
-
-call novoAluno_turma (4,2);
-/*
-Exemplo de chamada da procedure novoAluno_turma e consultas
-
-Manda primeiro o código do aluno e depois o código da turma.
-
-call novoAluno_turma (4,2);
-
-update turma set qte = 20;
-
-update aluno set fk_turma = null;
-
-call novoAluno_turma (1,1);
-
-select * from turma;
-
-select nome, serie from aluno inner join turma on fk_turma = cod_turma;
-select nome, serie from aluno inner join turma on fk_turma = cod_turma where serie = '1ºB';
-
+SELECT cod_aluno,nome,nota1,nota2,nota3,nota4 
+FROM desempenho INNER JOIN aluno
+ON desempenho.fk_cod_aluno = aluno.cod_aluno
+WHERE fk_disciplinaID = 7;
 */
 
-select * from desempenho;
 
-DESCRIBE desempenho;
-
-select * from turma;
-
-select cod_turma,serie FROM turma WHERE cod_turma != 1;
-
-select * from disciplinas;
-
-SELECT disciplinaID,nome FROM disciplinas WHERE disciplinaID != 1;
-
-SELECT disciplinaID,nome FROM disciplinas WHERE disciplinaID = 1;
-
-drop database projetorapc;
