@@ -87,10 +87,14 @@ public class DesempenhoDao {
         return listaTurma;
     }
     
-    public List<Desempenho> DesempenhoPorDisciplina(int DisciplinaID) throws SQLException, IOException {
-        String sql = "select * FROM desempenho WHERE fk_disciplinaID = ?";
+    public List<Desempenho> desempenhoPorDisciplina(int DisciplinaID) throws SQLException, IOException {
+        String sql = "SELECT cod_aluno,nome,nota1,nota2,nota3,nota4 "
+                + "FROM desempenho INNER JOIN aluno "
+                + "ON desempenho.fk_cod_aluno = aluno.cod_aluno "
+                + "WHERE fk_disciplinaID = ?";
+        
         Desempenho desempenho = new Desempenho();
-        List<Desempenho> listaDeDesempenho = new ArrayList<>();
+        List<Desempenho> listaDesempenho = new ArrayList<>();
         Connection conn = dbUtil.getConnection();
 
         try {
@@ -99,24 +103,24 @@ public class DesempenhoDao {
             //Execultando o comando
             ResultSet rst = stmt.executeQuery();
 
-            if (rst.next()) {
+            while (rst.next()) {
+                desempenho.setCodAluno(rst.getInt("cod_aluno"));
+                desempenho.setNome(rst.getString("nome"));
                 desempenho.setNota1(rst.getDouble("nota1"));
                 desempenho.setNota2(rst.getDouble("nota2"));
                 desempenho.setNota3(rst.getDouble("nota3"));
                 desempenho.setNota4(rst.getDouble("nota4"));
-                desempenho.setCodDisciplina(rst.getInt("fk_disciplinaID"));
-                desempenho.setCodDisciplina(rst.getInt("fk_cod_aluno"));
 
-                listaDeDesempenho.add(desempenho);
+                listaDesempenho.add(desempenho);
             }
             conn.close();
             stmt.close();
             rst.close();
         } catch (SQLException e) {
-            System.err.println("Ocorreu um erro ao tentar recuperar"
+            System.err.println("Ocorreu um erro ao tentar montar"
                     + " a lista de desempenho " + DisciplinaID );
         }
-        return listaDeDesempenho;
+        return listaDesempenho;
     }
     
     public List<Desempenho> DesempenhoDisciplinaTurma(int DisciplinaID,int alunoID) throws SQLException, IOException {

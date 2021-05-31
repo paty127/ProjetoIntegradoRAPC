@@ -17,7 +17,7 @@
         <div class="container">
             <h1>Registrar Notas</h1>
 
-            <form method="POST"  name="frmNotas" action="${request.contextPath}notasController" var="idx">
+            <form  name="frmNotas" action="${request.contextPath}selectionDisc" var="form1">
                 <label for="Turma">Turma</label>
                     <select class="custom-select mr-sm-11" name="codTurma"
                         id="inputTurma" >
@@ -57,7 +57,7 @@
                     </thead>
                     <tbody>
                              <!<!-- atributo Alunos vem da classe AlunoControlles na linha 65  -->
-                            <c:forEach items="${alunos}" var="alunos">
+                            <c:forEach items="${listaDisciplina}" var="lista">
 
                                 <tr>
 
@@ -65,7 +65,7 @@
                                     <th scope="row">
 
                                         <label class="form-control" name="codAluno">
-                                            <c:out value="${alunos.codAluno}" />
+                                            <c:out value="${lista.codAluno}" />
                                         </label>
 
                                     </th>
@@ -76,7 +76,7 @@
 
                                     <td>
 
-                                        <c:out value="${alunos.nome}" />
+                                        <c:out value="${lista.nome}" />
 
                                     </td>
                             
@@ -84,28 +84,32 @@
 
                                     <td>
                                         <input class="form-control"  id="nota1" type="text" name="nota1"
-                                               onkeypress="$(this).mask('00.0')"placeholder="00.0">
+                                               onkeypress="$(this).mask('00.0')"placeholder="00.0"
+                                               value="<c:out value="${lista.nota1}" />">
                                     </td>
 
                                     <!-- Nota 2 -->
 
                                     <td>
                                         <input class="form-control"  id="nota2" type="text" name="nota2"
-                                               onkeypress="$(this).mask('00.0')"placeholder="00.0">
+                                               onkeypress="$(this).mask('00.0')"placeholder="00.0"
+                                               value="<c:out value="${lista.nota2}" />">
                                     </td>
 
                                     <!-- Nota 3 -->
 
                                     <td>
                                         <input class="form-control"  id="nota3" type="text" name="nota3"
-                                               onkeypress="$(this).mask('00.0')"placeholder="00.0">
+                                               onkeypress="$(this).mask('00.0')"placeholder="00.0"
+                                               value="<c:out value="${lista.nota3}" />">
                                     </td>
 
                                     <!-- Nota 4 -->
 
                                     <td>
                                         <input class="form-control"  id="nota4" type="text" name="nota4"
-                                               onkeypress="$(this).mask('00.0')"placeholder="00.0">
+                                               onkeypress="$(this).mask('00.0')"placeholder="00.0" 
+                                               value="<c:out value="${lista.nota4}" />">
                                     </td>
                                 </tr>
                         </c:forEach>

@@ -5,6 +5,8 @@ package model;
  * @author Carlos Pavão <carlos.henrique93@msn.com>
  */
 public class Desempenho {
+    private int cod_aluno;
+    private String nome;
     private double nota1;
     private double nota2;
     private double nota3;
@@ -19,14 +21,42 @@ public class Desempenho {
         this.codAluno = codAluno;
     }
 
-    public Desempenho(double nota1, double nota2, double nota3, double nota4, int codTurma, int codAluno) {
-
+    public Desempenho(int cod_aluno, String nome, double nota1, double nota2,
+            double nota3, double nota4, int codDisciplina, int codAluno) {
+        this.cod_aluno = cod_aluno;
+        this.nome = nome;
         this.nota1 = nota1;
         this.nota2 = nota2;
         this.nota3 = nota3;
         this.nota4 = nota4;
-        this.codDisciplina = codTurma;
+        this.codDisciplina = codDisciplina;
         this.codAluno = codAluno;
+    }
+
+    public Desempenho(double nota1, double nota2, double nota3, double nota4,
+            int codDisciplina) {
+        this.nota1 = nota1;
+        this.nota2 = nota2;
+        this.nota3 = nota3;
+        this.nota4 = nota4;
+        this.codDisciplina = codDisciplina;
+    }
+    
+
+    public int getCod_aluno() {
+        return cod_aluno;
+    }
+
+    public void setCod_aluno(int cod_aluno) {
+        this.cod_aluno = cod_aluno;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public double getNota1() {
@@ -65,8 +95,8 @@ public class Desempenho {
         return codDisciplina;
     }
 
-    public void setCodDisciplina(int codTurma) {
-        this.codDisciplina = codTurma;
+    public void setCodDisciplina(int codDisciplina) {
+        this.codDisciplina = codDisciplina;
     }
 
     public int getCodAluno() {
@@ -76,6 +106,4 @@ public class Desempenho {
     public void setCodAluno(int codAluno) {
         this.codAluno = codAluno;
     }
-    
-    
 }

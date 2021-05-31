@@ -112,7 +112,7 @@ public class NotasController extends HttpServlet {
                 try {
                     request.setAttribute("turmaD", daoT.recuperaListaTurmaDifer(codTurma));
                     request.setAttribute("turmaR", daoT.recuperaTurma(codTurma));
-                    request.setAttribute("alunos", daoT.listarAlunosDaTurma(codTurma));
+                    request.setAttribute("listaDisciplina", daoDesp.desempenhoPorDisciplina(codDisciplina));
                     request.setAttribute("disciplinaR", daoDisc.recuperaDisci(codDisciplina));
                     request.setAttribute("discplinaD", daoDisc.recuperaListaDisciDifer(codDisciplina));
                 } catch (SQLException ex) {
@@ -203,7 +203,7 @@ public class NotasController extends HttpServlet {
         
         boolean temErro = false;
         
-        if (request.getParameter("codTurma").equals(null) ) {
+        if (request.getParameter("codTurma").equals("") ) {
             request.getRequestDispatcher("/WEB-INF/jsp/registro/notas.jsp").forward(request, response);
             codTurma = 0;
         } else {
@@ -211,7 +211,7 @@ public class NotasController extends HttpServlet {
             //codTurma = request.setAttribute("dados", dados);
             //codTurma.setNumero(Integer.parseInt(request.getParameter("codDisciplina")));
         }
-        if (request.getParameter("codDisciplina").equals("") || request.getParameter("codTurma").equals(null)){
+        if (request.getParameter("codDisciplina").equals("")){
             codDisciplina = 0;
             request.getRequestDispatcher("/WEB-INF/jsp/registro/notas.jsp").forward(request, response);
             codDisciplina = 0;
@@ -271,7 +271,7 @@ public class NotasController extends HttpServlet {
             request.setAttribute("erroNota4", "Nota4 não informada.");
         }
           */
-        Desempenho dados = new Desempenho(nota1,nota2,nota3,nota4,codTurma,codDisciplina);
+        Desempenho dados = new Desempenho(nota1,nota2,nota3,nota4,codDisciplina);
         request.setAttribute("dados", dados);
         
         if (temErro) {

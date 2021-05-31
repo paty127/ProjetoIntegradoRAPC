@@ -21,6 +21,8 @@ CREATE TABLE Turma (
     serie varchar(3) not null,
     qte integer not null
 );
+
+
 CREATE TABLE Aluno (
     cod_aluno integer not null auto_increment PRIMARY KEY,
     nome varchar(50),
@@ -87,6 +89,7 @@ CREATE TABLE Grade (
     FOREIGN KEY (fk_cod_turma) REFERENCES turma (cod_turma),
     FOREIGN KEY (fk_disciplinaID) REFERENCES disciplinas (disciplinaID)
 );
+
 CREATE TABLE Desempenho (
 	desempenhoID integer not null auto_increment PRIMARY KEY,
     nota1 decimal,
@@ -118,7 +121,7 @@ insert into turma(serie,qte)values
                  ('3ºA',20),('3ºB',20),
                  ('4ºA',20),('4ºB',20),
 				 ('5ºA',20),('5ºB',20);
-        
+
 insert into Disciplinas(nome,cargahoraria)values
 						("Português",80),
                         ("Matemática",80),
@@ -152,7 +155,7 @@ create procedure novo_aluno (
     insert into aluno(nome,cpf,data_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae,fk_endereco)values(nome,cpf,data_nascimento,sexo,celular,email,pai,telefone_pai,mae,telefone_mae,@@identity);
     end $$
 
-/*Exemplo de criação do usuário com a procedure
+Exemplo de criação do usuário com a procedure
 call novo_aluno ('Fulano','111.1111.111-11','1988/08/14','Masculino','1196291-0587','fulano@msn.com','Pai', '11962910587','Mãe','11962910587','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025');
 
 Exemplo de consulta:
@@ -192,8 +195,8 @@ rua varchar(30),numero integer,complemento varchar(30),bairro varchar(30),cep va
     insert into ministrante(fk_cod_professor, fk_disciplinaID)values(@@identity, fk_disciplina2ID);
     end $$
     
-    /*Exemplo de criação do Professor com a procedure
-call novo_professor ('Fulano','Masculino','1988/08/14','11.111.111-1','111.1111.111-11','1196291-0587','fulano@msn.com','12345678','12345678','Professor','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025',5,2,5,4);
+    Exemplo de criação do Professor com a procedure
+call novo_professor ('Fulano','Masculino','1988/08/14','11.111.111-1','111.1111.111-11','1196291-0587','fulano@msn.com','12345678','12345678','Professor','Avenida Circular', 113,'Apto52 Bloco6','Jardim Raposo','05547-025',5,2);
 
 Exemplo de consula:
 select *
@@ -232,6 +235,8 @@ JOIN endereco as E on A.fk_endereco = E.id_endereco;
 
 */
 select * from desempenho;
+select * from turma;
+
 truncate desempenho;
 
 delimiter $$   
@@ -259,12 +264,9 @@ select *
 FROM professor as A
 JOIN endereco as E on A.fk_endereco = E.id_endereco;
 
-select cod_aluno,nome,nota1,nota2,nota3,nota4,fk_disciplinaID FROM desempenho
-INNER JOIN aluno
-ON desempenho.fk_cod_aluno = aluno.cod_aluno
-WHERE fk_disciplinaID = 2
+SELECT cod_aluno,nome,nota1,nota2,nota3,nota4 FROM desempenho INNER JOIN aluno ON desempenho.fk_cod_aluno = aluno.cod_aluno WHERE fk_disciplinaID = 2;
 
-call novoAluno_turma (1,2);
+call novoAluno_turma (4,2);
 /*
 Exemplo de chamada da procedure novoAluno_turma e consultas
 
@@ -298,3 +300,5 @@ select * from disciplinas;
 SELECT disciplinaID,nome FROM disciplinas WHERE disciplinaID != 1;
 
 SELECT disciplinaID,nome FROM disciplinas WHERE disciplinaID = 1;
+
+drop database projetorapc;

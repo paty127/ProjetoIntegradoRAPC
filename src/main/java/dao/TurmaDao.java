@@ -68,7 +68,7 @@ public class TurmaDao {
     }
     
     public List<Aluno> listarAlunosDaTurma(int turmaID) throws SQLException, IOException {
-        String sql = "select * FROM aluno WHERE fk_turma = ?";
+        String sql = "select cod_aluno,nome FROM aluno WHERE fk_turma = ?";
         
         List<Aluno> listaDeAluno = new ArrayList<>();
         Connection conn = dbUtil.getConnection();
