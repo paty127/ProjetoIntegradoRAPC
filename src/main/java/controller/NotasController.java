@@ -203,14 +203,17 @@ public class NotasController extends HttpServlet {
         
         boolean temErro = false;
         
-        if (request.getParameter("codTurma").equals("")) {
+        if (request.getParameter("codTurma").equals(null) ) {
+            request.getRequestDispatcher("/WEB-INF/jsp/registro/notas.jsp").forward(request, response);
             codTurma = 0;
         } else {
               codTurma = Integer.parseInt(request.getParameter("codTurma"));
             //codTurma = request.setAttribute("dados", dados);
             //codTurma.setNumero(Integer.parseInt(request.getParameter("codDisciplina")));
         }
-        if (request.getParameter("codDisciplina").equals("")) {
+        if (request.getParameter("codDisciplina").equals("") || request.getParameter("codTurma").equals(null)){
+            codDisciplina = 0;
+            request.getRequestDispatcher("/WEB-INF/jsp/registro/notas.jsp").forward(request, response);
             codDisciplina = 0;
         } else {
             codDisciplina = Integer.parseInt(request.getParameter("codDisciplina"));

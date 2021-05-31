@@ -98,6 +98,8 @@ CREATE TABLE Desempenho (
     FOREIGN KEY (fk_disciplinaID) REFERENCES Disciplinas (disciplinaID),
     FOREIGN KEY (fk_cod_aluno) REFERENCES Aluno (cod_aluno)
 );
+
+
 CREATE TABLE Frequencia (
 	ID_frequencia integer not null auto_increment PRIMARY KEY,
     aula_assistida int ,
@@ -229,6 +231,8 @@ JOIN endereco as E on A.fk_endereco = E.id_endereco;
 
 
 */
+select * from desempenho;
+truncate desempenho;
 
 delimiter $$   
 create procedure novoAluno_turma (
@@ -236,8 +240,31 @@ IN p_cod_aluno integer, IN p_cod_turma integer)
     begin
 	UPDATE aluno SET fk_turma = p_cod_turma WHERE cod_aluno = p_cod_aluno; 
     UPDATE turma SET qte = qte - 1 WHERE cod_turma = p_cod_turma;
+    insert into desempenho (nota1,nota2,nota3,nota4,fk_disciplinaID,fk_cod_aluno)values(0,0,0,0,1,p_cod_aluno);
+    insert into desempenho (nota1,nota2,nota3,nota4,fk_disciplinaID,fk_cod_aluno)values(0,0,0,0,2,p_cod_aluno);
+    insert into desempenho (nota1,nota2,nota3,nota4,fk_disciplinaID,fk_cod_aluno)values(0,0,0,0,3,p_cod_aluno);
+    insert into desempenho (nota1,nota2,nota3,nota4,fk_disciplinaID,fk_cod_aluno)values(0,0,0,0,4,p_cod_aluno);
+    insert into desempenho (nota1,nota2,nota3,nota4,fk_disciplinaID,fk_cod_aluno)values(0,0,0,0,5,p_cod_aluno);
+    insert into desempenho (nota1,nota2,nota3,nota4,fk_disciplinaID,fk_cod_aluno)values(0,0,0,0,6,p_cod_aluno);
+    insert into desempenho (nota1,nota2,nota3,nota4,fk_disciplinaID,fk_cod_aluno)values(0,0,0,0,7,p_cod_aluno);
     end $$
+    
+drop procedure novoAluno_turma;
 
+select * from desempenho;
+
+select* from aluno;
+
+select *
+FROM professor as A
+JOIN endereco as E on A.fk_endereco = E.id_endereco;
+
+select cod_aluno,nome,nota1,nota2,nota3,nota4,fk_disciplinaID FROM desempenho
+INNER JOIN aluno
+ON desempenho.fk_cod_aluno = aluno.cod_aluno
+WHERE fk_disciplinaID = 2
+
+call novoAluno_turma (1,2);
 /*
 Exemplo de chamada da procedure novoAluno_turma e consultas
 
@@ -257,3 +284,17 @@ select nome, serie from aluno inner join turma on fk_turma = cod_turma;
 select nome, serie from aluno inner join turma on fk_turma = cod_turma where serie = '1ºB';
 
 */
+
+select * from desempenho;
+
+DESCRIBE desempenho;
+
+select * from turma;
+
+select cod_turma,serie FROM turma WHERE cod_turma != 1;
+
+select * from disciplinas;
+
+SELECT disciplinaID,nome FROM disciplinas WHERE disciplinaID != 1;
+
+SELECT disciplinaID,nome FROM disciplinas WHERE disciplinaID = 1;
