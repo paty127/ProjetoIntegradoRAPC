@@ -14,7 +14,7 @@ public class FrequenciaDao {
 
     public void adicionarDesempenho(Frequencia frequencia) throws SQLException, IOException {
 
-        String sql = "insert into desempenho(aula_assistida,presente,fk_disciplinaID,fk_cod_aluno)value(?,?,?,?)";
+        String sql = "insert into frequencia(aula_assistida,presente,fk_disciplinaID,fk_cod_aluno)value(?,?,?,?)";
         
         try (Connection conn = dbUtil.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -27,8 +27,10 @@ public class FrequenciaDao {
 
 
             stmt.executeUpdate();
-
+            
+            stmt.close();
             conn.close();
+            
 
         } catch (SQLException ex) {
             System.err.println("Ocorreu um erro ao adicionar presença.");

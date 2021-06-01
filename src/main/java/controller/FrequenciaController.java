@@ -58,6 +58,17 @@ public class FrequenciaController extends HttpServlet {
             }          
             Redirecionar(request,response);
         }
+        if (action.equals("/selecao")) {
+            
+            try {
+                request.setAttribute("turmas", daoT.getAllTurmas());
+                request.setAttribute("Disciplinas", daoDisc.getAllDisciplinas());
+            } catch (SQLException ex) {
+                Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+            }          
+            Redirecionar(request,response);
+        }
+        
     }
         
 
