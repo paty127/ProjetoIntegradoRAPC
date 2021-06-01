@@ -84,8 +84,7 @@
                                 <!-- Nome do Aluno -->
 
                                 <td>
-
-                                    <c:out value="${alunos.nome}" />
+                        <c:out value="${alunos.nome}" />
 
                                 </td>
 

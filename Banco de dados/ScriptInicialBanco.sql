@@ -25,7 +25,7 @@ CREATE TABLE Turma (
 CREATE TABLE Aluno (
     cod_aluno integer not null auto_increment PRIMARY KEY,
     nome varchar(50),
-    cpf varchar(16),
+    cpf varchar(16) unique,
     data_nascimento date,
     sexo varchar(9),
     celular varchar(15),
@@ -39,6 +39,8 @@ CREATE TABLE Aluno (
     FOREIGN KEY (fk_endereco) REFERENCES endereco (id_endereco),
     FOREIGN KEY (fk_turma) REFERENCES turma (cod_turma)
 );
+
+
 CREATE TABLE Adm (
     cod_adm integer not null auto_increment PRIMARY KEY,
     nome varchar(30),
@@ -75,6 +77,7 @@ CREATE TABLE Disciplinas (
     nome varchar(30),
     cargahoraria integer
 );
+
 CREATE TABLE Ministrante (
     fk_cod_professor integer,
     fk_disciplinaID integer,
@@ -89,6 +92,8 @@ CREATE TABLE Grade (
     FOREIGN KEY (fk_disciplinaID) REFERENCES disciplinas (disciplinaID)
 );
 
+
+
 CREATE TABLE Desempenho (
 	desempenhoID integer not null auto_increment PRIMARY KEY,
     nota1 decimal,
@@ -101,18 +106,19 @@ CREATE TABLE Desempenho (
     FOREIGN KEY (fk_cod_aluno) REFERENCES Aluno (cod_aluno)
 );
 
+select * FROM aluno WHERE fk_turma = 2 ;
+
+select * from desempenho;
 
 CREATE TABLE Frequencia (
 	ID_frequencia integer not null auto_increment PRIMARY KEY,
     aula_assistida int ,
     presente int,
-    ausente int,
     fk_disciplinaID int,
     fk_cod_aluno int,
     FOREIGN KEY (fk_disciplinaID) REFERENCES Disciplinas (disciplinaID),
     FOREIGN KEY (fk_cod_aluno) REFERENCES Aluno (cod_aluno)
 );
-
 
 insert into turma(serie,qte)values
 				 ('1ºA',20),('1ºB',20),
@@ -130,7 +136,7 @@ insert into Disciplinas(nome,cargahoraria)values
                         ("Fisíca",120),
                         ("Artes",80),
                         ("Inglês",80);   
-                        
+
 insert into grade(fk_cod_turma,fk_disciplinaID)values
 	/*1ºA*/(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),
     /*1ºB*/(2,1),(2,2),(2,3),(2,4),(2,5),(2,6),(2,7),

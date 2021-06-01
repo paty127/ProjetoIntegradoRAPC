@@ -90,7 +90,8 @@
                         <img src="Imagens/user.png" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Registro</h5>
-                            <a class="dropdown-item" href="notasController">Registro Notas</a>
+                            <a class="dropdown-item" href="notasController">Notas</a>
+                            <a class="dropdown-item" href="registrar-frequencia">Presença</a>
                         </div>
                     </div>
                 </div>

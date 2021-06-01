@@ -15,9 +15,8 @@
     </head>
     <body>
         <div class="container">
+            
             <h1>Registrar Notas</h1>
-
-        
             
             <form  name="frmNotas" action="${request.contextPath}selectionDisc" var="form1">
                 <label for="Turma">Turma</label>

@@ -14,7 +14,7 @@ import util.DbUtil;
 
 public class DesempenhoDao {
     private final DbUtil dbUtil = new DbUtil();
-    String erro = "Erro na execução";
+    
 
     public void adicionarDesempenho(Desempenho desempenho) throws SQLException, IOException {
         String sql = "insert into desempenho(nota1,nota2,nota3,nota4,fk_disciplinaID,fk_cod_aluno)value(?,?,?,?,?,?)";
