@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet(name = "notasController", urlPatterns = {"/notasController","/selectionDisc"})
+@WebServlet(name = "notasController", urlPatterns = {"/notasController","/selectionDisc","/registrar-frequencia"})
 public class NotasController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -65,7 +65,23 @@ public class NotasController extends HttpServlet {
             }
             request.getRequestDispatcher("/WEB-INF/jsp/registro/notas.jsp").forward(request, response);
 
-        } else if (action.equals("/selectionDisc")) {
+        } 
+        if (action.equals("/registrar-frequencia")) {
+            //Captando informações do banco para o Select
+            try {
+                request.setAttribute("turmas", daoT.getAllTurmas());
+            } catch (SQLException ex) {
+                Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                request.setAttribute("Disciplinas", daoDisc.getAllDisciplinas());
+            } catch (SQLException ex) {
+                Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.getRequestDispatcher("/WEB-INF/jsp/registro/presenca.jsp").forward(request, response);
+
+        } 
+        else if (action.equals("/selectionDisc")) {
             int codTurma;
             int codDisciplina;
 

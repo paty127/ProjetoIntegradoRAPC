@@ -2,6 +2,7 @@
 package controller;
 
 import dao.AlunoDao;
+import dao.DesempenhoDao;
 import dao.DisciplinaDao;
 import dao.FrequenciaDao;
 import dao.TurmaDao;
@@ -19,7 +20,7 @@ import model.Frequencia;
 
 
 
-@WebServlet(name = "FrequenciaController", urlPatterns = {"/FrequenciaController","/selecao"})
+@WebServlet(name = "FrequenciaController", urlPatterns = {"/frequenciaController","/selecao"})
 public class FrequenciaController extends HttpServlet {
     
     private static final long serialVersionUID = 102831973239L;
@@ -30,39 +31,32 @@ public class FrequenciaController extends HttpServlet {
     private final FrequenciaDao daoF;
     Frequencia desempenho = new Frequencia();
 
-    public FrequenciaController(DisciplinaDao daoDisc, TurmaDao daoT, AlunoDao daoA, FrequenciaDao daoF) {
-        this.daoDisc = daoDisc;
-        this.daoT = daoT;
-        this.daoA = daoA;
-        this.daoF = daoF;
+    public FrequenciaController() {
+        daoDisc = new DisciplinaDao();
+        daoT = new TurmaDao();
+        daoA = new AlunoDao();
+        daoF = new FrequenciaDao();
     }
 
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
+
         
         boolean temErro = false;
 
         String action = request.getServletPath();
 
-        if (action.equals("/FrequenciaController")) {
+        if (action.equals("/registrarFrequencia")) {
             
             try {
                 request.setAttribute("turmas", daoT.getAllTurmas());
-            } catch (SQLException ex) {
-                Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
                 request.setAttribute("Disciplinas", daoDisc.getAllDisciplinas());
             } catch (SQLException ex) {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+            }          
             Redirecionar(request,response);
-
         }
     }
         
