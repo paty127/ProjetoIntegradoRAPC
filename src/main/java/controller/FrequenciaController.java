@@ -20,7 +20,7 @@ import model.Frequencia;
 
 
 
-@WebServlet(name = "FrequenciaController", urlPatterns = {"/frequenciaController","/selecao"})
+@WebServlet(name = "FrequenciaController", urlPatterns = {"/registrarFrequencia","/selecao"})
 public class FrequenciaController extends HttpServlet {
     
     private static final long serialVersionUID = 102831973239L;
@@ -67,8 +67,7 @@ public class FrequenciaController extends HttpServlet {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }          
             Redirecionar(request,response);
-        }
-        
+        } 
     }
         
 
