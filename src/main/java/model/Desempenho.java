@@ -11,18 +11,21 @@ public class Desempenho {
     private double nota2;
     private double nota3;
     private double nota4;
+    private String disciplina;
     private int codDisciplina;
-    private int codAluno;
+    
 
     public Desempenho() {
     }
-    public Desempenho(int codTurma, int codAluno) {
-        this.codDisciplina = codTurma;
-        this.codAluno = codAluno;
+    public Desempenho(double nota1, double nota2, double nota3, double nota4){
+        this.nota1 = nota1;
+        this.nota2 = nota2;
+        this.nota3 = nota3;
+        this.nota4 = nota4;
     }
 
     public Desempenho(int cod_aluno, String nome, double nota1, double nota2,
-            double nota3, double nota4, int codDisciplina, int codAluno) {
+            double nota3, double nota4, int codDisciplina) {
         this.cod_aluno = cod_aluno;
         this.nome = nome;
         this.nota1 = nota1;
@@ -30,14 +33,14 @@ public class Desempenho {
         this.nota3 = nota3;
         this.nota4 = nota4;
         this.codDisciplina = codDisciplina;
-        this.codAluno = codAluno;
     }
 
-    public Desempenho(double nota1, double nota2, double nota3, double nota4) {
-        this.nota1 = nota1;
-        this.nota2 = nota2;
-        this.nota3 = nota3;
-        this.nota4 = nota4;
+    public String getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(String disciplina) {
+        this.disciplina = disciplina;
     }
     
 
@@ -95,13 +98,5 @@ public class Desempenho {
 
     public void setCodDisciplina(int codDisciplina) {
         this.codDisciplina = codDisciplina;
-    }
-
-    public int getCodAluno() {
-        return codAluno;
-    }
-
-    public void setCodAluno(int codAluno) {
-        this.codAluno = codAluno;
     }
 }

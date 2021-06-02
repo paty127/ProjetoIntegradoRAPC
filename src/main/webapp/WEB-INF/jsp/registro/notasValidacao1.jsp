@@ -58,6 +58,7 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Nome</th>
+                            <th scope="col">Disciplina</th>
                             <th scope="col">Nota 1</th>
                             <th scope="col">Nota 2</th>
                             <th scope="col">Nota 3</th>
@@ -66,7 +67,7 @@
                     </thead>
                     <tbody>
                         <!<!-- atributo Alunos vem da classe AlunoControlles na linha 65  -->
-                        <c:forEach items="${alunos}" var="alunos">
+                        <c:forEach items="${listaTurma}" var="alunos">
 
                             <tr>
 
@@ -74,7 +75,7 @@
                                 <th scope="row">
 
                                     <label class="form-control" name="codAluno">
-                                        <c:out value="${alunos.codAluno}" />
+                                        <c:out value="${alunos.cod_aluno}" />
                                     </label>
 
                                 </th>
@@ -84,37 +85,47 @@
                                 <!-- Nome do Aluno -->
 
                                 <td>
-                        <c:out value="${alunos.nome}" />
+                                    <c:out value="${alunos.nome}" />
+
+                                </td>
+                                 <!-- Nome da disciplina -->
+                                <td>
+                                    <c:out value="${alunos.disciplina}" />
 
                                 </td>
 
                                 <!-- Nota 1 -->
 
-                                <td>
-                                    <input class="form-control"  id="nota1" type="text" name="nota1"
-                                           onkeypress="$(this).mask('00.0')"placeholder="00.0">
-                                </td>
+                                    <td>
+                                        <input class="form-control"  id="nota1" type="text" name="nota1"
+                                               onkeypress="$(this).mask('00.0')"placeholder="00.0"
+                                               value="<c:out value="${alunos.nota1}" />">
+                                    </td>
 
-                                <!-- Nota 2 -->
+                                    <!-- Nota 2 -->
 
-                                <td>
-                                    <input class="form-control"  id="nota2" type="text" name="nota2"
-                                           onkeypress="$(this).mask('00.0')"placeholder="00.0">
-                                </td>
+                                    <td>
+                                        <input class="form-control"  id="nota2" type="text" name="nota2"
+                                               onkeypress="$(this).mask('00.0')"placeholder="00.0"
+                                               value="<c:out value="${alunos.nota2}" />">
+                                    </td>
 
-                                <!-- Nota 3 -->
+                                    <!-- Nota 3 -->
 
-                                <td>
-                                    <input class="form-control"  id="nota3" type="text" name="nota3"
-                                           onkeypress="$(this).mask('00.0')"placeholder="00.0">
-                                </td>
+                                    <td>
+                                        <input class="form-control"  id="nota3" type="text" name="nota3"
+                                               onkeypress="$(this).mask('00.0')"placeholder="00.0"
+                                               value="<c:out value="${alunos.nota3}" />">
+                                    </td>
 
-                                <!-- Nota 4 -->
+                                    <!-- Nota 4 -->
 
-                                <td>
-                                    <input class="form-control"  id="nota4" type="text" name="nota4"
-                                           onkeypress="$(this).mask('00.0')"placeholder="00.0">
-                                </td>
+                                    <td>
+                                        <input class="form-control"  id="nota4" type="text" name="nota4"
+                                               onkeypress="$(this).mask('00.0')"placeholder="00.0" 
+                                               value="<c:out value="${alunos.nota4}" />">
+                                    </td>
+                                </tr>
                             </tr>
                         </c:forEach>
                     </tbody>

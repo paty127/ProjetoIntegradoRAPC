@@ -65,22 +65,7 @@ public class NotasController extends HttpServlet {
             }
             request.getRequestDispatcher("/WEB-INF/jsp/registro/notas.jsp").forward(request, response);
 
-        } 
-        if (action.equals("/registrar-frequencia")) {
-            //Captando informações do banco para o Select
-            try {
-                request.setAttribute("turmas", daoT.getAllTurmas());
-            } catch (SQLException ex) {
-                Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                request.setAttribute("Disciplinas", daoDisc.getAllDisciplinas());
-            } catch (SQLException ex) {
-                Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            request.getRequestDispatcher("/WEB-INF/jsp/registro/presenca.jsp").forward(request, response);
-
-        } 
+        }
         else if (action.equals("/selectionDisc")) {
             int codTurma;
             int codDisciplina;
@@ -105,7 +90,9 @@ public class NotasController extends HttpServlet {
                 try {
                     request.setAttribute("turmaD", daoT.recuperaListaTurmaDifer(codTurma));
                     request.setAttribute("turmaR", daoT.recuperaTurma(codTurma));
-                    request.setAttribute("Disciplinas", daoDisc.getAllDisciplinas());                   
+                    request.setAttribute("Disciplinas", daoDisc.getAllDisciplinas());
+                    request.setAttribute("listaTurma", daoDesp.desempenhoPorTurma(codTurma));
+                    
             }   catch (SQLException ex) {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -137,7 +124,7 @@ public class NotasController extends HttpServlet {
                 try {
                     request.setAttribute("turmaD", daoT.recuperaListaTurmaDifer(codTurma));
                     request.setAttribute("turmaR", daoT.recuperaTurma(codTurma));
-                    request.setAttribute("listaDisciplina", daoDesp.desempenhoPorDisciplina(codDisciplina));
+                    request.setAttribute("listaTurmaDisciplina", daoDesp.desempenhoPorTurmaDisciplina(codTurma, codDisciplina));
                     request.setAttribute("disciplinaR", daoDisc.recuperaDisci(codDisciplina));
                     request.setAttribute("discplinaD", daoDisc.recuperaListaDisciDifer(codDisciplina));
                 } catch (SQLException ex) {
@@ -147,8 +134,6 @@ public class NotasController extends HttpServlet {
                 request.setAttribute("codDisciplina", codDisciplina);
                 request.getRequestDispatcher("/WEB-INF/jsp/registro/notas2.jsp").forward(request, response);
             }
-        }else {
-            response.sendRedirect("home.jsp");
         }
     }
 
@@ -176,7 +161,7 @@ public class NotasController extends HttpServlet {
 
             desempenho.setCodDisciplina(Integer.parseInt(request.getParameter("codDisciplina")));
             if (codAlunoStr.equals(null)){
-                desempenho.setCodAluno(0);
+                desempenho.setCod_aluno(0);
             }else {
                 desempenho.setCodDisciplina(Integer.parseInt(codAlunoStr));
             }
@@ -201,7 +186,7 @@ public class NotasController extends HttpServlet {
                 desempenho.setNota4(Integer.parseInt(nota2Str));
             }
 
-            daoDesp.adicionarDesempenho(desempenho);
+            //daoDesp.adicionarDesempenho(desempenho);
         }
     }
 

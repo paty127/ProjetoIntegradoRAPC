@@ -67,7 +67,7 @@
                                     <th scope="row">
 
                                         <label class="form-control" name="codAluno[${idx}]">
-                                            <c:out value="${alunos.codAluno}" />
+                                            <c:out value="${alunos.cod_aluno}" />
                                         </label>
 
                                     </th>

@@ -59,7 +59,7 @@
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Matricula</th>
+                    <th scope="col">Matrícula</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Data de nascimento</th>
                     <th scope="col">Sexo</th>

@@ -62,17 +62,13 @@
                     </thead>
                     <tbody>
                              <!<!-- atributo Alunos vem da classe AlunoControlles na linha 65  -->
-                            <c:forEach items="${listaDisciplina}" var="lista">
+                            <c:forEach items="${listaTurmaDisciplina}" var="lista">
 
                                 <tr>
 
                                     <!-- Código do Aluno -->
                                     <th scope="row">
-
-                                        <label class="form-control" name="codAluno">
-                                            <c:out value="${lista.codAluno}" />
-                                        </label>
-
+                                            <c:out value="${lista.cod_aluno}" />
                                     </th>
 
 
