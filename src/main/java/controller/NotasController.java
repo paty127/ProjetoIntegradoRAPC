@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "notasController", urlPatterns = {"/notasController","/selectionDisc","/registrar-frequencia"})
 public class NotasController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
+    private static final String LIST_NOTA = "/listarNota";
     private final DisciplinaDao daoDisc;
     private final TurmaDao daoT;
     private final AlunoDao daoA;
@@ -48,7 +48,7 @@ public class NotasController extends HttpServlet {
             throws ServletException, IOException {
 
         boolean temErro = false;
-
+        String forward = "";
         String action = request.getServletPath();
 
         if (action.equals("/notasController")) {
@@ -63,6 +63,14 @@ public class NotasController extends HttpServlet {
             }
             request.getRequestDispatcher("/WEB-INF/jsp/registro/notas.jsp").forward(request, response);
 
+        }
+        else if (action.equalsIgnoreCase("ListNota")) {
+            forward = LIST_NOTA;
+            try {
+                request.setAttribute("notas", daoDesp.getAllDesempenho());
+            } catch (SQLException ex) {
+                Logger.getLogger(NotasController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if (action.equals("/selectionDisc")) {
             int codTurma;
@@ -133,6 +141,7 @@ public class NotasController extends HttpServlet {
                 request.getRequestDispatcher("/WEB-INF/jsp/registro/notas2.jsp").forward(request, response);
             }
         }
+        
     }
 
     private void inserirDesempenho(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {

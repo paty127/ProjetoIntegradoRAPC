@@ -36,6 +36,36 @@ public class DesempenhoDao {
             System.err.println("Ocorreu um erro ao realizar o update da desempenho.");
         }
     }
+        public List<Desempenho> getAllDesempenho() throws SQLException, IOException {
+        String sql = "select * FROM desempenho";
+        List<Desempenho> listaDesempenho = new ArrayList<>();
+        try (
+            Connection conn = dbUtil.getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rst = stmt.executeQuery(sql)){
+            while (rst.next()) {
+                Desempenho desempenho = new Desempenho();
+                desempenho.setNota1(rst.getDouble("nota1"));
+                desempenho.setNota2(rst.getDouble("nota2"));
+                desempenho.setNota3(rst.getDouble("nota3"));
+                desempenho.setNota4(rst.getDouble("nota4"));
+                desempenho.setCodDisciplina(rst.getInt("fk_disciplinaID"));
+                desempenho.setCodDisciplina(rst.getInt("fk_cod_aluno"));
+                double media = (desempenho.nota1 + desempenho.nota2 + desempenho.nota3 + desempenho.nota4)/4;
+                desempenho.setMedia(media);
+                if(media >= 6){
+                    desempenho.setStatus(rst.getString("Aprovado"));
+                }else{desempenho.setStatus(rst.getString("Reprovado"));}
+                listaDesempenho.add(desempenho);
+            }
+            conn.close();
+            stmt.close();
+            rst.close();
+        } catch (SQLException e) {
+            System.err.println("Ocorreu um erro ao montar a lista de todos os desempenhos");
+        }
+        return listaDesempenho;
+    }
     
     public List<Desempenho> desempenhoPorTurma(int turmaID) throws SQLException, IOException {
         String sql = "SELECT cod_aluno,aluno.nome,disciplinas.nome disciplina,"

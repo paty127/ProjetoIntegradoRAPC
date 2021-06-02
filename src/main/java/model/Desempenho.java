@@ -5,19 +5,22 @@ package model;
  * @author Carlos Pavão <carlos.henrique93@msn.com>
  */
 public class Desempenho {
+
     private int cod_aluno;
     private String nome;
-    private double nota1;
-    private double nota2;
-    private double nota3;
-    private double nota4;
+    public double nota1;
+    public double nota2;
+    public double nota3;
+    public double nota4;
     private String disciplina;
     private int codDisciplina;
-    
+    private double media;
+    private String status;
 
     public Desempenho() {
     }
-    public Desempenho(double nota1, double nota2, double nota3, double nota4){
+
+    public Desempenho(double nota1, double nota2, double nota3, double nota4) {
         this.nota1 = nota1;
         this.nota2 = nota2;
         this.nota3 = nota3;
@@ -25,13 +28,15 @@ public class Desempenho {
     }
 
     public Desempenho(int cod_aluno, String nome, double nota1, double nota2,
-            double nota3, double nota4, int codDisciplina) {
+            double nota3, double nota4, int codDisciplina, double media, String status) {
         this.cod_aluno = cod_aluno;
         this.nome = nome;
         this.nota1 = nota1;
         this.nota2 = nota2;
         this.nota3 = nota3;
         this.nota4 = nota4;
+        this.media = media;
+        this.status = status;
         this.codDisciplina = codDisciplina;
     }
 
@@ -42,7 +47,6 @@ public class Desempenho {
     public void setDisciplina(String disciplina) {
         this.disciplina = disciplina;
     }
-    
 
     public int getCod_aluno() {
         return cod_aluno;
@@ -90,6 +94,22 @@ public class Desempenho {
 
     public void setNota4(double nota4) {
         this.nota4 = nota4;
+    }
+
+    public double getMedia() {
+        return media;
+    }
+
+    public void setMedia(double media) {
+        this.media = media;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getCodDisciplina() {

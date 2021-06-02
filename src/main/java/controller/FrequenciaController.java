@@ -24,7 +24,7 @@ import model.Frequencia;
 public class FrequenciaController extends HttpServlet {
     
     private static final long serialVersionUID = 102831973239L;
-
+    private static final String LIST_FREQ = "/listarFreq";
     private final DisciplinaDao daoDisc;
     private final TurmaDao daoT;
     private final AlunoDao daoA;
@@ -45,7 +45,7 @@ public class FrequenciaController extends HttpServlet {
 
         
         boolean temErro = false;
-
+        String forward = "";
         String action = request.getServletPath();
 
         if (action.equals("/registrarFrequencia")) {
@@ -67,7 +67,15 @@ public class FrequenciaController extends HttpServlet {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
             }          
             Redirecionar(request,response);
-        } 
+        }
+        if (action.equalsIgnoreCase("ListFrequencia")) {
+            forward = LIST_FREQ;
+            try {
+                request.setAttribute("Freq", daoF.getAllFrequencia());
+            } catch (SQLException ex) {
+                Logger.getLogger(FrequenciaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }  
     }
         
 

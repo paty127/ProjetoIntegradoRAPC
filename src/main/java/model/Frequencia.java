@@ -11,15 +11,17 @@ public class Frequencia {
     int ausente;
     int CodDisciplina;
     int CodAluno;
+    String status;
 
     public Frequencia() {
     }
 
-    public Frequencia(int ID_frequencia, int aula_assistida, int presente, int ausente, int CodDisciplina, int CodAluno) {
+    public Frequencia(int ID_frequencia, int aula_assistida, int presente, int ausente, int CodDisciplina, int CodAluno, String status) {
         this.ID_frequencia = ID_frequencia;
         this.aula_assistida = aula_assistida;
         this.presente = presente;
         this.ausente = ausente;
+        this.status = status;
         this.CodDisciplina = CodDisciplina;
         this.CodAluno = CodAluno;
     }
@@ -54,6 +56,13 @@ public class Frequencia {
 
     public void setAusente(int ausente) {
         this.ausente = ausente;
+    }
+        public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getCodDisciplina() {
