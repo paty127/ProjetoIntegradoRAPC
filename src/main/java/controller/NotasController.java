@@ -53,12 +53,10 @@ public class NotasController extends HttpServlet {
 
         if (action.equals("/notasController")) {
             //Captando informações do banco para o Select
+            
             try {
+                
                 request.setAttribute("turmas", daoT.getAllTurmas());
-            } catch (SQLException ex) {
-                Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
                 request.setAttribute("Disciplinas", daoDisc.getAllDisciplinas());
             } catch (SQLException ex) {
                 Logger.getLogger(ProfessorController.class.getName()).log(Level.SEVERE, null, ex);

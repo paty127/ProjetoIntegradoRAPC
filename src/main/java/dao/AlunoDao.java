@@ -190,6 +190,7 @@ public class AlunoDao {
         return aluno;
     }
     
+    
     public long calcularIdade(LocalDate data) {
         long idade = -1;
         if (data != null) {

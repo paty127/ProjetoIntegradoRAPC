@@ -93,7 +93,6 @@ CREATE TABLE Grade (
 );
 
 
-
 CREATE TABLE Desempenho (
 	desempenhoID integer not null auto_increment PRIMARY KEY,
     nota1 decimal,
@@ -105,10 +104,6 @@ CREATE TABLE Desempenho (
     FOREIGN KEY (fk_disciplinaID) REFERENCES Disciplinas (disciplinaID),
     FOREIGN KEY (fk_cod_aluno) REFERENCES Aluno (cod_aluno)
 );
-
-select * FROM aluno WHERE fk_turma = 2 ;
-
-select * from desempenho;
 
 CREATE TABLE Frequencia (
 	ID_frequencia integer not null auto_increment PRIMARY KEY,
@@ -258,14 +253,38 @@ IN p_cod_aluno integer, IN p_cod_turma integer)
 
     /*Exemplo de uso da procedure
     call novoAluno_turma (4,2);
+    
+    select * from desempenho;
+    
+    select * from aluno WHERE fk_turma = 1;
+    
+    select cod_aluno,nome from aluno where fk_turma = 1;
 
-
+selec *
 
 SELECT cod_aluno,nome,nota1,nota2,nota3,nota4 FROM desempenho INNER JOIN aluno ON desempenho.fk_cod_aluno = aluno.cod_aluno WHERE fk_disciplinaID = 2;
+
+use projetorapc;
+
+select * from disciplinas;
+
+select * from desempenho;
+
+SELECT cod_aluno,aluno.nome,disciplinas.nome Disciplina,nota1,nota2,nota3,nota4 
+FROM desempenho INNER JOIN aluno
+ON desempenho.fk_cod_aluno = aluno.cod_aluno
+INNER JOIN disciplinas
+ON desempenho.fk_disciplinaID = disciplinas.disciplinaID
+WHERE fk_turma = 1;
+
 SELECT cod_aluno,nome,nota1,nota2,nota3,nota4 
 FROM desempenho INNER JOIN aluno
 ON desempenho.fk_cod_aluno = aluno.cod_aluno
-WHERE fk_disciplinaID = 7;
+WHERE fk_turma = 1;
+
+select * from aluno;
+
+select * from turma;
 */
 
 

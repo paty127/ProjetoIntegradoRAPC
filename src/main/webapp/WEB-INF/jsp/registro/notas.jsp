@@ -30,7 +30,7 @@
                         </c:forEach>
                     </select>
                     <br>
-
+                    
                     <!-- Select de Disciplina   -->
 
                     <label for="Disciplina">Disciplina</label><br/>
@@ -42,6 +42,7 @@
                         <option value="${d.disciplinaID}" />${d.nome}</option>
                         </c:forEach>
                     </select>
+
                     <button type="submit" value="form1">Pesquisar</button>
             </form>
             

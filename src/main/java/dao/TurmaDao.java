@@ -94,6 +94,29 @@ public class TurmaDao {
         }
         return listaDeAluno;
     }
+    public List<Aluno> listatAllAlunos() throws SQLException, IOException {
+        String sql = "select cod_aluno,nome FROM aluno";
+        List<Aluno> listaAlunos = new ArrayList<>();
+        try (
+            Connection conn = dbUtil.getConnection();
+            Statement stmt = conn.createStatement();
+            ResultSet rst = stmt.executeQuery(sql)){
+            while (rst.next()) {
+                Aluno aluno = new Aluno();
+                aluno.setCodAluno(rst.getInt("cod_aluno"));
+                aluno.setNome(rst.getString("nome"));
+                
+                listaAlunos.add(aluno);
+            }
+            conn.close();
+            stmt.close();
+            rst.close();
+        } catch (SQLException e) {
+            System.err.println("Ocorreu um erro ao montar a lista de"
+                    + " todos Alunos.");
+        }
+        return listaAlunos;
+    }
     
     public List<Turma> recuperaListaTurmaDifer(int turmaID) throws SQLException, IOException {
         String sql = "select cod_turma,serie FROM turma WHERE cod_turma != ?";
