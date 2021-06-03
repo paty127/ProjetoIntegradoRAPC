@@ -1,0 +1,109 @@
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Rediatro de Notas</title>
+
+        <!--importando a folha de estilos do bootstrap-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+        <!--importando nossa folha de estilos-->
+        <link rel="stylesheet" href="css/registrodenotas.css">
+
+        <!--importando o jquery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!--importando javascript do bootstrap-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    </head>
+    <body>
+
+        <!--corpo da página-->
+        <div id="modal"></div>
+      
+        <div class="container" id="boletins">
+            <nav class="navbar navbar-light">
+                <h1>Registro de Notas</h1>
+                <a class="navbar-brand" href="inserir_boletim.php">
+                    <button class="btn btn-primary">inserir</button>
+                </a>
+            </nav>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Alunos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="disciplinas.php">Disciplinas</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <form method="GET" class="form-inline" id="boletins_search">   
+                <div class="form-group mx-sm-3 mb-2">
+                    <!-- TODO: o value do input deve ser o nome do aluno-->
+                    <input type="text" class="form-control" name="aluno" id="aluno" placeholder="aluno">
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <!-- TODO: o value do input deve ser o nome da disciplina-->  
+                    <input type="text" class="form-control" name="disciplina" id="disciplina" placeholder="disciplina" value="Nome do aluno">
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <select class="form-control" name="situacao" id="situacao">
+                        <!-- TODO: fazer um for com o array situaçoes ("--Situações--", "Aprovado", "Reprovado", "Recuperação")
+                            o aluno em questão buscado vai ter situação 1 = Aprovado, situação 2 = Reprovado, situação 3 = Recuperaçao
+                            de acordo com a situação do aluno uma das options vai ser selected -->  
+                            <option value='0'>-- Situações --</option>
+                            <option selected value='1'> Aprovado </option>
+                            <option value='2'> Reprovado </option>
+                            <option value='3'> Recuperação </option>
+                        
+                    </select>
+                </div>
+                <button type="submit" id="pesquisar" class="btn btn-primary mb-2">Pesquisar</button>
+            </form>
+            <div id="div_tabela">
+            <table class="table table-striped" id="table_boletins">
+            <tr>
+                <th>Matrícula</th>
+                <th>Aluno</th>
+                <th>Disciplina</th>
+                <th>Nota 1</th>
+                <th>Nota 2</th>
+                <th>Nota 3</th>
+                <th>Nota 4</th>
+                <th>Média</th>
+                <th>Situação</th>
+                <th colspan="2">Ações</th>
+            </tr>
+            <tr>
+                <!-- Preencher estes compos com os dados do aluno-->
+            <td>Matricula do aluno aqui</td>
+            <td>Registro do aluno aqui</td>
+            <td>Registro da disciplina aqui</td>
+            <td>nota 1 aqui</td>
+            <td>nota 2 aqui</td>
+            <td>nota 3 aqui</td>
+            <td>nota 4 aqui</td>
+            <td>media vai aqui</td>
+            <td>Situação do registro vai aqui</td>
+            <td>
+                <form method='GET' action='editar_boletim.php'>
+                    <input type='hidden' name='id' value='id do registro aqui'>
+                    <button type='submit' class='btn btn-primary'>Editar</button>
+                </form>
+            </td>
+            <td>
+                <form method='POST'>
+                    <input type='hidden' name='remover' value='id do registro aqui'>
+                    <button type='submit' class='btn btn-danger'>Remover</button>
+                </form>
+            </tr>         
+
+            </table>
+            </div>
+        </div>
+    </body>
+</html>
